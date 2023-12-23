@@ -26,11 +26,9 @@
 - As a mentor, I want to create new assignments for my bootcamp and have an option to get help from ai, defining the task, providing necessary resources, and setting due dates.
 - As a mentor, I want to post assignments to students and view all previous and upcoming assignments.
 - As a mentor, I want to create a schedule for the week and see schedules of all previous weeks.
-- As a mentor, I want to upload a csv file containing votes of students and the platform will display them.
 - As a mentor, I have the ability to post individual results for each student in the bootcamp.
 - As a mentor, I have the ability to live chat with other users.
 - As a mentor, I expect to receive notifications when a student submit his assignment.
-- As a mentor, I have the ability to edit my profile.
 
 <br><br>
 
