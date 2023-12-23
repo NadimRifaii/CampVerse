@@ -5,14 +5,32 @@
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
 
-> A mobile app for ordering coffee on-the-go, making it easier for coffee lovers to get their favorite beverages without waiting in line.
+> A website where mentors and students meet up for a smooth bootcamp journey 
 >
-> Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
+> CampVerse simplifies the mentorship journey with a user-friendly platform. We're committed to saving time, maximizing learning, and ensuring satisfaction. Join us in elevating the educational experience, where mentors and students meet seamlessly for a transformative journey.
 
-### User Stories
-- As a user, I want to browse the menu, so I can find my favorite coffee drinks.
-- As a user, I want to customize my order, so I can add or remove ingredients according to my preferences.
-- As a user, I want to pay for my order through the app, so I can avoid waiting in line at the store.
+### Admin Stories
+- As an admin, I should be able to create new bootcamps with a name, description, and target audience.
+- As an admin, I should be able to add mentors and students to bootcamps.
+- As an admin, I want to access user profiles containing their details and edit their profile.
+- As an admin, I want to invite a certain user to a bootcamp , specifying their role.
+- As an admin, I want to communicate with them and possibility of deleting their account and removing them from all bootcamps.
+
+### Student Stories
+- As a student, upon submitting an assignment, I expect to receive instant feedback from the AI system, highlighting areas of strength and suggesting improvements.
+- As a student, I want the opportunity to receive personalized feedback from the mentor after submitting an assignment. This could involve comments on specific aspects of my work or additional guidance for improvement.
+- As a student, I receive a notification  indicating that meeting results have been posted by the mentor.
+- As a student, I expect the ability to have a private chat with any of my mentors.
+
+### Mentor Stories
+- As a mentor, I want to create new assignments for my bootcamp and have an option to get help from ai, defining the task, providing necessary resources, and setting due dates.
+- As a mentor, I want to post assignments to students and view all previous and upcoming assignments.
+- As a mentor, I want to create a schedule for the week and see schedules of all previous weeks.
+- As a mentor, I want to upload a csv file containing votes of students and the platform will display them.
+- As a mentor, I have the ability to post individual results for each student in the bootcamp.
+- As a mentor, I have the ability to live chat with other users.
+- As a mentor, I expect to receive notifications when a student submit his assignment.
+- As a mentor, I have the ability to edit my profile.
 
 <br><br>
 
