@@ -52,6 +52,19 @@ func GetBootcampUsers(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
 }
 
+func GetUserBootcamps(c *fiber.Ctx) error {
+	user := new(models.User)
+	db := database.Db
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	bootcamps, err := user.GetBootcamps(db)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"user": user, "bootcamps": bootcamps})
+}
+
 func GetAuthUser(c *fiber.Ctx) *models.User {
 	if _, ok := c.Locals("error").(string); ok {
 		return nil
