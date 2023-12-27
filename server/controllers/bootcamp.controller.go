@@ -23,6 +23,20 @@ func CreateBootcamp(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})
 }
 
+func GetBootcamps(c *fiber.Ctx) error {
+	user := new(models.User)
+	db := database.Db
+	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "admin" {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	bootcamp := new(models.Bootcamp)
+	allBootcamps, err := bootcamp.GetAllBootcamps(db)
+	if err != nil {
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamps": allBootcamps})
+}
+
 func GetAuthUser(c *fiber.Ctx) *models.User {
 	if _, ok := c.Locals("error").(string); ok {
 		return nil
