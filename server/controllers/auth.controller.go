@@ -7,7 +7,6 @@ import (
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
-	"github.com/go-sql-driver/mysql"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
@@ -40,9 +39,10 @@ func Signup(c *fiber.Ctx) error {
 	user.Password = string(hashedPassword)
 	err = createUserInDb(c, user)
 	if err != nil {
-		if IsDuplicate := IsDuplicateKeyError(err); IsDuplicate {
-			return Loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
-		}
+		// if IsDuplicate := IsDuplicateKeyError(err); IsDuplicate {
+		// 	return Loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
+		// }
+		return Loger(c, fiber.StatusConflict, fiber.Map{"error": err.Error()})
 	}
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
 	if err != nil {
@@ -114,13 +114,4 @@ func createJwtToken(user *models.User, roleName string) *jwt.Token {
 func getRoleId(userRole *models.UserRole, roleName string) {
 	db := database.Db
 	userRole.GetIDByRoleName(db, roleName)
-}
-func IsDuplicateKeyError(err error) bool {
-	var mysqlErr *mysql.MySQLError
-	if errors.As(err, &mysqlErr) {
-		if mysqlErr.Number == 1062 {
-			return true
-		}
-	}
-	return false
 }
