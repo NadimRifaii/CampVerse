@@ -14,12 +14,26 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type Body struct {
+	Username string `json:"username" gorm:"not null;default:'first';size:255"`
+	Lastname string `json:"lastname" gorm:"not null;default:'last';size:255"`
+	Email    string `json:"email" gorm:"not null;size:255;unique"`
+	Password string `json:"password" gorm:"not null;size:255"`
+	RoleName string `json:"role" gorm:"not null;default:'user';size:255" `
+}
+
 func Signup(c *fiber.Ctx) error {
+	body := new(Body)
 	user := new(models.User)
 	userRole := new(models.UserRole)
-	if err := validateUserRequest(c, user, userRole); err != nil {
+	if err := validateRequest(c, body); err != nil {
 		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+	if body.RoleName == "" {
+		body.RoleName = "user"
+	}
+	getRoleId(userRole, body.RoleName)
+	populateUser(user, body, userRole.ID)
 	tokenString := createJwtToken(user, userRole.RoleName)
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
@@ -39,34 +53,23 @@ func Signup(c *fiber.Ctx) error {
 	}
 	return loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
 }
-func validateUserRequest(c *fiber.Ctx, user *models.User, userRole *models.UserRole) error {
-	var body struct {
-		Username string `json:"username" gorm:"not null;default:'first';size:255"`
-		Lastname string `json:"lastname" gorm:"not null;default:'last';size:255"`
-		Email    string `json:"email" gorm:"not null;size:255;unique"`
-		Password string `json:"password" gorm:"not null;size:255"`
-		RoleName string `json:"role" gorm:"not null;default:'user';size:255" `
-	}
-	if err := c.BodyParser(&body); err != nil {
+
+func validateRequest(c *fiber.Ctx, body *Body) error {
+	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")
 	} else if body.Email == "" || body.Password == "" {
 		return errors.New("missing credentials")
 	}
-	if body.RoleName == "" {
-		body.RoleName = "user"
-	}
-	getRoleId(userRole, body.RoleName)
-	user.Email = body.Email
-	user.Password = body.Password
-	fmt.Println("userRole.RoleName")
-	fmt.Println(userRole.RoleName)
-	fmt.Println("userRole.RoleName")
-	user.RoleID = userRole.ID
-	user.Username = body.Username
-	user.Lastname = body.Lastname
 	return nil
 }
-
+func populateUser(user *models.User, body *Body, id uint) {
+	fmt.Println(id)
+	user.Email = body.Email
+	user.Password = body.Password
+	user.RoleID = id
+	user.Username = body.Username
+	user.Lastname = body.Lastname
+}
 func loger(c *fiber.Ctx, status int, m fiber.Map) error {
 	return c.Status(status).JSON(m)
 }
