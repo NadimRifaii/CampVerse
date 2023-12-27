@@ -18,8 +18,8 @@ type User struct {
 }
 
 func (user *User) GetUserById(id string, db *gorm.DB) error {
-	if err := db.Find(user, "id = ?", id).Error; err != nil {
-		return err
+	if db.Find(user, "id = ?", id); user.ID == 0 {
+		return errors.New("User not found")
 	}
 	return nil
 }
@@ -29,7 +29,7 @@ func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
 	}
 	return nil
 }
-func (user *User) GetBootcamps(db *gorm.DB) ([]Bootcamp, error) {
+func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	var bootcamps []Bootcamp
 	if err := db.Model(&user).Association("Bootcamp").Find(&bootcamps); err != nil {
 		return nil, err

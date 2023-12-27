@@ -38,29 +38,13 @@ func GetBootcamps(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamps": allBootcamps})
 }
 
-func GetBootcampUsers(c *fiber.Ctx) error {
-	id := c.Params("id")
-	user := new(models.User)
-	db := database.Db
-	if user = GetAuthUser(c); user == nil {
-		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
-	}
-	bootcamp := new(models.Bootcamp)
-	bootcamp.GetBootcampByID(db, id)
-	users, err := bootcamp.GetUsersInBootcamp(db)
-	if err != nil {
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
-	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
-}
-
 func GetUserBootcamps(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-	bootcamps, err := user.GetBootcamps(db)
+	bootcamps, err := user.GetUserBootcamps(db)
 	if err != nil {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
@@ -85,7 +69,8 @@ func getUserAndBootcamp(c *fiber.Ctx, db *gorm.DB, userEmail, bootcampName strin
 	return user, bootcamp, nil
 }
 
-func AddUser(c *fiber.Ctx) error {
+// HandleUserAction handles adding or removing a user from a bootcamp.
+func HandleUserAction(c *fiber.Ctx, action string) error {
 	db := database.Db
 	var body struct {
 		Email        string `json:"email"`
@@ -99,34 +84,29 @@ func AddUser(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, err.(*fiber.Error).Code, fiber.Map{"error": err.Error()})
 	}
-
-	if err := bootcamp.AddUserToBootcamp(db, user); err != nil {
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	switch action {
+	case "add":
+		if err := bootcamp.AddUserToBootcamp(db, user); err != nil {
+			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+		}
+	case "remove":
+		if err := bootcamp.RemoveUserFromBootcamp(db, user); err != nil {
+			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+		}
+	default:
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid action"})
 	}
-
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User added successfully"})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User action successful"})
 }
 
+// AddUser handles the addition of a user to a bootcamp.
+func AddUser(c *fiber.Ctx) error {
+	return HandleUserAction(c, "add")
+}
+
+// RemoveUser handles the removal of a user from a bootcamp.
 func RemoveUser(c *fiber.Ctx) error {
-	db := database.Db
-	var body struct {
-		Email        string `json:"email"`
-		BootcampName string `json:"bootcampName"`
-	}
-	if err := c.BodyParser(&body); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
-	}
-
-	user, bootcamp, err := getUserAndBootcamp(c, db, body.Email, body.BootcampName)
-	if err != nil {
-		return Loger(c, err.(*fiber.Error).Code, fiber.Map{"error": err.Error()})
-	}
-
-	if err := bootcamp.RemoveUserFromBootcamp(db, user); err != nil {
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
-	}
-
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User removed successfully"})
+	return HandleUserAction(c, "remove")
 }
 func GetAuthUser(c *fiber.Ctx) *models.User {
 	if _, ok := c.Locals("error").(string); ok {
@@ -155,10 +135,26 @@ func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
 	return nil
 }
 
+func GetBootcampUsers(c *fiber.Ctx) error {
+	id := c.Params("id")
+	user := new(models.User)
+	db := database.Db
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	bootcamp := new(models.Bootcamp)
+	bootcamp.GetBootcampByID(db, id)
+	users, err := bootcamp.GetUsersInBootcamp(db)
+	if err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
+}
+
 /*
 // Retrieving a value from c.Locals
 value, ok := c.Locals("key").(string)
 if ok {
-    // Use the value
+	// Use the value
 }
 */
