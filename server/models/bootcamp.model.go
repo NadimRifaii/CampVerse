@@ -16,3 +16,10 @@ func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	}
 	return bootcamps, nil
 }
+func (bootcamp *Bootcamp) GetBootcampByName(db *gorm.DB, name string) (*Bootcamp, error) {
+	var foundBootcamp Bootcamp
+	if err := db.Find(&foundBootcamp, "name = ?", name).Error; err != nil {
+		return nil, err
+	}
+	return &foundBootcamp, nil
+}
