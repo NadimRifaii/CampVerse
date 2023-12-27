@@ -44,7 +44,11 @@ func Signup(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusConflict, fiber.Map{"error": err.Error()})
 	}
 	if body.RoleName == "mentor" {
-
+		mentor := new(models.Mentor)
+		mentor.Speciality = body.Speciality
+		mentor.Position = body.Password
+		mentor.User = *user
+		createRecordInDb(mentor)
 	} else if body.RoleName == "student" {
 
 	}
