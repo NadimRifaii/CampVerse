@@ -27,7 +27,7 @@ func Signup(c *fiber.Ctx) error {
 	user := new(models.User)
 	userRole := new(models.UserRole)
 	if err := validateRequest(c, body); err != nil {
-		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	if body.RoleName == "" {
 		body.RoleName = "user"
@@ -37,20 +37,20 @@ func Signup(c *fiber.Ctx) error {
 	tokenString := createJwtToken(user, userRole.RoleName)
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
-		return loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Internal server error"})
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Internal server error"})
 	}
 	user.Password = string(hashedPassword)
 	err = createUserInDb(c, user)
 	if err != nil {
 		if isDuplicate := isDuplicateKeyError(err); isDuplicate {
-			return loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
+			return Loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
 		}
 	}
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
 	if err != nil {
-		return loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
-	return loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
 }
 
 func Login(c *fiber.Ctx) error {
@@ -59,25 +59,25 @@ func Login(c *fiber.Ctx) error {
 	user := new(models.User)
 	userRole := new(models.UserRole)
 	if err := validateRequest(c, body); err != nil {
-		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	if err := user.GetUserByEmail(body.Email, db); err != nil {
-		return loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 	}
 	if err := userRole.GetUserRoleByID(db, user.RoleID); err != nil {
-		return loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 	}
 	password := body.Password
 	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 	if err != nil {
-		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Wrong password"})
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Wrong password"})
 	}
 	tokenString := createJwtToken(user, userRole.RoleName)
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
 	if err != nil {
-		return loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
-	return loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
 }
 
 func validateRequest(c *fiber.Ctx, body *Body) error {
@@ -96,7 +96,7 @@ func populateUser(user *models.User, body *Body, id uint) {
 	user.Username = body.Username
 	user.Lastname = body.Lastname
 }
-func loger(c *fiber.Ctx, status int, m fiber.Map) error {
+func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
 	return c.Status(status).JSON(m)
 }
 func createUserInDb(c *fiber.Ctx, user *models.User) error {
