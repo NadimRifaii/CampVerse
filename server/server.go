@@ -12,5 +12,5 @@ func init() {
 }
 func main() {
 	app := fiber.New()
-	app.Listen(":" + os.Getenv("PORT"))
+	app.Listen(os.Getenv("PORT"))
 }
