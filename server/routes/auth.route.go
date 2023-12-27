@@ -10,4 +10,5 @@ func AuthRoutes(app fiber.Router) {
 	app.Post("/signup", controllers.Signup)
 	app.Post("/login", controllers.Login)
 	app.Post("/bootcamp", middlewares.RequireAuth, controllers.CreateBootcamp)
+	app.Get("/bootcamp", middlewares.RequireAuth, controllers.GetBootcamps)
 }
