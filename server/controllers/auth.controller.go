@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"os"
 	"time"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -25,7 +26,17 @@ func Signup(c *fiber.Ctx) error {
 	}
 	user.Password = string(hashedPassword)
 	err = createUserInDb(c, user)
+	if err != nil {
+		if isDuplicate := isDuplicateKeyError(err); isDuplicate {
+			return loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
+		}
+	}
 
+	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
+	if err != nil {
+		return loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
+	}
+	return loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
 }
 func validateUserRequest(c *fiber.Ctx, user *models.User, userRole *models.UserRole) error {
 	var body struct {
