@@ -53,6 +53,19 @@ func Signup(c *fiber.Ctx) error {
 	return loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
 }
 
+func Login(c *fiber.Ctx) error {
+	db := database.Db
+	body := new(Body)
+	user := new(models.User)
+	userRole := new(models.UserRole)
+	if err := validateRequest(c, body); err != nil {
+		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	user.GetUserByEmail(body.Email, db)
+	userRole.GetUserRoleByID(db, user.RoleID)
+	return loger(c, fiber.StatusAccepted, fiber.Map{"user": user, "userRole": userRole})
+}
+
 func validateRequest(c *fiber.Ctx, body *Body) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")
