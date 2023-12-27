@@ -16,4 +16,7 @@ func ConnectToDb() {
 	password := os.Getenv("db_password")
 	dbName := os.Getenv("db_name")
 	dsn := fmt.Sprintf("%v:@%vtcp(127.0.0.1:3306)/%v?charset=utf8mb4&parseTime=True&loc=Local", user, password, dbName)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Error),
+	})
 }
