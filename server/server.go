@@ -16,6 +16,8 @@ func init() {
 func main() {
 	app := fiber.New()
 	authGroup := app.Group("/auth")
+	bootcampGroup := app.Group("/bootcamp")
 	routes.AuthRoutes(authGroup)
+	routes.BootcampRoutes(bootcampGroup)
 	app.Listen(os.Getenv("PORT"))
 }
