@@ -2,11 +2,13 @@ package database
 
 import (
 	"fmt"
+	"log"
+	"os"
+
+	"github.com/NadimRifaii/campverse/models"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
-	"log"
-	"os"
 )
 
 var Db *gorm.DB
@@ -23,6 +25,7 @@ func ConnectToDb() {
 		panic("Database connection failed")
 	} else {
 		log.Println("Connection successfull")
+		db.AutoMigrate(new(models.User), new(models.UserRole))
 	}
 	Db = db
 }
