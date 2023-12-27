@@ -90,6 +90,32 @@ func AddUser(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User added successfully"})
 }
+func RemoveUser(c *fiber.Ctx) error {
+	admin := new(models.User)
+	db := database.Db
+	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	var body struct {
+		Email        string `json:"email"`
+		BootcampName string `json:"bootcampName"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	user := new(models.User)
+	if err := user.GetUserByEmail(body.Email, db); err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	bootcamp := new(models.Bootcamp)
+	if err := bootcamp.GetBootcampByName(db, body.BootcampName); err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	if err := bootcamp.RemoveUserFromBootcamp(db, user); err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User removed successfully"})
+}
 
 func GetAuthUser(c *fiber.Ctx) *models.User {
 	if _, ok := c.Locals("error").(string); ok {
