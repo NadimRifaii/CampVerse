@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"errors"
+
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -11,7 +13,14 @@ func CreateBootcamp(c *fiber.Ctx) error {
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "admin" {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"user": user})
+	bootcamp := new(models.Bootcamp)
+	if err := validateBootcampRequest(c, bootcamp); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	if err := createBootcampInDb(bootcamp); err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})
 }
 
 func GetAuthUser(c *fiber.Ctx) *models.User {
@@ -23,11 +32,20 @@ func GetAuthUser(c *fiber.Ctx) *models.User {
 	}
 	return nil
 }
-func createBootcamp(bootcamp *models.Bootcamp) error {
+func createBootcampInDb(bootcamp *models.Bootcamp) error {
 	db := database.Db
 	result := db.Create(bootcamp)
 	if result.Error != nil {
 		return result.Error
+	}
+	return nil
+}
+
+func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
+	if err := c.BodyParser(body); err != nil {
+		return errors.New("invalid request body")
+	} else if body.Name == "" {
+		return errors.New("missing credentials")
 	}
 	return nil
 }

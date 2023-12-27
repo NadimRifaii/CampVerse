@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-	"fmt"
 	"os"
 	"time"
 
@@ -14,7 +13,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type Body struct {
+type UserBody struct {
 	Username string `json:"username" gorm:"not null;default:'first';size:255"`
 	Lastname string `json:"lastname" gorm:"not null;default:'last';size:255"`
 	Email    string `json:"email" gorm:"not null;size:255;unique"`
@@ -23,7 +22,7 @@ type Body struct {
 }
 
 func Signup(c *fiber.Ctx) error {
-	body := new(Body)
+	body := new(UserBody)
 	user := new(models.User)
 	if err := validateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
@@ -41,7 +40,7 @@ func Signup(c *fiber.Ctx) error {
 	user.Password = string(hashedPassword)
 	err = createUserInDb(c, user)
 	if err != nil {
-		if isDuplicate := isDuplicateKeyError(err); isDuplicate {
+		if IsDuplicate := IsDuplicateKeyError(err); IsDuplicate {
 			return Loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
 		}
 	}
@@ -54,7 +53,7 @@ func Signup(c *fiber.Ctx) error {
 
 func Login(c *fiber.Ctx) error {
 	db := database.Db
-	body := new(Body)
+	body := new(UserBody)
 	user := new(models.User)
 	if err := validateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
@@ -78,7 +77,7 @@ func Login(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": user, "username": user.Username, "role": user.UserRole.RoleName})
 }
 
-func validateRequest(c *fiber.Ctx, body *Body) error {
+func validateRequest(c *fiber.Ctx, body *UserBody) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")
 	} else if body.Email == "" || body.Password == "" {
@@ -86,8 +85,7 @@ func validateRequest(c *fiber.Ctx, body *Body) error {
 	}
 	return nil
 }
-func populateUser(user *models.User, body *Body, id uint) {
-	fmt.Println(id)
+func populateUser(user *models.User, body *UserBody, id uint) {
 	user.Email = body.Email
 	user.Password = body.Password
 	user.RoleID = id
@@ -117,7 +115,7 @@ func getRoleId(userRole *models.UserRole, roleName string) {
 	db := database.Db
 	userRole.GetIDByRoleName(db, roleName)
 }
-func isDuplicateKeyError(err error) bool {
+func IsDuplicateKeyError(err error) bool {
 	var mysqlErr *mysql.MySQLError
 	if errors.As(err, &mysqlErr) {
 		if mysqlErr.Number == 1062 {
