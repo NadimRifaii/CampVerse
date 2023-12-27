@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+
+	"gorm.io/gorm"
+)
 
 type User struct {
 	gorm.Model
@@ -13,9 +17,15 @@ type User struct {
 	Bootcamp []*Bootcamp `gorm:"many2many:bootcamp_users;"`
 }
 
-func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
-	if err := db.Find(user, "email = ?", email).Error; err != nil {
+func (user *User) GetUserById(id string, db *gorm.DB) error {
+	if err := db.Find(user, "id = ?", id).Error; err != nil {
 		return err
+	}
+	return nil
+}
+func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
+	if db.Find(user, "email = ?", email); user.ID == 0 {
+		return errors.New("User not found")
 	}
 	return nil
 }

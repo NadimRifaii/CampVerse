@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
@@ -48,7 +47,9 @@ func GetBootcampUsers(c *fiber.Ctx) error {
 	bootcamp := new(models.Bootcamp)
 	bootcamp.GetBootcampByID(db, id)
 	users, err := bootcamp.GetUsersInBootcamp(db)
-	fmt.Println(err)
+	if err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
 }
 
@@ -60,7 +61,7 @@ func GetUserBootcamps(c *fiber.Ctx) error {
 	}
 	bootcamps, err := user.GetBootcamps(db)
 	if err != nil {
-		fmt.Println(err)
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"user": user, "bootcamps": bootcamps})
 }

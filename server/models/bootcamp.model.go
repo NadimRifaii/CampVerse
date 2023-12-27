@@ -1,6 +1,11 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+	"fmt"
+
+	"gorm.io/gorm"
+)
 
 type Bootcamp struct {
 	gorm.Model
@@ -11,9 +16,10 @@ type Bootcamp struct {
 }
 
 func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id string) error {
-	if err := db.Find(bootcamp, id).Error; err != nil {
-		return err
+	if db.Find(bootcamp, id); bootcamp.ID == 0 {
+		return errors.New("Bootcamp was not found")
 	}
+	fmt.Println(bootcamp)
 	return nil
 }
 func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
@@ -24,8 +30,8 @@ func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	return bootcamps, nil
 }
 func (bootcamp *Bootcamp) GetBootcampByName(db *gorm.DB, name string) error {
-	if err := db.Find(bootcamp, "name = ?", name).Error; err != nil {
-		return err
+	if db.Find(bootcamp, "name = ?", name); bootcamp.ID == 0 {
+		return errors.New("Bootcamp doesn't exist")
 	}
 	return nil
 }
