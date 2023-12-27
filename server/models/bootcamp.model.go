@@ -10,6 +10,12 @@ type Bootcamp struct {
 	User             []*User `gorm:"many2many:bootcamp_users;"`
 }
 
+func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id string) error {
+	if err := db.Find(bootcamp, id).Error; err != nil {
+		return err
+	}
+	return nil
+}
 func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	var bootcamps []Bootcamp
 	if err := db.Find(&bootcamps).Error; err != nil {

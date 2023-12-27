@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
@@ -35,6 +36,20 @@ func GetBootcamps(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamps": allBootcamps})
+}
+
+func GetBootcampUsers(c *fiber.Ctx) error {
+	id := c.Params("id")
+	user := new(models.User)
+	db := database.Db
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	bootcamp := new(models.Bootcamp)
+	bootcamp.GetBootcampByID(db, id)
+	users, err := bootcamp.GetUsersInBootcamp(db)
+	fmt.Println(err)
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
 }
 
 func GetAuthUser(c *fiber.Ctx) *models.User {

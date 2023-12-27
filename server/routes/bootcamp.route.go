@@ -7,6 +7,7 @@ import (
 )
 
 func BootcampRoutes(app fiber.Router) {
-	app.Post("/bootcamp", middlewares.RequireAuth, controllers.CreateBootcamp)
-	app.Get("/bootcamp", middlewares.RequireAuth, controllers.GetBootcamps)
+	app.Post("/", middlewares.RequireAuth, controllers.CreateBootcamp)
+	app.Get("/", middlewares.RequireAuth, controllers.GetBootcamps)
+	app.Get("/:id", middlewares.RequireAuth, controllers.GetBootcampUsers)
 }
