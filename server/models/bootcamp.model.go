@@ -43,3 +43,16 @@ func (bootcamp *Bootcamp) GetUsersInBootcamp(db *gorm.DB) ([]User, error) {
 	}
 	return users, nil
 }
+func (bootcamp *Bootcamp) AddUserToBootcamp(db *gorm.DB, user *User) error {
+	var existingUser User
+	if db.Model(bootcamp).Association("User").Find(&existingUser, "id = ?", user.ID); existingUser.ID != 0 {
+		fmt.Println(existingUser.ID)
+		return errors.New("User already exist in this bootcamp")
+	}
+	bootcamp.User = append(bootcamp.User, user)
+	if err := db.Save(bootcamp).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
