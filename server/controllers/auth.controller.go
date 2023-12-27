@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"time"
 
@@ -46,14 +47,20 @@ func validateUserRequest(c *fiber.Ctx, user *models.User, userRole *models.UserR
 		Password string `json:"password" gorm:"not null;size:255"`
 		RoleName string `json:"role" gorm:"not null;default:'user';size:255" `
 	}
-	if err := c.BodyParser(body); err != nil {
+	if err := c.BodyParser(&body); err != nil {
 		return errors.New("invalid request body")
-	} else if body.Email == "" || body.Password == "" || body.RoleName == "" {
+	} else if body.Email == "" || body.Password == "" {
 		return errors.New("missing credentials")
+	}
+	if body.RoleName == "" {
+		body.RoleName = "user"
 	}
 	getRoleId(userRole, body.RoleName)
 	user.Email = body.Email
 	user.Password = body.Password
+	fmt.Println("userRole.RoleName")
+	fmt.Println(userRole.RoleName)
+	fmt.Println("userRole.RoleName")
 	user.RoleID = userRole.ID
 	user.Username = body.Username
 	user.Lastname = body.Lastname

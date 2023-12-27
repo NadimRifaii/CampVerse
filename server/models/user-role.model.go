@@ -8,9 +8,8 @@ type UserRole struct {
 }
 
 func (ur *UserRole) GetIDByRoleName(db *gorm.DB, roleName string) (uint, error) {
-	var userRole UserRole
-	if err := db.Find(&userRole, "role_name = ?", roleName).Error; err != nil {
+	if err := db.Find(ur, "role_name = ?", roleName).Error; err != nil {
 		return 0, err
 	}
-	return userRole.ID, nil
+	return ur.ID, nil
 }
