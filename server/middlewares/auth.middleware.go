@@ -2,7 +2,6 @@ package middlewares
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strings"
 
@@ -18,7 +17,7 @@ func RequireAuth(c *fiber.Ctx) error {
 		c.Locals("error", "No Authorization header")
 		return c.Next()
 	}
-	token := strings.Replace(authorizationHeader, "Bearer", "", 1)
+	token := strings.Replace(authorizationHeader, "Bearer ", "", 1)
 	tokenDecoded, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
@@ -26,15 +25,18 @@ func RequireAuth(c *fiber.Ctx) error {
 		return []byte(os.Getenv("secret")), nil
 	})
 	if err != nil {
-		log.Fatal(err)
+		c.Locals("error", err.Error())
+		return c.Next()
 	}
+
+	fmt.Println(authorizationHeader)
 	if claims, ok := tokenDecoded.Claims.(jwt.MapClaims); ok {
 		email := claims["email"].(string)
+		fmt.Println(email)
 		user := new(models.User)
 		user.GetUserByEmail(email, database.Db)
+		user.UserRole.GetUserRoleByID(database.Db, user.RoleID)
 		c.Locals("user", user)
-	} else {
-		log.Fatal(err)
 	}
 	return c.Next()
 }
