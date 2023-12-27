@@ -13,11 +13,13 @@ import (
 )
 
 type UserBody struct {
-	Username string `json:"username" gorm:"not null;default:'first';size:255"`
-	Lastname string `json:"lastname" gorm:"not null;default:'last';size:255"`
-	Email    string `json:"email" gorm:"not null;size:255;unique"`
-	Password string `json:"password" gorm:"not null;size:255"`
-	RoleName string `json:"role" gorm:"not null;default:'user';size:255" `
+	Username   string `json:"username" gorm:"not null;default:'first';size:255"`
+	Lastname   string `json:"lastname" gorm:"not null;default:'last';size:255"`
+	Email      string `json:"email" gorm:"not null;size:255;unique"`
+	Password   string `json:"password" gorm:"not null;size:255"`
+	RoleName   string `json:"role" gorm:"not null;default:'user';size:255" `
+	Speciality string `json:"speciality" gorm:"not null;default:'x';size:255"`
+	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
 }
 
 func Signup(c *fiber.Ctx) error {
@@ -37,12 +39,14 @@ func Signup(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Internal server error"})
 	}
 	user.Password = string(hashedPassword)
-	err = createUserInDb(c, user)
+	err = createRecordInDb(user)
 	if err != nil {
-		// if IsDuplicate := IsDuplicateKeyError(err); IsDuplicate {
-		// 	return Loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
-		// }
 		return Loger(c, fiber.StatusConflict, fiber.Map{"error": err.Error()})
+	}
+	if body.RoleName == "mentor" {
+
+	} else if body.RoleName == "student" {
+
 	}
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
 	if err != nil {
@@ -95,9 +99,9 @@ func populateUser(user *models.User, body *UserBody, id uint) {
 func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
 	return c.Status(status).JSON(m)
 }
-func createUserInDb(c *fiber.Ctx, user *models.User) error {
+func createRecordInDb(record interface{}) error {
 	db := database.Db
-	result := db.Create(user)
+	result := db.Create(record)
 	if result.Error != nil {
 		return result.Error
 	}
