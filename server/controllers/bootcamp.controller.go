@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -91,6 +90,7 @@ func AddUser(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User added successfully"})
 }
+
 func GetAuthUser(c *fiber.Ctx) *models.User {
 	if _, ok := c.Locals("error").(string); ok {
 		return nil

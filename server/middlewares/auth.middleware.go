@@ -28,7 +28,6 @@ func RequireAuth(c *fiber.Ctx) error {
 		c.Locals("error", err.Error())
 		return c.Next()
 	}
-
 	if claims, ok := tokenDecoded.Claims.(jwt.MapClaims); ok {
 		email := claims["email"].(string)
 		user := new(models.User)

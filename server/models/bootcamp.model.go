@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -19,7 +18,6 @@ func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id string) error {
 	if db.Find(bootcamp, id); bootcamp.ID == 0 {
 		return errors.New("Bootcamp was not found")
 	}
-	fmt.Println(bootcamp)
 	return nil
 }
 func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
@@ -46,11 +44,24 @@ func (bootcamp *Bootcamp) GetUsersInBootcamp(db *gorm.DB) ([]User, error) {
 func (bootcamp *Bootcamp) AddUserToBootcamp(db *gorm.DB, user *User) error {
 	var existingUser User
 	if db.Model(bootcamp).Association("User").Find(&existingUser, "id = ?", user.ID); existingUser.ID != 0 {
-		fmt.Println(existingUser.ID)
 		return errors.New("User already exist in this bootcamp")
 	}
 	bootcamp.User = append(bootcamp.User, user)
 	if err := db.Save(bootcamp).Error; err != nil {
+		return err
+	}
+
+	return nil
+}
+func (bootcamp *Bootcamp) RemoveUserFromBootcamp(db *gorm.DB, user *User) error {
+	// Check if the user is associated with the bootcamp
+	var existingUser User
+	if db.Model(bootcamp).Association("User").Find(&existingUser, "id = ?", user.ID); existingUser.ID == 0 {
+		return errors.New("User not found in this bootcamp")
+	}
+
+	// Remove the user from the bootcamp
+	if err := db.Model(bootcamp).Association("User").Delete(user); err != nil {
 		return err
 	}
 
