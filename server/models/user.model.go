@@ -11,3 +11,10 @@ type User struct {
 	RoleID   uint
 	UserRole UserRole `gorm:"foreignKey:RoleID"`
 }
+
+func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
+	if err := db.Find(user, "email = ?", email).Error; err != nil {
+		return err
+	}
+	return nil
+}

@@ -46,7 +46,6 @@ func Signup(c *fiber.Ctx) error {
 			return loger(c, fiber.StatusConflict, fiber.Map{"error": "This email already exists!"})
 		}
 	}
-
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
 	if err != nil {
 		return loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
