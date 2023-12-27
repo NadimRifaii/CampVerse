@@ -2,10 +2,12 @@ package controllers
 
 import (
 	"errors"
+	"time"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 func Signup(c *fiber.Ctx) error {
@@ -30,4 +32,19 @@ func createUserInDb(c *fiber.Ctx, user *models.User) error {
 		return result.Error
 	}
 	return nil
+}
+func createJwtToken(user *models.User, roleName string) *jwt.Token {
+	userRole := getRoleId(roleName)
+	return jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"exp":      time.Now().Add(time.Hour).Unix(),
+		"role":     userRole.ID,
+		"username": user.Username,
+		"email":    user.Email,
+	})
+}
+func getRoleId(roleName string) *models.UserRole {
+	userRole := new(models.UserRole)
+	db := database.Db
+	userRole.GetIDByRoleName(db, roleName)
+	return userRole
 }
