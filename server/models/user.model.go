@@ -9,7 +9,8 @@ type User struct {
 	Email    string `json:"email" gorm:"not null;size:255;unique"`
 	Password string `json:"password" gorm:"not null;size:255"`
 	RoleID   uint
-	UserRole UserRole `gorm:"foreignKey:RoleID"`
+	UserRole UserRole    `gorm:"foreignKey:RoleID"`
+	Bootcamp []*Bootcamp `gorm:"many2many:bootcamp_users;"`
 }
 
 func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
