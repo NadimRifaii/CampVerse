@@ -19,3 +19,10 @@ func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
 	}
 	return nil
 }
+func (user *User) GetBootcamps(db *gorm.DB) ([]Bootcamp, error) {
+	var bootcamps []Bootcamp
+	if err := db.Model(&user).Association("Bootcamp").Find(&bootcamps); err != nil {
+		return nil, err
+	}
+	return bootcamps, nil
+}
