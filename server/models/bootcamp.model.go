@@ -23,3 +23,11 @@ func (bootcamp *Bootcamp) GetBootcampByName(db *gorm.DB, name string) error {
 	}
 	return nil
 }
+
+func (bootcamp *Bootcamp) GetUsersInBootcamp(db *gorm.DB) ([]User, error) {
+	var users []User
+	if err := db.Model(&bootcamp).Association("User").Find(&users); err != nil {
+		return nil, err
+	}
+	return users, nil
+}
