@@ -61,9 +61,23 @@ func Login(c *fiber.Ctx) error {
 	if err := validateRequest(c, body); err != nil {
 		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	user.GetUserByEmail(body.Email, db)
-	userRole.GetUserRoleByID(db, user.RoleID)
-	return loger(c, fiber.StatusAccepted, fiber.Map{"user": user, "userRole": userRole})
+	if err := user.GetUserByEmail(body.Email, db); err != nil {
+		return loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+	}
+	if err := userRole.GetUserRoleByID(db, user.RoleID); err != nil {
+		return loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+	}
+	password := body.Password
+	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	if err != nil {
+		return loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Wrong password"})
+	}
+	tokenString := createJwtToken(user, userRole.RoleName)
+	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
+	if err != nil {
+		return loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
+	}
+	return loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": userRole.RoleName})
 }
 
 func validateRequest(c *fiber.Ctx, body *Body) error {
