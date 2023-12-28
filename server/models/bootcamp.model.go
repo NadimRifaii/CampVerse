@@ -54,6 +54,19 @@ func (bootcamp *Bootcamp) AddUserToBootcamp(db *gorm.DB, user *User) error {
 
 	return nil
 }
+
+func (bootcamp *Bootcamp) AddStackToBootcamp(db *gorm.DB, stack *Stack) error {
+	var existingStack Stack
+	if db.Model(bootcamp).Association("Stack").Find(&existingStack, "id = ?", stack.ID); existingStack.ID != 0 {
+		return errors.New("Stack already exist in this bootcacmp")
+	}
+	bootcamp.Stack = append(bootcamp.Stack, stack)
+	if err := db.Save(bootcamp).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
 func (bootcamp *Bootcamp) RemoveUserFromBootcamp(db *gorm.DB, user *User) error {
 	// Check if the user is associated with the bootcamp
 	var existingUser User
