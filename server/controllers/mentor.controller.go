@@ -41,7 +41,7 @@ func verifyStackRequest(c *fiber.Ctx, stack *models.Stack) error {
 	}
 	return nil
 }
-func getMentor(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, error) {
+func GetMentor(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, error) {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "mentor" {
 		return nil, errors.New("Unauthorized")
@@ -69,7 +69,7 @@ func getStack(c *fiber.Ctx, db *gorm.DB) (*models.Stack, error) {
 	return stack, nil
 }
 func getMentorAndStack(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, *models.Stack, error) {
-	mentor, err := getMentor(c, db)
+	mentor, err := GetMentor(c, db)
 	if err != nil {
 		return nil, nil, err
 	}
