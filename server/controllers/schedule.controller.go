@@ -31,7 +31,9 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	createDayRecords(c, body.Days, schedule)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 }
+func HttpGetSchedule(c *fiber.Ctx) error {
 
+}
 func validateScheduleRequest(c *fiber.Ctx, body *scheduleBody) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("bad request")
@@ -44,7 +46,7 @@ func createDayRecords(c *fiber.Ctx, days []*models.Day, schedule *models.Schedul
 		if err := CreateRecordInDb(day); err != nil {
 			return errors.New("internal server error")
 		}
-		schedule.Day = append(schedule.Day, day)
+		schedule.Days = append(schedule.Days, day)
 	}
 	return nil
 }

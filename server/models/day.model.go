@@ -10,6 +10,6 @@ type Day struct {
 	Sessions   []*Session
 }
 
-func (day *Day) GetSessions(db *gorm.DB) error {
+func (day *Day) GetDaySessions(db *gorm.DB) error {
 	return db.Model(day).Association("Sessions").Find(day.Sessions)
 }
