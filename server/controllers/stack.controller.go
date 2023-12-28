@@ -88,6 +88,10 @@ func handleStackAction(c *fiber.Ctx, action string) error {
 		if err := bootcamp.AddStackToBootcamp(db, stack); err != nil {
 			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 		}
+	case "remove":
+		if err := bootcamp.RemoveStackFromBootcamp(db, stack); err != nil {
+			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+		}
 	default:
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid action"})
 	}
