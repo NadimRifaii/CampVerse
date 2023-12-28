@@ -8,7 +8,8 @@ import (
 
 type Stack struct {
 	gorm.Model
-	Name string `json:"name" gorm:"not null;default:'x';size:255;unique"`
+	Name     string      `json:"name" gorm:"not null;default:'x';size:255;unique"`
+	Bootcamp []*Bootcamp `gorm:"many2many:bootcamp_stack"`
 }
 
 func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {

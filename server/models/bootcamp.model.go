@@ -8,10 +8,11 @@ import (
 
 type Bootcamp struct {
 	gorm.Model
-	Name             string  `json:"name" gorm:"not null;default:'first';size:255;unique"`
-	LearningOutcomes string  `json:"outcomes" gorm:"not null;"`
-	TargetAudiance   string  `json:"audience" gorm:"not null;;size:255"`
-	User             []*User `gorm:"many2many:bootcamp_users;"`
+	Name             string   `json:"name" gorm:"not null;default:'first';size:255;unique"`
+	LearningOutcomes string   `json:"outcomes" gorm:"not null;"`
+	TargetAudiance   string   `json:"audience" gorm:"not null;;size:255"`
+	User             []*User  `gorm:"many2many:bootcamp_users;"`
+	Stack            []*Stack `gorm:"many2many:bootcamp_stack"`
 }
 
 func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id string) error {
