@@ -26,7 +26,7 @@ func main() {
 	bootcampGroup.Use(middlewares.RequireAuth)
 	stackGroup.Use(middlewares.RequireAuth)
 	mentorGroup.Use(middlewares.RequireAuth)
-	scheduleGroup.Use(middlewares.RequireAuth())
+	scheduleGroup.Use(middlewares.RequireAuth)
 
 	routes.AuthRoutes(authGroup)
 	routes.BootcampRoutes(bootcampGroup)
