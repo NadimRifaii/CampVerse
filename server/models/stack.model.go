@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"fmt"
+
+	"gorm.io/gorm"
+)
 
 type Stack struct {
 	gorm.Model
@@ -9,7 +13,8 @@ type Stack struct {
 
 func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {
 	var stacks []Stack
-	if err := db.Find(stack).Error; err != nil {
+	fmt.Println("stacks")
+	if err := db.Find(&stacks).Error; err != nil {
 		return nil, err
 	}
 	return stacks, nil
