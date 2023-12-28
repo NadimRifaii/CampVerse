@@ -29,7 +29,7 @@ func Signup(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	if body.RoleName == "" {
-		body.RoleName = "user"
+		body.RoleName = "student"
 	}
 	getRoleId(&user.UserRole, body.RoleName)
 	populateUser(user, body, user.UserRole.ID)

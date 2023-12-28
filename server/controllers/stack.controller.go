@@ -32,7 +32,7 @@ func CreateStack(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 
-	if err := createStackIndB(stack); err != nil {
+	if err := createRecordInDb(stack); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Stack created successfully"})
@@ -44,14 +44,7 @@ func validateStackRequest(c *fiber.Ctx, stack *models.Stack) error {
 	}
 	return nil
 }
-func createStackIndB(stack *models.Stack) error {
-	db := database.Db
-	result := db.Create(stack)
-	if result.Error != nil {
-		return result.Error
-	}
-	return nil
-}
+
 func getStackAndBootcamp(c *fiber.Ctx, db *gorm.DB, stackName, bootcampName string) (*models.Stack, *models.Bootcamp, error) {
 	admin := new(models.User)
 	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
