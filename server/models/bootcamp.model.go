@@ -37,11 +37,20 @@ func (bootcamp *Bootcamp) GetBootcampByName(db *gorm.DB, name string) error {
 
 func (bootcamp *Bootcamp) GetUsersInBootcamp(db *gorm.DB) ([]User, error) {
 	var users []User
-	if err := db.Model(&bootcamp).Association("User").Find(&users); err != nil {
+	if err := db.Model(bootcamp).Association("User").Find(&users); err != nil {
 		return nil, err
 	}
 	return users, nil
 }
+
+func (bootcamp *Bootcamp) GetStacksInBootcamp(db *gorm.DB) ([]Stack, error) {
+	var stacks []Stack
+	if err := db.Model(bootcamp).Association("Stack").Find(&stacks); err != nil {
+		return nil, err
+	}
+	return stacks, nil
+}
+
 func (bootcamp *Bootcamp) AddUserToBootcamp(db *gorm.DB, user *User) error {
 	var existingUser User
 	if db.Model(bootcamp).Association("User").Find(&existingUser, "id = ?", user.ID); existingUser.ID != 0 {
