@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -105,5 +106,5 @@ func AddStack(c *fiber.Ctx) error {
 
 // RemoveStack handles the removal of a stack from a bootcamp.
 func RemoveStack(c *fiber.Ctx) error {
-	return handleUserAction(c, "remove")
+	return handleStackAction(c, "remove")
 }

@@ -87,7 +87,7 @@ func (bootcamp *Bootcamp) RemoveStackFromBootcamp(db *gorm.DB, stack *Stack) err
 	if db.Model(bootcamp).Association("Stack").Find(&existingStack, "id=?", stack.ID); existingStack.ID == 0 {
 		return errors.New("Stack not found in this bootcamp")
 	}
-	if err := db.Model(bootcamp).Association("Sstack").Delete(stack); err != nil {
+	if err := db.Model(bootcamp).Association("Stack").Delete(stack); err != nil {
 		return err
 	}
 	return nil
