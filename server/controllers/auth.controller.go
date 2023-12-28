@@ -22,7 +22,7 @@ type UserBody struct {
 	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
 }
 
-func Signup(c *fiber.Ctx) error {
+func HttpSignup(c *fiber.Ctx) error {
 	body := new(UserBody)
 	user := new(models.User)
 	if err := validateRequest(c, body); err != nil {
@@ -59,7 +59,7 @@ func Signup(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": user, "username": user.Username, "role": user.UserRole.RoleName})
 }
 
-func Login(c *fiber.Ctx) error {
+func HttpLogin(c *fiber.Ctx) error {
 	db := database.Db
 	body := new(UserBody)
 	user := new(models.User)

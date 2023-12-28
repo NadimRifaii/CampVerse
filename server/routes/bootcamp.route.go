@@ -6,11 +6,11 @@ import (
 )
 
 func BootcampRoutes(app fiber.Router) {
-	app.Get("/", controllers.GetBootcamps)
-	app.Get("/user-bootcamps", controllers.GetUserBootcamps)
-	app.Get("/:id", controllers.GetBootcampUsers)
-	app.Post("/bootcamp-stacks", controllers.GetBootcampStacks)
-	app.Post("/", controllers.CreateBootcamp)
-	app.Post("/add-user", controllers.AddUser)
-	app.Post("/remove-user", controllers.RemoveUser)
+	app.Get("/", controllers.HttpGetBootcamps)
+	app.Get("/user-bootcamps", controllers.HttpGetUserBootcamps)
+	app.Get("/:id", controllers.HttpGetBootcampUsers)
+	app.Post("/bootcamp-stacks", controllers.HttpGetBootcampStacks)
+	app.Post("/", controllers.HttpCreateBootcamp)
+	app.Post("/add-user", controllers.HttpAddUser)
+	app.Post("/remove-user", controllers.HttpRemoveUser)
 }

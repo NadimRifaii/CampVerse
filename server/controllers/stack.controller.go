@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func GetAllStacks(c *fiber.Ctx) error {
+func HttpGetAllStacks(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
 	if user = GetAuthUser(c); user == nil {
@@ -22,7 +22,7 @@ func GetAllStacks(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"stacks": stacks})
 }
-func CreateStack(c *fiber.Ctx) error {
+func HttpCreateStack(c *fiber.Ctx) error {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
@@ -93,11 +93,11 @@ func handleStackAction(c *fiber.Ctx, action string) error {
 }
 
 // AddStack handles the addition of a stack to a bootcamp.
-func AddStack(c *fiber.Ctx) error {
+func HttpAddStack(c *fiber.Ctx) error {
 	return handleStackAction(c, "add")
 }
 
 // RemoveStack handles the removal of a stack from a bootcamp.
-func RemoveStack(c *fiber.Ctx) error {
+func HttpRemoveStack(c *fiber.Ctx) error {
 	return handleStackAction(c, "remove")
 }

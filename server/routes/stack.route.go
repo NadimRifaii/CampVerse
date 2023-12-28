@@ -6,8 +6,8 @@ import (
 )
 
 func StackRoutes(app fiber.Router) {
-	app.Get("/", controllers.GetAllStacks)
-	app.Post("/", controllers.CreateStack)
-	app.Post("/add-to-bootcamp", controllers.AddStack)
-	app.Post("/remove-from-bootcamp", controllers.RemoveStack)
+	app.Get("/", controllers.HttpGetAllStacks)
+	app.Post("/", controllers.HttpCreateStack)
+	app.Post("/add-to-bootcamp", controllers.HttpAddStack)
+	app.Post("/remove-from-bootcamp", controllers.HttpRemoveStack)
 }

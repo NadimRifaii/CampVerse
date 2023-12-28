@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func CreateBootcamp(c *fiber.Ctx) error {
+func HttpCreateBootcamp(c *fiber.Ctx) error {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "admin" {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
@@ -24,7 +24,7 @@ func CreateBootcamp(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})
 }
 
-func GetBootcamps(c *fiber.Ctx) error {
+func HttpGetBootcamps(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "admin" {
@@ -38,7 +38,7 @@ func GetBootcamps(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamps": allBootcamps})
 }
 
-func GetUserBootcamps(c *fiber.Ctx) error {
+func HttpGetUserBootcamps(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
 	if user = GetAuthUser(c); user == nil {
@@ -100,12 +100,12 @@ func handleUserAction(c *fiber.Ctx, action string) error {
 }
 
 // AddUser handles the addition of a user to a bootcamp.
-func AddUser(c *fiber.Ctx) error {
+func HttpAddUser(c *fiber.Ctx) error {
 	return handleUserAction(c, "add")
 }
 
 // RemoveUser handles the removal of a user from a bootcamp.
-func RemoveUser(c *fiber.Ctx) error {
+func HttpRemoveUser(c *fiber.Ctx) error {
 	return handleUserAction(c, "remove")
 }
 func GetAuthUser(c *fiber.Ctx) *models.User {
@@ -118,7 +118,7 @@ func GetAuthUser(c *fiber.Ctx) *models.User {
 	return nil
 }
 
-func GetBootcampStacks(c *fiber.Ctx) error {
+func HttpGetBootcampStacks(c *fiber.Ctx) error {
 	admin := new(models.User)
 	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
@@ -153,7 +153,7 @@ func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
 	return nil
 }
 
-func GetBootcampUsers(c *fiber.Ctx) error {
+func HttpGetBootcampUsers(c *fiber.Ctx) error {
 	id := c.Params("id")
 	user := new(models.User)
 	db := database.Db
