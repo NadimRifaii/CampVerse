@@ -33,3 +33,17 @@ func (mentor *Mentor) AddStackToMentor(db *gorm.DB, stack *Stack) error {
 
 	return nil
 }
+func (mentor *Mentor) RemoveStackFromMentor(db *gorm.DB, stack *Stack) error {
+	// Check if the user is associated with the bootcamp
+	var existingStack Stack
+	if db.Model(mentor).Association("User").Find(&existingStack, "id = ?", stack.ID); existingStack.ID == 0 {
+		return errors.New("User not found in this bootcamp")
+	}
+
+	// Remove the user from the bootcamp
+	if err := db.Model(mentor).Association("User").Delete(stack); err != nil {
+		return err
+	}
+
+	return nil
+}
