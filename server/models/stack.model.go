@@ -1,6 +1,7 @@
 package models
 
 import (
+	"errors"
 	"fmt"
 
 	"gorm.io/gorm"
@@ -19,4 +20,10 @@ func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {
 		return nil, err
 	}
 	return stacks, nil
+}
+func (stack *Stack) GetStackByName(db *gorm.DB, name string) error {
+	if db.Find(stack, "name = ?", name); stack.ID == 0 {
+		return errors.New("User not found")
+	}
+	return nil
 }
