@@ -9,3 +9,7 @@ type Day struct {
 	Schedule   Schedule
 	Sessions   []*Session
 }
+
+func (day *Day) GetSessions(db *gorm.DB) error {
+	return db.Model(day).Association("Sessions").Find(day.Sessions)
+}
