@@ -45,9 +45,7 @@ func Signup(c *fiber.Ctx) error {
 	}
 	if body.RoleName == "mentor" {
 		mentor := new(models.Mentor)
-		mentor.Speciality = body.Speciality
-		mentor.Position = body.Password
-		mentor.User = *user
+		populateMentor(mentor, user, body)
 		createRecordInDb(mentor)
 	} else if body.RoleName == "student" {
 		student := new(models.Student)
@@ -101,6 +99,11 @@ func populateUser(user *models.User, body *UserBody, id uint) {
 	user.RoleID = id
 	user.Username = body.Username
 	user.Lastname = body.Lastname
+}
+func populateMentor(mentor *models.Mentor, user *models.User, body *UserBody) {
+	mentor.Speciality = body.Speciality
+	mentor.Position = body.Password
+	mentor.User = *user
 }
 func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
 	return c.Status(status).JSON(m)
