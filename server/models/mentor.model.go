@@ -21,3 +21,15 @@ func (mentor *Mentor) GetMentorByID(db *gorm.DB, id string) error {
 	}
 	return nil
 }
+func (mentor *Mentor) AddUserToBootcamp(db *gorm.DB, stack *Stack) error {
+	var existingStack Stack
+	if db.Model(mentor).Association("Stack").Find(&existingStack, "id = ?", stack.ID); existingStack.ID != 0 {
+		return errors.New("Teacher already teaches this stack")
+	}
+	mentor.Stack = append(mentor.Stack, stack)
+	if err := db.Save(mentor).Error; err != nil {
+		return err
+	}
+
+	return nil
+}

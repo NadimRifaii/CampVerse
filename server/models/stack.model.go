@@ -2,8 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
-
 	"gorm.io/gorm"
 )
 
@@ -16,7 +14,6 @@ type Stack struct {
 
 func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {
 	var stacks []Stack
-	fmt.Println("stacks")
 	if err := db.Find(&stacks).Error; err != nil {
 		return nil, err
 	}
