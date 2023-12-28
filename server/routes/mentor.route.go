@@ -7,4 +7,5 @@ import (
 
 func MentorRoutes(app fiber.Router) {
 	app.Post("/", controllers.HttpAddStackToMentor)
+	app.Delete("/", controllers.HttpRemoveStackFromMentor)
 }
