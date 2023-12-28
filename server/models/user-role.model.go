@@ -24,7 +24,7 @@ func (ur *UserRole) GetIDByRoleName(db *gorm.DB, roleName string) (uint, error) 
 	return ur.ID, nil
 }
 func (ur *UserRole) CreatePredefinedRoles(db *gorm.DB) {
-	roles := []string{"admin", "user", "mentor"}
+	roles := []string{"admin", "student", "mentor"}
 
 	for _, roleName := range roles {
 		var existingRole UserRole
@@ -44,7 +44,6 @@ func (ur *UserRole) CreatePredefinedRoles(db *gorm.DB) {
 				fmt.Printf("Error creating role %s: %v\n", roleName, result.Error)
 				continue
 			}
-
 			fmt.Printf("Role %s added successfully\n", roleName)
 		} else {
 			fmt.Printf("Role %s already exists\n", roleName)

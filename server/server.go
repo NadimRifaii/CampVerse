@@ -13,6 +13,7 @@ import (
 func init() {
 	initializers.Load()
 	database.ConnectToDb()
+	initializers.MigrateUserRoles()
 }
 func main() {
 	app := fiber.New()
