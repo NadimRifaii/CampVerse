@@ -15,9 +15,9 @@ type Mentor struct {
 	Stack      []*Stack `gorm:"many2many:teaches;"`
 }
 
-func (mentor *Mentor) GetMentorByID(db *gorm.DB, id string) error {
-	if db.Find(mentor, id); mentor.ID == 0 {
-		return errors.New("Bootcamp was not found")
+func (mentor *Mentor) GetMentorByID(db *gorm.DB, id uint) error {
+	if db.Find(mentor, "user_id=?", id); mentor.ID == 0 {
+		return errors.New("mentor was not found")
 	}
 	return nil
 }
