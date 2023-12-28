@@ -117,6 +117,23 @@ func GetAuthUser(c *fiber.Ctx) *models.User {
 	}
 	return nil
 }
+
+func GetStacks(c *fiber.Ctx) error {
+	admin := new(models.User)
+	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	bootcamp := new(models.Bootcamp)
+	if err := validateBootcampRequest(c, bootcamp); err != nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
+	}
+	stacks, err := bootcamp.GetStacksInBootcamp(database.Db)
+	if err != nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"stacks": stacks})
+}
+
 func createBootcampInDb(bootcamp *models.Bootcamp) error {
 	db := database.Db
 	result := db.Create(bootcamp)
