@@ -23,7 +23,7 @@ func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {
 }
 func (stack *Stack) GetStackByName(db *gorm.DB, name string) error {
 	if db.Find(stack, "name = ?", name); stack.ID == 0 {
-		return errors.New("User not found")
+		return errors.New("Stack not found")
 	}
 	return nil
 }

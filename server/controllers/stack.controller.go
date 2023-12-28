@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -31,6 +30,7 @@ func CreateStack(c *fiber.Ctx) error {
 	if err := validateStackRequest(c, stack); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+
 	if err := createStackIndB(stack); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
@@ -68,4 +68,20 @@ func getStackAndBootcamp(c *fiber.Ctx, db *gorm.DB, stackName, bootcampName stri
 	}
 
 	return stack, bootcamp, nil
+}
+func handleStackAction(c *fiber.Ctx, action string) error {
+	db := database.Db
+	var body struct {
+		Email        string `json:"stackName"`
+		BootcampName string `json:"bootcampName"`
+	}
+	if err := c.BodyParser(&body); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+
+	stack, bootcamp, err := getStackAndBootcamp(c, db, body.Email, body.BootcampName)
+	if err != nil {
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusNotFound, fiber.Map{"stack": stack, "bootcamp": bootcamp})
 }
