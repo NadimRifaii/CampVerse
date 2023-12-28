@@ -8,4 +8,5 @@ type Mentor struct {
 	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
 	UserId     uint
 	User       User
+	Stack      []*Stack `gorm:"many2many:teaches;"`
 }
