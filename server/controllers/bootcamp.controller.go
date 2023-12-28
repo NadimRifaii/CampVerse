@@ -18,7 +18,7 @@ func HttpCreateBootcamp(c *fiber.Ctx) error {
 	if err := validateBootcampRequest(c, bootcamp); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	if err := createBootcampInDb(bootcamp); err != nil {
+	if err := createRecordInDb(bootcamp); err != nil {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})
@@ -100,12 +100,12 @@ func handleUserAction(c *fiber.Ctx, action string) error {
 }
 
 // AddUser handles the addition of a user to a bootcamp.
-func HttpAddUser(c *fiber.Ctx) error {
+func HttpAddUserToBootcamp(c *fiber.Ctx) error {
 	return handleUserAction(c, "add")
 }
 
 // RemoveUser handles the removal of a user from a bootcamp.
-func HttpRemoveUser(c *fiber.Ctx) error {
+func HttpRemoveUserFromBootcamp(c *fiber.Ctx) error {
 	return handleUserAction(c, "remove")
 }
 func GetAuthUser(c *fiber.Ctx) *models.User {
@@ -133,15 +133,6 @@ func HttpGetBootcampStacks(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"stacks": stacks})
-}
-
-func createBootcampInDb(bootcamp *models.Bootcamp) error {
-	db := database.Db
-	result := db.Create(bootcamp)
-	if result.Error != nil {
-		return result.Error
-	}
-	return nil
 }
 
 func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
