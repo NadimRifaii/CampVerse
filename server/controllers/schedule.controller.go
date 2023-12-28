@@ -11,6 +11,7 @@ import (
 )
 
 type scheduleBody struct {
+	Week string        `json:"week"`
 	Days []*models.Day `json:"days"`
 }
 
@@ -24,8 +25,13 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	if err := validateScheduleRequest(c, db, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error(), "mentor": mentor})
 	}
-	createDayRecords(c, body.Days)
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"body": body})
+	schedule := new(models.Schedule)
+	schedule.Week = body.Week
+	if err := CreateRecordInDb(schedule); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	createDayRecords(c, body.Days, schedule)
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 }
 
 func validateScheduleRequest(c *fiber.Ctx, dd *gorm.DB, body *scheduleBody) error {
@@ -34,8 +40,16 @@ func validateScheduleRequest(c *fiber.Ctx, dd *gorm.DB, body *scheduleBody) erro
 	}
 	return nil
 }
-func createDayRecords(c *fiber.Ctx, days []*models.Day) {
+func createDayRecords(c *fiber.Ctx, days []*models.Day, schedule *models.Schedule) error {
+	fmt.Println("Schedule")
+	fmt.Println(schedule)
+	fmt.Println("Schedule")
 	for _, day := range days {
-		fmt.Println(day)
+		day.ScheduleId = schedule.ID
+		if err := CreateRecordInDb(day); err != nil {
+			return errors.New("internal server error")
+		}
+		schedule.Day = append(schedule.Day, *day)
 	}
+	return nil
 }

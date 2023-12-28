@@ -32,7 +32,7 @@ func HttpCreateStack(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 
-	if err := createRecordInDb(stack); err != nil {
+	if err := CreateRecordInDb(stack); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Stack created successfully"})

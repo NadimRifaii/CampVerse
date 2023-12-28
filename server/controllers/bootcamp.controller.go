@@ -18,7 +18,7 @@ func HttpCreateBootcamp(c *fiber.Ctx) error {
 	if err := validateBootcampRequest(c, bootcamp); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	if err := createRecordInDb(bootcamp); err != nil {
+	if err := CreateRecordInDb(bootcamp); err != nil {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})

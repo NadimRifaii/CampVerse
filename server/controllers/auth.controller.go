@@ -39,18 +39,18 @@ func HttpSignup(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Internal server error"})
 	}
 	user.Password = string(hashedPassword)
-	err = createRecordInDb(user)
+	err = CreateRecordInDb(user)
 	if err != nil {
 		return Loger(c, fiber.StatusConflict, fiber.Map{"error": err.Error()})
 	}
 	if body.RoleName == "mentor" {
 		mentor := new(models.Mentor)
 		populateMentor(mentor, user, body)
-		createRecordInDb(mentor)
+		CreateRecordInDb(mentor)
 	} else if body.RoleName == "student" {
 		student := new(models.Student)
 		student.User = *user
-		createRecordInDb(student)
+		CreateRecordInDb(student)
 	}
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
 	if err != nil {
@@ -108,7 +108,7 @@ func populateMentor(mentor *models.Mentor, user *models.User, body *UserBody) {
 func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
 	return c.Status(status).JSON(m)
 }
-func createRecordInDb(record interface{}) error {
+func CreateRecordInDb(record interface{}) error {
 	db := database.Db
 	result := db.Create(record)
 	if result.Error != nil {
