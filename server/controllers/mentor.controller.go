@@ -41,24 +41,43 @@ func verifyStackRequest(c *fiber.Ctx, stack *models.Stack) error {
 	}
 	return nil
 }
-func getMentorAndStack(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, *models.Stack, error) {
+func getMentor(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, error) {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "mentor" {
-		return nil, nil, errors.New("Unauthorized")
+		return nil, errors.New("Unauthorized")
 	}
-	//
+
 	mentor := new(models.Mentor)
 	if err := mentor.GetMentorByID(db, user.ID); err != nil {
-		return nil, nil, errors.New("Unauthorized")
+		return nil, errors.New("Unauthorized")
 	}
 	mentor.User = *user
+
+	return mentor, nil
+}
+
+func getStack(c *fiber.Ctx, db *gorm.DB) (*models.Stack, error) {
 	stack := new(models.Stack)
 	if err := verifyStackRequest(c, stack); err != nil {
-		return nil, nil, errors.New("invalid request body")
+		return nil, errors.New("invalid request body")
 	}
-	//
+
 	if err := stack.GetStackByName(db, stack.Name); err != nil {
-		return nil, nil, errors.New("stack not found")
+		return nil, errors.New("stack not found")
 	}
+
+	return stack, nil
+}
+func getMentorAndStack(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, *models.Stack, error) {
+	mentor, err := getMentor(c, db)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	stack, err := getStack(c, db)
+	if err != nil {
+		return nil, nil, err
+	}
+
 	return mentor, stack, nil
 }
