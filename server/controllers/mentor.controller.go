@@ -58,7 +58,7 @@ func getMentorAndStack(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, *models.Stack
 	}
 	//
 	if err := stack.GetStackByName(db, stack.Name); err != nil {
-		return nil, nil, errors.New("Stack not found")
+		return nil, nil, errors.New("stack not found")
 	}
 	return mentor, stack, nil
 }
