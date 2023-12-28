@@ -29,7 +29,9 @@ func HttpAddStackToMentor(c *fiber.Ctx) error {
 	if err := stack.GetStackByName(db, stack.Name); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-
+	if err := mentor.AddStackToMentor(db, stack); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"mentor": mentor})
 }
 func verifyStackRequest(c *fiber.Ctx, stack *models.Stack) error {
