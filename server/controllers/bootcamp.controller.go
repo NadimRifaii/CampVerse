@@ -70,7 +70,7 @@ func getUserAndBootcamp(c *fiber.Ctx, db *gorm.DB, userEmail, bootcampName strin
 }
 
 // HandleUserAction handles adding or removing a user from a bootcamp.
-func HandleUserAction(c *fiber.Ctx, action string) error {
+func handleUserAction(c *fiber.Ctx, action string) error {
 	db := database.Db
 	var body struct {
 		Email        string `json:"email"`
@@ -101,12 +101,12 @@ func HandleUserAction(c *fiber.Ctx, action string) error {
 
 // AddUser handles the addition of a user to a bootcamp.
 func AddUser(c *fiber.Ctx) error {
-	return HandleUserAction(c, "add")
+	return handleUserAction(c, "add")
 }
 
 // RemoveUser handles the removal of a user from a bootcamp.
 func RemoveUser(c *fiber.Ctx) error {
-	return HandleUserAction(c, "remove")
+	return handleUserAction(c, "remove")
 }
 func GetAuthUser(c *fiber.Ctx) *models.User {
 	if _, ok := c.Locals("error").(string); ok {
