@@ -83,7 +83,15 @@ func handleStackAction(c *fiber.Ctx, action string) error {
 	if err != nil {
 		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusNotFound, fiber.Map{"stack": stack, "bootcamp": bootcamp})
+	switch action {
+	case "add":
+		if err := bootcamp.AddStackToBootcamp(db, stack); err != nil {
+			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+		}
+	default:
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid action"})
+	}
+	return Loger(c, fiber.StatusNotFound, fiber.Map{"message": "Stack action successfull"})
 }
 
 // AddUser handles the addition of a user to a bootcamp.
