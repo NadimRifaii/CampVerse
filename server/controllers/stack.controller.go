@@ -6,6 +6,7 @@ import (
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
 func GetAllStacks(c *fiber.Ctx) error {
@@ -49,4 +50,22 @@ func createStackIndB(stack *models.Stack) error {
 		return result.Error
 	}
 	return nil
+}
+func getStackAndBootcamp(c *fiber.Ctx, db *gorm.DB, stackName, bootcampName string) (*models.Stack, *models.Bootcamp, error) {
+	admin := new(models.User)
+	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
+		return nil, nil, fiber.NewError(fiber.StatusUnauthorized, "Unauthorized")
+	}
+
+	stack := new(models.Stack)
+	if err := stack.GetStackByName(db, stackName); err != nil {
+		return nil, nil, fiber.NewError(fiber.StatusAccepted, err.Error())
+	}
+
+	bootcamp := new(models.Bootcamp)
+	if err := bootcamp.GetBootcampByName(db, bootcampName); err != nil {
+		return nil, nil, fiber.NewError(fiber.StatusAccepted, err.Error())
+	}
+
+	return stack, bootcamp, nil
 }
