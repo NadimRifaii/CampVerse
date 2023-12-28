@@ -127,6 +127,7 @@ func GetBootcampStacks(c *fiber.Ctx) error {
 	if err := validateBootcampRequest(c, bootcamp); err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
+	bootcamp.GetBootcampByName(database.Db, bootcamp.Name)
 	stacks, err := bootcamp.GetStacksInBootcamp(database.Db)
 	if err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
