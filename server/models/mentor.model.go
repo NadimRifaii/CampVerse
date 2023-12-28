@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+
+	"gorm.io/gorm"
+)
 
 type Mentor struct {
 	gorm.Model
@@ -9,4 +13,11 @@ type Mentor struct {
 	UserId     uint
 	User       User
 	Stack      []*Stack `gorm:"many2many:teaches;"`
+}
+
+func (mentor *Mentor) GetMentorByID(db *gorm.DB, id string) error {
+	if db.Find(mentor, id); mentor.ID == 0 {
+		return errors.New("Bootcamp was not found")
+	}
+	return nil
 }
