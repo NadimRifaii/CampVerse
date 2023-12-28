@@ -6,6 +6,6 @@ import (
 )
 
 func ScheduleRoutes(app fiber.Router) {
-	app.Get("/", controllers.HttpGetBootcamps)
+	app.Get("/", controllers.HttpGetScheduleByWeek)
 	app.Post("/", controllers.HttpCreateSchedule)
 }

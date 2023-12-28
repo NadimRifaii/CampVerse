@@ -31,7 +31,7 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	createDayRecords(c, body.Days, schedule)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 }
-func HttpGetSchedule(c *fiber.Ctx) error {
+func HttpGetScheduleByWeek(c *fiber.Ctx) error {
 	body := new(scheduleBody)
 	if err := validateScheduleRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
