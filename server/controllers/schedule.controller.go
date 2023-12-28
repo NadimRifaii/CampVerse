@@ -2,12 +2,10 @@ package controllers
 
 import (
 	"errors"
-	"fmt"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
 type scheduleBody struct {
@@ -22,7 +20,7 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
 	body := new(scheduleBody)
-	if err := validateScheduleRequest(c, db, body); err != nil {
+	if err := validateScheduleRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error(), "mentor": mentor})
 	}
 	schedule := new(models.Schedule)
@@ -34,22 +32,19 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 }
 
-func validateScheduleRequest(c *fiber.Ctx, dd *gorm.DB, body *scheduleBody) error {
+func validateScheduleRequest(c *fiber.Ctx, body *scheduleBody) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("bad request")
 	}
 	return nil
 }
 func createDayRecords(c *fiber.Ctx, days []*models.Day, schedule *models.Schedule) error {
-	fmt.Println("Schedule")
-	fmt.Println(schedule)
-	fmt.Println("Schedule")
 	for _, day := range days {
 		day.ScheduleId = schedule.ID
 		if err := CreateRecordInDb(day); err != nil {
 			return errors.New("internal server error")
 		}
-		schedule.Day = append(schedule.Day, *day)
+		schedule.Day = append(schedule.Day, day)
 	}
 	return nil
 }
