@@ -21,14 +21,18 @@ func main() {
 	bootcampGroup := app.Group("/bootcamp")
 	stackGroup := app.Group("/stacks")
 	mentorGroup := app.Group("/mentor")
+	scheduleGroup := app.Group("/schedule")
+
 	bootcampGroup.Use(middlewares.RequireAuth)
 	stackGroup.Use(middlewares.RequireAuth)
 	mentorGroup.Use(middlewares.RequireAuth)
+	scheduleGroup.Use(middlewares.RequireAuth())
 
 	routes.AuthRoutes(authGroup)
 	routes.BootcampRoutes(bootcampGroup)
 	routes.StackRoutes(stackGroup)
 	routes.MentorRoutes(mentorGroup)
+	routes.ScheduleRoutes(scheduleGroup)
 
 	app.Listen(os.Getenv("PORT"))
 }
