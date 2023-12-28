@@ -94,7 +94,12 @@ func handleStackAction(c *fiber.Ctx, action string) error {
 	return Loger(c, fiber.StatusNotFound, fiber.Map{"message": "Stack action successfull"})
 }
 
-// AddUser handles the addition of a user to a bootcamp.
+// AddStack handles the addition of a stack to a bootcamp.
 func AddStack(c *fiber.Ctx) error {
 	return handleStackAction(c, "add")
+}
+
+// RemoveStack handles the removal of a stack from a bootcamp.
+func RemoveStack(c *fiber.Ctx) error {
+	return handleUserAction(c, "remove")
 }
