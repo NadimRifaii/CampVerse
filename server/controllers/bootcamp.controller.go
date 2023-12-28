@@ -46,7 +46,7 @@ func HttpGetUserBootcamps(c *fiber.Ctx) error {
 	}
 	bootcamps, err := user.GetUserBootcamps(db)
 	if err != nil {
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"user": user, "bootcamps": bootcamps})
 }
@@ -58,12 +58,12 @@ func getUserAndBootcamp(c *fiber.Ctx, db *gorm.DB, userEmail, bootcampName strin
 
 	user := new(models.User)
 	if err := user.GetUserByEmail(userEmail, db); err != nil {
-		return nil, nil, fiber.NewError(fiber.StatusAccepted, err.Error())
+		return nil, nil, fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
 
 	bootcamp := new(models.Bootcamp)
 	if err := bootcamp.GetBootcampByName(db, bootcampName); err != nil {
-		return nil, nil, fiber.NewError(fiber.StatusAccepted, err.Error())
+		return nil, nil, fiber.NewError(fiber.StatusBadRequest, err.Error())
 	}
 
 	return user, bootcamp, nil
@@ -135,15 +135,6 @@ func HttpGetBootcampStacks(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"stacks": stacks})
 }
 
-func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
-	if err := c.BodyParser(body); err != nil {
-		return errors.New("invalid request body")
-	} else if body.Name == "" {
-		return errors.New("missing credentials")
-	}
-	return nil
-}
-
 func HttpGetBootcampUsers(c *fiber.Ctx) error {
 	id := c.Params("id")
 	user := new(models.User)
@@ -158,6 +149,15 @@ func HttpGetBootcampUsers(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
+}
+
+func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
+	if err := c.BodyParser(body); err != nil {
+		return errors.New("invalid request body")
+	} else if body.Name == "" {
+		return errors.New("missing credentials")
+	}
+	return nil
 }
 
 /*
