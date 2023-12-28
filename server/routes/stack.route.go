@@ -7,4 +7,5 @@ import (
 
 func StackRoutes(app fiber.Router) {
 	app.Get("/", controllers.GetAllStacks)
+	app.Post("/", controllers.CreateStack)
 }
