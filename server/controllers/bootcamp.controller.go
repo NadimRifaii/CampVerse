@@ -118,7 +118,7 @@ func GetAuthUser(c *fiber.Ctx) *models.User {
 	return nil
 }
 
-func GetStacks(c *fiber.Ctx) error {
+func GetBootcampStacks(c *fiber.Ctx) error {
 	admin := new(models.User)
 	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
