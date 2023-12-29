@@ -7,4 +7,5 @@ import (
 
 func AssignmentRoutes(app fiber.Router) {
 	app.Post("/", controllers.HttpCreateAssignment)
+	app.Get("/", controllers.HttpGetAllAssignments)
 }
