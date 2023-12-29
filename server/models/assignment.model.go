@@ -10,6 +10,10 @@ type Assignment struct {
 	Description string `json:"fileDescription" gorm:"not null;size:255"`
 	MentorId    uint
 	Mentor      Mentor
+	StackId     uint
+	Stack       Stack
+	BootcampId  uint
+	Bootcamp    Bootcamp
 }
 
 func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
