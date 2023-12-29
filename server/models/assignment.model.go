@@ -11,3 +11,11 @@ type Assignment struct {
 	MentorId    uint
 	Mentor      Mentor
 }
+
+func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
+	var assignments []Assignment
+	if err := db.Find(&assignments).Error; err != nil {
+		return nil, err
+	}
+	return assignments, nil
+}

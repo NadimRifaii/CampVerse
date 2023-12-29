@@ -25,7 +25,16 @@ func ConnectToDb() {
 		panic("Database connection failed")
 	} else {
 		log.Println("Connection successfull")
-		db.AutoMigrate(new(models.User), new(models.UserRole), new(models.Bootcamp), new(models.Mentor), new(models.Student), new(models.Stack), new(models.Schedule), new(models.Day), new(models.Session))
+		db.AutoMigrate(new(models.User),
+			new(models.UserRole),
+			new(models.Bootcamp),
+			new(models.Mentor),
+			new(models.Student),
+			new(models.Stack),
+			new(models.Schedule),
+			new(models.Day),
+			new(models.Session),
+			new(models.Assignment))
 	}
 	Db = db
 }
