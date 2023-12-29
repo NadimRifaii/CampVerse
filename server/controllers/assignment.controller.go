@@ -6,31 +6,53 @@ import (
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
+	"gorm.io/gorm"
 )
 
+type AssignmentRequest struct {
+	Assignment   models.Assignment `json:"assignment"`
+	BootcampName string            `json:"bootcampName"`
+	StackName    string            `json:"stackName"`
+}
+
 func HttpCreateAssignment(c *fiber.Ctx) error {
+	body := new(AssignmentRequest)
 	assignment := new(models.Assignment)
-	if err := validateAssignmentRequest(c, assignment); err != nil {
+	if err := validateAssignmentRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	db := database.Db
-	mentor, err := GetMentor(c, db)
-	if err != nil {
-		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
-	}
-	assignment.Mentor = *mentor
+
 	if err := CreateRecordInDb(assignment); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignment": assignment})
 }
-func validateAssignmentRequest(c *fiber.Ctx, assignment *models.Assignment) error {
+func validateAssignmentRequest(c *fiber.Ctx, assignment *AssignmentRequest) error {
 	if err := c.BodyParser(assignment); err != nil {
 		return errors.New("bad request")
 	}
 	return nil
 }
-
+func populateAssignment(c *fiber.Ctx, assignment *models.Assignment, body *AssignmentRequest) error {
+	db := database.Db
+	assignment = &body.Assignment
+	mentor, mentorErr := GetMentor(c, db)
+	if mentorErr != nil {
+		return errors.New("mentor not found")
+	}
+	assignment.Mentor = *mentor
+	bootcamp := new(models.Bootcamp)
+	if bootcampErr := bootcamp.GetBootcampByName(db, body.BootcampName); bootcampErr != nil {
+		return errors.New("bootcamp not found")
+	}
+	stack := new(models.Stack)
+	if stackErr := stack.GetStackByName(db, body.StackName); stackErr != nil {
+		return errors.New("stack not found")
+	}
+	assignment.Bootcamp = *bootcamp
+	assignment.Stack = *stack
+	return nil
+}
 func HttpGetAllAssignments(c *fiber.Ctx) error {
 	assignment := new(models.Assignment)
 	db := database.Db
