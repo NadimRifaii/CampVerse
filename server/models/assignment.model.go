@@ -4,20 +4,21 @@ import "gorm.io/gorm"
 
 type Assignment struct {
 	gorm.Model
-	Description     string `json:"fileDescription" gorm:"not null;size:255"`
+	Title           string `json:"title" gorm:"not null;size:255"`
+	Description     string `json:"description" gorm:"not null;size:255"`
 	MentorId        uint
 	Mentor          Mentor
 	StackId         uint
 	Stack           Stack
 	BootcampId      uint
 	Bootcamp        Bootcamp
-	AssignmentFiles []*AssignmentFile
+	AssignmentFiles []*AssignmentFile `json:"files"`
 }
 
 func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 	var assignments []Assignment
 
-	if err := db.Preload("Bootcamp").Preload("Mentor").Preload("Stack").Find(&assignments).Error; err != nil {
+	if err := db.Preload("Bootcamp").Preload("Mentor").Preload("Stack").Preload("AssignmentFiles").Find(&assignments).Error; err != nil {
 		return nil, err
 	}
 	/*
