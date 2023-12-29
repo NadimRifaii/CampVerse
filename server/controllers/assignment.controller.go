@@ -6,7 +6,6 @@ import (
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
 )
 
 type AssignmentRequest struct {
@@ -21,7 +20,10 @@ func HttpCreateAssignment(c *fiber.Ctx) error {
 	if err := validateAssignmentRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-
+	assignment = &body.Assignment
+	if err := populateAssignment(c, assignment, body); err != nil {
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+	}
 	if err := CreateRecordInDb(assignment); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
@@ -35,7 +37,6 @@ func validateAssignmentRequest(c *fiber.Ctx, assignment *AssignmentRequest) erro
 }
 func populateAssignment(c *fiber.Ctx, assignment *models.Assignment, body *AssignmentRequest) error {
 	db := database.Db
-	assignment = &body.Assignment
 	mentor, mentorErr := GetMentor(c, db)
 	if mentorErr != nil {
 		return errors.New("mentor not found")
