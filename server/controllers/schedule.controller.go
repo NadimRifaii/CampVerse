@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
@@ -28,7 +29,8 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	if err := CreateRecordInDb(schedule); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	createDayRecords(c, body.Days, schedule)
+	schedule.Days = body.Days
+	dayRecords(c, "create", schedule)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 }
 func HttpGetScheduleByWeek(c *fiber.Ctx) error {
@@ -41,6 +43,7 @@ func HttpGetScheduleByWeek(c *fiber.Ctx) error {
 	schedule.Week = body.Week
 	schedule.GetScheduleByWeek(db)
 	schedule.GetScheduleDays(db)
+	fmt.Println("sdafkljasd;klfj")
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 
 }
@@ -50,11 +53,15 @@ func validateScheduleRequest(c *fiber.Ctx, body *scheduleBody) error {
 	}
 	return nil
 }
-func createDayRecords(c *fiber.Ctx, days []*models.Day, schedule *models.Schedule) error {
-	for _, day := range days {
+func dayRecords(c *fiber.Ctx, action string, schedule *models.Schedule) error {
+	for _, day := range schedule.Days {
 		day.ScheduleId = schedule.ID
-		if err := CreateRecordInDb(day); err != nil {
-			return errors.New("internal server error")
+		if action == "create" {
+			if err := CreateRecordInDb(day); err != nil {
+				return errors.New("internal server error")
+			}
+		} else {
+
 		}
 		schedule.Days = append(schedule.Days, day)
 	}
