@@ -36,8 +36,11 @@ func HttpGetScheduleByWeek(c *fiber.Ctx) error {
 	if err := validateScheduleRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+	db := database.Db
 	schedule := new(models.Schedule)
 	schedule.Week = body.Week
+	schedule.GetScheduleByWeek(db)
+	schedule.GetScheduleDays(db)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 
 }
