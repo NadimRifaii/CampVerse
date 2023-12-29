@@ -3,6 +3,7 @@ package controllers
 import (
 	"errors"
 
+	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
 )
@@ -12,7 +13,15 @@ func HttpCreateAssignment(c *fiber.Ctx) error {
 	if err := validateAssignmentRequest(c, assignment); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-
+	db := database.Db
+	mentor, err := GetMentor(c, db)
+	if err != nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
+	}
+	assignment.Mentor = *mentor
+	if err := CreateRecordInDb(assignment); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignment": assignment})
 }
 func validateAssignmentRequest(c *fiber.Ctx, assignment *models.Assignment) error {
