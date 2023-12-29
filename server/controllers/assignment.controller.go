@@ -30,3 +30,13 @@ func validateAssignmentRequest(c *fiber.Ctx, assignment *models.Assignment) erro
 	}
 	return nil
 }
+
+func HttpGetAllAssignments(c *fiber.Ctx) error {
+	assignment := new(models.Assignment)
+	db := database.Db
+	assignments, err := assignment.GetAllAssignments(db)
+	if err != nil {
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignments": assignments})
+}
