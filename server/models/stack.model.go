@@ -19,6 +19,14 @@ func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {
 	}
 	return stacks, nil
 }
+
+func (stack *Stack) GetStackById(db *gorm.DB, id uint) error {
+	if db.Find(stack, "id = ?", id); stack.ID == 0 {
+		return errors.New("Stack not found")
+	}
+	return nil
+}
+
 func (stack *Stack) GetStackByName(db *gorm.DB, name string) error {
 	if db.Find(stack, "name = ?", name); stack.ID == 0 {
 		return errors.New("Stack not found")
