@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 type Assignment struct {
 	gorm.Model
 	FileName    string `json:"fileName" gorm:"not null;size:255;unique"`
-	FileType    string `json:"fileType" gorm:"default:'pdf';size:255;unique"`
+	FileType    string `json:"fileType" gorm:"default:'pdf';size:255"`
 	FileUrl     string `json:"fileUrl" gorm:"not null;size:255;unique"`
 	Description string `json:"fileDescription" gorm:"not null;size:255"`
 	MentorId    uint
@@ -22,6 +22,8 @@ func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 	if err := db.Preload("Bootcamp").Preload("Mentor").Preload("Stack").Find(&assignments).Error; err != nil {
 		return nil, err
 	}
-
+	/*
+		Preload method to eager load the associated Bootcamp, Mentor, and Stack for each assignment
+	*/
 	return assignments, nil
 }
