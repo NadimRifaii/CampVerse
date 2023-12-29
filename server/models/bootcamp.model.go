@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -15,7 +16,8 @@ type Bootcamp struct {
 	Stack            []*Stack `gorm:"many2many:bootcamp_stack"`
 }
 
-func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id string) error {
+func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id uint) error {
+	fmt.Println(id)
 	if db.Find(bootcamp, id); bootcamp.ID == 0 {
 		return errors.New("Bootcamp was not found")
 	}

@@ -18,8 +18,10 @@ type Assignment struct {
 
 func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 	var assignments []Assignment
-	if err := db.Find(&assignments).Error; err != nil {
+
+	if err := db.Preload("Bootcamp").Preload("Mentor").Preload("Stack").Find(&assignments).Error; err != nil {
 		return nil, err
 	}
+
 	return assignments, nil
 }

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"strconv"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
@@ -136,7 +137,11 @@ func HttpGetBootcampStacks(c *fiber.Ctx) error {
 }
 
 func HttpGetBootcampUsers(c *fiber.Ctx) error {
-	id := c.Params("id")
+	idStr := c.Params("id")
+
+	// Convert idStr to uint64
+	id64, _ := strconv.ParseUint(idStr, 10, 32)
+	id := uint(id64)
 	user := new(models.User)
 	db := database.Db
 	if user = GetAuthUser(c); user == nil {
