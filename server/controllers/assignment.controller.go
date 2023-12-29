@@ -12,6 +12,7 @@ func HttpCreateAssignment(c *fiber.Ctx) error {
 	if err := validateAssignmentRequest(c, assignment); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignment": assignment})
 }
 func validateAssignmentRequest(c *fiber.Ctx, assignment *models.Assignment) error {
