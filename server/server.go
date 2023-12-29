@@ -11,7 +11,7 @@ import (
 )
 
 func init() {
-	initializers.Load()
+	initializers.LoadEnv()
 	database.ConnectToDb()
 	initializers.MigrateUserRoles()
 }
