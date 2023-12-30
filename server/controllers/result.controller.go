@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"strconv"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
@@ -26,12 +27,17 @@ func HttpCreateResults(c *fiber.Ctx) error {
 
 func HttpGetAllResultsInBootcamp(c *fiber.Ctx) error {
 	db := database.Db
+	idStr := c.Params("id")
+
+	// Convert idStr to uint64
+	id64, _ := strconv.ParseUint(idStr, 10, 32)
+	id := uint(id64)
 	_, err := GetMentor(c, db)
 	if err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
 	result := new(models.Result)
-	results, err := result.GetAllResultsInBootcamp(db, 1)
+	results, err := result.GetAllResultsInBootcamp(db, id)
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
