@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+
+	"gorm.io/gorm"
+)
 
 type Result struct {
 	gorm.Model
@@ -31,4 +35,13 @@ func (r *Result) GetAllResultsInBootcamp(db *gorm.DB, bootcampID uint) ([]Result
 	}
 
 	return results, nil
+}
+func (r *Result) GetWeeklyResult(db *gorm.DB, week string, bootcampId uint) (*Result, error) {
+	var result Result
+
+	if db.First(&result, "week = ? AND bootcamp_id = ?", week, bootcampId); result.ID == 0 {
+		return nil, errors.New("record not found")
+	}
+
+	return &result, nil
 }
