@@ -16,7 +16,7 @@ func HttpCreateResults(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
 	result := new(models.Result)
-	if err := validateResultRequest(c, result); err != nil {
+	if err := ValidateRequest(c, result); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	if err := CreateRecordInDb(result); err != nil {
@@ -63,13 +63,6 @@ func HttpGetWeeklyResult(c *fiber.Ctx) error {
 }
 func ValidateRequest(c *fiber.Ctx, body interface{}) error {
 	if err := c.BodyParser(body); err != nil {
-		return errors.New("invalid request body")
-	}
-	return nil
-}
-
-func validateResultRequest(c *fiber.Ctx, result *models.Result) error {
-	if err := c.BodyParser(result); err != nil {
 		return errors.New("invalid request body")
 	}
 	return nil

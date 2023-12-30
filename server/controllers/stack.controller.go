@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"errors"
-
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -28,7 +26,7 @@ func HttpCreateStack(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
 	stack := new(models.Stack)
-	if err := validateStackRequest(c, stack); err != nil {
+	if err := ValidateRequest(c, stack); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 
@@ -36,13 +34,6 @@ func HttpCreateStack(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Stack created successfully"})
-}
-
-func validateStackRequest(c *fiber.Ctx, stack *models.Stack) error {
-	if err := c.BodyParser(stack); err != nil {
-		return errors.New("faild to parse body request")
-	}
-	return nil
 }
 
 func getStackAndBootcamp(c *fiber.Ctx, db *gorm.DB, stackName, bootcampName string) (*models.Stack, *models.Bootcamp, error) {

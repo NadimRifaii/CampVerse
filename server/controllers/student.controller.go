@@ -22,7 +22,7 @@ func HttpSubmitAssignment(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
 	submissionBody := new(SubmissionBody)
-	bodyErr := validateSubmissionRequest(c, submissionBody)
+	bodyErr := ValidateRequest(c, submissionBody)
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": bodyErr.Error()})
 	}
@@ -62,12 +62,6 @@ func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 	student.User = *user
 
 	return student, nil
-}
-func validateSubmissionRequest(c *fiber.Ctx, submission *SubmissionBody) error {
-	if err := c.BodyParser(submission); err != nil {
-		return errors.New("bad request")
-	}
-	return nil
 }
 func populateSubmission(studentSubmission *models.StudentSubmission, body *SubmissionBody, db *gorm.DB) error {
 	stack := new(models.Stack)

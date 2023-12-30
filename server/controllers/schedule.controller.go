@@ -20,7 +20,7 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
 	body := new(scheduleBody)
-	if err := validateScheduleRequest(c, body); err != nil {
+	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error(), "mentor": mentor})
 	}
 	schedule := new(models.Schedule)
@@ -34,7 +34,7 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 }
 func HttpGetScheduleByWeek(c *fiber.Ctx) error {
 	body := new(scheduleBody)
-	if err := validateScheduleRequest(c, body); err != nil {
+	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	db := database.Db
@@ -45,12 +45,6 @@ func HttpGetScheduleByWeek(c *fiber.Ctx) error {
 	handleDayRecords(c, "get", schedule)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 
-}
-func validateScheduleRequest(c *fiber.Ctx, body *scheduleBody) error {
-	if err := c.BodyParser(body); err != nil {
-		return errors.New("bad request")
-	}
-	return nil
 }
 func handleDayRecords(c *fiber.Ctx, action string, schedule *models.Schedule) error {
 	db := database.Db

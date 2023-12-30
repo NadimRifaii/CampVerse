@@ -17,7 +17,7 @@ type AssignmentRequest struct {
 func HttpCreateAssignment(c *fiber.Ctx) error {
 	body := new(AssignmentRequest)
 	assignment := new(models.Assignment)
-	if err := validateAssignmentRequest(c, body); err != nil {
+	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	assignment = &body.Assignment
