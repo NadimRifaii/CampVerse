@@ -34,21 +34,21 @@ func HttpSubmitAssignment(c *fiber.Ctx) error {
 	if err := studentSubmission.CreateSubmission(db); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"studentSubmission": studentSubmission.SubmissionFiles})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"studentSubmission": studentSubmission})
 }
 
-// func HttpGetSubmittedFiles(c *fiber.Ctx) error {
-// 	db := database.Db
-// 	student, err := GetStudent(c, db)
-// 	if err != nil {
-// 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
-// 	}
-// 	submissions, err := student.GetStudentSubmissions(db)
-// 	if err != nil {
-// 		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
-// 	}
-// 	return Loger(c, fiber.StatusAccepted, fiber.Map{"submissions": submissions})
-// }
+func HttpGetSubmittedFiles(c *fiber.Ctx) error {
+	db := database.Db
+	student, err := GetStudent(c, db)
+	if err != nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
+	}
+	submissions, err := student.GetStudentSubmissions(db)
+	if err != nil {
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"submissions": submissions})
+}
 
 func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 	user := new(models.User)

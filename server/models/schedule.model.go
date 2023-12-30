@@ -9,7 +9,7 @@ import (
 type Schedule struct {
 	gorm.Model
 	Week string `json:"week" gorm:"not null;size:255;unique"`
-	Days []*Day
+	Days []*Day `gorm:"foreignKey:ScheduleId"`
 }
 
 func (schedule *Schedule) GetScheduleByWeek(db *gorm.DB) error {

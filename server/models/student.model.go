@@ -19,3 +19,10 @@ func (student *Student) GetStudentByID(db *gorm.DB, id uint) error {
 	}
 	return nil
 }
+func (s *Student) GetStudentSubmissions(db *gorm.DB) ([]*StudentSubmission, error) {
+	var submissions []*StudentSubmission
+	if err := db.Where("student_id = ?", s.ID).Preload("SubmissionFiles").Find(&submissions).Error; err != nil {
+		return nil, err
+	}
+	return submissions, nil
+}

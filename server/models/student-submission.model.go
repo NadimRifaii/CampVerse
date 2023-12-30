@@ -8,12 +8,9 @@ import (
 
 type StudentSubmission struct {
 	gorm.Model
-	StackId         uint
-	Stack           Stack
-	StudentId       uint
-	Student         Student
-	AssignmentId    uint
-	Assignment      Assignment
+	StackId         uint `gorm:"foreignkey:StackId"`
+	StudentId       uint `gorm:"foreignkey:StudentId"`
+	AssignmentId    uint `gorm:"foreignkey:AssignmentId"` //
 	SubmissionFiles []*SubmissionFile
 }
 

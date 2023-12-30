@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -124,6 +125,7 @@ func HttpGetBootcampStacks(c *fiber.Ctx) error {
 	if admin = GetAuthUser(c); admin == nil || admin.UserRole.RoleName != "admin" {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
+	fmt.Println("hello")
 	bootcamp := new(models.Bootcamp)
 	if err := validateBootcampRequest(c, bootcamp); err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
