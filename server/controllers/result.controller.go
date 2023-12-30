@@ -44,6 +44,25 @@ func HttpGetAllResultsInBootcamp(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"resuls": results})
 }
 
+type Body struct {
+	Week         string `json:"week"`
+	BootcampName string `json:"bootcampName"`
+}
+
+func HttpGetWeeklyResult(c *fiber.Ctx) error {
+	body := new(Body)
+	if err := ValidateRequest(c, body); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"body": body})
+}
+func ValidateRequest(c *fiber.Ctx, body interface{}) error {
+	if err := c.BodyParser(body); err != nil {
+		return errors.New("invalid request body")
+	}
+	return nil
+}
+
 func validateResultRequest(c *fiber.Ctx, result *models.Result) error {
 	if err := c.BodyParser(result); err != nil {
 		return errors.New("invalid request body")
