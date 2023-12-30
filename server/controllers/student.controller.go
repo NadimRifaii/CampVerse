@@ -10,10 +10,8 @@ import (
 )
 
 type SubmissionBody struct {
-	Submission     models.StudentSubmission `json:"submission"`
-	StackName      string                   `json:"stackName"`
-	AssignmentName string                   `json:"assignmentName"`
-	StudentEmail   string                   `json:"email"`
+	StackName      string `json:"stackName"`
+	AssignmentName string `json:"assignmentName"`
 }
 
 func HttpSubmitAssignment(c *fiber.Ctx) error {
@@ -22,14 +20,22 @@ func HttpSubmitAssignment(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"student": student})
+	submissionBody := new(SubmissionBody)
+	bodyErr := validateSubmissionRequest(c, submissionBody)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": bodyErr.Error()})
+	}
+	stack := new(models.Stack)
+	if stackErr := stack.GetStackByName(db, submissionBody.StackName); stackErr != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": stackErr.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"student": student, "submission": submissionBody})
 }
 func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "student" {
 		return nil, errors.New("Unauthorized")
 	}
-
 	student := new(models.Student)
 	if err := student.GetStudentByID(db, user.ID); err != nil {
 		return nil, errors.New("Unauthorized")

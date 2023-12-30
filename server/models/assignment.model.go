@@ -1,6 +1,10 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"errors"
+
+	"gorm.io/gorm"
+)
 
 type Assignment struct {
 	gorm.Model
@@ -25,4 +29,10 @@ func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 		Preload method to eager load the associated Bootcamp, Mentor, and Stack for each assignment
 	*/
 	return assignments, nil
+}
+func (assignment *Assignment) GetAssignmentByTitle(db *gorm.DB, title string) error {
+	if db.Find(assignment, "title = ?", title); assignment.ID == 0 {
+		return errors.New("Assignment not found")
+	}
+	return nil
 }
