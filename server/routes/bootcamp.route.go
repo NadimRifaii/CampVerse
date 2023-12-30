@@ -12,5 +12,5 @@ func BootcampRoutes(app fiber.Router) {
 	app.Post("/bootcamp-stacks", controllers.HttpGetBootcampStacks)
 	app.Post("/", controllers.HttpCreateBootcamp)
 	app.Post("/add-user", controllers.HttpAddUserToBootcamp)
-	app.Post("/remove-user", controllers.HttpRemoveUserFromBootcamp)
+	app.Delete("/remove-user", controllers.HttpRemoveUserFromBootcamp)
 }
