@@ -16,6 +16,13 @@ type Assignment struct {
 	AssignmentFiles   []*AssignmentFile    `json:"files"`
 	StudentSubmission []*StudentSubmission //
 }
+type AssignmentFile struct {
+	gorm.Model
+	FileName     string `json:"fileName" gorm:"not null;size:255;unique"`
+	FileType     string `json:"fileType" gorm:"default:'pdf';size:255"`
+	FileUrl      string `json:"fileUrl" gorm:"not null;size:255;"`
+	AssignmentId uint
+}
 
 func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 	var assignments []Assignment

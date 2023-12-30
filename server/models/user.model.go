@@ -36,3 +36,5 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	}
 	return bootcamps, nil
 }
+
+//

@@ -13,6 +13,13 @@ type StudentSubmission struct {
 	AssignmentId    uint `gorm:"foreignkey:AssignmentId"` //
 	SubmissionFiles []*SubmissionFile
 }
+type SubmissionFile struct {
+	gorm.Model
+	FileName            string `json:"fileName" gorm:"not null;size:255"`
+	FileType            string `json:"fileType" gorm:"not null;size:255"`
+	FileUrl             string `json:"fileUrl" gorm:"not null;size:255"`
+	StudentSubmissionId uint   `gorm:"foreignKey:StudentSubmissionId"`
+}
 
 func (submission *StudentSubmission) CreateSubmission(db *gorm.DB) error {
 	var existingSubmission StudentSubmission
