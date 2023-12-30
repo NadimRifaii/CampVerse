@@ -8,5 +8,4 @@ type AssignmentFile struct {
 	FileType     string `json:"fileType" gorm:"default:'pdf';size:255"`
 	FileUrl      string `json:"fileUrl" gorm:"not null;size:255;"`
 	AssignmentId uint
-	Assignment   Assignment
 }
