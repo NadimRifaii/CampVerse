@@ -8,6 +8,7 @@ import (
 
 type Assignment struct {
 	gorm.Model
+	Title             string `json:"assignmentTitle" gorm:"unique"`
 	Description       string `json:"description" gorm:"not null;size:255"`
 	DueDate           string `json:"dueDate" gorm:"type:date"`
 	MentorId          uint

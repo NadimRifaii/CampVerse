@@ -30,7 +30,7 @@ func main() {
 	mentorGroup.Use(middlewares.RequireAuth)
 	scheduleGroup.Use(middlewares.RequireAuth)
 	assignmentGroup.Use(middlewares.RequireAuth)
-	resultGroup.Use(middlewares.RequireAuth())
+	resultGroup.Use(middlewares.RequireAuth)
 
 	routes.AuthRoutes(authGroup)
 	routes.BootcampRoutes(bootcampGroup)

@@ -7,7 +7,7 @@ type Result struct {
 	StudentId  uint
 	BootcampId uint
 	Week       string `json:"week" gorm:"unique"`
-	Grade      []*Grade
+	Grades     []*Grade
 }
 type Grade struct {
 	gorm.Model
