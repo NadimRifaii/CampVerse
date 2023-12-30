@@ -24,6 +24,15 @@ func HttpCreateResults(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"result": result})
 }
 
+func HttpGetAllResultsInBootcamp(c *fiber.Ctx) error {
+	db := database.Db
+	_, err := GetMentor(c, db)
+	if err != nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
+	}
+
+}
+
 func validateResultRequest(c *fiber.Ctx, result *models.Result) error {
 	if err := c.BodyParser(result); err != nil {
 		return errors.New("invalid request body")
