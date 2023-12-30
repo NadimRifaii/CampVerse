@@ -10,8 +10,8 @@ import (
 )
 
 type SubmissionBody struct {
-	StackName      string `json:"stackName"`
-	AssignmentName string `json:"assignmentName"`
+	StackName       string `json:"stackName"`
+	AssignmentTitle string `json:"assignmentTitle"`
 }
 
 func HttpSubmitAssignment(c *fiber.Ctx) error {
@@ -27,10 +27,15 @@ func HttpSubmitAssignment(c *fiber.Ctx) error {
 	}
 	stack := new(models.Stack)
 	if stackErr := stack.GetStackByName(db, submissionBody.StackName); stackErr != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": stackErr.Error()})
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": bodyErr.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"student": student, "submission": submissionBody})
+	assignment := new(models.Assignment)
+	if assignmentErr := assignment.GetAssignmentByTitle(db, submissionBody.AssignmentTitle); assignmentErr != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": assignmentErr.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"student": student, "assignment": assignment, "stack": stack})
 }
+
 func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "student" {
