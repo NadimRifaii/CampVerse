@@ -29,12 +29,7 @@ func HttpCreateAssignment(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignment": assignment})
 }
-func validateAssignmentRequest(c *fiber.Ctx, assignment *AssignmentRequest) error {
-	if err := c.BodyParser(assignment); err != nil {
-		return errors.New("bad request")
-	}
-	return nil
-}
+
 func populateAssignment(c *fiber.Ctx, assignment *models.Assignment, body *AssignmentRequest) error {
 	db := database.Db
 	mentor, mentorErr := GetMentor(c, db)

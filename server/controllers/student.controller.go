@@ -66,7 +66,7 @@ func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 func populateSubmission(studentSubmission *models.StudentSubmission, body *SubmissionBody, db *gorm.DB) error {
 	stack := new(models.Stack)
 	if stackErr := stack.GetStackByName(db, body.StackName); stackErr != nil {
-		return errors.New("Stack not found")
+		return errors.New("stack not found")
 	}
 	studentSubmission.StackId = stack.ID
 	assignment := new(models.Assignment)
