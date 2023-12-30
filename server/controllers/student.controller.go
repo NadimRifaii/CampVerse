@@ -10,8 +10,9 @@ import (
 )
 
 type SubmissionBody struct {
-	StackName       string `json:"stackName"`
-	AssignmentTitle string `json:"assignmentTitle"`
+	StackName       string                   `json:"stackName"`
+	AssignmentTitle string                   `json:"assignmentTitle"`
+	SubmissionFiles []*models.SubmissionFile `json:"files"`
 }
 
 func HttpSubmitAssignment(c *fiber.Ctx) error {
@@ -25,15 +26,15 @@ func HttpSubmitAssignment(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": bodyErr.Error()})
 	}
-	stack := new(models.Stack)
-	if stackErr := stack.GetStackByName(db, submissionBody.StackName); stackErr != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": bodyErr.Error()})
+	studentSubmission := new(models.StudentSubmission)
+	if err := populateSubmission(studentSubmission, submissionBody, db); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	assignment := new(models.Assignment)
-	if assignmentErr := assignment.GetAssignmentByTitle(db, submissionBody.AssignmentTitle); assignmentErr != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": assignmentErr.Error()})
+	studentSubmission.StudentId = student.ID
+	if err := studentSubmission.CreateSubmission(db); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"student": student, "assignment": assignment, "stack": stack})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"studentSubmission": studentSubmission.SubmissionFiles})
 }
 
 func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
@@ -53,5 +54,19 @@ func validateSubmissionRequest(c *fiber.Ctx, submission *SubmissionBody) error {
 	if err := c.BodyParser(submission); err != nil {
 		return errors.New("bad request")
 	}
+	return nil
+}
+func populateSubmission(studentSubmission *models.StudentSubmission, body *SubmissionBody, db *gorm.DB) error {
+	stack := new(models.Stack)
+	if stackErr := stack.GetStackByName(db, body.StackName); stackErr != nil {
+		return errors.New("Stack not found")
+	}
+	studentSubmission.StackId = stack.ID
+	assignment := new(models.Assignment)
+	if assignmentErr := assignment.GetAssignmentByTitle(db, body.AssignmentTitle); assignmentErr != nil {
+		return errors.New("assignment not found")
+	}
+	studentSubmission.AssignmentId = assignment.ID
+	studentSubmission.SubmissionFiles = body.SubmissionFiles
 	return nil
 }

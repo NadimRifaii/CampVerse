@@ -4,13 +4,9 @@ import "gorm.io/gorm"
 
 type SubmissionFile struct {
 	gorm.Model
-	Description         string `json:"fileDescription" gorm:"not null;size:255"`
-	StudentId           uint
-	Student             Student
-	StackId             uint
-	Stack               Stack
-	BootcampId          uint
-	Bootcamp            Bootcamp
+	FileName            string `json:"fileName" gorm:"not null;size:255"`
+	FileType            string `json:"fileType" gorm:"not null;size:255"`
+	FileUrl             string `json:"fileUrl" gorm:"not null;size:255"`
 	StudentSubmissionId uint
 	StudentSubmission   StudentSubmission
 }

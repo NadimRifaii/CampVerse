@@ -8,13 +8,13 @@ import (
 
 type StudentSubmission struct {
 	gorm.Model
-	StackId        uint
-	Stack          Stack
-	StudentId      uint
-	Student        Student
-	AssignmentId   uint
-	Assignment     Assignment
-	SubmissionFile []*SubmissionFile `json:"files"`
+	StackId         uint
+	Stack           Stack
+	StudentId       uint
+	Student         Student
+	AssignmentId    uint
+	Assignment      Assignment
+	SubmissionFiles []*SubmissionFile
 }
 
 func (submission *StudentSubmission) CreateSubmission(db *gorm.DB) error {
