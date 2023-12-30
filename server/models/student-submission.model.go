@@ -28,3 +28,12 @@ func (submission *StudentSubmission) CreateSubmission(db *gorm.DB) error {
 
 	return nil
 }
+func (student *Student) GetSubmittedFiles(db *gorm.DB) ([]*SubmissionFile, error) {
+	var submittedFiles []*SubmissionFile
+
+	if err := db.Model(student).Association("StudentSubmissions.SubmissionFiles").Find(&submittedFiles); err != nil {
+		return nil, err
+	}
+
+	return submittedFiles, nil
+}
