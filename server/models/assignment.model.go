@@ -9,6 +9,7 @@ import (
 type Assignment struct {
 	gorm.Model
 	Description       string `json:"description" gorm:"not null;size:255"`
+	DueDate           string `json:"dueDate" gorm:"type:date"`
 	MentorId          uint
 	StackId           uint
 	BootcampId        uint
@@ -19,7 +20,7 @@ type Assignment struct {
 func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 	var assignments []Assignment
 
-	if err := db.Preload("Bootcamp").Preload("Mentor").Preload("Stack").Preload("AssignmentFiles").Find(&assignments).Error; err != nil {
+	if err := db.Preload("AssignmentFiles").Find(&assignments).Error; err != nil {
 		return nil, err
 	}
 	/*
