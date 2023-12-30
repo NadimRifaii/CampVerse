@@ -36,12 +36,11 @@ func (r *Result) GetAllResultsInBootcamp(db *gorm.DB, bootcampID uint) ([]Result
 
 	return results, nil
 }
-func (r *Result) GetWeeklyResult(db *gorm.DB, week string, bootcampId uint) (*Result, error) {
-	var result Result
-
-	if db.First(&result, "week = ? AND bootcamp_id = ?", week, bootcampId); result.ID == 0 {
-		return nil, errors.New("record not found")
+func (r *Result) GetWeeklyResult(db *gorm.DB, week string, bootcampId uint) error {
+	if db.First(r, "week = ? AND bootcamp_id = ?", week, bootcampId); r.ID == 0 {
+		return errors.New("record not found")
 	}
-
-	return &result, nil
+	// Eager load related grades
+	db.Preload("Grades").Find(r)
+	return nil
 }
