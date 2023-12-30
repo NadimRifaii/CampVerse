@@ -66,14 +66,14 @@ func getStackAndBootcamp(c *fiber.Ctx, db *gorm.DB, stackName, bootcampName stri
 func handleStackAction(c *fiber.Ctx, action string) error {
 	db := database.Db
 	var body struct {
-		Email        string `json:"stackName"`
+		StackName    string `json:"stackName"`
 		BootcampName string `json:"bootcampName"`
 	}
 	if err := c.BodyParser(&body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 
-	stack, bootcamp, err := getStackAndBootcamp(c, db, body.Email, body.BootcampName)
+	stack, bootcamp, err := getStackAndBootcamp(c, db, body.StackName, body.BootcampName)
 	if err != nil {
 		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 	}
