@@ -30,7 +30,12 @@ func HttpGetAllResultsInBootcamp(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
-
+	result := new(models.Result)
+	results, err := result.GetAllResultsInBootcamp(db, 1)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"resuls": results})
 }
 
 func validateResultRequest(c *fiber.Ctx, result *models.Result) error {
