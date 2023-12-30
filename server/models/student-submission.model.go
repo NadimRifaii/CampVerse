@@ -28,11 +28,3 @@ func (submission *StudentSubmission) CreateSubmission(db *gorm.DB) error {
 
 	return nil
 }
-func (submission *StudentSubmission) GetStudentSubmissions(db *gorm.DB, studentID uint) ([]*StudentSubmission, error) {
-	var submissions []*StudentSubmission
-	if err := db.Find(&submissions, "student_id = ?", studentID).Error; err != nil {
-		return nil, err
-	}
-
-	return submissions, nil
-}
