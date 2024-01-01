@@ -1,0 +1,72 @@
+.auth-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #f6f5f7;
+}
+
+.container {
+  position: relative;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.25)
+}
+
+.signup,
+.login {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  transition: all .6s ease-in-out;
+}
+
+.signup {
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.login {
+  width: 50%;
+  z-index: 2;
+}
+
+form {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+
+
+.container.right-panel-active .login {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.container.right-panel-active .signup {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 3;
+}
+
+.auth-page button {
+  width: 100px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  color: rgba(236, 232, 239, 1);
+  background-color: rgba(2, 186, 255, 1);
+}
