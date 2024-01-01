@@ -1,0 +1,34 @@
+.input-label {
+  margin: 0 auto 10px;
+  position: relative;
+}
+
+.input-label input {
+  display: block;
+  padding: 8px 15px;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  border-radius: 5px;
+  width: 250px;
+  outline: none;
+  caret-color: rgba(17, 17, 19, 0.2);
+  font-size: 18px;
+}
+
+.input-label label {
+  color: rgba(17, 17, 19, 0.6);
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  text-transform: capitalize;
+  transition: .5s
+}
+
+.input-label input.active+label {
+  font-size: 11px;
+  top: -15px;
+}
+
+.input-label input:focus+label {
+  font-size: 11px;
+  top: -15px;
+}
