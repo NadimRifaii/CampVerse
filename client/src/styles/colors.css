@@ -1,0 +1,47 @@
+.primary-bg {
+  background-color: #0D1F2D;
+}
+
+.secondary-bg {
+  background-color: #888888;
+}
+
+.black-bg {
+  background-color: black;
+}
+
+.white-bg {
+  background-color: #ECE8EF;
+}
+
+.primary-text {
+  color: #ECE8EF;
+}
+
+.black-text {
+  color: #0D1F2D;
+}
+
+.white-text {
+  color: #ECE8EF;
+}
+
+.primary-border {
+  border: 0.5px solid #efefef;
+}
+
+.secondary-border {
+  border: 0.5px solid #888888;
+}
+
+.black-border {
+  border: 0.5px solid black;
+}
+
+.white-border {
+  border: 0.5px solid white;
+}
+
+.blue-border {
+  border: 0.5px solid #0095f6;
+}
