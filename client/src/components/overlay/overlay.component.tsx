@@ -1,13 +1,13 @@
 import { Button } from '../common/button/button.component'
 import './overlay.styles.css'
 import { useContext } from 'react'
-import { ActiveContext } from '../../contexts/active-form.context'
+import { ActiveFormContext } from '../../contexts/active-form.context'
 export const Overlay = () => {
-  const activeContext = useContext(ActiveContext)
-  if (!activeContext) {
+  const activeFormContext = useContext(ActiveFormContext)
+  if (!activeFormContext) {
     return <h1>activeContext not found</h1>
   }
-  const { setActive } = activeContext
+  const { setActive } = activeFormContext
   return (
     <div className="overlay-container">
       <div className="overlay">

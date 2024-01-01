@@ -1,15 +1,15 @@
-import { ActiveContext } from "../../../contexts/active-form.context"
-import { Login } from "../../loginForm/login.component"
-import { Overlay } from "../../overlay/overlay.component"
-import { Signup } from "../../signupForm/signup.component"
+import { ActiveFormContext } from "../../contexts/active-form.context"
+import { Login } from "../../components/loginForm/login.component"
+import { Overlay } from "../../components/overlay/overlay.component"
+import { Signup } from "../../components/signupForm/signup.component"
 import './auth-page.styles.css'
 import { useContext } from 'react'
 export const AuthPage = () => {
-  const activeContext = useContext(ActiveContext)
-  if (!activeContext) {
+  const activeFormContext = useContext(ActiveFormContext)
+  if (!activeFormContext) {
     return <h1>activeContext not found</h1>
   }
-  const { active } = activeContext
+  const { active } = activeFormContext
   return (
     <div className="auth-page">
       <div className={`container ${active}`}>
