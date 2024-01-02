@@ -18,15 +18,14 @@ export const Signup = () => {
 
   const changeHandler = (event) => {
     setFormFields({ ...formFields, [event.target.name]: event.target.value });
-
   };
-  console.log(formFields)
   return (
     <div className="signup">
       <form
         action=""
         onSubmit={(e) => {
           e.preventDefault();
+          console.log(formFields)
         }}
       >
         <h1>Create account</h1>
