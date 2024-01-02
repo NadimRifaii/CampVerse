@@ -4,7 +4,6 @@ import { ReactComponent as MyIcon } from '../../continue-with-google.svg'
 import { useContext } from 'react'
 import { ActiveFormContext } from '../../core/contexts/active-form.context'
 import { useState } from 'react'
-import { request } from "../../core/axios/axios"
 const defaultFormFields = {
   email: "",
   password: "",
