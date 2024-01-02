@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/App.css';
+import './styles/colors.css'
 import { Routes, Route } from 'react-router-dom'
 import { AuthPage } from './pages/authPage/auth-page.component';
 function App() {

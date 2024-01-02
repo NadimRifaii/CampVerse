@@ -3,14 +3,13 @@
   align-items: center;
   justify-content: space-between;
   width: fit-content;
-  color: rgba(17, 17, 19, 0.6);
+  color: var(--main-black-color);
   margin-bottom: 10px;
   gap: 20px;
 }
 
 .radio-holder .holder {
   display: flex;
-
 }
 
 .radio-holder :where(label, input) {

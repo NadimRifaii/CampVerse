@@ -36,7 +36,7 @@ export const Signup = () => {
           <MyIcon />
         </div>
         <p>
-          Or continue with your personal info
+          Or register with your email
         </p>
         <InputLabel type="text" label="First name" value={firstname} name='firstname' handleChange={changeHandler} />
         <InputLabel type="text" label="Last name" value={lastname} name='lastname' handleChange={changeHandler} />

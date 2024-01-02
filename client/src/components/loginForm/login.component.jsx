@@ -4,7 +4,6 @@ import { ReactComponent as MyIcon } from '../../continue-with-google.svg'
 import { useContext } from 'react'
 import { ActiveFormContext } from '../../contexts/active-form.context'
 import { useState } from 'react'
-import './login.styles.css'
 const defaultFormFields = {
   email: "",
   password: "",
@@ -30,7 +29,7 @@ export const Login = () => {
           <MyIcon />
         </div>
         <p>
-          Or continue with your personal info
+          Or continue with your account
         </p>
         <InputLabel type="email" label="email" name="email" value={email} handleChange={changeHandler} />
         <InputLabel type="password" label="password" name="password" value={password} handleChange={changeHandler} />
