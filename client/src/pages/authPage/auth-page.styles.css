@@ -56,11 +56,15 @@ form {
 
 
 .google-icon {
-  margin: 20px auto 5px;
+  margin: 10px auto 5px;
   display: grid;
   place-items: center;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.google-icon svg {
+  width: 180px;
 }
 
 .container.right-panel-active .login {
@@ -85,12 +89,17 @@ form {
 
 @media(max-width:767px) {
   .container {
-    width: 350px;
+    width: 300px;
   }
 
   .signup,
   .login {
     width: 100%
+  }
+
+  .signup p,
+  .login p {
+    font-size: 12px;
   }
 
   .container h1 {
