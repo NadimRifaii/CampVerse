@@ -87,6 +87,10 @@ form {
   background-color: rgba(2, 186, 255, 1);
 }
 
+.auth-page .login button.submit {
+  margin-top: -3px;
+}
+
 .signup p,
 .login p {
   font-weight: bold;
