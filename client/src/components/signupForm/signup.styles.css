@@ -16,3 +16,7 @@
 .radio-holder :where(label, input) {
   cursor: pointer;
 }
+
+input[type="radio"] {
+  margin-right: 5px;
+}
