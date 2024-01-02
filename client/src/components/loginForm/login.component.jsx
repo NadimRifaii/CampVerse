@@ -4,6 +4,7 @@ import { ReactComponent as MyIcon } from '../../continue-with-google.svg'
 import { useContext } from 'react'
 import { ActiveFormContext } from '../../core/contexts/active-form.context'
 import { useState } from 'react'
+import { request } from "../../core/axios/axios"
 const defaultFormFields = {
   email: "",
   password: "",
@@ -19,10 +20,22 @@ export const Login = () => {
     return <h1>activeContext not found</h1>
   }
   const { setActive } = activeFormContext
+  const loginClick = async () => {
+    console.log("asdjfal;sdkf")
+    try {
+      const data = await request(`auth/login`, 'POST', formFields)
+      const token = data.token
+      localStorage.setItem("token", `Bearer ${token}`)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="login">
       <form action="" onSubmit={(e) => {
         e.preventDefault()
+        loginClick()
       }} >
         <h1>login</h1>
         <div className="google-icon" >

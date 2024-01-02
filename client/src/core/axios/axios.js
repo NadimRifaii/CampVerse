@@ -12,6 +12,6 @@ export async function request(url, method, data = {}, headers = {}) {
     })
     return res.data
   } catch (error) {
-    console.log(error)
+    return error.response.data
   }
 }
