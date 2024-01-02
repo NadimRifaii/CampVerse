@@ -1,5 +1,19 @@
+.switch-form {
+  position: absolute;
+  bottom: 62px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+}
+
 .login button.switch {
   display: inline-block;
   background-color: transparent;
   color: rgba(2, 186, 255, 1)
+}
+
+@media(min-width:767px) {
+  .switch-form {
+    display: none;
+  }
 }

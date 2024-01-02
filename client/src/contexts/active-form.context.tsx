@@ -13,6 +13,7 @@ export const ActiveFormContext = createContext<null | ActiveContextType>({} as A
 
 export const ActiveFormContextProvider = ({ children }: UserContextProviderProps) => {
   const [active, setActive] = useState<string | null>(null)
+  console.log(active)
   return (
     <ActiveFormContext.Provider value={{ active, setActive }} >{children}</ActiveFormContext.Provider>
   )
