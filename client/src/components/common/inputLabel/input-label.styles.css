@@ -8,11 +8,11 @@
 .input-label input {
   display: block;
   padding: 8px 15px;
-  border: 1px solid rgba(17, 17, 19, 0.2);
+  border: 1px solid var(--main-white-color);
   border-radius: 5px;
   width: 250px;
   outline: none;
-  caret-color: rgba(17, 17, 19, 0.2);
+  caret-color: var(--main-grey-color);
   font-size: 18px;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .input-label label {
-  color: rgba(17, 17, 19, 0.6);
+  color: var(--main-grey-color);
   position: absolute;
   top: 9px;
   left: 10px;
