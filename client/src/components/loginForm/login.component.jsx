@@ -16,7 +16,6 @@ export const Login = () => {
     <div className="login">
       <form action="" onSubmit={(e) => {
         e.preventDefault()
-        console.log(formFields)
       }} >
         <h1>login</h1>
         <div className="google-icon" >

@@ -25,7 +25,6 @@ export const Signup = () => {
         action=""
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(formFields)
         }}
       >
         <h1>Create account</h1>

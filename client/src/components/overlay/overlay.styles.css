@@ -78,3 +78,9 @@ p {
   letter-spacing: .5px;
   margin: 15px 0 20px;
 }
+
+@media(max-width:767px) {
+  .overlay-container {
+    display: none;
+  }
+}

@@ -79,3 +79,36 @@ form {
   color: rgba(236, 232, 239, 1);
   background-color: rgba(2, 186, 255, 1);
 }
+
+@media(max-width:767px) {
+  .container {
+    width: 400px;
+  }
+
+  .signup,
+  .login {
+    width: 100%
+  }
+
+  .container .login {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  .container .signup {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 3;
+  }
+
+  .container.right-panel-active .login {
+    transform: translateX(100%);
+    opacity: 1;
+  }
+
+  .container.right-panel-active .signup {
+    transform: translateX(0%);
+    opacity: 1;
+    z-index: 3;
+  }
+}
