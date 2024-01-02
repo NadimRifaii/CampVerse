@@ -1,9 +1,10 @@
 import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
 import { ReactComponent as MyIcon } from '../../continue-with-google.svg'
-import { useContext } from 'react'
-import { ActiveFormContext } from '../../core/contexts/active-form.context'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { ActiveFormContext } from "../../utils/contexts/active-form.context"
+import { signInWithGooglePopup } from "../../utils/firebase/firebase"
+import { request } from "../../utils/axios/axios"
 const defaultFormFields = {
   email: "",
   password: "",
@@ -30,6 +31,15 @@ export const Login = () => {
       console.log(error)
     }
   }
+  const signInWithGoogle = async () => {
+    try {
+      const response = await signInWithGooglePopup()
+      const userAuth = response.user
+      console.log(userAuth)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="login">
       <form action="" onSubmit={(e) => {
@@ -37,7 +47,7 @@ export const Login = () => {
         loginClick()
       }} >
         <h1>login</h1>
-        <div className="google-icon" >
+        <div className="google-icon" onClick={signInWithGoogle} >
           <MyIcon />
         </div>
         <p>

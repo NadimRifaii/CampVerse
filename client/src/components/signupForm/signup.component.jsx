@@ -3,7 +3,7 @@ import { InputLabel } from "../common/inputLabel/input-label.component";
 import { ReactComponent as MyIcon } from '../../continue-with-google.svg';
 import { useState, useContext } from 'react';
 import './signup.styles.css';
-import { ActiveFormContext } from '../../core/contexts/active-form.context'
+import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 const defaultFormFields = {
   firstname: "",
   lastname: "",

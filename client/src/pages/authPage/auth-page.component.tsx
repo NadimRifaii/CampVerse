@@ -1,4 +1,4 @@
-import { ActiveFormContext } from "../../core/contexts/active-form.context"
+import { ActiveFormContext } from "../../utils/contexts/active-form.context"
 import { Login } from "../../components/loginForm/login.component"
 import { Overlay } from "../../components/overlay/overlay.component"
 import { Signup } from "../../components/signupForm/signup.component"
