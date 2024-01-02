@@ -3,6 +3,8 @@
   position: relative;
 }
 
+
+
 .input-label input {
   display: block;
   padding: 8px 15px;
@@ -20,10 +22,11 @@
   top: 9px;
   left: 10px;
   text-transform: capitalize;
-  transition: .5s
+  transition: .5s;
+  pointer-events: none;
 }
 
-.input-label input.active+label {
+.input-label label.active {
   font-size: 11px;
   top: -15px;
 }
