@@ -8,6 +8,7 @@ import (
 	"github.com/NadimRifaii/campverse/middlewares"
 	"github.com/NadimRifaii/campverse/routes"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func init() {
@@ -17,6 +18,9 @@ func init() {
 }
 func main() {
 	app := fiber.New()
+
+	app.Use(cors.New())
+
 	authGroup := app.Group("/auth")
 	bootcampGroup := app.Group("/bootcamp")
 	stackGroup := app.Group("/stacks")
