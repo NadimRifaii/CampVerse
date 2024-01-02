@@ -163,7 +163,7 @@ form {
 .signup button.switch {
   display: inline-block;
   background-color: transparent;
-  color: rgba(2, 186, 255, 1)
+  color: var(--main-blue-color)
 }
 
 form p {

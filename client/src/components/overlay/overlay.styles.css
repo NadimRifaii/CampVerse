@@ -61,7 +61,7 @@
 }
 
 .overlay button.switch {
-  background-color: var(--main-blue-color);
+  background-color: var(--blue-color);
   border: 1px solid var(--main-white-color);
 }
 
