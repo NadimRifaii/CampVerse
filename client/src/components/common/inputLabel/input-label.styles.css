@@ -16,6 +16,12 @@
   font-size: 18px;
 }
 
+@media (max-width:767px) {
+  .input-label input {
+    width: 100%;
+  }
+}
+
 .input-label label {
   color: rgba(17, 17, 19, 0.6);
   position: absolute;

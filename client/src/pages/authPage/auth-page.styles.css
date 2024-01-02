@@ -49,14 +49,14 @@ form {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0 50px;
+  padding: 0 30px;
   height: 100%;
   text-align: center;
 }
 
 
 .google-icon {
-  margin: 10px auto 5px;
+  margin: 0px auto;
   display: grid;
   place-items: center;
   border-radius: 5px;
@@ -87,6 +87,16 @@ form {
   background-color: rgba(2, 186, 255, 1);
 }
 
+.signup p,
+.login p {
+  font-weight: bold;
+  margin: 10px auto;
+}
+
+form h1 {
+  margin-top: -10px;
+}
+
 @media(max-width:767px) {
   .container {
     width: 300px;
@@ -99,11 +109,11 @@ form {
 
   .signup p,
   .login p {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .container h1 {
-    font-size: 33px;
+    font-size: 27px;
   }
 
   .container .login {
@@ -131,7 +141,7 @@ form {
 
 .switch-form {
   position: absolute;
-  bottom: 62px;
+  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
@@ -141,7 +151,7 @@ form {
 }
 
 .signup .switch-form {
-  bottom: 3px;
+  bottom: 10px;
 }
 
 .login button.switch,
