@@ -4,7 +4,7 @@
   justify-content: space-between;
   width: 50%;
   color: rgba(17, 17, 19, 0.6);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .radio-holder :where(label, input) {
