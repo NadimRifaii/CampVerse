@@ -50,6 +50,15 @@ form {
 }
 
 
+.google-icon {
+  margin: 20px auto;
+  border: 1px solid rgba(17, 17, 19, 0.2);
+  padding: 10px;
+  display: grid;
+  place-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 .container.right-panel-active .login {
   transform: translateX(100%);
