@@ -71,7 +71,7 @@ form {
   z-index: 3;
 }
 
-.auth-page button {
+.auth-page button.submit {
   width: 100px;
   display: grid;
   place-items: center;
@@ -82,12 +82,16 @@ form {
 
 @media(max-width:767px) {
   .container {
-    width: 400px;
+    width: 350px;
   }
 
   .signup,
   .login {
     width: 100%
+  }
+
+  .container h1 {
+    font-size: 35px;
   }
 
   .container .login {

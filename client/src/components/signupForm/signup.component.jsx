@@ -45,7 +45,7 @@ export const Signup = () => {
             <label htmlFor="mentor">Mentor</label>
           </div>
         </div>
-        <Button text="Signup" />
+        <Button className="submit" text="Signup" />
       </form>
     </div>
   );
