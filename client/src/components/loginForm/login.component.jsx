@@ -1,6 +1,6 @@
 import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
-import { ReactComponent as MyIcon } from '../../Google.svg'
+import { ReactComponent as MyIcon } from '../../continue-with-google.svg'
 import { useContext } from 'react'
 import { ActiveFormContext } from '../../contexts/active-form.context'
 import { useState } from 'react'
@@ -29,6 +29,9 @@ export const Login = () => {
         <div className="google-icon" >
           <MyIcon />
         </div>
+        <p>
+          Or continue with your personal info
+        </p>
         <InputLabel type="email" label="email" name="email" value={email} handleChange={changeHandler} />
         <InputLabel type="password" label="password" name="password" value={password} handleChange={changeHandler} />
         <Button className="submit" text="Login" />

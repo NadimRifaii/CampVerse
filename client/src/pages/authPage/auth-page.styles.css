@@ -56,9 +56,7 @@ form {
 
 
 .google-icon {
-  margin: 20px auto;
-  border: 1px solid rgba(17, 17, 19, 0.2);
-  padding: 10px;
+  margin: 20px auto 5px;
   display: grid;
   place-items: center;
   border-radius: 5px;
@@ -142,6 +140,10 @@ form {
   display: inline-block;
   background-color: transparent;
   color: rgba(2, 186, 255, 1)
+}
+
+form p {
+  margin: 10px auto 15px;
 }
 
 @media(min-width:767px) {

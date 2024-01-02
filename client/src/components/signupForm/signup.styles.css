@@ -7,6 +7,10 @@
   margin-bottom: 10px;
 }
 
+.radio-holder .holder {
+  display: flex;
+}
+
 .radio-holder :where(label, input) {
   cursor: pointer;
 }

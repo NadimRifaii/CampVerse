@@ -1,6 +1,6 @@
 import { Button } from "../common/button/button.component";
 import { InputLabel } from "../common/inputLabel/input-label.component";
-import { ReactComponent as MyIcon } from '../../Google.svg';
+import { ReactComponent as MyIcon } from '../../continue-with-google.svg';
 import { useState, useContext } from 'react';
 import './signup.styles.css';
 import { ActiveFormContext } from '../../contexts/active-form.context'
@@ -35,6 +35,9 @@ export const Signup = () => {
         <div className="google-icon">
           <MyIcon />
         </div>
+        <p>
+          Or continue with your personal info
+        </p>
         <InputLabel type="text" label="First name" value={firstname} name='firstname' handleChange={changeHandler} />
         <InputLabel type="text" label="Last name" value={lastname} name='lastname' handleChange={changeHandler} />
         <InputLabel type="email" label="Email" value={email} name='email' handleChange={changeHandler} />
