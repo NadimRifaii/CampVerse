@@ -15,39 +15,43 @@ const defaultCredentials: SignupCredentials = {
 };
 export const useLogic = () => {
   const [credentials, setCredentials] = useState<SignupCredentials>(defaultCredentials)
-  const [googleSignInComplete, setGoogleSignInComplete] = useState(false);
+  const [googleSignUpComplete, setGoogleSignUpComplete] = useState(false);
   const dispatch = useDispatch()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
-  function handleLogin(data: any) {
+  function handleSignup(data: any) {
     dispatch(setUser(data.user))
-    setGoogleSignInComplete(false);
+    setGoogleSignUpComplete(false);
     setCredentials({ ...defaultCredentials })
   }
-  const loginClick = async () => {
+  const signupClick = async () => {
     const loadingToastId = toast.loading('Logging in...');
     try {
-      const data = await authDataSource.login(credentials)
+      const data = await authDataSource.register(credentials)
       local("token", data.token)
-      handleLogin(data)
-      toast.success('Login successful!', { id: loadingToastId });
+      handleSignup(data)
+      toast.success('Signup successful!', { id: loadingToastId });
     } catch (error) {
       setCredentials({ ...defaultCredentials })
       toast.error(`${error}`, { id: loadingToastId });
     }
 
   }
-  const signInWithGoogle = async () => {
+  const signUpWithGoogle = async () => {
     try {
       const response = await signInWithGooglePopup()
       const userAuth = response.user
-      if (userAuth.email !== null && userAuth.uid !== null)
-        setCredentials({ ['email']: userAuth.email, ['password']: userAuth.uid })
-      setGoogleSignInComplete(true);
+      if (userAuth.displayName && userAuth.email !== null && userAuth.uid !== null) {
+        const firstname = userAuth.displayName.split(" ")[0]
+        const lastname = userAuth.displayName.split(" ")[1]
+        setCredentials({ ...credentials, firstname, lastname, ['email']: userAuth.email, ['password']: userAuth.uid })
+        setGoogleSignUpComplete(true);
+      }
     } catch (error) {
       console.log(error)
     }
   }
-  return { changeHandler, signInWithGoogle, loginClick, googleSignInComplete, credentials }
+
+  return { changeHandler, signUpWithGoogle, signupClick, googleSignUpComplete, credentials }
 }
