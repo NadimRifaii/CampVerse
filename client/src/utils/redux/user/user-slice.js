@@ -18,3 +18,9 @@ export const userSlice = createSlice({
     }
   }
 })
+export const { setUser } = userSlice.actions
+export const user = userSlice.name
+export default userSlice.reducer
+export const extractUserSlice = (global) => {
+  return global[user]
+}

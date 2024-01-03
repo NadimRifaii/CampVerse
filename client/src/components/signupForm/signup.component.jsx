@@ -7,6 +7,8 @@ import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { signInWithGooglePopup } from "../../utils/firebase/firebase"
 import { request } from "../../utils/axios/axios";
 import { toast } from 'react-hot-toast';
+import { useDispatch } from "react-redux";
+import { setUser } from "../../utils/redux/user/user-slice";
 const defaultFormFields = {
   firstname: "",
   lastname: "",
@@ -18,6 +20,7 @@ const defaultFormFields = {
 export const Signup = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [googleSignUpComplete, setGoogleSignUpComplete] = useState(false);
+  const dispatch = useDispatch()
   const { firstname, lastname, email, password, role } = formFields;
   const changeHandler = (event) => {
     setFormFields({ ...formFields, [event.target.name]: event.target.value });
@@ -38,8 +41,8 @@ export const Signup = () => {
       const data = await request(`auth/signup`, 'POST', formFields)
       const token = data.token
       localStorage.setItem("token", `Bearer ${token}`)
-      console.log(data)
       setFormFields({ ...defaultFormFields })
+      dispatch(setUser(data.user))
       toast.success('Signup successful!', { id: loadingToastId });
       setGoogleSignUpComplete(false);
     } catch (error) {
