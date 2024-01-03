@@ -4,5 +4,7 @@ button {
   outline: none;
   cursor: pointer;
   padding: 5px 10px;
-  background-color: var(--main-blue-color)
+  background-color: var(--main-blue-color);
+  font-size: 18px;
+  font-weight: bold;
 }

@@ -51,7 +51,6 @@
 .home-page .btn-holder button {
   margin: auto;
   color: var(--main-white-color);
-  border-radius: 10px;
   padding: 15px;
   font-size: 18px;
   font-weight: bold;
@@ -70,5 +69,15 @@
 
   50% {
     transform: translateY(-40px);
+  }
+}
+
+@media(max-width:992px) {
+  .right {
+    display: none;
+  }
+
+  .home-page .home-container .left {
+    width: 100%;
   }
 }

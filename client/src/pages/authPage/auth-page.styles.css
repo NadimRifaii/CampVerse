@@ -53,9 +53,12 @@ form {
   text-align: center;
 }
 
+.login h1 {
+  margin-top: -20px;
+}
 
 .google-icon {
-  margin: 0px auto;
+  margin: 5px auto 0;
   display: grid;
   place-items: center;
   border-radius: 5px;
@@ -148,14 +151,14 @@ form {
   bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
+  width: 95%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .signup .switch-form {
-  bottom: 24px;
+  bottom: 35px;
 }
 
 .login button.switch,
