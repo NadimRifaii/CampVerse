@@ -4,6 +4,7 @@ import { ReactComponent as MyIcon } from '../../continue-with-google.svg';
 import { useState, useContext } from 'react';
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
+import { signInWithGooglePopup } from "../../utils/firebase/firebase"
 import { request } from "../../utils/axios/axios";
 const defaultFormFields = {
   firstname: "",
@@ -34,6 +35,19 @@ export const Signup = () => {
       console.log(error)
     }
   }
+  console.log(formFields)
+  const signUpWithGoogle = async () => {
+    try {
+      const response = await signInWithGooglePopup()
+      const userAuth = response.user
+      const firstname = userAuth.displayName.split(" ")[0]
+      const lastname = userAuth.displayName.split(" ")[1]
+      setFormFields({ ...formFields, firstname, lastname, ['email']: userAuth.email, ['password']: userAuth.uid })
+      signupClick()
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="signup">
       <form
@@ -44,7 +58,7 @@ export const Signup = () => {
         }}
       >
         <h1>Create account</h1>
-        <div className="google-icon">
+        <div className="google-icon" onClick={signUpWithGoogle}>
           <MyIcon />
         </div>
         <p>
