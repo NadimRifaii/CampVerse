@@ -21,7 +21,6 @@ export const Login = () => {
   }
   const { setActive } = activeFormContext
   const loginClick = async () => {
-    console.log("asdjfal;sdkf")
     try {
       const data = await request(`auth/login`, 'POST', formFields)
       const token = data.token
@@ -35,7 +34,8 @@ export const Login = () => {
     try {
       const response = await signInWithGooglePopup()
       const userAuth = response.user
-      console.log(userAuth)
+      setFormFields({ ['email']: userAuth.email, ['password']: userAuth.uid })
+      loginClick()
     } catch (error) {
       console.log(error)
     }
