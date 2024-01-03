@@ -2,8 +2,9 @@ import './home-page.styles.css'
 import { ReactComponent as Logo } from '../../assets/Logo.svg'
 import { ReactComponent as LandingImage } from '../../assets/landing-image 1.svg'
 import { Button } from '../../components/common/button/button.component'
-
+import { useNavigate } from 'react-router-dom'
 export const HomePage = () => {
+  const navigate = useNavigate()
   return (
     <div className="home-page">
       <div className="home-container">
@@ -19,7 +20,7 @@ export const HomePage = () => {
             Streamlining your bootcamp journey for an enhanced learning experience
           </p>
           <div className="btn-holder">
-            <Button text='Continue to CampVerse' />
+            <Button text='Continue to CampVerse' handleClick={() => navigate("/auth")} />
           </div>
         </div>
         <div className="right">
