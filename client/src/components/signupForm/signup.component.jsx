@@ -4,12 +4,13 @@ import { ReactComponent as MyIcon } from '../../continue-with-google.svg';
 import { useState, useContext } from 'react';
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
+import { request } from "../../utils/axios/axios";
 const defaultFormFields = {
   firstname: "",
   lastname: "",
   email: "",
   password: "",
-  role: "mentor",
+  role: "student",
 };
 
 export const Signup = () => {
@@ -23,12 +24,23 @@ export const Signup = () => {
     return <h1>activeContext not found</h1>
   }
   const { setActive } = activeFormContext
+  const signupClick = async () => {
+    try {
+      const data = await request(`auth/signup`, 'POST', formFields)
+      const token = data.token
+      localStorage.setItem("token", `Bearer ${token}`)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <div className="signup">
       <form
         action=""
         onSubmit={(e) => {
           e.preventDefault();
+          signupClick()
         }}
       >
         <h1>Create account</h1>
@@ -42,7 +54,7 @@ export const Signup = () => {
         <InputLabel type="text" label="Last name" value={lastname} name='lastname' handleChange={changeHandler} />
         <InputLabel type="email" label="Email" value={email} name='email' handleChange={changeHandler} />
         <InputLabel type="password" className="last" label="Password" value={password} name='password' handleChange={changeHandler} />
-        <div className="radio-holder">
+        {/* <div className="radio-holder">
           <div className="holder">
             <input type="radio" id="student" name='role' value='student' onChange={changeHandler} />
             <label htmlFor="student">Student</label>
@@ -51,7 +63,7 @@ export const Signup = () => {
             <input type="radio" id="mentor" name='role' value='mentor' onChange={changeHandler} checked={role === 'mentor'} />
             <label htmlFor="mentor">Mentor</label>
           </div>
-        </div>
+        </div> */}
         <Button className="submit" text="Signup" />
       </form>
       <div className="switch-form">
