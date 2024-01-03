@@ -6,6 +6,7 @@ import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { signInWithGooglePopup } from "../../utils/firebase/firebase"
 import { request } from "../../utils/axios/axios";
+import { toast } from 'react-hot-toast';
 const defaultFormFields = {
   firstname: "",
   lastname: "",
@@ -32,15 +33,17 @@ export const Signup = () => {
   }
   const { setActive } = activeFormContext
   const signupClick = async () => {
+    const loadingToastId = toast.loading('Logging in...');
     try {
       const data = await request(`auth/signup`, 'POST', formFields)
       const token = data.token
       localStorage.setItem("token", `Bearer ${token}`)
       console.log(data)
       setFormFields({ ...defaultFormFields })
+      toast.success('Signup successful!', { id: loadingToastId });
       setGoogleSignUpComplete(false);
     } catch (error) {
-      console.log(error)
+      toast.error(`${error}`, { id: loadingToastId });
     }
   }
   const signUpWithGoogle = async () => {
