@@ -16,17 +16,16 @@ const defaultFormFields = {
 
 export const Signup = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const [googleSignInComplete, setGoogleSignInComplete] = useState(false);
+  const [googleSignUpComplete, setGoogleSignUpComplete] = useState(false);
   const { firstname, lastname, email, password, role } = formFields;
   const changeHandler = (event) => {
     setFormFields({ ...formFields, [event.target.name]: event.target.value });
   };
   useEffect(() => {
-    // This effect will run whenever googleSignInComplete changes
-    if (googleSignInComplete) {
+    if (googleSignUpComplete) {
       signupClick();
     }
-  }, [googleSignInComplete]);
+  }, [googleSignUpComplete]);
   const activeFormContext = useContext(ActiveFormContext)
   if (!activeFormContext) {
     return <h1>activeContext not found</h1>
@@ -39,7 +38,7 @@ export const Signup = () => {
       localStorage.setItem("token", `Bearer ${token}`)
       console.log(data)
       setFormFields({ ...defaultFormFields })
-      setGoogleSignInComplete(false);
+      setGoogleSignUpComplete(false);
     } catch (error) {
       console.log(error)
     }
@@ -51,7 +50,7 @@ export const Signup = () => {
       const firstname = userAuth.displayName.split(" ")[0]
       const lastname = userAuth.displayName.split(" ")[1]
       setFormFields({ ...formFields, firstname, lastname, ['email']: userAuth.email, ['password']: userAuth.uid })
-      setGoogleSignInComplete(true);
+      setGoogleSignUpComplete(true);
     } catch (error) {
       console.log(error)
     }
@@ -66,6 +65,7 @@ export const Signup = () => {
         onSubmit={(e) => {
           e.preventDefault();
           signupClick()
+          setFormFields({ ...defaultFormFields })
         }}
       >
         <h1>Create account</h1>
