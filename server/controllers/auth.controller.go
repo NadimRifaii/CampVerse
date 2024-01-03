@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"errors"
-	"fmt"
 	"os"
 	"strings"
 	"time"
@@ -86,7 +85,7 @@ func HttpLogin(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "username": user.Username, "role": user.UserRole.RoleName})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "email": user.Email, "username": user.Username, "role": user.UserRole.RoleName})
 }
 
 func validateRequest(c *fiber.Ctx, body *UserBody) error {
