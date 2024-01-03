@@ -1,7 +1,7 @@
 import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
 import { ReactComponent as MyIcon } from '../../assets/continue-with-google.svg'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { ActiveFormContext } from "../../utils/contexts/active-form.context"
 import { useLogic } from "./logic.hook"
 export const Login = () => {

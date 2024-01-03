@@ -1,17 +1,20 @@
 import { local } from "../../core/helpers/localStorage";
 import { useState } from "react";
 import { useDispatch } from 'react-redux'
-import { LoginCredentials } from "../../core/types/loginCredentials";
 import { setUser } from "../../core/datasource/localDataSource/user/userSlice";
+import { SignupCredentials } from "../../core/types/signupCredentials";
 import toast from "react-hot-toast";
 import { authDataSource } from "../../core/datasource/remoteDataSource/auth";
 import { signInWithGooglePopup } from "../../utils/firebase/firebase";
-const defaultCredentials: LoginCredentials = {
+const defaultCredentials: SignupCredentials = {
+  firstname: "",
+  lastname: "",
   email: "",
   password: "",
+  role: "student"
 };
 export const useLogic = () => {
-  const [credentials, setCredentials] = useState<LoginCredentials>(defaultCredentials)
+  const [credentials, setCredentials] = useState<SignupCredentials>(defaultCredentials)
   const [googleSignInComplete, setGoogleSignInComplete] = useState(false);
   const dispatch = useDispatch()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
