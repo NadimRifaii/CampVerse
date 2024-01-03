@@ -22,6 +22,7 @@ export const Login = () => {
   const { setActive } = activeFormContext
   const loginClick = async () => {
     try {
+      console.log(formFields)
       const data = await request(`auth/login`, 'POST', formFields)
       const token = data.token
       localStorage.setItem("token", `Bearer ${token}`)
@@ -35,7 +36,7 @@ export const Login = () => {
       const response = await signInWithGooglePopup()
       const userAuth = response.user
       setFormFields({ ['email']: userAuth.email, ['password']: userAuth.uid })
-      loginClick()
+      await loginClick()
     } catch (error) {
       console.log(error)
     }

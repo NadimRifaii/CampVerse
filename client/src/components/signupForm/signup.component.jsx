@@ -1,7 +1,7 @@
 import { Button } from "../common/button/button.component";
 import { InputLabel } from "../common/inputLabel/input-label.component";
 import { ReactComponent as MyIcon } from '../../continue-with-google.svg';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { signInWithGooglePopup } from "../../utils/firebase/firebase"
@@ -16,10 +16,17 @@ const defaultFormFields = {
 
 export const Signup = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const [googleSignInComplete, setGoogleSignInComplete] = useState(false);
   const { firstname, lastname, email, password, role } = formFields;
   const changeHandler = (event) => {
     setFormFields({ ...formFields, [event.target.name]: event.target.value });
   };
+  useEffect(() => {
+    // This effect will run whenever googleSignInComplete changes
+    if (googleSignInComplete) {
+      signupClick();
+    }
+  }, [googleSignInComplete]);
   const activeFormContext = useContext(ActiveFormContext)
   if (!activeFormContext) {
     return <h1>activeContext not found</h1>
@@ -31,11 +38,12 @@ export const Signup = () => {
       const token = data.token
       localStorage.setItem("token", `Bearer ${token}`)
       console.log(data)
+      setFormFields({ ...defaultFormFields })
+      setGoogleSignInComplete(false);
     } catch (error) {
       console.log(error)
     }
   }
-  console.log(formFields)
   const signUpWithGoogle = async () => {
     try {
       const response = await signInWithGooglePopup()
@@ -43,11 +51,14 @@ export const Signup = () => {
       const firstname = userAuth.displayName.split(" ")[0]
       const lastname = userAuth.displayName.split(" ")[1]
       setFormFields({ ...formFields, firstname, lastname, ['email']: userAuth.email, ['password']: userAuth.uid })
-      signupClick()
+      setGoogleSignInComplete(true);
     } catch (error) {
       console.log(error)
     }
   }
+
+
+  // ... your existing code ...
   return (
     <div className="signup">
       <form
