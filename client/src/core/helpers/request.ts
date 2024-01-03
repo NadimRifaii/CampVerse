@@ -1,5 +1,5 @@
 import axios from "axios";
-import { local } from "./local-storage";
+import { local } from "./localStorage";
 
 type SendRequestRequirements = {
   route: string;
@@ -17,7 +17,7 @@ export const sendRequest = async ({
   const token = local("token");
 
   const authorizationHeader = `Bearer ${token}`;
-
+  console.log(route)
   try {
     const response = await axios.request({
       url: route,

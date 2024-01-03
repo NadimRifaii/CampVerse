@@ -4,10 +4,11 @@ import { ReactComponent as MyIcon } from '../../assets/continue-with-google.svg'
 import { useContext, useState, useEffect } from 'react'
 import { ActiveFormContext } from "../../utils/contexts/active-form.context"
 import { signInWithGooglePopup } from "../../utils/firebase/firebase"
-import { request } from "../../utils/axios/axios"
 import { toast } from 'react-hot-toast';
 import { useDispatch } from "react-redux";
-import { setUser } from "../../utils/redux/user/user-slice";
+import { setUser } from "../../core/datasource/localDataSource/user/userSlice"
+import { sendRequest } from "../../core/helpers/request"
+import { local } from "../../core/helpers/localStorage"
 const defaultFormFields = {
   email: "",
   password: "",
@@ -31,16 +32,18 @@ export const Login = () => {
     return <h1>activeContext not found</h1>
   }
   const { setActive } = activeFormContext
+  function handleLogin(data) {
+    console.log(data)
+    dispatch(setUser(data.user))
+    setGoogleSignInComplete(false);
+    setFormFields({ ...defaultFormFields })
+  }
   const loginClick = async () => {
     const loadingToastId = toast.loading('Logging in...');
     try {
-      const data = await request(`auth/login`, 'POST', formFields)
-      const token = data.token
-      localStorage.setItem("token", `Bearer ${token}`)
-      console.log(data)
-      dispatch(setUser(data.user))
-      setGoogleSignInComplete(false);
-      setFormFields({ ...defaultFormFields })
+      const data = await sendRequest({ route: `auth/login`, method: 'POST', body: formFields })
+      local("token", data.token)
+      handleLogin(data)
       toast.success('Login successful!', { id: loadingToastId });
     } catch (error) {
       setFormFields({ ...defaultFormFields })

@@ -5,7 +5,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { ActiveFormContextProvider } from './utils/contexts/active-form.context';
 import { Provider } from 'react-redux';
-import { store } from './utils/redux/store';
+import { store } from './core/datasource/localDataSource/store';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
