@@ -15,7 +15,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type UserBody struct {
+type UserInfoRequest struct {
 	Username   string `json:"username" gorm:"not null;default:'first';size:255"`
 	Lastname   string `json:"lastname" gorm:"not null;default:'last';size:255"`
 	Email      string `json:"email" gorm:"not null;size:255;unique"`
@@ -24,9 +24,14 @@ type UserBody struct {
 	Speciality string `json:"speciality" gorm:"not null;default:'x';size:255"`
 	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
 }
+type UserInfoResponse struct {
+	Email    string `json:"email"`
+	Username string `json:"username"`
+	Role     string `json:"role"`
+}
 
 func HttpSignup(c *fiber.Ctx) error {
-	body := new(UserBody)
+	body := new(UserInfoRequest)
 	user := new(models.User)
 	if err := validateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
@@ -59,12 +64,17 @@ func HttpSignup(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "email": user.Email, "username": user.Username, "role": user.UserRole.RoleName})
+	userInfoResponse := UserInfoResponse{
+		Email:    user.Email,
+		Username: user.Username,
+		Role:     user.UserRole.RoleName,
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
 
 func HttpLogin(c *fiber.Ctx) error {
 	db := database.Db
-	body := new(UserBody)
+	body := new(UserInfoRequest)
 	user := new(models.User)
 	if err := validateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
@@ -85,10 +95,15 @@ func HttpLogin(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "email": user.Email, "username": user.Username, "role": user.UserRole.RoleName})
+	userInfoResponse := UserInfoResponse{
+		Email:    user.Email,
+		Username: user.Username,
+		Role:     user.UserRole.RoleName,
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
 
-func validateRequest(c *fiber.Ctx, body *UserBody) error {
+func validateRequest(c *fiber.Ctx, body *UserInfoRequest) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")
 	} else if body.Email == "" || body.Password == "" {
@@ -96,14 +111,14 @@ func validateRequest(c *fiber.Ctx, body *UserBody) error {
 	}
 	return nil
 }
-func populateUser(user *models.User, body *UserBody, id uint) {
+func populateUser(user *models.User, body *UserInfoRequest, id uint) {
 	user.Email = body.Email
 	user.Password = body.Password
 	user.RoleID = id
 	user.Username = body.Username
 	user.Lastname = body.Lastname
 }
-func populateMentor(mentor *models.Mentor, user *models.User, body *UserBody) {
+func populateMentor(mentor *models.Mentor, user *models.User, body *UserInfoRequest) {
 	mentor.Speciality = body.Speciality
 	mentor.Position = body.Password
 	mentor.User = *user
