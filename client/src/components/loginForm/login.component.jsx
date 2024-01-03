@@ -38,11 +38,12 @@ export const Login = () => {
       const token = data.token
       localStorage.setItem("token", `Bearer ${token}`)
       console.log(data)
-      setFormFields({ ...defaultFormFields })
       dispatch(setUser(data.user))
       setGoogleSignInComplete(false);
+      setFormFields({ ...defaultFormFields })
       toast.success('Login successful!', { id: loadingToastId });
     } catch (error) {
+      setFormFields({ ...defaultFormFields })
       toast.error(`${error}`, { id: loadingToastId });
     }
   }

@@ -41,11 +41,11 @@ export const Signup = () => {
       const data = await request(`auth/signup`, 'POST', formFields)
       const token = data.token
       localStorage.setItem("token", `Bearer ${token}`)
-      setFormFields({ ...defaultFormFields })
       dispatch(setUser(data.user))
       toast.success('Signup successful!', { id: loadingToastId });
       setGoogleSignUpComplete(false);
     } catch (error) {
+      setFormFields({ ...defaultFormFields })
       toast.error(`${error}`, { id: loadingToastId });
     }
   }

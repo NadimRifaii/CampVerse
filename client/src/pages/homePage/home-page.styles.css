@@ -54,6 +54,7 @@
   padding: 15px;
   font-size: 18px;
   font-weight: bold;
+  border-radius: 10px;
 }
 
 .home-page .image-holder svg {
