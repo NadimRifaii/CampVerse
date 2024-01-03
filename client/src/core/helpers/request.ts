@@ -17,7 +17,6 @@ export const sendRequest = async ({
   const token = local("token");
 
   const authorizationHeader = `Bearer ${token}`;
-  console.log(route)
   try {
     const response = await axios.request({
       url: route,

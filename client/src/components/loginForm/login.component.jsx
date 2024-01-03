@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../core/datasource/localDataSource/user/userSlice"
 import { sendRequest } from "../../core/helpers/request"
 import { local } from "../../core/helpers/localStorage"
+import { authDataSource } from "../../core/datasource/remoteDataSource/auth"
 const defaultFormFields = {
   email: "",
   password: "",
@@ -33,7 +34,6 @@ export const Login = () => {
   }
   const { setActive } = activeFormContext
   function handleLogin(data) {
-    console.log(data)
     dispatch(setUser(data.user))
     setGoogleSignInComplete(false);
     setFormFields({ ...defaultFormFields })
@@ -41,7 +41,7 @@ export const Login = () => {
   const loginClick = async () => {
     const loadingToastId = toast.loading('Logging in...');
     try {
-      const data = await sendRequest({ route: `auth/login`, method: 'POST', body: formFields })
+      const data = await authDataSource.login(formFields)
       local("token", data.token)
       handleLogin(data)
       toast.success('Login successful!', { id: loadingToastId });
