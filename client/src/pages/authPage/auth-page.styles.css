@@ -3,8 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  background-color: #f6f5f7;
+  background-color: var(--main-white-color);
 }
 
 .container {

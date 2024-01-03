@@ -15,7 +15,9 @@ const defaultFormFields = {
 export const Login = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [googleSignInComplete, setGoogleSignInComplete] = useState(false);
+  const dispatch = useDispatch()
   const { email, password } = formFields;
+
   useEffect(() => {
     if (googleSignInComplete) {
       loginClick();
