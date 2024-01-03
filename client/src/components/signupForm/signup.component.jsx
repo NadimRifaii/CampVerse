@@ -1,6 +1,6 @@
 import { Button } from "../common/button/button.component";
 import { InputLabel } from "../common/inputLabel/input-label.component";
-import { ReactComponent as MyIcon } from '../../continue-with-google.svg';
+import { ReactComponent as MyIcon } from '../../assets/continue-with-google.svg';
 import { useState, useContext, useEffect } from 'react';
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
