@@ -12,6 +12,12 @@ export async function request(url, method, data = {}, headers = {}) {
     })
     return res.data
   } catch (error) {
-    throw new Error(error.response.data.error)
+    if (error.response) {
+      throw new Error(error.response.data.error);
+    } else if (error.request) {
+      throw new Error("Network error. Please try again.");
+    } else {
+      throw error;
+    }
   }
 }
