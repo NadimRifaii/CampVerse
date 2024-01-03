@@ -2,14 +2,18 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
+	"github.com/go-sql-driver/mysql"
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 )
 
 type UserBody struct {
@@ -111,8 +115,19 @@ func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
 func CreateRecordInDb(record interface{}) error {
 	db := database.Db
 	result := db.Create(record)
+	return checkExistingEmail(result)
+}
+func checkExistingEmail(result *gorm.DB) error {
 	if result.Error != nil {
-		return result.Error
+		// Check if the error is a MySQL error with code 1062 (duplicate entry)
+		mysqlErr, isMySQLError := result.Error.(*mysql.MySQLError)
+		if isMySQLError && mysqlErr.Number == 1062 {
+			// Parse the error message to get the conflicting email
+			if strings.Contains(mysqlErr.Message, "for key 'email'") {
+				return errors.New("email is already in use")
+			}
+		}
+		return errors.New(result.Error.Error())
 	}
 	return nil
 }
