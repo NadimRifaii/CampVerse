@@ -2,7 +2,7 @@ import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
 import { useContext, useEffect } from 'react'
 import { ActiveFormContext } from "../../utils/contexts/active-form.context"
-import GoogleButton from "../../assets/GoogleButton"
+import GoogleButton from "../../assets/google-button.component"
 import { useLogic } from "./logic.hook"
 export const Login = () => {
   const { inputLabels, googleSignInComplete, loginClick, signInWithGoogle } = useLogic()

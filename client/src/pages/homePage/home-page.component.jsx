@@ -1,12 +1,9 @@
 import './home-page.styles.css'
-import Landing1 from '../../assets/Landing1'
-import Landing2 from '../../assets/Landing2'
-import Logo from '../../assets/Logo'
+import Logo from '../../assets/logo.component'
 import { Button } from '../../components/common/button/button.component'
 import { useNavigate } from 'react-router-dom'
-import Landing3 from '../../assets/Landing3'
-import Landing4 from '../../assets/Landing4'
-import Landing5 from '../../assets/Landing5'
+import LandingImage from '../../assets/landing-image.component'
+import AddUserIcon from '../../assets/add-user-icon.component'
 export const HomePage = () => {
   const navigate = useNavigate()
   return (
@@ -29,7 +26,7 @@ export const HomePage = () => {
         </div>
         <div className="right">
           <div className="image-holder">
-            <Landing2 />
+            <LandingImage />
           </div>
         </div>
       </div>

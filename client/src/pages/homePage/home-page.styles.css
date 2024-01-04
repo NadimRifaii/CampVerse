@@ -24,7 +24,7 @@
 }
 
 .home-page .left h1 {
-  color: var(--main-blue-color);
+  color: #455a64
 }
 
 
@@ -37,10 +37,6 @@
   font-size: 14px;
 }
 
-.home-page .left span {
-  color: #6A3937;
-  font-weight: bold;
-}
 
 .home-page .left .logo {
   margin: auto;
@@ -55,6 +51,7 @@
   font-size: 18px;
   font-weight: bold;
   border-radius: 10px;
+  background-color: #455a64;
 }
 
 .home-page .image-holder svg {

@@ -1,7 +1,7 @@
 import { Button } from "../common/button/button.component";
 import { InputLabel } from "../common/inputLabel/input-label.component";
 import { useContext, useEffect } from 'react';
-import GoogleButton from "../../assets/GoogleButton";
+import GoogleButton from "../../assets/google-button.component";
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { useLogic } from "./logic.hook";

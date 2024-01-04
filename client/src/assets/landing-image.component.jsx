@@ -1,5 +1,4 @@
-
-const Landing4 = () => {
+const LandingImage = () => {
   return (
     <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M250 492.87C386.574 492.87 497.29 425.019 497.29 341.32C497.29 257.621 386.574 189.77 250 189.77C113.425 189.77 2.70996 257.621 2.70996 341.32C2.70996 425.019 113.425 492.87 250 492.87Z" fill="#FAFAFA" />
@@ -434,4 +433,4 @@ const Landing4 = () => {
 
   )
 }
-export default Landing4
+export default LandingImage
