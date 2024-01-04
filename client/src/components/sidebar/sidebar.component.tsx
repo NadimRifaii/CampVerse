@@ -2,6 +2,7 @@ import Logo from "../../assets/logo.component"
 import SidebarToggler from "../../assets/sidebar-toggler-icon"
 import SmallLogo from "../../assets/small-logo.component"
 import ResultsIcon from "../../assets/users-icon.component"
+import SidebarItem from "../sidebarItem/sidebar-item.component"
 import useLogic from "./logic.hook"
 import './sidebar.styles.css'
 export const SideBar = () => {
@@ -22,14 +23,7 @@ export const SideBar = () => {
         </div>
       </div>
       <div className="sidebar-items-container">
-        <div className="sidebar-item">
-          <div className="icon">
-            <ResultsIcon />
-          </div>
-          <div className="text">
-            Results
-          </div>
-        </div>
+        <SidebarItem icon={<ResultsIcon />} text="results" />
       </div>
     </div>
   )
