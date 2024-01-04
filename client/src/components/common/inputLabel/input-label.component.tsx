@@ -4,17 +4,19 @@ type InputProps = {
     type: string,
     name: string,
     value: string,
+    id?: string,
+    label: string,
+    className?: string,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
-  },
-  label: string,
-  className?: string,
+  }
 }
-export const InputLabel = ({ info, label, className }: InputProps) => {
+export const InputLabel = ({ info }: InputProps) => {
   const minLength = info.type === 'password' ? 6 : undefined;
+  const { className, label, ...inputInfo } = info
   return (
     <div className={`input-label ${className ? className : ''}`}>
-      <input {...info} />
-      <label className={`${info.value ? 'active' : ''}`} htmlFor="">{label}</label>
+      <input {...inputInfo} autoComplete='off' required />
+      <label className={`${info.value ? 'active' : ''}`} htmlFor={info.id}>{label}</label>
     </div>
   )
 }

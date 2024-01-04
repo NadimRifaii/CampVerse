@@ -5,7 +5,7 @@ import { ActiveFormContext } from "../../utils/contexts/active-form.context"
 import GoogleButton from "../../assets/continue-with-google"
 import { useLogic } from "./logic.hook"
 export const Login = () => {
-  const { changeHandler, googleSignInComplete, loginClick, signInWithGoogle, credentials } = useLogic()
+  const { inputs, googleSignInComplete, loginClick, signInWithGoogle } = useLogic()
   useEffect(() => {
     if (googleSignInComplete) {
       loginClick();
@@ -18,7 +18,7 @@ export const Login = () => {
   const { setActive } = activeFormContext
   return (
     <div className="login">
-      <form action="" onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
+      <form action="" onSubmit={(e) => {
         e.preventDefault()
         loginClick()
       }} >
@@ -29,8 +29,9 @@ export const Login = () => {
         <p>
           Or continue with your account
         </p>
-        <InputLabel label="email" info={{ type: 'email', name: "email", value: credentials.email, onChange: changeHandler }} />
-        <InputLabel label="password" info={{ type: "password", name: "password", value: credentials.password, onChange: changeHandler }} />
+        {
+          inputs.map(input => <InputLabel info={input} />)
+        }
         <Button className="submit" text="Login" />
       </form>
       <div className="switch-form">

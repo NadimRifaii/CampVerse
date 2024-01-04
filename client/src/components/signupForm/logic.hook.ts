@@ -20,6 +20,40 @@ export const useLogic = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
+  const inputs = [
+    {
+      label: "First name",
+      type: "text",
+      value: credentials.firstname,
+      name: "firstname",
+      id: "firstname",
+      onChange: changeHandler
+    },
+    {
+      label: "Last name",
+      type: "text",
+      value: credentials.lastname,
+      name: "lastname",
+      id: "lastname",
+      onChange: changeHandler
+    },
+    {
+      label: "Email",
+      type: "email",
+      value: credentials.email,
+      name: "email",
+      id: 'signup-email',
+      onChange: changeHandler
+    },
+    {
+      label: "Password",
+      type: "password",
+      value: credentials.password,
+      name: "password",
+      id: "signup-password",
+      onChange: changeHandler
+    }
+  ]
   function handleSignup(data: any) {
     dispatch(setUser(data.user))
     setGoogleSignUpComplete(false);
@@ -53,5 +87,5 @@ export const useLogic = () => {
     }
   }
 
-  return { changeHandler, signUpWithGoogle, signupClick, googleSignUpComplete, credentials }
+  return { signUpWithGoogle, signupClick, googleSignUpComplete, inputs }
 }

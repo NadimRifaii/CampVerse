@@ -6,6 +6,6 @@ type ButtonProps = {
 }
 export const Button = ({ text, className, handleClick }: ButtonProps) => {
   return (
-    <button className={className} onClick={handleClick}  > {text} </button>
+    <button className={className} onClick={handleClick}> {text} </button>
   )
 }
