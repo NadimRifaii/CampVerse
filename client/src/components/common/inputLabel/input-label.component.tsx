@@ -1,18 +1,20 @@
 import './input-label.styles.css'
 type InputProps = {
-  type: string,
+  info: {
+    type: string,
+    name: string,
+    value: string,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  },
   label: string,
-  name: string,
-  value: string,
   className?: string,
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
-export const InputLabel = ({ type, className, label, name, value, handleChange }: InputProps) => {
-  const minLength = type === 'password' ? 6 : undefined;
+export const InputLabel = ({ info, label, className }: InputProps) => {
+  const minLength = info.type === 'password' ? 6 : undefined;
   return (
-    <div className={`input-label ${className}`}>
-      <input type={type} name={name} minLength={minLength} value={value} required onChange={handleChange} />
-      <label className={`${value ? 'active' : ''}`} htmlFor="">{label}</label>
+    <div className={`input-label ${className ? className : ''}`}>
+      <input {...info} />
+      <label className={`${info.value ? 'active' : ''}`} htmlFor="">{label}</label>
     </div>
   )
 }

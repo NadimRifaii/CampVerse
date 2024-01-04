@@ -12,7 +12,7 @@ const defaultCredentials: LoginCredentials = {
 };
 export const useLogic = () => {
   const [credentials, setCredentials] = useState<LoginCredentials>(defaultCredentials)
-  const [googleSignInComplete, setGoogleSignInComplete] = useState(false);
+  const [googleSignInComplete, setGoogleSignInComplete] = useState<boolean>(false);
   const dispatch = useDispatch()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });

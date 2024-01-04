@@ -1,8 +1,8 @@
 import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
-import { ReactComponent as MyIcon } from '../../assets/continue-with-google.svg'
 import { useContext, useEffect } from 'react'
 import { ActiveFormContext } from "../../utils/contexts/active-form.context"
+import GoogleButton from "../../assets/continue-with-google"
 import { useLogic } from "./logic.hook"
 export const Login = () => {
   const { changeHandler, googleSignInComplete, loginClick, signInWithGoogle, credentials } = useLogic()
@@ -18,19 +18,19 @@ export const Login = () => {
   const { setActive } = activeFormContext
   return (
     <div className="login">
-      <form action="" onSubmit={(e) => {
+      <form action="" onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         loginClick()
       }} >
         <h1>login</h1>
         <div className="google-icon" onClick={signInWithGoogle} >
-          <MyIcon />
+          <GoogleButton />
         </div>
         <p>
           Or continue with your account
         </p>
-        <InputLabel type="email" label="email" name="email" value={credentials.email} handleChange={changeHandler} />
-        <InputLabel type="password" label="password" name="password" value={credentials.password} handleChange={changeHandler} />
+        <InputLabel label="email" info={{ type: 'email', name: "email", value: credentials.email, onChange: changeHandler }} />
+        <InputLabel label="password" info={{ type: "password", name: "password", value: credentials.password, onChange: changeHandler }} />
         <Button className="submit" text="Login" />
       </form>
       <div className="switch-form">

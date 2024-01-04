@@ -1,7 +1,7 @@
 import { Button } from "../common/button/button.component";
 import { InputLabel } from "../common/inputLabel/input-label.component";
-import { ReactComponent as MyIcon } from '../../assets/continue-with-google.svg';
 import { useContext, useEffect } from 'react';
+import GoogleButton from "../../assets/continue-with-google";
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { useLogic } from "./logic.hook";
@@ -28,15 +28,37 @@ export const Signup = () => {
       >
         <h1>Create account</h1>
         <div className="google-icon" onClick={signUpWithGoogle}>
-          <MyIcon />
+          <GoogleButton />
         </div>
         <p>
           Or register with your email
         </p>
-        <InputLabel type="text" label="First name" value={credentials.firstname} name='firstname' handleChange={changeHandler} />
-        <InputLabel type="text" label="Last name" value={credentials.lastname} name='lastname' handleChange={changeHandler} />
-        <InputLabel type="email" label="Email" value={credentials.email} name='email' handleChange={changeHandler} />
-        <InputLabel type="password" className="last" label="Password" value={credentials.password} name='password' handleChange={changeHandler} />
+        <InputLabel label="First name" info={{
+          type: "text",
+          value: credentials.firstname,
+          name: "firstname",
+          onChange: changeHandler
+        }} />
+        <InputLabel label="Last name" info={{
+          type: "text",
+          value: credentials.lastname,
+          name: "lastname",
+          onChange: changeHandler
+        }} />
+        <InputLabel label="Email" info={
+          {
+            type: "email",
+            value: credentials.email,
+            name: "email",
+            onChange: changeHandler
+          }} />
+        <InputLabel label="Password" info={
+          {
+            type: "password",
+            value: credentials.password,
+            name: "password",
+            onChange: changeHandler
+          }} />
         {/* <div className="radio-holder">
           <div className="holder">
             <input type="radio" id="student" name='role' value='student' onChange={changeHandler} />
