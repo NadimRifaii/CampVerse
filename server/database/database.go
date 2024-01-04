@@ -25,7 +25,8 @@ func ConnectToDb() {
 		panic("Database connection failed")
 	} else {
 		log.Println("Connection successfull")
-		db.AutoMigrate(new(models.User),
+		db.AutoMigrate(
+			new(models.User),
 			new(models.UserRole),
 			new(models.Bootcamp),
 			new(models.Mentor),

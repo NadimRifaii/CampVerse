@@ -81,7 +81,7 @@ p {
 .overlay button {
   color: var(--main-white-color);
   border-color: var(--main-white-color);
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100px;
 }
 

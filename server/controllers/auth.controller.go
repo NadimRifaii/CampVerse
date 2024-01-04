@@ -106,8 +106,6 @@ func HttpLogin(c *fiber.Ctx) error {
 func validateRequest(c *fiber.Ctx, body *UserInfoRequest) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")
-	} else if body.Email == "" || body.Password == "" {
-		return errors.New("missing credentials")
 	}
 	return nil
 }

@@ -75,10 +75,10 @@ export const useLogic = () => {
     try {
       const response = await signInWithGooglePopup()
       const userAuth = response.user
-      if (userAuth.displayName && userAuth.email !== null && userAuth.uid !== null) {
+      if (userAuth.displayName && userAuth.email !== null) {
         const firstname = userAuth.displayName.split(" ")[0]
         const lastname = userAuth.displayName.split(" ")[1]
-        setCredentials({ ...credentials, firstname, lastname, ['email']: userAuth.email, ['password']: userAuth.uid })
+        setCredentials({ ...credentials, firstname, lastname, ['email']: userAuth.email })
         setGoogleSignUpComplete(true);
       }
     } catch (error) {

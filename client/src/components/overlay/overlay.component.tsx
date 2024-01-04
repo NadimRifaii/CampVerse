@@ -12,14 +12,14 @@ export const Overlay = () => {
     <div className="overlay-container">
       <div className="overlay">
         <div className="overlay-left">
-          <h1>Wellcome back</h1>
-          <p>Login with your personal info</p>
-          <Button text='Login' className="switch" handleClick={() => setActive("")} />
+          <h1>Welcome back</h1>
+          <p>Log In with your personal info</p>
+          <Button text='Log In' className="switch" handleClick={() => setActive("")} />
         </div>
         <div className="overlay-right">
           <h1>Hello</h1>
           <p>Enter your personal details and start your journey</p>
-          <Button text='Signup' className="switch" handleClick={() => setActive("right-panel-active")} />
+          <Button text='Sign Up' className="switch" handleClick={() => setActive("right-panel-active")} />
         </div>
       </div>
     </div>

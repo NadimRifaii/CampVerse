@@ -1,7 +1,7 @@
 import { Button } from "../common/button/button.component";
 import { InputLabel } from "../common/inputLabel/input-label.component";
 import { useContext, useEffect } from 'react';
-import GoogleButton from "../../assets/continue-with-google";
+import GoogleButton from "../../assets/GoogleButton";
 import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { useLogic } from "./logic.hook";
@@ -27,21 +27,21 @@ export const Signup = () => {
         }}
       >
         <h1>Create account</h1>
-        <div className="google-icon" onClick={signUpWithGoogle}>
-          <GoogleButton />
-        </div>
-        <p>
-          Or register with your email
-        </p>
         {
           inputLabels.map((inputLabel) => {
             return <InputLabel key={inputLabel.id} info={inputLabel} />
           })
         }
-        <Button className="submit" text="Signup" />
+        <Button className="submit" text="Sign Up" />
+        <p>
+          Or
+        </p>
+        <div className="google-icon" onClick={signUpWithGoogle}>
+          <GoogleButton />
+        </div>
       </form>
       <div className="switch-form">
-        <span>Already have an account?</span> <button className="switch" onClick={() => setActive("")} >Login</button>
+        <span>Already have an account?</span> <button className="switch" onClick={() => setActive("")} >Log In</button>
       </div>
     </div>
   );
