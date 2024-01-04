@@ -6,7 +6,7 @@ import SidebarItem from "../sidebarItem/sidebar-item.component"
 import useLogic from "./logic.hook"
 import './sidebar.styles.css'
 export const SideBar = () => {
-  const { sidebarActive, setSidebarActive } = useLogic()
+  const { sidebarActive, setSidebarActive, items } = useLogic()
   return (
     <div className={`sidebar ${sidebarActive ? 'hidden' : ""} `}>
       <div className="top">
@@ -23,7 +23,9 @@ export const SideBar = () => {
         </div>
       </div>
       <div className="sidebar-items-container">
-        <SidebarItem icon={<ResultsIcon />} text="results" />
+        {
+          items.map(item => <SidebarItem key={item.text} icon={item.icon()} text={item.text} />)
+        }
       </div>
     </div>
   )

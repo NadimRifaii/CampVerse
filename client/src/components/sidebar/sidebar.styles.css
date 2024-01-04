@@ -52,6 +52,11 @@
   transition: .5s;
   transform: translateX(0px);
   cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.sidebar-items-container .sidebar-item svg {
+  width: 30px;
 }
 
 .sidebar-items-container .sidebar-item .text {
@@ -65,7 +70,7 @@
 }
 
 .sidebar.hidden .sidebar-item {
-  transform: translateX(200px);
+  transform: translateX(205px);
   width: fit-content
 }
 

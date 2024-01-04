@@ -6,6 +6,7 @@ import { setUser } from "../../core/datasource/localDataSource/user/userSlice";
 import toast from "react-hot-toast";
 import { authDataSource } from "../../core/datasource/remoteDataSource/auth";
 import { signInWithGooglePopup } from "../../utils/firebase/firebase";
+import { useNavigate } from "react-router-dom";
 const defaultCredentials: LoginCredentials = {
   email: "",
   password: "",
@@ -17,6 +18,7 @@ export const useLogic = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
+  const navigate = useNavigate()
   const inputLabels = [
     {
       label: "Email",
@@ -37,6 +39,7 @@ export const useLogic = () => {
   ]
   function handleLogin(data: any) {
     dispatch(setUser(data.user))
+
     setGoogleSignInComplete(false);
     setCredentials({ ...defaultCredentials })
   }
@@ -47,6 +50,7 @@ export const useLogic = () => {
       local("token", data.token)
       handleLogin(data)
       toast.success('Login successful!', { id: loadingToastId });
+      navigate("/sidebar")
     } catch (error) {
       setCredentials({ ...defaultCredentials })
       toast.error(`${error}`, { id: loadingToastId });

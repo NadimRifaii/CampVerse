@@ -10,7 +10,7 @@ const SidebarItem = ({ icon, text }: SidebarItemProps) => {
         {icon}
       </div>
       <div className="text">
-        Results
+        {text}
       </div>
     </div>
   )
