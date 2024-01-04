@@ -6,7 +6,11 @@
   width: 300px;
   color: var(--main-white-color);
   padding: 20px;
+  transition: .5s;
+  overflow: hidden;
 }
+
+
 
 .sidebar svg {
   width: 40px;
@@ -16,6 +20,10 @@
 .sidebar .top .logo-title {
   display: flex;
   align-items: center;
+}
+
+.sidebar .top .logo svg {
+  width: 50px
 }
 
 .sidebar .top .logo-title {
@@ -31,4 +39,37 @@
 
 .sidebar .top .toggler {
   cursor: pointer;
+}
+
+.sidebar-items-container {
+  padding: 20px 0 0 20px;
+}
+
+.sidebar-items-container .sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: .5s;
+  transform: translateX(0px);
+  cursor: pointer;
+}
+
+.sidebar-items-container .sidebar-item .text {
+  color: #5D7285;
+  font-weight: bold;
+  transition: .5s;
+}
+
+.sidebar.hidden {
+  transform: translateX(-220px);
+}
+
+.sidebar.hidden .sidebar-item {
+  transform: translateX(200px);
+  width: fit-content
+}
+
+.sidebar.hidden .sidebar-item .text {
+  pointer-events: none;
+  display: none;
 }
