@@ -17,7 +17,7 @@ export const useLogic = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
-  const inputs = [
+  const inputLabels = [
     {
       label: "Email",
       type: "email",
@@ -64,5 +64,5 @@ export const useLogic = () => {
       console.log(error)
     }
   }
-  return { inputs, signInWithGoogle, loginClick, googleSignInComplete }
+  return { inputLabels, signInWithGoogle, loginClick, googleSignInComplete }
 }

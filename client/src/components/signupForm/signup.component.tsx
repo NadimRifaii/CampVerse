@@ -6,7 +6,7 @@ import './signup.styles.css';
 import { ActiveFormContext } from "../../utils/contexts/active-form.context";
 import { useLogic } from "./logic.hook";
 export const Signup = () => {
-  const { googleSignUpComplete, signupClick, signUpWithGoogle, inputs } = useLogic()
+  const { googleSignUpComplete, signupClick, signUpWithGoogle, inputLabels } = useLogic()
   useEffect(() => {
     if (googleSignUpComplete) {
       signupClick();
@@ -34,8 +34,8 @@ export const Signup = () => {
           Or register with your email
         </p>
         {
-          inputs.map((input) => {
-            return <InputLabel info={input} />
+          inputLabels.map((inputLabel) => {
+            return <InputLabel key={inputLabel.id} info={inputLabel} />
           })
         }
         <Button className="submit" text="Signup" />

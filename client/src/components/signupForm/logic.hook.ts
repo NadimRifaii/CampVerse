@@ -20,7 +20,7 @@ export const useLogic = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
-  const inputs = [
+  const inputLabels = [
     {
       label: "First name",
       type: "text",
@@ -70,7 +70,6 @@ export const useLogic = () => {
       setCredentials({ ...defaultCredentials })
       toast.error(`${error}`, { id: loadingToastId });
     }
-
   }
   const signUpWithGoogle = async () => {
     try {
@@ -87,5 +86,5 @@ export const useLogic = () => {
     }
   }
 
-  return { signUpWithGoogle, signupClick, googleSignUpComplete, inputs }
+  return { signUpWithGoogle, signupClick, googleSignUpComplete, inputLabels }
 }

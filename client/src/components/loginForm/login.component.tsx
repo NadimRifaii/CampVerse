@@ -5,7 +5,7 @@ import { ActiveFormContext } from "../../utils/contexts/active-form.context"
 import GoogleButton from "../../assets/continue-with-google"
 import { useLogic } from "./logic.hook"
 export const Login = () => {
-  const { inputs, googleSignInComplete, loginClick, signInWithGoogle } = useLogic()
+  const { inputLabels, googleSignInComplete, loginClick, signInWithGoogle } = useLogic()
   useEffect(() => {
     if (googleSignInComplete) {
       loginClick();
@@ -30,7 +30,7 @@ export const Login = () => {
           Or continue with your account
         </p>
         {
-          inputs.map(input => <InputLabel info={input} />)
+          inputLabels.map(inputLabel => <InputLabel key={inputLabel.id} info={inputLabel} />)
         }
         <Button className="submit" text="Login" />
       </form>
