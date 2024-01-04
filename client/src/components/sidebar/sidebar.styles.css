@@ -1,0 +1,34 @@
+.sidebar {
+  background-color: var(--main-black-color);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  color: var(--main-white-color);
+  padding: 20px;
+}
+
+.sidebar svg {
+  width: 40px;
+}
+
+.sidebar .top,
+.sidebar .top .logo-title {
+  display: flex;
+  align-items: center;
+}
+
+.sidebar .top .logo-title {
+  gap: 10px;
+  color: var(--main-blue-color);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.sidebar .top {
+  justify-content: space-between;
+}
+
+.sidebar .top .toggler {
+  cursor: pointer;
+}
