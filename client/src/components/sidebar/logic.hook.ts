@@ -6,17 +6,19 @@ import ScheduleIcon from "../../assets/schedule-icon.component"
 import VotesIcon from "../../assets/votes-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
-type ItemsType = {
+type ItemType = {
   text: string;
   icon: () => JSX.Element;
-}[]
+}
+type ItemsType = ItemType[]
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
   const [sidebarHidden, setSidebarHidden] = useState<boolean>(false)
+  const [activeItem, setActiveItem] = useState<string>("Assignments")
   const studentItems: ItemsType = [
     {
       text: "Assignments",
-      icon: AssignmentsIcon
+      icon: AssignmentsIcon,
     },
     {
       text: "Users",
@@ -62,6 +64,9 @@ const useLogic = () => {
       items = mentorItems
       break;
   }
-  return { sidebarHidden, setSidebarHidden, items }
+  const toggleActiveItem = (item: ItemType) => {
+    setActiveItem(item.text)
+  }
+  return { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem }
 }
 export default useLogic

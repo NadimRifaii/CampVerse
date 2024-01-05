@@ -73,7 +73,7 @@
   transform: translateX(215px);
 }
 
-.sidebar.hidden .sidebar-item.active {
+.sidebar.hidden .sidebar-item {
   width: 50px;
 }
 
