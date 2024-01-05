@@ -1,0 +1,6 @@
+.dashboard {
+  height: 100vh;
+  display: flex;
+  background-color: black;
+  color: white;
+}

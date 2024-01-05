@@ -6,6 +6,7 @@ import { SignupCredentials } from "../../core/types/signupCredentials";
 import toast from "react-hot-toast";
 import { authDataSource } from "../../core/datasource/remoteDataSource/auth";
 import { signInWithGooglePopup } from "../../utils/firebase/firebase";
+import { useNavigate } from "react-router-dom";
 const defaultCredentials: SignupCredentials = {
   firstname: "",
   lastname: "",
@@ -17,6 +18,7 @@ export const useLogic = () => {
   const [credentials, setCredentials] = useState<SignupCredentials>(defaultCredentials)
   const [googleSignUpComplete, setGoogleSignUpComplete] = useState(false);
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value });
   };
@@ -58,6 +60,7 @@ export const useLogic = () => {
     dispatch(setUser(data.user))
     setGoogleSignUpComplete(false);
     setCredentials({ ...defaultCredentials })
+    navigate("/dashboard")
   }
   const signupClick = async () => {
     const loadingToastId = toast.loading('Logging in...');

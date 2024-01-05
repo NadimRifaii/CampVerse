@@ -41,7 +41,8 @@ const useLogic = () => {
 
   const toggleActiveItem = (item: ItemType) => {
     setActiveItem(item.text)
-    // navigate(`${item.text}`)
+    console.log(item.text)
+    navigate(`${item.text}`)
   }
   return { sidebarHidden, setSidebarHidden, adminItems, activeItem, toggleActiveItem }
 }

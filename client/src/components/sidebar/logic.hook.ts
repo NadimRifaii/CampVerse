@@ -68,7 +68,7 @@ const useLogic = () => {
   }
   const toggleActiveItem = (item: ItemType) => {
     setActiveItem(item.text)
-    // navigate(`${item.text}`)
+    navigate(`${item.text}`)
   }
   return { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem }
 }

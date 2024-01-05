@@ -1,8 +1,6 @@
 .sidebar {
   background-color: var(--main-black-color);
-  position: fixed;
-  top: 0;
-  bottom: 0;
+
   width: 300px;
   color: var(--main-white-color);
   padding: 20px;
@@ -20,6 +18,10 @@
 .sidebar .top .logo-title {
   display: flex;
   align-items: center;
+}
+
+.sidebar .top {
+  height: 94px;
 }
 
 .sidebar .top .logo svg {
@@ -65,13 +67,23 @@
   width: 260px;
 }
 
-.sidebar.hidden {
-  transform: translateX(-220px);
+.sidebar-item .text {
+  flex: 1;
+  text-wrap: nowrap;
 }
 
-.sidebar.hidden .sidebar-item {
-  transform: translateX(215px);
+.sidebar.hidden {
+  width: 90px;
 }
+
+.sidebar.hidden .logo-title {
+  display: none;
+}
+
+.sidebar.hidden .top {
+  justify-content: center;
+}
+
 
 .sidebar.hidden .sidebar-item {
   width: 50px;

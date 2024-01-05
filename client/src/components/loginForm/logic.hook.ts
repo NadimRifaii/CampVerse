@@ -50,7 +50,7 @@ export const useLogic = () => {
       local("token", data.token)
       handleLogin(data)
       toast.success('Login successful!', { id: loadingToastId });
-      navigate("/sidebar")
+      navigate("/dashboard")
     } catch (error) {
       setCredentials({ ...defaultCredentials })
       toast.error(`${error}`, { id: loadingToastId });

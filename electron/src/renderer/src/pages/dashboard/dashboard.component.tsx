@@ -1,11 +1,14 @@
+import Header from '@renderer/components/header/header.component'
+import { SideBar } from '@renderer/components/sidebar/sidebar.component'
 import './dashboard.styles.css'
 import { Outlet } from "react-router-dom"
 const DashBoard = () => {
   return (
     <div className="dashboard">
-      <Outlet />
+      <SideBar />
       <div className="content">
-        <h2>This is contentt</h2>
+        <Header />
+        <Outlet />
       </div>
     </div>
   )
