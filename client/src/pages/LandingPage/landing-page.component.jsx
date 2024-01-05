@@ -1,10 +1,9 @@
-import './home-page.styles.css'
+import './landing-page.styles.css'
 import Logo from '../../assets/logo.component'
 import { Button } from '../../components/common/button/button.component'
 import { useNavigate } from 'react-router-dom'
 import LandingImage from '../../assets/landing-image.component'
-import AddUserIcon from '../../assets/add-user-icon.component'
-export const HomePage = () => {
+export const LandingPage = () => {
   const navigate = useNavigate()
   return (
     <div className="home-page">

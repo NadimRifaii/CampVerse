@@ -6,6 +6,7 @@ import ScheduleIcon from "../../assets/schedule-icon.component"
 import VotesIcon from "../../assets/votes-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
+import { useNavigate } from "react-router-dom"
 type ItemType = {
   text: string;
   icon: () => JSX.Element;
@@ -15,6 +16,7 @@ const useLogic = () => {
   const user = useSelector(extractUserSlice)
   const [sidebarHidden, setSidebarHidden] = useState<boolean>(false)
   const [activeItem, setActiveItem] = useState<string>("Assignments")
+  const navigate = useNavigate()
   const studentItems: ItemsType = [
     {
       text: "Assignments",
@@ -66,6 +68,7 @@ const useLogic = () => {
   }
   const toggleActiveItem = (item: ItemType) => {
     setActiveItem(item.text)
+    // navigate(`${item.text}`)
   }
   return { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem }
 }
