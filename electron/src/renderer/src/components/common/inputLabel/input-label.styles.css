@@ -1,0 +1,43 @@
+.input-label {
+  margin: 0 auto 20px;
+  position: relative;
+}
+
+
+
+.input-label input {
+  display: block;
+  padding: 8px 15px;
+  border: 1px solid var(--main-white-color);
+  border-radius: 5px;
+  width: 250px;
+  outline: none;
+  caret-color: var(--main-grey-color);
+  font-size: 18px;
+}
+
+@media (max-width:767px) {
+  .input-label input {
+    width: 100%;
+  }
+}
+
+.input-label label {
+  color: var(--main-grey-color);
+  position: absolute;
+  top: 9px;
+  left: 10px;
+  text-transform: capitalize;
+  transition: .5s;
+  pointer-events: none;
+}
+
+.input-label label.active {
+  font-size: 11px;
+  top: -15px;
+}
+
+.input-label input:focus+label {
+  font-size: 11px;
+  top: -15px;
+}
