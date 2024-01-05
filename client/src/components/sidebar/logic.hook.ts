@@ -12,7 +12,7 @@ type ItemsType = {
 }[]
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
-  const [sidebarActive, setSidebarActive] = useState<boolean>(true)
+  const [sidebarHidden, setSidebarHidden] = useState<boolean>(false)
   const studentItems: ItemsType = [
     {
       text: "Assignments",
@@ -62,6 +62,6 @@ const useLogic = () => {
       items = mentorItems
       break;
   }
-  return { sidebarActive, setSidebarActive, items }
+  return { sidebarHidden, setSidebarHidden, items }
 }
 export default useLogic

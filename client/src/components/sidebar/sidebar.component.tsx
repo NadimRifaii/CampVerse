@@ -6,9 +6,9 @@ import SidebarItem from "../sidebarItem/sidebar-item.component"
 import useLogic from "./logic.hook"
 import './sidebar.styles.css'
 export const SideBar = () => {
-  const { sidebarActive, setSidebarActive, items } = useLogic()
+  const { sidebarHidden, setSidebarHidden, items } = useLogic()
   return (
-    <div className={`sidebar ${sidebarActive ? 'hidden' : ""} `}>
+    <div className={`sidebar ${sidebarHidden ? 'hidden' : ""} `}>
       <div className="top">
         <div className="logo-title">
           <div className="logo">
@@ -18,7 +18,7 @@ export const SideBar = () => {
             CampVerse
           </div>
         </div>
-        <div className="toggler" onClick={() => setSidebarActive(!sidebarActive)}>
+        <div className="toggler" onClick={() => setSidebarHidden(!sidebarHidden)}>
           <SidebarToggler />
         </div>
       </div>
