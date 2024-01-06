@@ -13,9 +13,9 @@ function App(): JSX.Element {
         <Route path='/dashboard' element={<DashBoard />}>
           <Route index element={<h1>Bootcamps</h1>} />
           <Route path="/dashboard/bootcamps" element={<h1>Bootcamps</h1>} />
-          <Route path='/dashboard/Create a bootcamp' element={<h1>Create a bootcamp</h1>} />
+          <Route path='/dashboard/Create' element={<h1>Create a bootcamp</h1>} />
           <Route path='/dashboard/Users' element={<h1>Users</h1>} />
-          <Route path='/dashboard/Add user' element={<h1>Add user</h1>} />
+          <Route path='/dashboard/Add' element={<h1>Add user</h1>} />
         </Route>
       </Routes>
     </>

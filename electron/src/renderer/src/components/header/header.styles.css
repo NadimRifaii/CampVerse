@@ -1,0 +1,47 @@
+.header {
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profile-notification-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.notification {
+  background-color: var(--main-white-color);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.profile {
+  width: 200px;
+  height: 50px;
+  background-color: var(--main-white-color);
+  border-radius: 30px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.profile .image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
+.profile .name-role {
+  color: var(--main-black-color);
+}
+
+.arrow-up-down {
+  cursor: pointer;
+}
