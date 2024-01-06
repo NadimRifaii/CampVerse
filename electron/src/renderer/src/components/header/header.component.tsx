@@ -3,6 +3,7 @@ import BellIcon from '../../assets/bell-icon.component.jsx'
 import useLogic from './logic.hook'
 import ArrowUp from '../../assets/arrow-up.component.jsx'
 import ArrowDown from '../../assets/arrow-down.component.jsx'
+import Dropdown from '../dropdown/dropdown.component'
 const Header = () => {
   const { user, dropdownActive, setDropdownActive } = useLogic()
   return (
@@ -12,7 +13,7 @@ const Header = () => {
         <div className="notification">
           <BellIcon />
         </div>
-        <div className="profile">
+        <div className={`profile ${dropdownActive ? 'active' : ""} `}>
           <div className="image">
             <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />
           </div>
@@ -28,6 +29,7 @@ const Header = () => {
             {dropdownActive ? <ArrowUp /> : <ArrowDown />}
           </div>
         </div>
+        <Dropdown />
       </div>
     </div>
   )
