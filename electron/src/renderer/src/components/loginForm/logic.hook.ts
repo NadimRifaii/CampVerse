@@ -1,5 +1,5 @@
 import { local } from "../../core/helpers/localStorage";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from 'react-redux'
 import { LoginCredentials } from "../../core/types/loginCredentials";
 import { setUser } from "../../core/datasource/localDataSource/user/userSlice";
