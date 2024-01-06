@@ -1,5 +1,48 @@
 .dropdown {
-  width: 100px;
-  height: 100px;
-  background-color: white;
+  width: 200px;
+  background-color: var(--main-white-color);
+  position: absolute;
+  right: 0;
+  top: 200%;
+  transition: .5s;
+}
+
+.dropdown ul li:first-of-type {
+  border-bottom: 1px solid var(--main-black-color)
+}
+
+.dropdown ul li {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown ul li::before {
+  content: '';
+  width: 0px;
+  height: 100%;
+  background-color: var(--main-black-color);
+  transition: .5s;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.dropdown ul li:hover::before {
+  width: 100%;
+}
+
+.dropdown ul li:hover a {
+  color: var(--main-white-color);
+  z-index: 3;
+}
+
+.dropdown ul li a {
+  text-decoration: none;
+  color: var(--main-black-color);
+  display: block;
+  padding: 10px;
+  transition: .5s;
+  position: relative;
 }

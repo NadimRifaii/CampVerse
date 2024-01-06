@@ -59,6 +59,7 @@ export const useLogic = () => {
   function handleSignup(data: any) {
     dispatch(setUser(data.user))
     setGoogleSignUpComplete(false);
+
     setCredentials({ ...defaultCredentials })
     navigate("/dashboard")
   }

@@ -13,7 +13,7 @@ const Header = () => {
         <div className="notification">
           <BellIcon />
         </div>
-        <div className="profile">
+        <div className={`profile ${dropdownActive ? 'active' : ""} `}>
           <div className="image">
             <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />
           </div>
@@ -29,9 +29,7 @@ const Header = () => {
             {dropdownActive ? <ArrowUp /> : <ArrowDown />}
           </div>
         </div>
-      </div>
-      <div className="dropdown">
-        <h1>Hello world</h1>
+        <Dropdown />
       </div>
     </div>
   )

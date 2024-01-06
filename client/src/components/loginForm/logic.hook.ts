@@ -39,7 +39,6 @@ export const useLogic = () => {
   ]
   function handleLogin(data: any) {
     dispatch(setUser(data.user))
-
     setGoogleSignInComplete(false);
     setCredentials({ ...defaultCredentials })
   }
@@ -47,10 +46,16 @@ export const useLogic = () => {
     const loadingToastId = toast.loading('Logging in...');
     try {
       const data = await authDataSource.login(credentials)
-      local("token", data.token)
-      handleLogin(data)
-      toast.success('Login successful!', { id: loadingToastId });
-      navigate("/dashboard")
+      if (data.user.role === "admin") {
+        local("token", "xxx")
+        toast.error(`Unauthorized`, { id: loadingToastId });
+        return navigate('/')
+      } else {
+        local("token", data.token)
+        handleLogin(data)
+        toast.success('Login successful!', { id: loadingToastId });
+        navigate("/dashboard")
+      }
     } catch (error) {
       setCredentials({ ...defaultCredentials })
       toast.error(`${error}`, { id: loadingToastId });

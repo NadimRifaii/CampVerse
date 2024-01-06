@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .profile-notification-container {
@@ -30,7 +31,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  text-align: center
+  text-align: center;
+  transition: .5s;
+}
+
+.profile+.dropdown {
+  opacity: 0;
+  z-index: -1;
+}
+
+.profile.active {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.profile.active+.dropdown {
+  top: 100%;
+  opacity: 1;
+  z-index: 1;
 }
 
 .profile .image {
