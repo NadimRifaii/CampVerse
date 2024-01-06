@@ -14,7 +14,7 @@ const Header = () => {
         </div>
         <div className="profile">
           <div className="image">
-
+            <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />
           </div>
           <div className="name-role">
             <div className="name">

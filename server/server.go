@@ -18,7 +18,10 @@ func init() {
 }
 func setupApp() *fiber.App {
 	app := fiber.New()
-	app.Use(cors.New())
+	app.Static("/", "./public")
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+	}))
 	return app
 }
 func setupProtectedGroups(app *fiber.App, paths []string) []fiber.Router {

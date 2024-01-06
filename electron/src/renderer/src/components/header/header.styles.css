@@ -29,6 +29,8 @@
   padding: 5px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  text-align: center
 }
 
 .profile .image {
@@ -38,10 +40,22 @@
   background-color: #ccc;
 }
 
+.profile .image img {
+  border-radius: 50%;
+}
+
 .profile .name-role {
   color: var(--main-black-color);
+  width: fit-content;
+}
+
+.profile .name-role .name {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
 .arrow-up-down {
   cursor: pointer;
+  width: 24px;
 }

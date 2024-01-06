@@ -25,9 +25,10 @@ type UserInfoRequest struct {
 	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
 }
 type UserInfoResponse struct {
-	Email    string `json:"email"`
-	Username string `json:"username"`
-	Role     string `json:"role"`
+	Email          string `json:"email"`
+	Username       string `json:"username"`
+	Role           string `json:"role"`
+	ProfilePicture string `json:"profilePicture"`
 }
 
 func HttpSignup(c *fiber.Ctx) error {
@@ -65,9 +66,10 @@ func HttpSignup(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
 	userInfoResponse := UserInfoResponse{
-		Email:    user.Email,
-		Username: user.Username,
-		Role:     user.UserRole.RoleName,
+		Email:          user.Email,
+		Username:       user.Username,
+		Role:           user.UserRole.RoleName,
+		ProfilePicture: user.Image_url,
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
@@ -96,9 +98,10 @@ func HttpLogin(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
 	}
 	userInfoResponse := UserInfoResponse{
-		Email:    user.Email,
-		Username: user.Username,
-		Role:     user.UserRole.RoleName,
+		Email:          user.Email,
+		Username:       user.Username,
+		Role:           user.UserRole.RoleName,
+		ProfilePicture: user.Image_url,
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
