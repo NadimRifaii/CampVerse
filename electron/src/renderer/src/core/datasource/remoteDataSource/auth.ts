@@ -23,5 +23,16 @@ export const authDataSource = {
     } catch (error: any) {
       throw new Error(error)
     }
+  },
+  refresh: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/auth/login",
+        method: "POST"
+      })
+    } catch (error: any) {
+      throw new Error(error)
+    }
   }
 }

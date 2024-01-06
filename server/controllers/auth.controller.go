@@ -106,6 +106,25 @@ func HttpLogin(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
 
+func HttpRefresh(c *fiber.Ctx) error {
+	user := new(models.User)
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	userInfoResponse := UserInfoResponse{
+		Email:          user.Email,
+		Username:       user.Username,
+		Role:           user.UserRole.RoleName,
+		ProfilePicture: user.Image_url,
+	}
+	tokenString := createJwtToken(user, user.UserRole.RoleName)
+	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
+	if err != nil {
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": "Failed to sign the token"})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
+}
+
 func validateRequest(c *fiber.Ctx, body *UserInfoRequest) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")

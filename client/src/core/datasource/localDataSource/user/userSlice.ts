@@ -6,6 +6,7 @@ const initialState: User = {
   role: "",
   username: "",
   email: "",
+  profilePicture: ""
 }
 
 export const userSlice = createSlice({
@@ -13,9 +14,9 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, { type, payload }: { payload: User, type: string }) {
-      const { username, email, role } = payload
+      const { username, email, role, profilePicture } = payload
       return {
-        username, email, role
+        username, email, role, profilePicture
       }
     }
   }

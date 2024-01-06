@@ -1,3 +1,4 @@
+import Header from '../../components/header/header.component'
 import { SideBar } from '../../components/sidebar/sidebar.component'
 import './dashboard.styles.css'
 import { Outlet } from "react-router-dom"
@@ -5,7 +6,10 @@ const DashBoard = () => {
   return (
     <div className="dashboard">
       <SideBar />
-      <Outlet />
+      <div className="content">
+        <Header />
+        <Outlet />
+      </div>
     </div>
   )
 }
