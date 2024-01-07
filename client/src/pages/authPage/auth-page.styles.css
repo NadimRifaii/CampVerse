@@ -42,7 +42,7 @@ form div.input-label.last {
   z-index: 2;
 }
 
-form {
+.auth-page form {
   background: #fff;
   display: flex;
   align-items: center;

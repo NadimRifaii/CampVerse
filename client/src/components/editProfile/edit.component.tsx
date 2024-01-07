@@ -1,9 +1,10 @@
-import { profile } from "console"
-
+import './edit.styles.css'
 const EditProfile = () => {
   return (
     <div className="edit-container">
-      <h1>Edit Profile</h1>
+      <form action="">
+        <h1>Edit profile</h1>
+      </form>
     </div>
   )
 }

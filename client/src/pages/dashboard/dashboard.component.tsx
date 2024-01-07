@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { authDataSource } from '../../core/datasource/remoteDataSource/auth'
 import { setUser } from '../../core/datasource/localDataSource/user/userSlice'
 import { local } from '../../core/helpers/localStorage'
+import EditProfile from '../../components/editProfile/edit.component'
 const DashBoard = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -27,7 +28,9 @@ const DashBoard = () => {
       <SideBar />
       <div className="content">
         <Header />
+        <EditProfile />
         <Outlet />
+
       </div>
     </div>
   )
