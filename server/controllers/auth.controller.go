@@ -140,7 +140,7 @@ func populateUser(user *models.User, body *UserInfoRequest, id uint) {
 }
 func populateMentor(mentor *models.Mentor, user *models.User, body *UserInfoRequest) {
 	mentor.Speciality = body.Speciality
-	mentor.Position = body.Password
+	mentor.Position = body.Position
 	mentor.User = *user
 }
 func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
