@@ -7,6 +7,8 @@ const initialState: User = {
   email: "",
   role: "student",
   profilePicture: "",
+  firstname: "",
+  lastname: ""
 }
 
 export const userSlice = createSlice({
@@ -18,7 +20,7 @@ export const userSlice = createSlice({
         ...payload
       }
     },
-    updateUser(state, { type, payload }: { payload: User, type: string }) {
+    updateUser(state, { type, payload }: { payload: any, type: string }) {
       return {
         ...state, ...payload
       }

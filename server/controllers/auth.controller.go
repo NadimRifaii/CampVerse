@@ -16,7 +16,8 @@ import (
 )
 
 type UserInfoRequest struct {
-	Username   string `json:"username" gorm:"not null;default:'first';size:255"`
+	Username   string `json:"username" gorm:"not null;default:'username';size:255"`
+	FirstName  string `json:"firstname" gorm:"not null;default:'first';size:255" `
 	Lastname   string `json:"lastname" gorm:"not null;default:'last';size:255"`
 	Email      string `json:"email" gorm:"not null;size:255;unique"`
 	Password   string `json:"password" gorm:"not null;size:255"`
@@ -143,6 +144,7 @@ func populateUser(user *models.User, body *UserInfoRequest, id uint) {
 	user.Password = body.Password
 	user.RoleID = id
 	user.Username = body.Username
+	user.FirstName = body.FirstName
 	user.Lastname = body.Lastname
 }
 func populateMentor(mentor *models.Mentor, user *models.User, body *UserInfoRequest) {
