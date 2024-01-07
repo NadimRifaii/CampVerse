@@ -67,6 +67,12 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	}
 	if user.UserRole.RoleName == "mentor" {
 		mentor := new(models.Mentor)
+		mentor.Speciality = body.Speciality
+		mentor.Position = body.Position
+		mentor.UserId = user.ID
+		if err := mentor.UpdateMentor(db); err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
 		if err := mentor.GetMentorByID(db, user.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}

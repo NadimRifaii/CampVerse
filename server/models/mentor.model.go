@@ -46,3 +46,6 @@ func (mentor *Mentor) RemoveStackFromMentor(db *gorm.DB, stack *Stack) error {
 
 	return nil
 }
+func (mentor *Mentor) UpdateMentor(db *gorm.DB) error {
+	return db.Save(mentor).Error
+}
