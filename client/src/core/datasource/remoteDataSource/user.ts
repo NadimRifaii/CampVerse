@@ -12,14 +12,26 @@ export const userDataSource = {
       throw new Error(error)
     }
   },
-  updateUser: async (data: {}) => {
+  uploadImage: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/user/profile",
+        method: "POST"
+      })
+      return response;
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  },
+  updateProfile: async (data: {}) => {
     try {
       const response = await sendRequest({
         body: data,
         route: "/user",
         method: "PUT"
       })
-      return response;
+      return response
     } catch (error: any) {
       throw new Error(error)
     }

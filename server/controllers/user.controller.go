@@ -35,14 +35,19 @@ func HttpGetUser(c *fiber.Ctx) error {
 	}
 }
 
-func HttpUpdateUser(c *fiber.Ctx) error {
+func HttpUploadImage(c *fiber.Ctx) error {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-	body := new(UserInfoRequest)
-	if err := ValidateRequest(c, body); err != nil {
+
+	file, err := c.FormFile("file")
+	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"body": body})
+	c.SaveFile(file, "public/images/"+file.Filename)
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
+}
+func HttpUpdateUserProfile(c *fiber.Ctx) error {
+	return nil
 }

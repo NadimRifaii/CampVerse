@@ -26,6 +26,12 @@ const useLogic = () => {
   useEffect(() => {
     resetCredentials()
   }, [user]);
+  useEffect(() => {
+    if (selectedFile) {
+      setCredentials({ ...credentials, ['profilePicture']: selectedFile.name })
+      uploadImage()
+    }
+  }, [selectedFile])
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -40,10 +46,23 @@ const useLogic = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   };
-  const update = async () => {
+  const uploadImage = async () => {
     try {
-      const response = await userDataSource.updateUser(credentials)
-      console.log(response)
+      const formData = new FormData();
+      if (selectedFile) {
+        formData.append("file", selectedFile);
+        const response = await userDataSource.uploadImage(formData);
+        console.log(response);
+      } else {
+        throw new Error("No file selected")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateProfile = async () => {
+    try {
+      const response = await userDataSource.updateProfile(credentials)
     } catch (error) {
       console.log(error)
     }
@@ -91,6 +110,6 @@ const useLogic = () => {
       onChange: changeHandler
     }])
   }
-  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, update }
+  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, uploadImage }
 }
 export default useLogic
