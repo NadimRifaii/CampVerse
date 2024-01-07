@@ -58,7 +58,6 @@ func HttpSignup(c *fiber.Ctx) error {
 		CreateRecordInDb(mentor)
 	} else if body.RoleName == "student" {
 		student := new(models.Student)
-		student.User = *user
 		CreateRecordInDb(student)
 	}
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))

@@ -9,8 +9,8 @@ import useLogic from './logic.hook'
 const DashBoard = () => {
   const { refresh, getUserInfo } = useLogic()
   useEffect(() => {
-    getUserInfo()
     refresh()
+    getUserInfo()
   }, [])
   return (
     <div className="dashboard">

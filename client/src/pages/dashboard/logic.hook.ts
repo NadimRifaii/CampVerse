@@ -2,13 +2,14 @@ import { extractUserSlice } from "../../core/datasource/localDataSource/user/use
 import { useDispatch, useSelector } from "react-redux"
 import { userDataSource } from "../../core/datasource/remoteDataSource/user"
 import { authDataSource } from '../../core/datasource/remoteDataSource/auth'
-import { setUser } from '../../core/datasource/localDataSource/user/userSlice'
+import { setUser, updateUser } from '../../core/datasource/localDataSource/user/userSlice'
 import { local } from '../../core/helpers/localStorage'
 import { useNavigate } from "react-router-dom"
 const useLogic = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(extractUserSlice)
+  console.log(user)
   async function refresh() {
     try {
       const data = await authDataSource.refresh({})
@@ -21,7 +22,7 @@ const useLogic = () => {
   async function getUserInfo() {
     try {
       const data = await userDataSource.getUser({})
-      console.log(data)
+      dispatch(updateUser(data.info))
     } catch (error: any) {
       console.log(error)
     }

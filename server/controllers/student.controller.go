@@ -59,7 +59,6 @@ func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 	if err := student.GetStudentByID(db, user.ID); err != nil {
 		return nil, errors.New("Unauthorized")
 	}
-	student.User = *user
 
 	return student, nil
 }

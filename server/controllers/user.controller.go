@@ -26,12 +26,12 @@ func HttpGetUser(c *fiber.Ctx) error {
 		mentorResponse.Position = mentor.Position
 		mentorResponse.Speciality = mentor.Speciality
 		mentorResponse.Stacks = mentor.Stack
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"mentor": mentorResponse})
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": mentorResponse})
 	} else {
 		student := new(models.Student)
 		if err := student.GetStudentByID(db, user.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"student": student})
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": student})
 	}
 }

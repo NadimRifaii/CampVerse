@@ -20,13 +20,14 @@ export const userSlice = createSlice({
       }
     },
     updateUser(state, { type, payload }: { payload: User, type: string }) {
+      console.log(payload)
       return {
         ...state, ...payload
       }
     }
   }
 })
-export const { setUser } = userSlice.actions
+export const { setUser, updateUser } = userSlice.actions
 export const user = userSlice.name
 export default userSlice.reducer
 export const extractUserSlice = (global: RootState) => {
