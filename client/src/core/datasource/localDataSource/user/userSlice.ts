@@ -18,6 +18,11 @@ export const userSlice = createSlice({
       return {
         username, email, role, profilePicture
       }
+    },
+    updateUser(state, { type, payload }: { payload: User, type: string }) {
+      return {
+        ...state, ...payload
+      }
     }
   }
 })
