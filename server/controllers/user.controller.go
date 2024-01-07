@@ -17,7 +17,6 @@ func HttpGetUser(c *fiber.Ctx) error {
 		if err := mentor.GetMentorByID(db, user.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}
-
 		var mentorResponse struct {
 			Speciality string          `json:"speciality"`
 			Position   string          `json:"position"`
@@ -34,4 +33,16 @@ func HttpGetUser(c *fiber.Ctx) error {
 		}
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": student})
 	}
+}
+
+func HttpUpdateUser(c *fiber.Ctx) error {
+	user := new(models.User)
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	body := new(UserInfoRequest)
+	if err := ValidateRequest(c, body); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"body": body})
 }

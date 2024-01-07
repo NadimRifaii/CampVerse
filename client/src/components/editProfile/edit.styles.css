@@ -45,6 +45,10 @@
   margin: auto;
 }
 
+.edit-container .inputs-container input[type='email'] {
+  background-color: var(--main-white-color)
+}
+
 .edit-container .inputs-container .input-label input:focus+label {
   color: var(--main-white-color);
 }

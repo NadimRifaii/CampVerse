@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice";
 import { updateUser } from "../../core/datasource/localDataSource/user/userSlice";
+import { userDataSource } from "../../core/datasource/remoteDataSource/user";
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
   const dispatch = useDispatch()
@@ -39,6 +40,14 @@ const useLogic = () => {
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCredentials({ ...credentials, [event.target.name]: event.target.value })
   };
+  const update = async () => {
+    try {
+      const response = await userDataSource.updateUser(credentials)
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const fields = [
     {//
       label: 'UserName',
@@ -60,17 +69,16 @@ const useLogic = () => {
       label: "LastName",
       name: "lastname",
       type: 'text',
-      value: credentials.lastname || ''
-      ,
+      value: credentials.lastname || '',
       onChange: changeHandler
     },
     {
       label: 'Email',
       name: 'email',
       type: 'email',
-      value: credentials.email || ''
-      ,
-      onChange: changeHandler
+      value: credentials.email || '',
+      onChange: changeHandler,
+      disabled: true
     }
   ]
   if (user.role === 'mentor') {
@@ -83,6 +91,6 @@ const useLogic = () => {
       onChange: changeHandler
     }])
   }
-  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials }
+  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, update }
 }
 export default useLogic

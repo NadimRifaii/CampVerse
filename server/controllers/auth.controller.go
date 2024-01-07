@@ -37,7 +37,7 @@ type UserInfoResponse struct {
 func HttpSignup(c *fiber.Ctx) error {
 	body := new(UserInfoRequest)
 	user := new(models.User)
-	if err := validateRequest(c, body); err != nil {
+	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	if body.RoleName == "" {
@@ -82,7 +82,7 @@ func HttpLogin(c *fiber.Ctx) error {
 	db := database.Db
 	body := new(UserInfoRequest)
 	user := new(models.User)
-	if err := validateRequest(c, body); err != nil {
+	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	if err := user.GetUserByEmail(body.Email, db); err != nil {
@@ -133,12 +133,6 @@ func HttpRefresh(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
 
-func validateRequest(c *fiber.Ctx, body *UserInfoRequest) error {
-	if err := c.BodyParser(body); err != nil {
-		return errors.New("invalid request body")
-	}
-	return nil
-}
 func populateUser(user *models.User, body *UserInfoRequest, id uint) {
 	user.Email = body.Email
 	user.Password = body.Password
