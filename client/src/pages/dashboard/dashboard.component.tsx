@@ -30,7 +30,6 @@ const DashBoard = () => {
         <Header />
         <EditProfile />
         <Outlet />
-
       </div>
     </div>
   )

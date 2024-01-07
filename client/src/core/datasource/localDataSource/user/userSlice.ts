@@ -3,10 +3,10 @@ import { User } from '../../../types/user'
 import { RootState } from '../../../types/rootState'
 
 const initialState: User = {
-  role: "",
   username: "",
   email: "",
-  profilePicture: ""
+  role: "student",
+  profilePicture: "",
 }
 
 export const userSlice = createSlice({

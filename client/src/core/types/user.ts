@@ -1,6 +1,10 @@
 export type User = {
-  email: string;
-  username: string;
-  role?: string;
-  profilePicture: string
+  username: string,
+  firstname?: string,
+  lastname?: string,
+  email: string,
+  role: "student" | "mentor",
+  profilePicture: string,
+  speciality?: string,
+  position?: string
 };
