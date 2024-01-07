@@ -18,3 +18,23 @@
   z-index: 3;
   opacity: 1;
 }
+
+.edit-container .top {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  margin-left: auto;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.edit-container .top input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}

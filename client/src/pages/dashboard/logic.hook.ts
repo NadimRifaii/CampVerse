@@ -9,7 +9,6 @@ const useLogic = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const user = useSelector(extractUserSlice)
-  console.log(user)
   async function refresh() {
     try {
       const data = await authDataSource.refresh({})

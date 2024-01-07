@@ -29,6 +29,8 @@ type UserInfoResponse struct {
 	Username       string `json:"username"`
 	Role           string `json:"role"`
 	ProfilePicture string `json:"profilePicture"`
+	FirstName      string `json:"firstname"`
+	LastName       string `json:"lastname"`
 }
 
 func HttpSignup(c *fiber.Ctx) error {
@@ -69,6 +71,8 @@ func HttpSignup(c *fiber.Ctx) error {
 		Username:       user.Username,
 		Role:           user.UserRole.RoleName,
 		ProfilePicture: user.Image_url,
+		FirstName:      user.FirstName,
+		LastName:       user.Lastname,
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
@@ -101,6 +105,8 @@ func HttpLogin(c *fiber.Ctx) error {
 		Username:       user.Username,
 		Role:           user.UserRole.RoleName,
 		ProfilePicture: user.Image_url,
+		FirstName:      user.FirstName,
+		LastName:       user.Lastname,
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
@@ -115,6 +121,8 @@ func HttpRefresh(c *fiber.Ctx) error {
 		Username:       user.Username,
 		Role:           user.UserRole.RoleName,
 		ProfilePicture: user.Image_url,
+		FirstName:      user.FirstName,
+		LastName:       user.Lastname,
 	}
 	tokenString := createJwtToken(user, user.UserRole.RoleName)
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))

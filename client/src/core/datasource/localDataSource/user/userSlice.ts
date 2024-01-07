@@ -14,13 +14,11 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, { type, payload }: { payload: User, type: string }) {
-      const { username, email, role, profilePicture } = payload
       return {
-        username, email, role, profilePicture
+        ...payload
       }
     },
     updateUser(state, { type, payload }: { payload: User, type: string }) {
-      console.log(payload)
       return {
         ...state, ...payload
       }
