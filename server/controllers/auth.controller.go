@@ -21,6 +21,7 @@ type UserInfoRequest struct {
 	Lastname   string `json:"lastname" gorm:"not null;default:'last';size:255"`
 	Email      string `json:"email" gorm:"not null;size:255;unique"`
 	Password   string `json:"password" gorm:"not null;size:255"`
+	Image_url  string `json:"profilePicture" gorm:"not null;size:255"`
 	RoleName   string `json:"role" gorm:"not null;default:'student';size:255" `
 	Speciality string `json:"speciality" gorm:"not null;default:'x';size:255"`
 	Position   string `json:"position" gorm:"not null;default:'x';size:255"`

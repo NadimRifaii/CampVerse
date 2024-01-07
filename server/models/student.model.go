@@ -9,6 +9,7 @@ import (
 type Student struct {
 	gorm.Model
 	UserId            uint
+	User              User
 	StudentSubmission []*StudentSubmission
 }
 

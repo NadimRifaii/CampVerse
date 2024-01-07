@@ -39,4 +39,6 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	return bootcamps, nil
 }
 
-//
+func (user *User) UpdateUser(db *gorm.DB) error {
+	return db.Save(user).Error
+}
