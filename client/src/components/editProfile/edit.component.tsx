@@ -7,7 +7,7 @@ import { Button } from '../common/button/button.component';
 
 const EditProfile = () => {
   const activeEditContext = useContext(ActiveEditContext);
-  const { handleFileChange, previewImage, selectedFile, fields, resetCredentials } = useLogic()
+  const { handleFileChange, previewImage, fields, resetCredentials, updateProfile } = useLogic()
   if (!activeEditContext) {
     return <h1>activeEditContext not found</h1>;
   }
@@ -17,6 +17,8 @@ const EditProfile = () => {
     <div className={`edit-container ${active ? 'active' : ''}`}>
       <form onSubmit={(e) => {
         e.preventDefault();
+        updateProfile()
+        setActive(false)
       }} >
         <div className="top">
           <input

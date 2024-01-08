@@ -8,7 +8,8 @@ const initialState: User = {
   role: "student",
   profilePicture: "",
   firstname: "",
-  lastname: ""
+  lastname: "",
+  position: ""
 }
 
 export const userSlice = createSlice({

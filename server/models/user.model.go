@@ -8,15 +8,15 @@ import (
 
 type User struct {
 	gorm.Model
-	Username  string `json:"username" gorm:"not null;default:'username';size:255"`
-	FirstName string `json:"firstname" gorm:"not null;default:'first';size:255"`
-	Lastname  string `json:"lastname" gorm:"not null;default:'last';size:255"`
-	Email     string `json:"email" gorm:"not null;size:255;unique"`
-	Password  string `json:"password" gorm:"not null;size:255"`
-	Image_url string `json:"profile_picture" gorm:"default:'default_profile_picture.jpg'"`
-	RoleID    uint
-	UserRole  UserRole    `gorm:"foreignKey:RoleID"`
-	Bootcamp  []*Bootcamp `gorm:"many2many:bootcamp_users;"`
+	Username       string `json:"username" gorm:"not null;default:'username';size:255"`
+	FirstName      string `json:"firstname" gorm:"not null;default:'first';size:255"`
+	Lastname       string `json:"lastname" gorm:"not null;default:'last';size:255"`
+	Email          string `json:"email" gorm:"not null;size:255;unique"`
+	Password       string `json:"password" gorm:"not null;size:255"`
+	ProfilePicture string `json:"profilePicture" gorm:"default:'default_profile_picture.jpg'"`
+	RoleID         uint
+	UserRole       UserRole    `gorm:"foreignKey:RoleID"`
+	Bootcamp       []*Bootcamp `gorm:"many2many:bootcamp_users;"`
 }
 
 func (user *User) GetUserById(id string, db *gorm.DB) error {

@@ -12,6 +12,9 @@ func HttpGetUser(c *fiber.Ctx) error {
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
+	if user.UserRole.RoleName == "admin" {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": user})
+	}
 	if user.UserRole.RoleName == "mentor" {
 		mentor := new(models.Mentor)
 		if err := mentor.GetMentorByID(db, user.ID); err != nil {
@@ -61,22 +64,25 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	user.Username = body.Username
 	user.FirstName = body.FirstName
 	user.Lastname = body.Lastname
-	user.Image_url = body.Image_url
+	user.ProfilePicture = body.ProfilePicture
 	if err := user.UpdateUser(db); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	if user.UserRole.RoleName == "mentor" {
+	if user.UserRole.RoleName == "admin" {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
+	} else if user.UserRole.RoleName == "mentor" {
 		mentor := new(models.Mentor)
-		mentor.Speciality = body.Speciality
-		mentor.Position = body.Position
-		mentor.UserId = user.ID
-		if err := mentor.UpdateMentor(db); err != nil {
-			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
-		}
 		if err := mentor.GetMentorByID(db, user.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully"})
+		mentor.Speciality = body.Speciality
+		mentor.Position = body.Position
+		mentor.UserId = user.ID
+
+		if err := mentor.UpdateMentor(db); err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
 	} else {
 		student := new(models.Student)
 		if err := student.GetStudentByID(db, user.ID); err != nil {

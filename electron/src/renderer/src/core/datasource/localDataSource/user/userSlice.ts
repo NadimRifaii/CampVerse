@@ -1,12 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { User } from '../../../types/user'
-import { RootState } from '../../../types/rootState'
+import { RootState } from '@renderer/core/types/rootState'
+import { User } from '@renderer/core/types/user'
+
 
 const initialState: User = {
-  role: "",
   username: "",
   email: "",
-  profilePicture: ""
+  role: "student",
+  profilePicture: "",
+  firstname: "",
+  lastname: "",
+  position: ""
 }
 
 export const userSlice = createSlice({
@@ -14,14 +18,18 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser(state, { type, payload }: { payload: User, type: string }) {
-      const { username, email, role, profilePicture } = payload
       return {
-        username, email, role, profilePicture
+        ...payload
+      }
+    },
+    updateUser(state, { type, payload }: { payload: any, type: string }) {
+      return {
+        ...state, ...payload
       }
     }
   }
 })
-export const { setUser } = userSlice.actions
+export const { setUser, updateUser } = userSlice.actions
 export const user = userSlice.name
 export default userSlice.reducer
 export const extractUserSlice = (global: RootState) => {

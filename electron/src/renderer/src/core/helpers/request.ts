@@ -24,9 +24,7 @@ export const sendRequest = async ({
       data: body,
       headers: {
         Authorization: authorizationHeader,
-        // "Content-Type": "application/json",
-        "Content-Type": "multipart/form-data",
-        'Access-Control-Allow-Origin': '*'
+        "Content-Type": "multipart/form-data"
       },
     });
     return response.data;

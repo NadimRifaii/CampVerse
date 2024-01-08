@@ -16,15 +16,15 @@ import (
 )
 
 type UserInfoRequest struct {
-	Username   string `json:"username" gorm:"not null;default:'username';size:255"`
-	FirstName  string `json:"firstname" gorm:"not null;default:'first';size:255" `
-	Lastname   string `json:"lastname" gorm:"not null;default:'last';size:255"`
-	Email      string `json:"email" gorm:"not null;size:255;unique"`
-	Password   string `json:"password" gorm:"not null;size:255"`
-	Image_url  string `json:"profilePicture" gorm:"not null;size:255"`
-	RoleName   string `json:"role" gorm:"not null;default:'student';size:255" `
-	Speciality string `json:"speciality" gorm:"not null;default:'x';size:255"`
-	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
+	Username       string `json:"username" gorm:"not null;default:'username';size:255"`
+	FirstName      string `json:"firstname" gorm:"not null;default:'first';size:255" `
+	Lastname       string `json:"lastname" gorm:"not null;default:'last';size:255"`
+	Email          string `json:"email" gorm:"not null;size:255;unique"`
+	Password       string `json:"password" gorm:"not null;size:255"`
+	ProfilePicture string `json:"profilePicture" gorm:"not null;size:255"`
+	RoleName       string `json:"role" gorm:"not null;default:'student';size:255" `
+	Speciality     string `json:"speciality" gorm:"not null;default:'x';size:255"`
+	Position       string `json:"position" gorm:"not null;default:'x';size:255"`
 }
 type UserInfoResponse struct {
 	Email          string `json:"email"`
@@ -62,6 +62,7 @@ func HttpSignup(c *fiber.Ctx) error {
 		CreateRecordInDb(mentor)
 	} else if body.RoleName == "student" {
 		student := new(models.Student)
+		student.UserId = user.ID
 		CreateRecordInDb(student)
 	}
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
@@ -72,7 +73,7 @@ func HttpSignup(c *fiber.Ctx) error {
 		Email:          user.Email,
 		Username:       user.Username,
 		Role:           user.UserRole.RoleName,
-		ProfilePicture: user.Image_url,
+		ProfilePicture: user.ProfilePicture,
 		FirstName:      user.FirstName,
 		LastName:       user.Lastname,
 	}
@@ -106,7 +107,7 @@ func HttpLogin(c *fiber.Ctx) error {
 		Email:          user.Email,
 		Username:       user.Username,
 		Role:           user.UserRole.RoleName,
-		ProfilePicture: user.Image_url,
+		ProfilePicture: user.ProfilePicture,
 		FirstName:      user.FirstName,
 		LastName:       user.Lastname,
 	}
@@ -122,7 +123,7 @@ func HttpRefresh(c *fiber.Ctx) error {
 		Email:          user.Email,
 		Username:       user.Username,
 		Role:           user.UserRole.RoleName,
-		ProfilePicture: user.Image_url,
+		ProfilePicture: user.ProfilePicture,
 		FirstName:      user.FirstName,
 		LastName:       user.Lastname,
 	}

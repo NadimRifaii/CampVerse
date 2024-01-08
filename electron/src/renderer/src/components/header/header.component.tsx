@@ -1,11 +1,21 @@
 import './header.styles.css'
 import BellIcon from '../../assets/bell-icon.component.jsx'
-import useLogic from './logic.hook'
 import ArrowUp from '../../assets/arrow-up.component.jsx'
 import ArrowDown from '../../assets/arrow-down.component.jsx'
 import Dropdown from '../dropdown/dropdown.component'
+import { useContext, useEffect } from 'react'
+import { ActiveEditContext } from '@renderer/utils/contexts/active-edit-profile.context'
+import useLogic from './logic.hook'
 const Header = () => {
   const { user, dropdownActive, setDropdownActive } = useLogic()
+  const activeEditContext = useContext(ActiveEditContext)
+
+  const { active, setActive } = activeEditContext || {};
+
+  useEffect(() => {
+    if (active)
+      setDropdownActive(false)
+  }, [active])
   return (
     <div className="header">
       <h1>Dashboard</h1>

@@ -15,8 +15,10 @@ const useLogic = () => {
     firstname: user.firstname,
     lastname: user.lastname,
     ...(user.role === 'mentor' ? { speciality: user.speciality } : {}),
+    ...(user.role === 'mentor' ? { position: user.position } : {})
   }
   const [credentials, setCredentials] = useState(defaultCredentials)
+
   useEffect(() => {
     setPreviewImage(`http://localhost:8000/images/${user.profilePicture}`);
   }, [user]);
@@ -52,7 +54,6 @@ const useLogic = () => {
       if (selectedFile) {
         formData.append("file", selectedFile);
         const response = await userDataSource.uploadImage(formData);
-        console.log(response);
       } else {
         throw new Error("No file selected")
       }
@@ -63,6 +64,7 @@ const useLogic = () => {
   const updateProfile = async () => {
     try {
       const response = await userDataSource.updateProfile(credentials)
+      dispatch(updateUser(credentials))
     } catch (error) {
       console.log(error)
     }
@@ -108,8 +110,15 @@ const useLogic = () => {
       value: credentials.speciality || ''
       ,
       onChange: changeHandler
+    }, {
+      label: "Position",
+      name: "position",
+      type: "text",
+      value: credentials.position || ''
+      ,
+      onChange: changeHandler
     }])
   }
-  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, uploadImage }
+  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, updateProfile }
 }
 export default useLogic

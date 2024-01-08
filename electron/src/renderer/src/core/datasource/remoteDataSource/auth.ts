@@ -1,4 +1,5 @@
-import { sendRequest } from "../../helpers/request";
+import { sendRequest } from "@renderer/core/helpers/request"
+
 export const authDataSource = {
   login: async (data: {}) => {
     try {

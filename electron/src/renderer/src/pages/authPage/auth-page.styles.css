@@ -27,7 +27,7 @@ form div.input-label.last {
   width: 400px;
 }
 
-form {
+.auth-page form {
   background: #fff;
   display: flex;
   align-items: center;
