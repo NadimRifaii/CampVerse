@@ -42,3 +42,10 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 func (user *User) UpdateUser(db *gorm.DB) error {
 	return db.Save(user).Error
 }
+func GetAllUsers(db *gorm.DB) ([]User, error) {
+	var users []User
+	if err := db.Preload("UserRole").Find(&users).Error; err != nil {
+		return nil, err
+	}
+	return users, nil
+}
