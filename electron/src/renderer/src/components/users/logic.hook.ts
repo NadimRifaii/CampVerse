@@ -4,7 +4,6 @@ import { extractUsersSlice, setUsers } from "@renderer/core/datasource/localData
 const useLogic = () => {
   const { users } = useSelector(extractUsersSlice)
   const dispatch = useDispatch()
-  console.log(users)
   const fetchUsers = async (userType: "user" | "student" | "mentor") => {
     try {
       const response = await userDataSource.getAllUsers({}, userType)

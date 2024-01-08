@@ -5,7 +5,7 @@
   transform: translate(-50%, -50%);
   background-color: var(--main-black-color);
   width: 600px;
-  height: 400px;
+  min-height: 300px;
   padding: 20px;
 }
 
