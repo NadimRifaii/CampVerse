@@ -2,11 +2,12 @@ import { useEffect } from 'react'
 import useLogic from './logic.hook'
 import './users.styles.css'
 type UsersProps = {
-  userType?: "" | "student" | "mentor"
+  userType?: "user" | "student" | "mentor"
 }
-const Users = ({ userType = "" }: UsersProps) => {
+const Users = ({ userType = "user" }: UsersProps) => {
   const { fetchUsers } = useLogic()
   useEffect(() => {
+    userType = "mentor"
     fetchUsers(userType)
   }, [])
   return (

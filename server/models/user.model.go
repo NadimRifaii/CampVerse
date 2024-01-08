@@ -57,3 +57,10 @@ func (user *User) GetAllMentorUsers(db *gorm.DB) ([]User, error) {
 	}
 	return mentors, nil
 }
+func (user *User) GetAllStudentUsers(db *gorm.DB) ([]User, error) {
+	var mentors []User
+	if err := db.Preload("UserRole").Where("role_id = ?", 2).Find(&mentors).Error; err != nil {
+		return nil, err
+	}
+	return mentors, nil
+}

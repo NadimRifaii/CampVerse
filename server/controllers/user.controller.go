@@ -115,3 +115,15 @@ func HttpGetAllMentorUsers(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"mentors": mentors})
 }
+func HttpGetAllStudentUsers(c *fiber.Ctx) error {
+	user := new(models.User)
+	db := database.Db
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	students, err := user.GetAllMentorUsers(db)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"err": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"mentors": students})
+}

@@ -36,11 +36,11 @@ export const userDataSource = {
       throw new Error(error)
     }
   },
-  getAllUsers: async (data: {}) => {
+  getAllUsers: async (data: {}, userType: string) => {
     try {
       const response = await sendRequest({
         body: data,
-        route: "/user/all-users",
+        route: `/user/all-${userType}s`,
         method: "GET"
       })
       return response
