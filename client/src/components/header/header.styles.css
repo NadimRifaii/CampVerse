@@ -25,7 +25,6 @@
 .profile {
   width: 200px;
   height: 50px;
-  background-color: var(--main-white-color);
   border-radius: 30px;
   padding: 5px;
   display: flex;

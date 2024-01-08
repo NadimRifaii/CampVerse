@@ -1,8 +1,7 @@
 .dashboard {
   height: 100vh;
   display: flex;
-  background-color: black;
-  color: white;
+  color: var(--main-black-color);
 }
 
 .content {
@@ -10,4 +9,5 @@
   padding: 40px;
   overflow-y: auto;
   position: relative;
+  background-color: var(--main-white-color)
 }

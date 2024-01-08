@@ -60,14 +60,16 @@
 .edit-container .buttons-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
   margin-top: 10px;
+  width: 250px;
+  margin: auto;
 }
 
 .edit-container .buttons-container button {
   border-radius: 5px;
-  width: 100px;
+  width: 47%
 }
 
 .edit-container .buttons-container .cancle-btn {

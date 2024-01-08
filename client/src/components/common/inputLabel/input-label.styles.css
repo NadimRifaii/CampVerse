@@ -25,19 +25,20 @@
 .input-label label {
   color: var(--main-grey-color);
   position: absolute;
-  top: 9px;
+  top: 14px;
   left: 10px;
   text-transform: capitalize;
   transition: .5s;
   pointer-events: none;
+  font-size: 10px;
 }
 
 .input-label label.active {
-  font-size: 11px;
+  font-size: 8px;
   top: -15px;
 }
 
 .input-label input:focus+label {
-  font-size: 11px;
+  font-size: 8px;
   top: -15px;
 }

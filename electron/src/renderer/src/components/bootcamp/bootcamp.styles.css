@@ -1,6 +1,6 @@
 .bootcamp {
   border-radius: 10px;
-  background-color: var(--main-white-color);
+  background-color: #fff;
   overflow: hidden;
   max-width: 250px;
   cursor: pointer;
