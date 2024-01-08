@@ -37,6 +37,7 @@ export const userDataSource = {
     }
   },
   getAllUsers: async (data: {}, userType: string) => {
+    console.log(userType)
     try {
       const response = await sendRequest({
         body: data,

@@ -5,8 +5,20 @@
   transform: translate(-50%, -50%);
   background-color: var(--main-black-color);
   width: 600px;
-  min-height: 300px;
   padding: 20px;
+  border-radius: 5px;
+}
+
+.users-container .holder {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.users-container h1 {
+  color: white;
+  text-align: center;
 }
 
 .users-container .search-bar {

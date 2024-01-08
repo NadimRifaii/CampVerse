@@ -113,7 +113,7 @@ func HttpGetAllMentorUsers(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"err": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"mentors": mentors})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": mentors})
 }
 func HttpGetAllStudentUsers(c *fiber.Ctx) error {
 	user := new(models.User)
@@ -125,5 +125,5 @@ func HttpGetAllStudentUsers(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"err": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"students": students})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": students})
 }
