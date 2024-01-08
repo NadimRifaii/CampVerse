@@ -1,0 +1,60 @@
+.create-bootcamp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: var(--main-black-color);
+  width: 420px;
+  border-radius: 5px;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+}
+
+.create-bootcamp .holder {
+  margin-bottom: 10px;
+}
+
+.create-bootcamp :where(input, textarea) {
+  display: block;
+  padding: 8px 15px;
+  border: 1px solid var(--main-white-color);
+  border-radius: 5px;
+  width: 100%;
+  outline: none;
+  caret-color: var(--main-grey-color);
+  font-size: 18px;
+}
+
+.create-bootcamp :where(input, textarea)::placeholder {
+  transition: .5s;
+}
+
+.create-bootcamp :where(input, textarea):focus::placeholder {
+  opacity: 0;
+}
+
+.create-bootcamp textarea {
+  resize: none;
+  height: 100px;
+}
+
+.create-bootcamp .buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.create-bootcamp .buttons-container button {
+  border-radius: 5px;
+  width: 100px;
+}
+
+.create-bootcamp .buttons-container .cancle-btn {
+  background-color: var(--main-white-color);
+  color: var(--main-blue-color);
+}
+
+.create-bootcamp .buttons-container .save-btn {
+  color: var(--main-white-color);
+}
