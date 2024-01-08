@@ -35,5 +35,17 @@ export const userDataSource = {
     } catch (error: any) {
       throw new Error(error)
     }
+  },
+  getAllUsers: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/user/all-useres",
+        method: "GET"
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error)
+    }
   }
 }
