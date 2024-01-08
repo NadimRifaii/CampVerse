@@ -6,14 +6,14 @@ type UsersProps = {
   userType?: "user" | "student" | "mentor"
 }
 const Users = ({ userType = "user" }: UsersProps) => {
-  const { fetchUsers, users } = useLogic()
+  const { fetchUsers, filteredArray: users, searchUsers } = useLogic()
   useEffect(() => {
     fetchUsers(userType)
   }, [])
   return (
     <div className="users-container">
       <div className="search-bar">
-        <input type="search" placeholder="Search..." />
+        <input type="search" placeholder="Search..." onChange={(e) => searchUsers(e.target.value)} />
         <img src={`http://localhost:8000/images/search.png`} alt="" />
       </div>
       {
