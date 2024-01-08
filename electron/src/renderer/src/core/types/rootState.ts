@@ -3,5 +3,6 @@ import { User } from "./user"
 
 export type RootState = {
   user: User,
-  bootcamps: Bootcamp[]
+  bootcamps: Bootcamp[],
+  users:User[]
 }

@@ -7,7 +7,6 @@ type UsersProps = {
 const Users = ({ userType = "user" }: UsersProps) => {
   const { fetchUsers } = useLogic()
   useEffect(() => {
-    userType = "mentor"
     fetchUsers(userType)
   }, [])
   return (

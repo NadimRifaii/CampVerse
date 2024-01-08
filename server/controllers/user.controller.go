@@ -121,9 +121,9 @@ func HttpGetAllStudentUsers(c *fiber.Ctx) error {
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-	students, err := user.GetAllMentorUsers(db)
+	students, err := user.GetAllStudentUsers(db)
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"err": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"mentors": students})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"students": students})
 }

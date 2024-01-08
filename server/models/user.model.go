@@ -42,9 +42,10 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 func (user *User) UpdateUser(db *gorm.DB) error {
 	return db.Save(user).Error
 }
+
 func (user *User) GetAllUsers(db *gorm.DB) ([]User, error) {
 	var users []User
-	if err := db.Preload("UserRole").Find(&users).Error; err != nil {
+	if err := db.Preload("UserRole").Select("id, username, first_name, lastname,role_id, email, profile_picture").Find(&users).Error; err != nil {
 		return nil, err
 	}
 	return users, nil
@@ -52,14 +53,14 @@ func (user *User) GetAllUsers(db *gorm.DB) ([]User, error) {
 
 func (user *User) GetAllMentorUsers(db *gorm.DB) ([]User, error) {
 	var mentors []User
-	if err := db.Preload("UserRole").Where("role_id = ?", 3).Find(&mentors).Error; err != nil {
+	if err := db.Preload("UserRole").Select("id, username, first_name, lastname, email,role_id, profile_picture").Where("role_id = ?", 3).Find(&mentors).Error; err != nil {
 		return nil, err
 	}
 	return mentors, nil
 }
 func (user *User) GetAllStudentUsers(db *gorm.DB) ([]User, error) {
 	var mentors []User
-	if err := db.Preload("UserRole").Where("role_id = ?", 2).Find(&mentors).Error; err != nil {
+	if err := db.Preload("UserRole").Select("id, username, first_name, lastname, email,role_id, profile_picture").Where("role_id = ?", 2).Find(&mentors).Error; err != nil {
 		return nil, err
 	}
 	return mentors, nil
