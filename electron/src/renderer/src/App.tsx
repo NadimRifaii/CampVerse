@@ -4,6 +4,7 @@ import DashBoard from './pages/dashboard/dashboard.component'
 import { Toaster } from 'react-hot-toast'
 import './styles/colors.css'
 import './styles/index.css'
+import Bootcamps from './components/bootcamps/bootcamps.component'
 function App(): JSX.Element {
 
   return (
@@ -12,7 +13,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path="/" element={<AuthPage />} />
         <Route path='/dashboard' element={<DashBoard />}>
-          <Route index element={<h1>Bootcamps</h1>} />
+          <Route index element={<Bootcamps />} />
           <Route path="/dashboard/bootcamps" element={<h1>Bootcamps</h1>} />
           <Route path='/dashboard/Create' element={<h1>Create a bootcamp</h1>} />
           <Route path='/dashboard/Users' element={<h1>Users</h1>} />

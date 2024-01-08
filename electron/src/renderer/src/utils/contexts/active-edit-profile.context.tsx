@@ -10,7 +10,6 @@ export const ActiveEditContext = createContext<null | ActiveEditContextType>({} 
 
 export const ActiveEditContextProvider = ({ children }: ActiveEditContextProviderProps) => {
   const [active, setActive] = useState<boolean>(false)
-  console.log(`Hello world`)
   return (
     <ActiveEditContext.Provider value={{ active, setActive }}>{children}</ActiveEditContext.Provider>
   )
