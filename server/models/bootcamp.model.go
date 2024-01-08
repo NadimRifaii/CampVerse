@@ -12,20 +12,20 @@ type Bootcamp struct {
 	Name             string   `json:"name" gorm:"not null;default:'first';size:255;unique"`
 	LearningOutcomes string   `json:"outcomes" gorm:"not null;"`
 	TargetAudiance   string   `json:"audience" gorm:"not null;;size:255"`
-	User             []*User  `gorm:"many2many:bootcamp_users;"`
-	Stack            []*Stack `gorm:"many2many:bootcamp_stack"`
+	Users            []*User  `gorm:"many2many:bootcamp_users;"`
+	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
 }
 
 func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id uint) error {
 	fmt.Println(id)
-	if db.Find(bootcamp, id); bootcamp.ID == 0 {
+	if err := db.Preload("Stacks").Preload("Users").Find(bootcamp, id).Error; err != nil {
 		return errors.New("Bootcamp was not found")
 	}
 	return nil
 }
 func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	var bootcamps []Bootcamp
-	if err := db.Preload("Stack").Preload("User").Find(&bootcamps).Error; err != nil {
+	if err := db.Preload("Stacks").Preload("Users").Find(&bootcamps).Error; err != nil {
 		return nil, err
 	}
 	return bootcamps, nil
@@ -55,10 +55,10 @@ func (bootcamp *Bootcamp) GetStacksInBootcamp(db *gorm.DB) ([]Stack, error) {
 
 func (bootcamp *Bootcamp) AddUserToBootcamp(db *gorm.DB, user *User) error {
 	var existingUser User
-	if db.Model(bootcamp).Association("User").Find(&existingUser, "id = ?", user.ID); existingUser.ID != 0 {
+	if db.Model(bootcamp).Association("Users").Find(&existingUser, "id = ?", user.ID); existingUser.ID != 0 {
 		return errors.New("User already exist in this bootcamp")
 	}
-	bootcamp.User = append(bootcamp.User, user)
+	bootcamp.Users = append(bootcamp.Users, user)
 	if err := db.Save(bootcamp).Error; err != nil {
 		return err
 	}
@@ -68,10 +68,10 @@ func (bootcamp *Bootcamp) AddUserToBootcamp(db *gorm.DB, user *User) error {
 
 func (bootcamp *Bootcamp) AddStackToBootcamp(db *gorm.DB, stack *Stack) error {
 	var existingStack Stack
-	if db.Model(bootcamp).Association("Stack").Find(&existingStack, "id = ?", stack.ID); existingStack.ID != 0 {
+	if db.Model(bootcamp).Association("Stacks").Find(&existingStack, "id = ?", stack.ID); existingStack.ID != 0 {
 		return errors.New("Stack already exist in this bootcacmp")
 	}
-	bootcamp.Stack = append(bootcamp.Stack, stack)
+	bootcamp.Stacks = append(bootcamp.Stacks, stack)
 	if err := db.Save(bootcamp).Error; err != nil {
 		return err
 	}

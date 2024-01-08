@@ -50,7 +50,7 @@ func HttpGetUserBootcamps(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"user": user, "bootcamps": bootcamps})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamps": bootcamps})
 }
 func getUserAndBootcamp(c *fiber.Ctx, db *gorm.DB, userEmail, bootcampName string) (*models.User, *models.Bootcamp, error) {
 	admin := new(models.User)
@@ -151,11 +151,11 @@ func HttpGetBootcampUsers(c *fiber.Ctx) error {
 	}
 	bootcamp := new(models.Bootcamp)
 	bootcamp.GetBootcampByID(db, id)
-	users, err := bootcamp.GetUsersInBootcamp(db)
-	if err != nil {
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
-	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp, "users": users})
+	// users, err := bootcamp.GetUsersInBootcamp(db)
+	// if err != nil {
+	// 	return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	// }
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp})
 }
 
 func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {

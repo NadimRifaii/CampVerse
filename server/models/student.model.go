@@ -8,9 +8,9 @@ import (
 
 type Student struct {
 	gorm.Model
-	UserId            uint
-	User              User
-	StudentSubmission []*StudentSubmission
+	UserId             uint
+	User               User
+	StudentSubmissions []*StudentSubmission
 }
 
 func (student *Student) GetStudentByID(db *gorm.DB, id uint) error {
