@@ -25,7 +25,7 @@ func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id uint) error {
 }
 func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	var bootcamps []Bootcamp
-	if err := db.Find(&bootcamps).Error; err != nil {
+	if err := db.Preload("Stack").Preload("User").Find(&bootcamps).Error; err != nil {
 		return nil, err
 	}
 	return bootcamps, nil

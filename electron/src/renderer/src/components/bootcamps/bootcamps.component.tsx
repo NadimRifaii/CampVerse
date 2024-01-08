@@ -1,6 +1,8 @@
 const Bootcamps = () => {
   return (
-    <h1>Here is all the bootcamps</h1>
+    <div className="bootcamps-container">
+      <h1>Here is all the bootcamps</h1>
+    </div>
   )
 }
 export default Bootcamps
