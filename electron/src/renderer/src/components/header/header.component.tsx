@@ -10,7 +10,7 @@ const Header = () => {
   const { user, dropdownActive, setDropdownActive } = useLogic()
   const activeEditContext = useContext(ActiveEditContext)
 
-  const { active, setActive } = activeEditContext || {};
+  const { active } = activeEditContext || {};
 
   useEffect(() => {
     if (active)

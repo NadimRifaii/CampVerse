@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import { extractUserSlice } from '../../core/datasource/localDataSource/user/userSlice'
 const useLogic = () => {
   const user = useSelector(extractUserSlice)

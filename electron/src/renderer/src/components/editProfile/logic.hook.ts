@@ -53,7 +53,7 @@ const useLogic = () => {
       const formData = new FormData();
       if (selectedFile) {
         formData.append("file", selectedFile);
-        const response = await userDataSource.uploadImage(formData);
+        await userDataSource.uploadImage(formData);
       } else {
         throw new Error("No file selected")
       }
@@ -63,7 +63,7 @@ const useLogic = () => {
   };
   const updateProfile = async () => {
     try {
-      const response = await userDataSource.updateProfile(credentials)
+      await userDataSource.updateProfile(credentials)
       dispatch(updateUser(credentials))
     } catch (error) {
       console.log(error)
