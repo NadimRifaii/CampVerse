@@ -1,0 +1,16 @@
+.bootcamp {
+  border-radius: 10px;
+  background-color: var(--main-white-color);
+  overflow: hidden;
+  max-width: 250px;
+  cursor: pointer;
+}
+
+.image-holder img {
+  height: 120%;
+}
+
+.bootcamp .name {
+  padding: 10px;
+  color: var(--main-black-color)
+}
