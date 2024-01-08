@@ -2,12 +2,13 @@ import { Button } from "../common/button/button.component";
 import './create-bootcamp.styles.css'
 import useLogic from "./logic.hook";
 const CreateBootcamp = () => {
-  const { changeHandler, credentials, resetFields } = useLogic()
+  const { changeHandler, credentials, resetFields, createBootcamp } = useLogic()
   console.log(credentials)
   return (
     <div className="create-bootcamp" >
       <form onSubmit={(e) => {
         e.preventDefault()
+        createBootcamp()
       }} >
         <div className="inputs-container">
           <div className="holder">
