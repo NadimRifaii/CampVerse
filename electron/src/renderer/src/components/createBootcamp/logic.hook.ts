@@ -1,6 +1,6 @@
 import { bootcampsDataSource } from "@renderer/core/datasource/remoteDataSource/bootcamps"
 import { useState } from "react"
-
+import toast from "react-hot-toast";
 const defaultCredentials = {
   name: "",
   outcomes: "",
@@ -15,11 +15,13 @@ const useLogic = () => {
     setCredentials({ ...defaultCredentials })
   }
   const createBootcamp = async () => {
+    const loadingToastId = toast.loading('Loading...');
     try {
       const response = await bootcampsDataSource.createBootcamp(credentials)
-      console.log(response)
+      toast.success(response.message, { id: loadingToastId });
     } catch (error) {
-      console.log(error)
+      resetFields()
+      toast.error(`This bootcamp already exists`, { id: loadingToastId })
     }
   }
   return { changeHandler, credentials, resetFields, createBootcamp }

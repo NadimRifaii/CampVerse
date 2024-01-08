@@ -3,7 +3,6 @@ import './create-bootcamp.styles.css'
 import useLogic from "./logic.hook";
 const CreateBootcamp = () => {
   const { changeHandler, credentials, resetFields, createBootcamp } = useLogic()
-  console.log(credentials)
   return (
     <div className="create-bootcamp" >
       <form onSubmit={(e) => {
@@ -12,13 +11,13 @@ const CreateBootcamp = () => {
       }} >
         <div className="inputs-container">
           <div className="holder">
-            <input type="text" value={credentials.name} name="name" placeholder="Bootcamp name" onChange={changeHandler} />
+            <input type="text" required value={credentials.name} name="name" placeholder="Bootcamp name" onChange={changeHandler} />
           </div>
           <div className="holder">
-            <textarea name="outcomes" value={credentials.outcomes} placeholder="Learning outcomes" onChange={changeHandler}></textarea>
+            <textarea required name="outcomes" value={credentials.outcomes} placeholder="Learning outcomes" onChange={changeHandler}></textarea>
           </div>
           <div className="holder">
-            <textarea name="audience" value={credentials.audience} placeholder="Target audience" onChange={changeHandler}></textarea>
+            <textarea required name="audience" value={credentials.audience} placeholder="Target audience" onChange={changeHandler}></textarea>
           </div>
         </div>
         <div className="buttons-container">
