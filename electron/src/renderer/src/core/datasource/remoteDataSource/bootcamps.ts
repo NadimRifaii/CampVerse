@@ -13,4 +13,16 @@ export const bootcampsDataSource = {
       throw new Error(error)
     }
   },
+  createBootcamp: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/bootcamp",
+        method: "POST"
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
 }

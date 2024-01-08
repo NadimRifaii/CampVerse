@@ -16,6 +16,7 @@
 .create-bootcamp :where(input, textarea) {
   display: block;
   padding: 8px 15px;
+  font-family: sans-serif;
   border: 1px solid var(--main-white-color);
   border-radius: 5px;
   width: 100%;
@@ -40,14 +41,16 @@
 .create-bootcamp .buttons-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 20px;
   margin-top: 10px;
+  width: 380px;
+  margin: auto;
 }
 
 .create-bootcamp .buttons-container button {
   border-radius: 5px;
-  width: 100px;
+  width: 47%;
 }
 
 .create-bootcamp .buttons-container .cancle-btn {
