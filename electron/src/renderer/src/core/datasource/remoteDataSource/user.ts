@@ -40,7 +40,7 @@ export const userDataSource = {
     try {
       const response = await sendRequest({
         body: data,
-        route: "/user/all-useres",
+        route: "/user/all-users",
         method: "GET"
       })
       return response

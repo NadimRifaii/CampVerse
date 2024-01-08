@@ -1,5 +1,14 @@
+import { useEffect } from 'react'
+import useLogic from './logic.hook'
 import './users.styles.css'
-const Users = () => {
+type UsersProps = {
+  userType?: "" | "student" | "mentor"
+}
+const Users = ({ userType = "" }: UsersProps) => {
+  const { fetchUsers } = useLogic()
+  useEffect(() => {
+    fetchUsers(userType)
+  }, [])
   return (
     <div className="users-container">
       <div className="search-bar">
