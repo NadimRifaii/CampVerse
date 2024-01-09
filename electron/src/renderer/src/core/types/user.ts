@@ -3,7 +3,7 @@ export type User = {
   firstname?: string,
   lastname?: string,
   email: string,
-  role: "student" | "mentor",
+  role: "student" | "mentor" | "user",
   profilePicture: string,
   speciality?: string,
   position?: string

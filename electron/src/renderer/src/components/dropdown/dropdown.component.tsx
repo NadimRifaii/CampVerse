@@ -3,6 +3,7 @@ import './dropdown.styles.css'
 import { useContext } from 'react'
 import { ActiveEditContext } from '@renderer/utils/contexts/active-edit-profile.context'
 import { local } from '@renderer/core/helpers/localStorage'
+import { Button } from '../common/button/button.component'
 const Dropdown = () => {
   const activeEditContext = useContext(ActiveEditContext)
   const { active, setActive } = activeEditContext || {};
@@ -10,10 +11,10 @@ const Dropdown = () => {
     <div className="dropdown">
       <ul>
         <li>
-          <Link to={'/dashboard'} onClick={() => {
+          <Button text="Edit profile" handleClick={() => {
             if (setActive)
               setActive(!active)
-          }}>Edit profile</Link>
+          }} />
         </li>
         <li>
           <Link to='/' onClick={() => local('token', "xxxx")}>Logout</Link>

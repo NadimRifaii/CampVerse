@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '@renderer/core/types/rootState'
-
 const initialState = {
   users: []
 };

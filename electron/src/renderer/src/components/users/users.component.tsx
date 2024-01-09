@@ -14,7 +14,7 @@ const Users = ({ userType = "user" }: UsersProps) => {
     <div className="users-container">
       <div className="search-bar-container">
         <div className="search-bar">
-          <input type="search" placeholder="Search by username..." onChange={(e) => searchUsers(e.target.value)} />
+          <input type="search" placeholder="Search..." onChange={(e) => searchUsers(e.target.value)} />
           <img src={`http://localhost:8000/images/search.png`} alt="" />
         </div>
       </div>

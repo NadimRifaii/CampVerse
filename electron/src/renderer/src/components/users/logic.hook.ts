@@ -19,9 +19,11 @@ const useLogic = () => {
     }
   }
   const searchUsers = (query: string) => {
-    const filteredUsers = users.filter(user =>
-      user.firstname.toLowerCase().includes(query.toLowerCase())
-    );
+    const filteredUsers = users.filter(user => {
+      const fullName = user.firstname + ' ' + user.lastname;
+      const regex = new RegExp(query, 'i');
+      return regex.test(fullName);
+    });
     setFilteredArray(filteredUsers)
   };
   return { fetchUsers, filteredArray, searchUsers }

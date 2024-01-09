@@ -5,7 +5,8 @@
   transform: translate(-50%, -50%);
   background-color: var(--main-black-color);
   width: 600px;
-  max-height: 250px;
+  height: 386px;
+
   overflow-y: auto;
   border-radius: 5px;
 }
