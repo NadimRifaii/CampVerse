@@ -8,6 +8,7 @@ type UsersProps = {
 const Users = ({ userType = "user" }: UsersProps) => {
   const { fetchUsers, filteredArray: users, searchUsers } = useLogic()
   useEffect(() => {
+    console.log("Fetching users")
     fetchUsers(userType)
   }, [])
   return (
@@ -21,15 +22,13 @@ const Users = ({ userType = "user" }: UsersProps) => {
       <div className="holder">
         {
           users?.length > 0 ? users?.map(user => {
-            const { firstname, lastname, profilePicture, UserRole: { role } } = user
-            if (role != 'admin')
-              return <UserRow key={user.ID} info={{ firstname, lastname, profilePicture, role }} />
+            if (user.role != 'admin')
+              return <UserRow key={user.id} info={user} />
             return null
           })
             : <h1>No such user</h1>
         }
       </div>
-
     </div>
   )
 }

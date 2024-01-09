@@ -52,14 +52,14 @@ func (mentor *Mentor) UpdateMentor(db *gorm.DB) error {
 
 type Response struct {
 	ID             uint   `json:"id"`
-	Username       string `json:"username"`
+	UserName       string `json:"username"`
 	FirstName      string `json:"firstname"`
 	LastName       string `json:"lastname"`
 	Email          string `json:"email"`
 	Role           string `json:"role"`
 	Speciality     string `json:"speciality" default:""`
 	Position       string `json:"position" default:""`
-	ProfilePicture string `json:"profile_picture"`
+	ProfilePicture string `json:"profilePicture"`
 }
 
 func (user *User) GetAllMentorUsers(db *gorm.DB) ([]Response, error) {
@@ -69,9 +69,10 @@ func (user *User) GetAllMentorUsers(db *gorm.DB) ([]Response, error) {
 	}
 	var cleanedMentors []Response
 	for _, mentor := range mentors {
+
 		cleanedMentor := Response{
 			ID:             mentor.ID,
-			Username:       mentor.User.UserName,
+			UserName:       mentor.User.UserName,
 			FirstName:      mentor.User.FirstName,
 			LastName:       mentor.User.LastName,
 			Email:          mentor.User.Email,

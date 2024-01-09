@@ -1,10 +1,11 @@
 import { Button } from '../common/button/button.component'
 import { useContext } from 'react'
 import { ActiveEditContext } from '@renderer/utils/contexts/active-edit-profile.context'
+import { CurrentUserContext } from '@renderer/utils/contexts/current-user.context'
 import './user-row.styles.css'
-import EditProfile from '../editProfile/edit.component'
 type UserRowProps = {
   info: {
+    id?: number,
     firstname: string,
     lastname: string,
     username: string,
@@ -15,7 +16,9 @@ type UserRowProps = {
 }
 const UserRow = ({ info }: UserRowProps) => {
   const activeEditContext = useContext(ActiveEditContext)
+  const currentUserContext = useContext(CurrentUserContext)
   const { active, setActive } = activeEditContext || {};
+  const { setCurrentUser } = currentUserContext || {}
   return (
     <div className="user-row">
       <div className="left">
@@ -34,15 +37,12 @@ const UserRow = ({ info }: UserRowProps) => {
       <div className="buttons-container">
         <Button text='Edit' handleClick={() => {
           if (setActive) {
+            setCurrentUser(info)
             setActive(!active)
-            console.log(info)
           }
         }} />
         <Button text='Chat' />
       </div>
-      {/* {
-        active ? <EditProfile user={info} /> : ""
-      } */}
     </div>
   )
 }

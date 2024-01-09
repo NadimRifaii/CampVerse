@@ -26,7 +26,7 @@ func (user *User) GetUserById(id string, db *gorm.DB) error {
 	return nil
 }
 func (user *User) GetUserByEmail(email string, db *gorm.DB) error {
-	if db.Find(user, "email = ?", email); user.ID == 0 {
+	if db.Preload("UserRole").Find(user, "email = ?", email); user.ID == 0 {
 		return errors.New("User not found")
 	}
 	return nil
@@ -43,10 +43,25 @@ func (user *User) UpdateUser(db *gorm.DB) error {
 	return db.Save(user).Error
 }
 
-func (user *User) GetAllUsers(db *gorm.DB) ([]User, error) {
+func (user *User) GetAllUsers(db *gorm.DB) ([]Response, error) {
 	var users []User
-	if err := db.Preload("UserRole").Select("id, username, first_name, lastname,role_id, email, profile_picture").Find(&users).Error; err != nil {
+	if err := db.Preload("UserRole").Find(&users).Error; err != nil {
 		return nil, err
 	}
-	return users, nil
+	var cleanedUsers []Response
+	for _, user := range users {
+		cleanedUser := Response{
+			ID:             user.ID,
+			UserName:       user.UserName,
+			FirstName:      user.FirstName,
+			LastName:       user.LastName,
+			Email:          user.Email,
+			Role:           user.UserRole.RoleName,
+			ProfilePicture: user.ProfilePicture,
+		}
+		cleanedUser.Speciality = ""
+		cleanedUser.Position = ""
+		cleanedUsers = append(cleanedUsers, cleanedUser)
+	}
+	return cleanedUsers, nil
 }

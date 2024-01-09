@@ -5,9 +5,9 @@ type InputProps = {
     name: string,
     value: string,
     id?: string,
-    label: string,
+    label?: string,
     className?: string,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   }
 }
 export const InputLabel = ({ info }: InputProps) => {

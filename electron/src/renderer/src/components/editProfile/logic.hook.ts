@@ -1,40 +1,37 @@
-import { extractUserSlice, updateUser } from "@renderer/core/datasource/localDataSource/user/userSlice";
+import { updateUser } from "@renderer/core/datasource/localDataSource/user/userSlice";
 import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user";
-import { useEffect, useState, useContext } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useContext } from "react";
 import { CurrentUserContext } from "@renderer/utils/contexts/current-user.context";
+
 const useLogic = () => {
-  const user = useSelector(extractUserSlice)
-  const currentUserContext = useContext(CurrentUserContext)
-  const { currentUser, setCurrentUser } = currentUserContext || {}
-  useEffect(() => {
-    if (currentUser.email == "" && setCurrentUser) {
-      setCurrentUser(user)
-    }
-  }, [user])
   const dispatch = useDispatch()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const currentUserContext = useContext(CurrentUserContext)
+  const { currentUser } = currentUserContext || {}
+
   let defaultCredentials = {
-    username: currentUser.username,
-    email: currentUser.email,
-    profilePicture: user.profilePicture,
-    firstname: currentUser.firstname,
-    lastname: currentUser.lastname,
-    ...(currentUser.role === 'mentor' ? { speciality: currentUser.speciality } : {}),
-    ...(currentUser.role === 'mentor' ? { position: currentUser.position } : {})
+    username: currentUser?.username,
+    email: currentUser?.email,
+    profilePicture: currentUser?.profilePicture,
+    firstname: currentUser?.firstname,
+    lastname: currentUser?.lastname,
+    ...(currentUser?.role === 'mentor' ? { speciality: currentUser?.speciality } : {}),
+    ...(currentUser?.role === 'mentor' ? { position: currentUser?.position } : {}),
   }
   const [credentials, setCredentials] = useState(defaultCredentials)
 
   useEffect(() => {
-    setPreviewImage(`http://localhost:8000/images/${user.profilePicture}`);
-  }, [user]);
+    setPreviewImage(`http://localhost:8000/images/${currentUser?.profilePicture}`);
+  }, [currentUser]);
   function resetCredentials() {
     setCredentials(defaultCredentials);
   }
   useEffect(() => {
     resetCredentials()
-  }, [user]);
+  }, [currentUser]);
   useEffect(() => {
     if (selectedFile) {
       setCredentials({ ...credentials, ['profilePicture']: selectedFile.name })
@@ -71,11 +68,16 @@ const useLogic = () => {
   const updateProfile = async () => {
     try {
       await userDataSource.updateProfile(credentials)
-      dispatch(updateUser(credentials))
+      if (currentUser?.role == "admin") {
+        dispatch(updateUser(credentials))
+      } else {
+        console.log("This user is not an admin")
+      }
     } catch (error) {
       console.log(error)
     }
   }
+
   const fields = [
     {//
       label: 'UserName',
@@ -109,7 +111,7 @@ const useLogic = () => {
       disabled: true
     }
   ]
-  if (user.role === 'mentor') {
+  if (currentUser?.role === 'mentor') {
     fields.push(...[{
       label: "Speciality",
       name: "speciality",

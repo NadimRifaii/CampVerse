@@ -61,31 +61,34 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	user.UserName = body.Username
-	user.FirstName = body.FirstName
-	user.LastName = body.Lastname
-	user.ProfilePicture = body.ProfilePicture
-	if err := user.UpdateUser(db); err != nil {
+	currentUser := new(models.User)
+	if err := currentUser.GetUserByEmail(body.Email, db); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	if user.UserRole.RoleName == "admin" {
+	currentUser.UserName = body.Username
+	currentUser.FirstName = body.FirstName
+	currentUser.LastName = body.Lastname
+	currentUser.ProfilePicture = body.ProfilePicture
+	if err := currentUser.UpdateUser(db); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	if currentUser.UserRole.RoleName == "admin" {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
 	} else if user.UserRole.RoleName == "mentor" {
 		mentor := new(models.Mentor)
-		if err := mentor.GetMentorByID(db, user.ID); err != nil {
+		if err := mentor.GetMentorByID(db, currentUser.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}
 		mentor.Speciality = body.Speciality
 		mentor.Position = body.Position
 		mentor.UserId = user.ID
-
 		if err := mentor.UpdateMentor(db); err != nil {
 			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 		}
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
 	} else {
 		student := new(models.Student)
-		if err := student.GetStudentByID(db, user.ID); err != nil {
+		if err := student.GetStudentByID(db, currentUser.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully"})

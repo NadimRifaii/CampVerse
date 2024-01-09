@@ -25,6 +25,7 @@ export const userDataSource = {
     }
   },
   updateProfile: async (data: {}) => {
+    console.log(data)
     try {
       const response = await sendRequest({
         body: data,
@@ -37,7 +38,6 @@ export const userDataSource = {
     }
   },
   getAllUsers: async (data: {}, userType: string) => {
-    console.log(userType)
     try {
       const response = await sendRequest({
         body: data,

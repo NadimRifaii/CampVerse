@@ -4,13 +4,13 @@ type CurrentUserContextProviderProps = {
   children: React.ReactNode
 }
 type CurrentUserContextType = {
-  currentUser: User,
-  setCurrentUser: React.Dispatch<React.SetStateAction<User>>
+  currentUser: User | null,
+  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
 }
 export const CurrentUserContext = createContext<CurrentUserContextType>({} as CurrentUserContextType)
 
 export const CurrentUserContextProvider = ({ children }: CurrentUserContextProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User>({
+  const [currentUser, setCurrentUser] = useState<User | null>({
     username: "",
     firstname: "",
     lastname: "",

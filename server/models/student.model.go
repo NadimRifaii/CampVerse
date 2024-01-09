@@ -35,7 +35,7 @@ func (user *User) GetAllStudentUsers(db *gorm.DB) ([]Response, error) {
 	for _, student := range students {
 		cleanedStudent := Response{
 			ID:             student.ID,
-			Username:       student.User.UserName,
+			UserName:       student.User.UserName,
 			FirstName:      student.User.FirstName,
 			LastName:       student.User.LastName,
 			Email:          student.User.Email,
