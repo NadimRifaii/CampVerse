@@ -61,9 +61,9 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	user.Username = body.Username
+	user.UserName = body.Username
 	user.FirstName = body.FirstName
-	user.Lastname = body.Lastname
+	user.LastName = body.Lastname
 	user.ProfilePicture = body.ProfilePicture
 	if err := user.UpdateUser(db); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})

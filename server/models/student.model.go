@@ -26,3 +26,25 @@ func (s *Student) GetStudentSubmissions(db *gorm.DB) ([]*StudentSubmission, erro
 	}
 	return submissions, nil
 }
+func (user *User) GetAllStudentUsers(db *gorm.DB) ([]Response, error) {
+	var students []Student
+	if err := db.Preload("User").Preload("User.UserRole").Find(&students).Error; err != nil {
+		return nil, err
+	}
+	var cleanedStudents []Response
+	for _, student := range students {
+		cleanedStudent := Response{
+			ID:             student.ID,
+			Username:       student.User.UserName,
+			FirstName:      student.User.FirstName,
+			LastName:       student.User.LastName,
+			Email:          student.User.Email,
+			Role:           student.User.UserRole.RoleName,
+			ProfilePicture: student.User.ProfilePicture,
+		}
+		cleanedStudent.Speciality = ""
+		cleanedStudent.Position = ""
+		cleanedStudents = append(cleanedStudents, cleanedStudent)
+	}
+	return cleanedStudents, nil
+}

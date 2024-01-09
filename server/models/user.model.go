@@ -8,9 +8,9 @@ import (
 
 type User struct {
 	gorm.Model
-	Username       string `json:"username" gorm:"not null;default:'username';size:255"`
-	FirstName      string `json:"firstname" gorm:"not null;default:'first';size:255"`
-	Lastname       string `json:"lastname" gorm:"not null;default:'last';size:255"`
+	UserName       string `json:"username" gorm:"not null;default:'username';size:255;"`
+	FirstName      string `json:"firstname" gorm:"not null;default:'first';size:255;"`
+	LastName       string `json:"lastname" gorm:"not null;default:'last';size:255;"`
 	Email          string `json:"email" gorm:"not null;size:255;unique"`
 	Password       string `json:"password" gorm:"not null;size:255"`
 	ProfilePicture string `json:"profilePicture" gorm:"default:'default_profile_picture.jpg'"`
@@ -49,19 +49,4 @@ func (user *User) GetAllUsers(db *gorm.DB) ([]User, error) {
 		return nil, err
 	}
 	return users, nil
-}
-
-func (user *User) GetAllMentorUsers(db *gorm.DB) ([]User, error) {
-	var mentors []User
-	if err := db.Preload("UserRole").Select("id, username, first_name, lastname, email,role_id, profile_picture").Where("role_id = ?", 3).Find(&mentors).Error; err != nil {
-		return nil, err
-	}
-	return mentors, nil
-}
-func (user *User) GetAllStudentUsers(db *gorm.DB) ([]User, error) {
-	var mentors []User
-	if err := db.Preload("UserRole").Select("id, username, first_name, lastname, email,role_id, profile_picture").Where("role_id = ?", 2).Find(&mentors).Error; err != nil {
-		return nil, err
-	}
-	return mentors, nil
 }

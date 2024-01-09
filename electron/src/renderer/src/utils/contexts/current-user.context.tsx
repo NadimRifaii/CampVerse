@@ -4,14 +4,23 @@ type CurrentUserContextProviderProps = {
   children: React.ReactNode
 }
 type CurrentUserContextType = {
-  currentUser: User | null,
-  setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>
+  currentUser: User,
+  setCurrentUser: React.Dispatch<React.SetStateAction<User>>
 }
-export const ActiveEditContext = createContext<null | CurrentUserContextType>({} as CurrentUserContextType)
+export const CurrentUserContext = createContext<CurrentUserContextType>({} as CurrentUserContextType)
 
-export const ActiveEditContextProvider = ({ children }: CurrentUserContextProviderProps) => {
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
+export const CurrentUserContextProvider = ({ children }: CurrentUserContextProviderProps) => {
+  const [currentUser, setCurrentUser] = useState<User>({
+    username: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    role: "student",
+    profilePicture: "",
+    speciality: "",
+    position: ""
+  })
   return (
-    <ActiveEditContext.Provider value={{ currentUser, setCurrentUser }}>{children}</ActiveEditContext.Provider>
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>{children}</CurrentUserContext.Provider>
   )
 }

@@ -71,11 +71,11 @@ func HttpSignup(c *fiber.Ctx) error {
 	}
 	userInfoResponse := UserInfoResponse{
 		Email:          user.Email,
-		Username:       user.Username,
+		Username:       user.UserName,
 		Role:           user.UserRole.RoleName,
 		ProfilePicture: user.ProfilePicture,
 		FirstName:      user.FirstName,
-		LastName:       user.Lastname,
+		LastName:       user.LastName,
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
@@ -105,11 +105,11 @@ func HttpLogin(c *fiber.Ctx) error {
 	}
 	userInfoResponse := UserInfoResponse{
 		Email:          user.Email,
-		Username:       user.Username,
+		Username:       user.UserName,
 		Role:           user.UserRole.RoleName,
 		ProfilePicture: user.ProfilePicture,
 		FirstName:      user.FirstName,
-		LastName:       user.Lastname,
+		LastName:       user.LastName,
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
@@ -121,11 +121,11 @@ func HttpRefresh(c *fiber.Ctx) error {
 	}
 	userInfoResponse := UserInfoResponse{
 		Email:          user.Email,
-		Username:       user.Username,
+		Username:       user.UserName,
 		Role:           user.UserRole.RoleName,
 		ProfilePicture: user.ProfilePicture,
 		FirstName:      user.FirstName,
-		LastName:       user.Lastname,
+		LastName:       user.LastName,
 	}
 	tokenString := createJwtToken(user, user.UserRole.RoleName)
 	tokenEncoded, err := tokenString.SignedString([]byte(os.Getenv("secret")))
@@ -139,9 +139,9 @@ func populateUser(user *models.User, body *UserInfoRequest, id uint) {
 	user.Email = body.Email
 	user.Password = body.Password
 	user.RoleID = id
-	user.Username = body.Username
+	user.UserName = body.Username
 	user.FirstName = body.FirstName
-	user.Lastname = body.Lastname
+	user.LastName = body.Lastname
 }
 func populateMentor(mentor *models.Mentor, user *models.User, body *UserInfoRequest) {
 	mentor.Speciality = body.Speciality
@@ -174,7 +174,7 @@ func createJwtToken(user *models.User, roleName string) *jwt.Token {
 	return jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"exp":      time.Now().Add(time.Hour).Unix(),
 		"role":     roleName,
-		"username": user.Username,
+		"username": user.UserName,
 		"email":    user.Email,
 	})
 }

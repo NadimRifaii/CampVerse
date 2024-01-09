@@ -1,21 +1,28 @@
 import { extractUserSlice, updateUser } from "@renderer/core/datasource/localDataSource/user/userSlice";
 import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { CurrentUserContext } from "@renderer/utils/contexts/current-user.context";
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
+  const currentUserContext = useContext(CurrentUserContext)
+  const { currentUser, setCurrentUser } = currentUserContext || {}
+  useEffect(() => {
+    if (currentUser.email == "" && setCurrentUser) {
+      setCurrentUser(user)
+    }
+  }, [user])
   const dispatch = useDispatch()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   let defaultCredentials = {
-    username: user.username,
-    email: user.email,
+    username: currentUser.username,
+    email: currentUser.email,
     profilePicture: user.profilePicture,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    ...(user.role === 'mentor' ? { speciality: user.speciality } : {}),
-    ...(user.role === 'mentor' ? { position: user.position } : {})
+    firstname: currentUser.firstname,
+    lastname: currentUser.lastname,
+    ...(currentUser.role === 'mentor' ? { speciality: currentUser.speciality } : {}),
+    ...(currentUser.role === 'mentor' ? { position: currentUser.position } : {})
   }
   const [credentials, setCredentials] = useState(defaultCredentials)
 

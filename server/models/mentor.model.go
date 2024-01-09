@@ -49,3 +49,38 @@ func (mentor *Mentor) RemoveStackFromMentor(db *gorm.DB, stack *Stack) error {
 func (mentor *Mentor) UpdateMentor(db *gorm.DB) error {
 	return db.Save(mentor).Error
 }
+
+type Response struct {
+	ID             uint   `json:"id"`
+	Username       string `json:"username"`
+	FirstName      string `json:"firstname"`
+	LastName       string `json:"lastname"`
+	Email          string `json:"email"`
+	Role           string `json:"role"`
+	Speciality     string `json:"speciality" default:""`
+	Position       string `json:"position" default:""`
+	ProfilePicture string `json:"profile_picture"`
+}
+
+func (user *User) GetAllMentorUsers(db *gorm.DB) ([]Response, error) {
+	var mentors []Mentor
+	if err := db.Preload("User").Preload("User.UserRole").Find(&mentors).Error; err != nil {
+		return nil, err
+	}
+	var cleanedMentors []Response
+	for _, mentor := range mentors {
+		cleanedMentor := Response{
+			ID:             mentor.ID,
+			Username:       mentor.User.UserName,
+			FirstName:      mentor.User.FirstName,
+			LastName:       mentor.User.LastName,
+			Email:          mentor.User.Email,
+			Role:           mentor.User.UserRole.RoleName,
+			Speciality:     mentor.Speciality,
+			Position:       mentor.Position,
+			ProfilePicture: mentor.User.ProfilePicture,
+		}
+		cleanedMentors = append(cleanedMentors, cleanedMentor)
+	}
+	return cleanedMentors, nil
+}
