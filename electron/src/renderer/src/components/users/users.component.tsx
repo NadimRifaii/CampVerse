@@ -5,16 +5,18 @@ import UserRow from '../userRow/user-row.component'
 type UsersProps = {
   userType?: "user" | "student" | "mentor"
 }
-const Users = ({ userType = "mentor" }: UsersProps) => {
+const Users = ({ userType = "user" }: UsersProps) => {
   const { fetchUsers, filteredArray: users, searchUsers } = useLogic()
   useEffect(() => {
     fetchUsers(userType)
   }, [])
   return (
     <div className="users-container">
-      <div className="search-bar">
-        <input type="search" placeholder="Search by username..." onChange={(e) => searchUsers(e.target.value)} />
-        <img src={`http://localhost:8000/images/search.png`} alt="" />
+      <div className="search-bar-container">
+        <div className="search-bar">
+          <input type="search" placeholder="Search by username..." onChange={(e) => searchUsers(e.target.value)} />
+          <img src={`http://localhost:8000/images/search.png`} alt="" />
+        </div>
       </div>
       <div className="holder">
         {

@@ -5,20 +5,46 @@
   transform: translate(-50%, -50%);
   background-color: var(--main-black-color);
   width: 600px;
-  padding: 20px;
+  max-height: 250px;
+  overflow-y: auto;
   border-radius: 5px;
 }
+
+.users-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.users-container::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+
+.users-container::-webkit-scrollbar-track {
+  background-color: #ccc;
+}
+
 
 .users-container .holder {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  padding: 20px;
 }
 
 .users-container h1 {
   color: white;
   text-align: center;
+}
+
+.users-container .search-bar-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: var(--main-black-color);
+  margin-top: -3px;
+  padding: 20px;
 }
 
 .users-container .search-bar {
