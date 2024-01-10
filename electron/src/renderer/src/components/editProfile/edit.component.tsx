@@ -54,11 +54,17 @@ const EditProfile = () => {
           }
         </div>
         <div className="buttons-container">
-          <Button text="Cancle" className='cancle-btn' handleClick={() => {
+          {/* <Button text="Cancle" className='cancle-btn' handleClick={() => {
             resetCredentials()
             if (setActive)
               setActive(false)
-          }} />
+          }} /> */}
+          <button onClick={(e) => {
+            e.preventDefault()
+            resetCredentials()
+            if (setActive)
+              setActive(false)
+          }} >Cancle</button>
           <Button text="Save" className='save-btn' />
         </div>
       </form>

@@ -6,7 +6,7 @@ import (
 )
 
 type Stack struct {
-	gorm.Model
+	ID        uint        `gorm:"primarykey"`
 	Name      string      `json:"name" gorm:"not null;default:'x';size:255;unique"`
 	Bootcamps []*Bootcamp `gorm:"many2many:bootcamp_stack"`
 	Mentors   []*Mentor   `gorm:"many2many:teaches;"`

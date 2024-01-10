@@ -68,7 +68,7 @@ const useLogic = () => {
   };
   const updateProfile = async () => {
     try {
-      await userDataSource.updateProfile(credentials)
+      await userDataSource.updateProfile({ ...credentials, ['role']: role })
       if (currentUser?.role == "admin") {
         dispatch(updateUser(credentials))
       } else {

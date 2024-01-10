@@ -7,7 +7,7 @@ import (
 )
 
 type Schedule struct {
-	gorm.Model
+	ID   uint   `gorm:"primarykey"`
 	Week string `json:"week" gorm:"not null;size:255;unique"`
 	Days []*Day `gorm:"foreignKey:ScheduleId"`
 }

@@ -7,7 +7,7 @@ import (
 )
 
 type User struct {
-	gorm.Model
+	ID             uint   `gorm:"primarykey"`
 	UserName       string `json:"username" gorm:"not null;default:'username';size:255;"`
 	FirstName      string `json:"firstname" gorm:"not null;default:'first';size:255;"`
 	LastName       string `json:"lastname" gorm:"not null;default:'last';size:255;"`
@@ -39,10 +39,12 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 	return bootcamps, nil
 }
 
-func (user *User) UpdateUser(db *gorm.DB) error {
+func (user *User) UpdateUser(db *gorm.DB, newRole string) error {
+	if user.UserRole.RoleName != newRole {
+		user.UpdateUserRoleByEmail(db, user.Email, newRole)
+	}
 	return db.Save(user).Error
 }
-
 func (user *User) GetAllUsers(db *gorm.DB) ([]Response, error) {
 	var users []User
 	if err := db.Preload("UserRole").Find(&users).Error; err != nil {
@@ -72,24 +74,33 @@ func (user *User) GetAllUsers(db *gorm.DB) ([]Response, error) {
 	}
 	return cleanedUsers, nil
 }
-func UpdateUserRoleByEmail(db *gorm.DB, email string, newRoleName string) error {
-	user := new(User)
+func (user *User) UpdateUserRoleByEmail(db *gorm.DB, email string, newRoleName string) error {
 	if err := user.GetUserByEmail(email, db); err != nil {
 		return err
 	}
 	switch user.UserRole.RoleName {
 	case "student":
 		student := new(Student)
-		student.GetStudentByID(db, user.ID)
-		if err := db.Delete(student, user.ID).Error; err != nil {
+		if err := student.GetStudentByID(db, user.ID); err != nil {
 			return err
 		}
+		if err := student.DeleteStudent(db); err != nil {
+			return err
+		}
+		mentor := new(Mentor)
+		mentor.UserId = user.ID
+		db.Create(mentor)
 	case "mentor":
 		mentor := new(Mentor)
-		mentor.GetMentorByID(db, user.ID)
-		if err := db.Delete(mentor, user.ID).Error; err != nil {
+		if err := mentor.GetMentorByID(db, user.ID); err != nil {
 			return err
 		}
+		if err := mentor.DeleteMentor(db); err != nil {
+			return err
+		}
+		student := new(Student)
+		student.UserId = user.ID
+		db.Create(student)
 	}
 	newRole := new(UserRole)
 	if err := newRole.GetRoleByName(db, newRoleName); err != nil {
@@ -102,7 +113,21 @@ func UpdateUserRoleByEmail(db *gorm.DB, email string, newRoleName string) error 
 	}
 	return nil
 }
+
 func (u *User) DeleteUser(db *gorm.DB) error {
+	if u.UserRole.RoleName == "student" {
+		student := new(Student)
+		if err := student.GetStudentByID(db, u.ID); err != nil {
+			return err
+		}
+		student.DeleteStudent(db)
+	} else {
+		mentor := new(Mentor)
+		if err := mentor.GetMentorByID(db, u.ID); err != nil {
+			return err
+		}
+		mentor.DeleteMentor(db)
+	}
 	result := db.Delete(u)
 	if result.Error != nil {
 		return result.Error

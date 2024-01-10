@@ -7,7 +7,7 @@ import (
 )
 
 type UserRole struct {
-	gorm.Model
+	ID       uint   `gorm:"primarykey"`
 	RoleName string `json:"role" gorm:"not null;default:'user';size:255" `
 }
 

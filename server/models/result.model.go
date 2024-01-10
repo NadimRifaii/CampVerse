@@ -7,7 +7,7 @@ import (
 )
 
 type Result struct {
-	gorm.Model
+	ID         uint `gorm:"primarykey"`
 	StudentId  uint
 	BootcampId uint
 	Week       string `json:"week" gorm:"unique"`

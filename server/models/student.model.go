@@ -7,7 +7,7 @@ import (
 )
 
 type Student struct {
-	gorm.Model
+	ID                 uint `gorm:"primarykey"`
 	UserId             uint
 	User               User
 	StudentSubmissions []*StudentSubmission
