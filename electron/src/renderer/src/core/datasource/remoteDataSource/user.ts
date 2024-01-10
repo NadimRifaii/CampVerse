@@ -25,7 +25,6 @@ export const userDataSource = {
     }
   },
   updateProfile: async (data: {}) => {
-    console.log(data)
     try {
       const response = await sendRequest({
         body: data,

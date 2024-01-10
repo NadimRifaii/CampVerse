@@ -8,7 +8,6 @@ type UsersProps = {
 const Users = ({ userType = "user" }: UsersProps) => {
   const { fetchUsers, filteredArray: users, searchUsers } = useLogic()
   useEffect(() => {
-    console.log("Fetching users")
     fetchUsers(userType)
   }, [])
   return (

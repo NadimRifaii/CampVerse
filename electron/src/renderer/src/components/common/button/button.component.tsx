@@ -1,6 +1,7 @@
 import './button.styles.css'
 type ButtonProps = {
   text: string,
+  type?: string
   className?: string
   handleClick?: () => void
 }

@@ -3,16 +3,9 @@ import { useContext } from 'react'
 import { ActiveEditContext } from '@renderer/utils/contexts/active-edit-profile.context'
 import { CurrentUserContext } from '@renderer/utils/contexts/current-user.context'
 import './user-row.styles.css'
+import { User } from '@renderer/core/types/user'
 type UserRowProps = {
-  info: {
-    id?: number,
-    firstname: string,
-    lastname: string,
-    username: string,
-    email: string,
-    profilePicture: string,
-    role: "mentor" | "student" | "user"
-  }
+  info: User
 }
 const UserRow = ({ info }: UserRowProps) => {
   const activeEditContext = useContext(ActiveEditContext)

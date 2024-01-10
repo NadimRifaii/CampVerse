@@ -12,7 +12,8 @@ export const usersSlice = createSlice({
   reducers: {
     setUsers(state, { type, payload }: { payload: any, type: string }) {
       return {
-        ...payload
+        users: payload
+        // ...payload
       }
     }
   }

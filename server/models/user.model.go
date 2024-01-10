@@ -59,9 +59,64 @@ func (user *User) GetAllUsers(db *gorm.DB) ([]Response, error) {
 			Role:           user.UserRole.RoleName,
 			ProfilePicture: user.ProfilePicture,
 		}
-		cleanedUser.Speciality = ""
-		cleanedUser.Position = ""
+		if cleanedUser.Role == "mentor" {
+			mentor := new(Mentor)
+			mentor.GetMentorByID(db, cleanedUser.ID)
+			cleanedUser.Speciality = mentor.Speciality
+			cleanedUser.Position = mentor.Position
+		} else {
+			cleanedUser.Speciality = ""
+			cleanedUser.Position = ""
+		}
 		cleanedUsers = append(cleanedUsers, cleanedUser)
 	}
 	return cleanedUsers, nil
 }
+func UpdateUserRoleByEmail(db *gorm.DB, email string, newRoleName string) error {
+	user := new(User)
+	if err := user.GetUserByEmail(email, db); err != nil {
+		return err
+	}
+	switch user.UserRole.RoleName {
+	case "student":
+		student := new(Student)
+		student.GetStudentByID(db, user.ID)
+		if err := db.Delete(student, user.ID).Error; err != nil {
+			return err
+		}
+	case "mentor":
+		mentor := new(Mentor)
+		mentor.GetMentorByID(db, user.ID)
+		if err := db.Delete(mentor, user.ID).Error; err != nil {
+			return err
+		}
+	}
+	newRole := new(UserRole)
+	if err := newRole.GetRoleByName(db, newRoleName); err != nil {
+		return err
+	}
+	// Update the UserRole association
+	user.UserRole = *newRole
+	if err := db.Save(user).Error; err != nil {
+		return err
+	}
+	return nil
+}
+func (u *User) DeleteUser(db *gorm.DB) error {
+	result := db.Delete(u)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}
+
+/**
+updating a user role
+if user.role == body.role , just update profile
+
+if user.role != body.role{
+	if user.role==mentor && body.role==student => delete the mentor record and create a new student record
+
+	if user.role==student && body.role==mentor => delete the student record and create a new mentor record
+}
+*/

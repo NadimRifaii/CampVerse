@@ -80,3 +80,27 @@
 .edit-container .buttons-container .save-btn {
   color: var(--main-white-color);
 }
+
+.select-container {
+  width: fit-content;
+  margin: auto;
+  color: white;
+  margin-bottom: 25px;
+}
+
+select#role {
+  cursor: pointer;
+  background-color: var(--main-white-color);
+  color: var(--main-black-color);
+  font-weight: bold;
+  width: 100px;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  margin-left: 22px;
+  border-radius: 5px;
+}
+
+select#role option {
+  cursor: pointer;
+}

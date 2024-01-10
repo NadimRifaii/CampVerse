@@ -85,3 +85,10 @@ func (user *User) GetAllMentorUsers(db *gorm.DB) ([]Response, error) {
 	}
 	return cleanedMentors, nil
 }
+func (m *Mentor) DeleteUser(db *gorm.DB) error {
+	result := db.Delete(m)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

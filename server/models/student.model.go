@@ -48,3 +48,10 @@ func (user *User) GetAllStudentUsers(db *gorm.DB) ([]Response, error) {
 	}
 	return cleanedStudents, nil
 }
+func (s *Student) DeleteStudent(db *gorm.DB) error {
+	result := db.Delete(s)
+	if result.Error != nil {
+		return result.Error
+	}
+	return nil
+}

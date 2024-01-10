@@ -17,6 +17,12 @@ func (ur *UserRole) GetUserRoleByID(db *gorm.DB, id uint) error {
 	}
 	return nil
 }
+func (ur *UserRole) GetRoleByName(db *gorm.DB, roleName string) error {
+	if err := db.Where("role_name = ?", roleName).First(ur).Error; err != nil {
+		return err
+	}
+	return nil
+}
 func (ur *UserRole) GetIDByRoleName(db *gorm.DB, roleName string) (uint, error) {
 	if err := db.Find(ur, "role_name = ?", roleName).Error; err != nil {
 		return 0, err

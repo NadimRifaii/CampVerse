@@ -11,5 +11,6 @@ func UserRoutes(app fiber.Router) {
 	app.Get("/all-mentors", controllers.HttpGetAllMentorUsers)
 	app.Get("/all-students", controllers.HttpGetAllStudentUsers)
 	app.Put("/", controllers.HttpUpdateUserProfile)
+	app.Put("/role", controllers.HttpUpdateUserRole)
 	app.Post("/profile", controllers.HttpUploadImage)
 }

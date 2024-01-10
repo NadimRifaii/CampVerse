@@ -7,7 +7,7 @@ import { Button } from '../common/button/button.component';
 
 const EditProfile = () => {
   const activeEditContext = useContext(ActiveEditContext);
-  const { handleFileChange, previewImage, fields, resetCredentials, updateProfile } = useLogic()
+  const { handleFileChange, previewImage, fields, resetCredentials, updateProfile, role, setRole } = useLogic()
   const { active, setActive } = activeEditContext || {};
 
   return (
@@ -30,6 +30,21 @@ const EditProfile = () => {
             <img src={previewImage} alt="Preview" className="preview-image" />
             // src attribute expects a URL, data URL
           )}
+        </div>
+        <div className="select-container">
+          {
+            role != 'admin' ?
+              <>
+                <label htmlFor="role">Choose user role:</label>
+                <select name="role" id="role" value={role} onChange={(e) => {
+                  setRole(e.target.value)
+                }}>
+                  <option value="mentor">Mentor</option>
+                  <option value="student">Student</option>
+                </select>
+              </>
+              : ""
+          }
         </div>
         <div className="inputs-container">
           {

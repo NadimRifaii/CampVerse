@@ -1,29 +1,30 @@
 import { updateUser } from "@renderer/core/datasource/localDataSource/user/userSlice";
 import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { CurrentUserContext } from "@renderer/utils/contexts/current-user.context";
-
+import { extractUsersSlice, setUsers } from "@renderer/core/datasource/localDataSource/users/usersSlice";
 const useLogic = () => {
   const dispatch = useDispatch()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const currentUserContext = useContext(CurrentUserContext)
   const { currentUser } = currentUserContext || {}
-
+  const { users } = useSelector(extractUsersSlice)
+  const [role, setRole] = useState(currentUser?.role)
   let defaultCredentials = {
     username: currentUser?.username,
     email: currentUser?.email,
     profilePicture: currentUser?.profilePicture,
     firstname: currentUser?.firstname,
     lastname: currentUser?.lastname,
-    ...(currentUser?.role === 'mentor' ? { speciality: currentUser?.speciality } : {}),
-    ...(currentUser?.role === 'mentor' ? { position: currentUser?.position } : {}),
-  }
+    speciality: currentUser?.speciality,
+    position: currentUser?.position,
+  };
   const [credentials, setCredentials] = useState(defaultCredentials)
-
   useEffect(() => {
+    setRole(currentUser?.role)
     setPreviewImage(`http://localhost:8000/images/${currentUser?.profilePicture}`);
   }, [currentUser]);
   function resetCredentials() {
@@ -71,7 +72,11 @@ const useLogic = () => {
       if (currentUser?.role == "admin") {
         dispatch(updateUser(credentials))
       } else {
-        console.log("This user is not an admin")
+        const updatedUsers = users.map((user) => {
+          return user.email === currentUser?.email ? { ...user, ...credentials } : user
+        }
+        );
+        dispatch(setUsers(updatedUsers));
       }
     } catch (error) {
       console.log(error)
@@ -111,7 +116,7 @@ const useLogic = () => {
       disabled: true
     }
   ]
-  if (currentUser?.role === 'mentor') {
+  if (role === 'mentor') {
     fields.push(...[{
       label: "Speciality",
       name: "speciality",
@@ -128,6 +133,6 @@ const useLogic = () => {
       onChange: changeHandler
     }])
   }
-  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, updateProfile }
+  return { handleFileChange, previewImage, selectedFile, fields, resetCredentials, updateProfile, role, setRole }
 }
 export default useLogic

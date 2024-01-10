@@ -51,6 +51,7 @@ func HttpUploadImage(c *fiber.Ctx) error {
 	c.SaveFile(file, "public/images/"+file.Filename)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
 }
+
 func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
@@ -74,14 +75,14 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	}
 	if currentUser.UserRole.RoleName == "admin" {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
-	} else if user.UserRole.RoleName == "mentor" {
+	} else if currentUser.UserRole.RoleName == "mentor" {
 		mentor := new(models.Mentor)
 		if err := mentor.GetMentorByID(db, currentUser.ID); err != nil {
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 		}
 		mentor.Speciality = body.Speciality
 		mentor.Position = body.Position
-		mentor.UserId = user.ID
+		mentor.UserId = currentUser.ID
 		if err := mentor.UpdateMentor(db); err != nil {
 			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 		}
@@ -94,6 +95,7 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully"})
 	}
 }
+
 func HttpGetAllUsers(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
@@ -119,8 +121,8 @@ func HttpGetAllMentorUsers(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": mentors})
 }
 func HttpGetAllStudentUsers(c *fiber.Ctx) error {
-	user := new(models.User)
 	db := database.Db
+	user := new(models.User)
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
@@ -129,4 +131,23 @@ func HttpGetAllStudentUsers(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"err": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": students})
+}
+func HttpUpdateUserRole(c *fiber.Ctx) error {
+	db := database.Db
+	user := new(models.User)
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	body := new(UserInfoRequest)
+	if err := ValidateRequest(c, body); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	currentUser := new(models.User)
+	if err := currentUser.GetUserByEmail(body.Email, db); err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	if err := currentUser.DeleteUser(db); err != nil {
+		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User deleted"})
 }

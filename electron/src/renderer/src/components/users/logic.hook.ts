@@ -9,11 +9,10 @@ const useLogic = () => {
   useEffect(() => {
     setFilteredArray(users)
   }, [users])
-
   const fetchUsers = async (userType: "user" | "student" | "mentor") => {
     try {
       const response = await userDataSource.getAllUsers({}, userType)
-      dispatch(setUsers(response))
+      dispatch(setUsers(response.users))
     } catch (error) {
       console.log(error)
     }
