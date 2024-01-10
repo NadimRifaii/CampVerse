@@ -1,0 +1,27 @@
+.bootcamp-details-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.toggler-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--main-black-color);
+  width: 500px;
+  border-radius: 5px;
+}
+
+.toggler-header button {
+  width: 150px;
+  color: var(--main-white-color);
+  border-radius: 5px;
+  background-color: #02baff8c;
+}
+
+.toggler-header button.active {
+  background-color: var(--main-blue-color)
+}
