@@ -1,12 +1,8 @@
 import { useState } from "react"
-import AssignmentsIcon from "../../assets/assignments-icon.component"
 import UsersIcon from "../../assets/users-icon.component"
-import ResultsIcon from "../../assets/results-icon.component"
-import ScheduleIcon from "../../assets/schedule-icon.component"
-import VotesIcon from "../../assets/votes-icon.component"
+
 import HomeIcon from "../../assets/home-icon.component"
 import EditIcon from "../../assets/edit-icon.component"
-import AddUser from "../../assets/add-user-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { useNavigate } from "react-router-dom"
@@ -32,10 +28,6 @@ const useLogic = () => {
     {
       text: "Users",
       icon: UsersIcon
-    },
-    {
-      text: "Add user",
-      icon: AddUser
     }
   ]
 

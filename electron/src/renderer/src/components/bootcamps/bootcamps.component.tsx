@@ -1,5 +1,5 @@
 
-import Bootcamp from "../bootcamp/bootcamp.component"
+import BootcampC from "../bootcamp/bootcamp.component"
 import './bootcamps.styles.css'
 import useLogic from "./logic.hook"
 const Bootcamps = () => {
@@ -7,7 +7,7 @@ const Bootcamps = () => {
   return (
     <div className="bootcamps-container">
       {
-        bootcamps?.map(bootcamp => <Bootcamp key={bootcamp.ID} name={bootcamp.name} />)
+        bootcamps?.map(bootcamp => <BootcampC key={bootcamp.ID} bootcamp={bootcamp} />)
       }
     </div>
   )

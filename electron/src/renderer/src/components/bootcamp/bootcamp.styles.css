@@ -11,6 +11,17 @@
 }
 
 .bootcamp .name {
-  padding: 10px;
   color: var(--main-black-color)
+}
+
+.name-details-holder {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name-details-holder a {
+  text-decoration: none;
+  color: var(--main-black-color);
 }
