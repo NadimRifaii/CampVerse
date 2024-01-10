@@ -2,6 +2,7 @@ import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user"
 import { useDispatch, useSelector } from "react-redux"
 import { extractUsersSlice, setUsers } from "@renderer/core/datasource/localDataSource/users/usersSlice"
 import { useEffect, useState } from "react"
+
 const useLogic = () => {
   const { users } = useSelector(extractUsersSlice)
   let [filteredArray, setFilteredArray] = useState(users)

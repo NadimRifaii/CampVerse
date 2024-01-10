@@ -73,7 +73,8 @@ const useLogic = () => {
         dispatch(updateUser(credentials))
       } else {
         const updatedUsers = users.map((user) => {
-          return user.email === currentUser?.email ? { ...user, ...credentials } : user
+          const data = { ...credentials, ['role']: role }
+          return user.email === currentUser?.email ? { ...user, ...data } : user
         }
         );
         dispatch(setUsers(updatedUsers));
