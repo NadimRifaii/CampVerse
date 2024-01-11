@@ -20,21 +20,6 @@ func HttpGetAllStacks(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"stacks": stacks})
 }
-func HttpCreateStack(c *fiber.Ctx) error {
-	user := new(models.User)
-	if user = GetAuthUser(c); user == nil {
-		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
-	}
-	stack := new(models.Stack)
-	if err := ValidateRequest(c, stack); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
-	}
-
-	if err := CreateRecordInDb(stack); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
-	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Stack created successfully"})
-}
 
 func getStackAndBootcamp(c *fiber.Ctx, db *gorm.DB, stackName, bootcampName string) (*models.Stack, *models.Bootcamp, error) {
 	admin := new(models.User)
@@ -91,4 +76,18 @@ func HttpAddStack(c *fiber.Ctx) error {
 // RemoveStack handles the removal of a stack from a bootcamp.
 func HttpRemoveStack(c *fiber.Ctx) error {
 	return handleStackAction(c, "remove")
+}
+func HttpCreateCurriculum(c *fiber.Ctx) error {
+	user := new(models.User)
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	curriculum := new(models.Curriculum)
+	if err := ValidateRequest(c, curriculum); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"err": err.Error()})
+	}
+	if err := CreateRecordInDb(curriculum); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Stack created successfully"})
 }
