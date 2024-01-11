@@ -4,6 +4,7 @@ import { extractUsersSlice, setUsers } from "@renderer/core/datasource/localData
 import { useEffect, useState } from "react"
 import { extractBootcampsSlice, setBootcamps } from "@renderer/core/datasource/localDataSource/bootcamps/bootcampsSlice"
 import { bootcampsDataSource } from "@renderer/core/datasource/remoteDataSource/bootcamps"
+import toast from "react-hot-toast"
 const useLogic = () => {
   const { users } = useSelector(extractUsersSlice)
   const { bootcamps } = useSelector(extractBootcampsSlice)
@@ -21,15 +22,25 @@ const useLogic = () => {
     }
   }
   const getBootcamps = async () => {
-    async function getBootcamps() {
-      try {
-        const response = await bootcampsDataSource.getBootcamps({})
-        dispatch(setBootcamps(response))
-      } catch (error) {
-        console.log(error)
-      }
+    try {
+      const response = await bootcampsDataSource.getBootcamps({})
+      dispatch(setBootcamps(response))
+    } catch (error) {
+      console.log(error)
     }
-    getBootcamps()
+
+  }
+  const addUserToBootcamp = async (data: any) => {
+    const loadingToastId = toast.loading('Adding the user...');
+    try {
+      const response = await bootcampsDataSource.addUserToBootcamp(data)
+      toast.success(response.message, { id: loadingToastId });
+      console.log(response.message)
+    } catch (error) {
+      toast.error(`User already exist in this bootcamp`, { id: loadingToastId });
+      console.log(error)
+    }
+
   }
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {
@@ -39,6 +50,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, searchUsers, bootcamps, getBootcamps }
+  return { fetchUsers, filteredArray, searchUsers, bootcamps, getBootcamps, addUserToBootcamp }
 }
 export default useLogic

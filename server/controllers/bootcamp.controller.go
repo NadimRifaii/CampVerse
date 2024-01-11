@@ -89,11 +89,11 @@ func handleUserAction(c *fiber.Ctx, action string) error {
 	switch action {
 	case "add":
 		if err := bootcamp.AddUserToBootcamp(db, user); err != nil {
-			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 		}
 	case "remove":
 		if err := bootcamp.RemoveUserFromBootcamp(db, user); err != nil {
-			return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 		}
 	default:
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid action"})

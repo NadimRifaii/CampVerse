@@ -9,10 +9,10 @@ type UsersProps = {
   showBtn: string
 }
 const Users = ({ userType = "user", showBtn = "Add" }: UsersProps) => {
-  const { fetchUsers, filteredArray: users, searchUsers, bootcamps, getBootcamps } = useLogic()
+  const { filteredArray: users, bootcamps, searchUsers, getBootcamps, addUserToBootcamp, fetchUsers } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
   const currentUserContext = useContext(CurrentUserContext)
-  const { currentUser } = currentUserContext || {};
+  const { currentUser, setCurrentUser } = currentUserContext || {};
   useEffect(() => {
     fetchUsers(userType)
     getBootcamps()
@@ -30,8 +30,12 @@ const Users = ({ userType = "user", showBtn = "Add" }: UsersProps) => {
         </ul>
         <div className="save-btn">
           <Button text='Save' handleClick={() => {
-            console.log(activeBootcamp)
-            console.log(currentUser)
+            addUserToBootcamp({
+              'email': currentUser?.email,
+              'bootcampName': activeBootcamp
+            })
+            setCurrentUser(null)
+            setActiveBootcamp(false)
           }} className={activeBootcamp ? 'active' : ""} />
         </div>
       </div>
