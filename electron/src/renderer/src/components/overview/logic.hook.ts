@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react"
-import { extractCurriculumsSlice } from "@renderer/core/datasource/localDataSource/curriculums/curriculumsSlice";
+import { extractCurriculumsSlice, setCurriculums } from "@renderer/core/datasource/localDataSource/curriculums/curriculumsSlice";
 import { extractcurrentBootcampSlice } from "@renderer/core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { curriculumsDataSource } from "@renderer/core/datasource/remoteDataSource/curriculums";
 const useLogic = () => {
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice);
   const { curriculums } = useSelector(extractCurriculumsSlice)
+  const dispatch = useDispatch()
   useEffect(() => {
-    console.log(curriculums)
-  }, [curriculums])
+    const fetchCurriculums = async () => {
+      try {
+        const response = await curriculumsDataSource.getCurriculums({ ["id"]: currentBootcamp.id })
+        dispatch(setCurriculums(response))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchCurriculums()
+  }, [])
+
   const [currentCurriculum, setCurrentCurriculum] = useState('')
   const [stacksArray, setStacksArray] = useState([{
     name: ""
   }])
-  console.log({
-    bootcampId: currentBootcamp.id,
-    title: currentCurriculum,
-    stacks: stacksArray
-  })
   const currentCurriculumChangeHandler = (e) => {
     setCurrentCurriculum(e.target.value)
   }
@@ -29,7 +35,8 @@ const useLogic = () => {
     updatedStacksArray[index] = { name: newName };
     setStacksArray(updatedStacksArray);
   };
-  return { stacksArray, updateStack, addNewStack, currentCurriculum, currentCurriculumChangeHandler };
+
+  return { stacksArray, currentCurriculum, curriculums, updateStack, addNewStack, currentCurriculumChangeHandler };
 };
 
 export default useLogic;

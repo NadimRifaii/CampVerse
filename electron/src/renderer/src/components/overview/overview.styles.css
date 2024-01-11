@@ -5,12 +5,14 @@
   gap: 20px;
   height: 100%;
   padding: 20px;
+
 }
 
-.curriculum-cards-container .add-curiculum-card {
+.curriculum-cards-container .curiculum-card {
   padding: 20px;
   background-color: var(--main-black-color);
   border-radius: 5px;
+
 }
 
 .curriculum-cards-container .buttons-container {
@@ -41,4 +43,13 @@
 
 .add-curiculum-card .input-label label.active {
   color: var(--main-white-color);
+}
+
+.bootcamp-curriculum-cards input {
+  color: var(--main-white-color);
+}
+
+.bootcamp-curriculum-cards h2 {
+  color: var(--main-white-color);
+  text-align: center;
 }

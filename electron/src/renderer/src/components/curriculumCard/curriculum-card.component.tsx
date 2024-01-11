@@ -1,19 +1,32 @@
 import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
-type CurriculumCardType = {
-
+type Stack = {
+  name: string
 }
-const CurriculumCard = () => {
+type CurriculumType = {
+  title: string,
+  stacks: Stack[]
+}
+type CurriculumCardPropsType = {
+  curriculum: CurriculumType
+}
+const CurriculumCard = ({ curriculum }: CurriculumCardPropsType) => {
+
   return (
     <div className="curiculum-card">
       <div className="title">
-        <InputLabel info={{ type: 'text', label: "Curriculum title", value: '', name: '' }} />
+        <h2>Stack title: {curriculum.title}</h2>
       </div>
       <div className="inputs-container">
-        <InputLabel info={{ type: 'text', label: "Stack name", value: "", name: '' }} />
-      </div>
-      <div className="add-btn">
-        <Button text="Add a stack" />
+        <h3>Technologies</h3>
+        {
+          curriculum.stacks.map((stack, index) => {
+            return <InputLabel key={index} info={{
+              label: 'Stack title',
+              type: 'text', value: stack.name, name: `${index}`, disabled: true
+            }} />
+          })
+        }
       </div>
     </div>
   )

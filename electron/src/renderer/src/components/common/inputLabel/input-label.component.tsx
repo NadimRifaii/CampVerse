@@ -7,6 +7,7 @@ type InputProps = {
     id?: string,
     label?: string,
     className?: string,
+    disabled?: boolean,
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   }
 }

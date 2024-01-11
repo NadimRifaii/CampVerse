@@ -13,4 +13,16 @@ export const curriculumsDataSource = {
       throw new Error(error)
     }
   },
+  addCurriculum: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/curriculum/add-to-bootcamp",
+        method: "POST"
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
 }
