@@ -36,6 +36,5 @@ export const bootcampsDataSource = {
     } catch (error: any) {
       throw new Error(error)
     }
-
   }
 }

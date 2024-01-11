@@ -7,9 +7,6 @@ import Users from "../users/users.component"
 const BootcampDetails = () => {
   const currentBootcamp = useSelector(extractcurrentBootcampSlice)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
-  useEffect(() => {
-    console.log(currentBootcamp)
-  }, [currentBootcamp])
   return (
     <div className="bootcamp-details-container">
       <div className="toggler-header">

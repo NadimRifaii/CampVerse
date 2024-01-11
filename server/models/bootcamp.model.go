@@ -14,6 +14,8 @@ type Bootcamp struct {
 	TargetAudiance   string   `json:"audience" gorm:"not null;;size:255"`
 	Users            []*User  `gorm:"many2many:bootcamp_users;"`
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
+	Mentors          []Response
+	Students         []Response
 }
 
 func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id uint) error {
@@ -29,6 +31,46 @@ func (bootcamp *Bootcamp) GetAllBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 		return nil, err
 	}
 	return bootcamps, nil
+}
+func (bootcamp *Bootcamp) GetCleanedData(db *gorm.DB) error {
+	// Fetch bootcamp details including associated users
+	if err := db.Preload("Stacks").Preload("Users").Find(bootcamp, bootcamp.ID).Error; err != nil {
+		return errors.New("Bootcamp was not found")
+	}
+
+	// Clean user data and separate into mentors and students
+	var mentors []Response
+	var students []Response
+
+	for _, user := range bootcamp.Users {
+		cleanedUser := Response{
+			ID:             user.ID,
+			UserName:       user.UserName,
+			FirstName:      user.FirstName,
+			LastName:       user.LastName,
+			Email:          user.Email,
+			Role:           user.UserRole.RoleName,
+			ProfilePicture: user.ProfilePicture,
+		}
+
+		if cleanedUser.Role == "mentor" {
+			mentor := new(Mentor)
+			mentor.GetMentorByID(db, cleanedUser.ID)
+			cleanedUser.Speciality = mentor.Speciality
+			cleanedUser.Position = mentor.Position
+			mentors = append(mentors, cleanedUser)
+		} else {
+			cleanedUser.Speciality = ""
+			cleanedUser.Position = ""
+			students = append(students, cleanedUser)
+		}
+	}
+
+	// Assign cleaned mentor and student data to the bootcamp
+	bootcamp.Mentors = mentors
+	bootcamp.Students = students
+
+	return nil
 }
 func (bootcamp *Bootcamp) GetBootcampByName(db *gorm.DB, name string) error {
 	if db.Find(bootcamp, "name = ?", name); bootcamp.ID == 0 {

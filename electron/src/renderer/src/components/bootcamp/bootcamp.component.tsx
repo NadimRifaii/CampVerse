@@ -22,7 +22,7 @@ const BootcampC = ({ bootcamp }: BootcampProps) => {
       <div className="image-holder">
         {imageLoaded ? null : <SkeletonTheme baseColor="#ccc" highlightColor="#eee">
           <p>
-            <Skeleton count={10} width={400} />
+            <Skeleton count={12} width={450} />
           </p>
         </SkeletonTheme>}
         <img
