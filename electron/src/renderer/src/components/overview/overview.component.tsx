@@ -8,7 +8,7 @@ const Overview = () => {
   return (
     <div className="overview">
       <div className="curriculum-cards-container">
-        <div className="curiculum-card">
+        <div className="add-curiculum-card">
           <div className="title">
             <InputLabel info={{ type: 'text', label: "Curriculum title", name: "Current Curriculum", value: currentCurriculum, onChange: currentCurriculumChangeHandler }} />
           </div>

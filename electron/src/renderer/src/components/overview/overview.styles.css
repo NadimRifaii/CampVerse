@@ -7,7 +7,7 @@
   padding: 20px;
 }
 
-.curriculum-cards-container .curiculum-card {
+.curriculum-cards-container .add-curiculum-card {
   padding: 20px;
   background-color: var(--main-black-color);
   border-radius: 5px;
@@ -35,10 +35,10 @@
   width: 25%;
 }
 
-.curiculum-card .input-label input:focus+label {
+.add-curiculum-card .input-label input:focus+label {
   color: var(--main-white-color);
 }
 
-.curiculum-card .input-label label.active {
+.add-curiculum-card .input-label label.active {
   color: var(--main-white-color);
 }

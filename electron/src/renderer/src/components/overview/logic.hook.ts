@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { extractCurriculumsSlice } from "@renderer/core/datasource/localDataSource/curriculums/curriculumsSlice";
 import { extractcurrentBootcampSlice } from "@renderer/core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { useSelector } from "react-redux"
 const useLogic = () => {
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice);
+  const { curriculums } = useSelector(extractCurriculumsSlice)
+  useEffect(() => {
+    console.log(curriculums)
+  }, [curriculums])
   const [currentCurriculum, setCurrentCurriculum] = useState('')
   const [stacksArray, setStacksArray] = useState([{
     name: ""
