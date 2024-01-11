@@ -2,14 +2,14 @@ import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user"
 import { useDispatch, useSelector } from "react-redux"
 import { UsersSliceType, extractUsersSlice, setUsers } from "@renderer/core/datasource/localDataSource/users/usersSlice"
 import { useEffect, useState } from "react"
-import { extractBootcampsSlice, setBootcamps } from "@renderer/core/datasource/localDataSource/bootcamps/bootcampsSlice"
+import { BootcampsSliceType, extractBootcampsSlice, setBootcamps } from "@renderer/core/datasource/localDataSource/bootcamps/bootcampsSlice"
 import { bootcampsDataSource } from "@renderer/core/datasource/remoteDataSource/bootcamps"
 import toast from "react-hot-toast"
 const useLogic = () => {
-  const { users }: UsersSliceType = useSelector(extractUsersSlice)
-  const { bootcamps } = useSelector(extractBootcampsSlice)
-  let [filteredArray, setFilteredArray] = useState(users)
   const dispatch = useDispatch()
+  const { users }: UsersSliceType = useSelector(extractUsersSlice)
+  const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
+  let [filteredArray, setFilteredArray] = useState(users)
   useEffect(() => {
     setFilteredArray(users)
   }, [users])
@@ -20,6 +20,9 @@ const useLogic = () => {
     } catch (error) {
       console.log(error)
     }
+  }
+  const setBootcampUsers = (bootcampUsers: []) => {
+    dispatch(setUsers(bootcampUsers))
   }
   const getBootcamps = async () => {
     try {
@@ -49,6 +52,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, searchUsers, bootcamps, getBootcamps, addUserToBootcamp }
+  return { fetchUsers, filteredArray, searchUsers, bootcamps, getBootcamps, addUserToBootcamp, setBootcampUsers }
 }
 export default useLogic

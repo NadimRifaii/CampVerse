@@ -1,14 +1,11 @@
 import { useSelector } from "react-redux"
-import { extractcurrentBootcampSlice } from "@renderer/core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
-import { useEffect, useState } from "react"
+import { CurrentBootcampType, extractcurrentBootcampSlice } from "@renderer/core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
+import { useState } from "react"
 import { Button } from "../common/button/button.component"
 import './bootcamp-details.styles.css'
 import Users from "../users/users.component"
 const BootcampDetails = () => {
-  const currentBootcamp = useSelector(extractcurrentBootcampSlice)
-  useEffect(() => {
-    console.log(currentBootcamp)
-  }, [currentBootcamp])
+  const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
   return (
     <div className="bootcamp-details-container">
@@ -19,8 +16,8 @@ const BootcampDetails = () => {
       </div>
       <div className="details-container">
         {
-          currentActiveComponent == "student" ? <Users userType={currentActiveComponent} showBtn="Chat" /> :
-            currentActiveComponent == "mentor" ? <Users userType={currentActiveComponent} showBtn="Chat" /> :
+          currentActiveComponent == "student" ? <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.students} showBtn="Chat" /> :
+            currentActiveComponent == "mentor" ? <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.mentors} showBtn="Chat" /> :
               <h1>Curriculum</h1>
         }
       </div>

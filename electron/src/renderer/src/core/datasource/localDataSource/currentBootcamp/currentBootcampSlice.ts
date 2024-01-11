@@ -1,16 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Bootcamp } from '@renderer/core/types/bootcamp';
 import { RootState } from '@renderer/core/types/rootState'
-
-const initialState = {
-  currentBootcamp: {}
-};
+export type CurrentBootcampType = {
+  currentBootcamp: Bootcamp
+}
+const initialState: CurrentBootcampType = {
+  currentBootcamp: {
+    id: 0,
+    name: "",
+    audience: "",
+    outcomes: "",
+    stacks: [],
+    students: [],
+    mentors: []
+  }
+}
 export const currentBootcampSlice = createSlice({
   name: "currentBootcamp",
   initialState,
   reducers: {
     setcurrentBootcamp(state, { type, payload }: { payload: any, type: string }) {
       return {
-        ...payload
+        currentBootcamp: payload
       }
     }
   }

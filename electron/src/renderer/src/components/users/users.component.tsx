@@ -7,15 +7,19 @@ import { CurrentUserContext } from '@renderer/utils/contexts/current-user.contex
 type UsersProps = {
   userType?: "user" | "student" | "mentor",
   showBtn: string,
-  bootcampUsers?: []
+  bootcampUsers: [] | null
 }
 const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps) => {
-  const { filteredArray: users, bootcamps, searchUsers, getBootcamps, addUserToBootcamp, fetchUsers } = useLogic()
+  const { filteredArray: users, bootcamps, searchUsers, getBootcamps, addUserToBootcamp, fetchUsers, setBootcampUsers } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
   const currentUserContext = useContext(CurrentUserContext)
   const { currentUser, setCurrentUser } = currentUserContext;
   useEffect(() => {
-    fetchUsers(userType)
+    if (bootcampUsers) {
+      setBootcampUsers(bootcampUsers)
+    } else {
+      fetchUsers(userType)
+    }
     getBootcamps()
   }, [userType])
   return (
@@ -50,7 +54,7 @@ const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps
         {
           users?.length > 0 ? users?.map(user => {
             if (user.role != 'admin')
-              return <UserRow key={user.id} setActiveBootcamp={setActiveBootcamp} showBtn={showBtn} info={user} />
+              return <UserRow key={user.email} setActiveBootcamp={setActiveBootcamp} showBtn={showBtn} info={user} />
             return null
           })
             : <h1>No such user</h1>
