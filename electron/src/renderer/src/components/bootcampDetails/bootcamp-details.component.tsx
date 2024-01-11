@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "../common/button/button.component"
 import './bootcamp-details.styles.css'
 import Users from "../users/users.component"
+import Curriculum from "../curriculum/curriculum.component"
 const BootcampDetails = () => {
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
@@ -18,7 +19,7 @@ const BootcampDetails = () => {
         {
           currentActiveComponent == "student" ? <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.students} showBtn="Chat" /> :
             currentActiveComponent == "mentor" ? <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.mentors} showBtn="Chat" /> :
-              <h1>Curriculum</h1>
+              <Curriculum />
         }
       </div>
     </div>
