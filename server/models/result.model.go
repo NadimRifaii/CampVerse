@@ -12,7 +12,7 @@ type Result struct {
 	BootcampId uint
 	Week       string `json:"week" gorm:"unique"`
 	Grades     []*Grade
-}
+} //
 type Grade struct {
 	gorm.Model
 	ResultId uint

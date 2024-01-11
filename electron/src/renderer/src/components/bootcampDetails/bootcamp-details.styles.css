@@ -1,9 +1,11 @@
 .bootcamp-details-container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  height: 500px;
+  width: 100%;
+  height: calc(100vh - 170px);
+  position: relative;
+}
+
+.details-container {
+  height: calc(100% - 51px);
 }
 
 .toggler-header {
@@ -14,6 +16,7 @@
   background-color: var(--main-black-color);
   width: 500px;
   border-radius: 5px;
+  margin: 0 auto 12px;
 }
 
 .toggler-header button {

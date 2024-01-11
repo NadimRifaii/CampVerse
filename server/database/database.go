@@ -41,6 +41,7 @@ func ConnectToDb() {
 			new(models.SubmissionFile),
 			new(models.Result),
 			new(models.Grade),
+			new(models.Curriculum),
 		)
 	}
 	Db = db
