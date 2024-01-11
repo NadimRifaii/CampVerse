@@ -1,6 +1,31 @@
 .toggler {
   width: 60px;
   height: 20px;
-  background-color: grey;
+  background-color: var(--main-black-color);
   border-radius: 15px;
+  position: relative;
+  transition: .5s;
+  margin: 10px auto;
+  cursor: pointer;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: var(--main-blue-color);
+  transition: .5s;
+}
+
+.toggler.active {
+  background-color: var(--main-blue-color)
+}
+
+.toggler.active .circle {
+  left: 42px;
+  background-color: var(--main-black-color)
 }
