@@ -33,7 +33,7 @@ func HttpGetBootcamps(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
 	bootcamp := new(models.Bootcamp)
-	allBootcamps, err := bootcamp.GetAllBootcamps(db)
+	allBootcamps, err := bootcamp.GetAllBootcampsWithCleanedData(db)
 	if err != nil {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
 	}
