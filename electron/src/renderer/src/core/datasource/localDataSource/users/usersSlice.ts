@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '@renderer/core/types/rootState'
 import { User } from '@renderer/core/types/user';
-const initialState: {
+export type UsersSliceType = {
   users: User[]
-} = {
+}
+const initialState: UsersSliceType = {
   users: []
 };
 export const usersSlice = createSlice({

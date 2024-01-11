@@ -1,9 +1,9 @@
-import { Bootcamp } from "./bootcamp"
+// import { Bootcamp } from "./bootcamp"
 import { User } from "./user"
 
 export type Stack = {
   id: number,
   name: string,
-  bootcamps: Bootcamp[],
+  // bootcamps: Bootcamp[],
   mentors: User[]
 }

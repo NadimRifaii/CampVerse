@@ -6,13 +6,14 @@ import { Button } from '../common/button/button.component'
 import { CurrentUserContext } from '@renderer/utils/contexts/current-user.context'
 type UsersProps = {
   userType?: "user" | "student" | "mentor",
-  showBtn: string
+  showBtn: string,
+  bootcampUsers?: []
 }
-const Users = ({ userType = "user", showBtn = "Add" }: UsersProps) => {
+const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps) => {
   const { filteredArray: users, bootcamps, searchUsers, getBootcamps, addUserToBootcamp, fetchUsers } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
   const currentUserContext = useContext(CurrentUserContext)
-  const { currentUser, setCurrentUser } = currentUserContext || {};
+  const { currentUser, setCurrentUser } = currentUserContext;
   useEffect(() => {
     fetchUsers(userType)
     getBootcamps()
@@ -23,7 +24,7 @@ const Users = ({ userType = "user", showBtn = "Add" }: UsersProps) => {
         <h3>Choose a bootcamp</h3>
         <ul>
           {
-            bootcamps.map(bootcamp => <li key={bootcamp.ID} className={`${activeBootcamp == bootcamp.name ? 'active' : ""}`} onClick={(() => {
+            bootcamps.map(bootcamp => <li key={bootcamp.id} className={`${activeBootcamp == bootcamp.name ? 'active' : ""}`} onClick={(() => {
               setActiveBootcamp(bootcamp.name)
             })} ><span>{bootcamp.name}</span></li>)
           }

@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -16,6 +15,7 @@ type Bootcamp struct {
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
 }
 type BootcampDetails struct {
+	ID               uint       `json:"id"`
 	Name             string     `json:"name"`
 	LearningOutcomes string     `json:"outcomes"`
 	TargetAudience   string     `json:"audience"`
@@ -32,7 +32,6 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 	for _, bootcamp := range bootcamps {
 		var mentors []Response
 		var students []Response
-
 		for _, user := range bootcamp.Users {
 			cleanedUser := Response{
 				ID:             user.ID,
@@ -57,6 +56,7 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 			}
 		}
 		bootcampDetails := BootcampDetails{
+			ID:               bootcamp.ID,
 			Name:             bootcamp.Name,
 			LearningOutcomes: bootcamp.LearningOutcomes,
 			TargetAudience:   bootcamp.TargetAudiance,
@@ -70,7 +70,6 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 	return bootcampDetailsList, nil
 }
 func (bootcamp *Bootcamp) GetBootcampByID(db *gorm.DB, id uint) error {
-	fmt.Println(id)
 	if err := db.Preload("Stacks").Preload("Users").Find(bootcamp, id).Error; err != nil {
 		return errors.New("Bootcamp was not found")
 	}

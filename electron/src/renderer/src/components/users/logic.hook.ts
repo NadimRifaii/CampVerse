@@ -1,12 +1,12 @@
 import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user"
 import { useDispatch, useSelector } from "react-redux"
-import { extractUsersSlice, setUsers } from "@renderer/core/datasource/localDataSource/users/usersSlice"
+import { UsersSliceType, extractUsersSlice, setUsers } from "@renderer/core/datasource/localDataSource/users/usersSlice"
 import { useEffect, useState } from "react"
 import { extractBootcampsSlice, setBootcamps } from "@renderer/core/datasource/localDataSource/bootcamps/bootcampsSlice"
 import { bootcampsDataSource } from "@renderer/core/datasource/remoteDataSource/bootcamps"
 import toast from "react-hot-toast"
 const useLogic = () => {
-  const { users } = useSelector(extractUsersSlice)
+  const { users }: UsersSliceType = useSelector(extractUsersSlice)
   const { bootcamps } = useSelector(extractBootcampsSlice)
   let [filteredArray, setFilteredArray] = useState(users)
   const dispatch = useDispatch()
@@ -40,7 +40,6 @@ const useLogic = () => {
       toast.error(`User already exist in this bootcamp`, { id: loadingToastId });
       console.log(error)
     }
-
   }
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {

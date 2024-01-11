@@ -6,6 +6,9 @@ import './bootcamp-details.styles.css'
 import Users from "../users/users.component"
 const BootcampDetails = () => {
   const currentBootcamp = useSelector(extractcurrentBootcampSlice)
+  useEffect(() => {
+    console.log(currentBootcamp)
+  }, [currentBootcamp])
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
   return (
     <div className="bootcamp-details-container">

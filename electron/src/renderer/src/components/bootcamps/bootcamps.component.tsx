@@ -7,7 +7,7 @@ const Bootcamps = () => {
   return (
     <div className="bootcamps-container">
       {
-        bootcamps?.map(bootcamp => <BootcampC key={bootcamp.ID} bootcamp={bootcamp} />)
+        bootcamps?.map(bootcamp => <BootcampC key={bootcamp.id} bootcamp={bootcamp} />)
       }
     </div>
   )

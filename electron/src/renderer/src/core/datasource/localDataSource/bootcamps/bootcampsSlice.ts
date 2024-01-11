@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Bootcamp } from '@renderer/core/types/bootcamp';
 import { RootState } from '@renderer/core/types/rootState'
-
-const initialState = {
+export type BootcampsSliceType = {
+  bootcamps: Bootcamp[]
+}
+const initialState: BootcampsSliceType = {
   bootcamps: []
 };
 export const bootcampsSlice = createSlice({
