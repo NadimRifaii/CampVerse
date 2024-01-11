@@ -14,7 +14,7 @@ func (c *Curriculum) GetCurriculumsByBootcampID(db *gorm.DB, bootcampID uint) ([
 	var curriculums []Curriculum
 
 	// Use GORM to retrieve curriculums with the specified BootcampID
-	if err := db.Preload("Stacks").Where("bootcamp_id = ?", bootcampID).Find(&curriculums).Error; err != nil {
+	if err := db.Preload("Stack").Where("bootcamp_id = ?", bootcampID).Find(&curriculums).Error; err != nil {
 		return nil, err
 	}
 
