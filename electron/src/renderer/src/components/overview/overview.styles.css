@@ -1,0 +1,44 @@
+.curriculum-cards-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  height: 100%;
+  padding: 20px;
+}
+
+.curriculum-cards-container .curiculum-card {
+  padding: 20px;
+  background-color: var(--main-black-color);
+  border-radius: 5px;
+}
+
+.curriculum-cards-container .buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px
+}
+
+.curriculum-cards-container .buttons-container button {
+  color: var(--main-white-color);
+  padding: 5px;
+  background-color: var(--blue-color);
+  border-radius: 5px;
+}
+
+.curriculum-cards-container .buttons-container .add-btn {
+  width: 70%;
+}
+
+.curriculum-cards-container .buttons-container .save-btn {
+  width: 25%;
+}
+
+.curiculum-card .input-label input:focus+label {
+  color: var(--main-white-color);
+}
+
+.curiculum-card .input-label label.active {
+  color: var(--main-white-color);
+}

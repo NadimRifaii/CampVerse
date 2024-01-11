@@ -54,13 +54,11 @@
 
 .overview-schedule .overview {
   z-index: 2;
-  background-color: black;
   left: 0;
 }
 
 .overview-schedule .schedule {
   z-index: 1;
-  background-color: blue;
   left: -100%;
 }
 
