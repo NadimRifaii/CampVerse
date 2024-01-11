@@ -11,16 +11,19 @@
   border-radius: 5px;
 }
 
-.users-container::-webkit-scrollbar {
+.users-container::-webkit-scrollbar,
+ul::-webkit-scrollbar {
   width: 12px;
 }
 
-.users-container::-webkit-scrollbar-thumb {
+.users-container::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
   background-color: var(--blue-color);
   border-radius: 6px;
 }
 
-.users-container::-webkit-scrollbar-track {
+.users-container::-webkit-scrollbar-track,
+ul::-webkit-scrollbar-track {
   background-color: #ccc;
 }
 
@@ -97,4 +100,85 @@
 
 .users-container .search-bar input:focus+img {
   opacity: 0;
+}
+
+.users-container .bootcamps-list {
+  position: absolute;
+  top: -250%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ece8efd1;
+  color: var(--main-black-color);
+  width: 300px;
+  border-radius: 5px;
+  padding: 10px;
+  ;
+}
+
+.users-container .bootcamps-list.active {
+  top: 50%;
+}
+
+.users-container .bootcamps-list ul {
+  height: 148px;
+  overflow-y: auto;
+
+}
+
+.users-container .bootcamps-list ul li {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid var(--main-black-color);
+  cursor: pointer;
+  position: relative;
+
+  transition: .5s;
+}
+
+.users-container .bootcamps-list h3 {
+  text-align: center;
+  color: var(--main-black-color);
+}
+
+.users-container .bootcamps-list ul li span {
+  position: relative;
+  z-index: 2;
+  color: var(--main-black-color);
+  transition: .5s;
+}
+
+.users-container .bootcamps-list ul li:not(:last-child) {
+  border-bottom: 1px solid var(--main-black-color)
+}
+
+.users-container .bootcamps-list ul li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0px;
+  background-color: var(--main-black-color);
+  transition: .5s;
+}
+
+.users-container .bootcamps-list ul li.active span {
+  color: var(--main-white-color);
+}
+
+.users-container .bootcamps-list ul li.active::before {
+  width: 100%;
+}
+
+.users-container .bootcamps-list button {
+  margin: auto;
+  width: 100px;
+  margin-top: 10px;
+  color: var(--main-white-color);
+  background-color: #0235488c;
+  border-radius: 5px;
+}
+
+.users-container .bootcamps-list button.active {
+  background-color: var(--main-blue-color)
 }

@@ -5,13 +5,16 @@ import { CurrentUserContext } from '@renderer/utils/contexts/current-user.contex
 import './user-row.styles.css'
 import { User } from '@renderer/core/types/user'
 type UserRowProps = {
-  info: User
+  info: User,
+  activeBootcamp?: string | boolean
+  setActiveBootcamp?: React.Dispatch<React.SetStateAction<string | boolean>>
+  showBtn: string
 }
-const UserRow = ({ info }: UserRowProps) => {
+const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowProps) => {
   const activeEditContext = useContext(ActiveEditContext)
   const currentUserContext = useContext(CurrentUserContext)
+  const { setCurrentUser } = currentUserContext || {};
   const { active, setActive } = activeEditContext || {};
-  const { setCurrentUser } = currentUserContext || {}
   return (
     <div className="user-row">
       <div className="left">
@@ -34,7 +37,16 @@ const UserRow = ({ info }: UserRowProps) => {
             setActive(!active)
           }
         }} />
-        <Button text='Chat' />
+        {
+          showBtn == "Add" ?
+            <Button text='Add' handleClick={() => {
+              if (setActiveBootcamp) {
+                setCurrentUser(info)
+                setActiveBootcamp(true)
+              }
+            }} />
+            : <Button text='Chat' />
+        }
       </div>
     </div>
   )

@@ -2,9 +2,11 @@ import { userDataSource } from "@renderer/core/datasource/remoteDataSource/user"
 import { useDispatch, useSelector } from "react-redux"
 import { extractUsersSlice, setUsers } from "@renderer/core/datasource/localDataSource/users/usersSlice"
 import { useEffect, useState } from "react"
-
+import { extractBootcampsSlice, setBootcamps } from "@renderer/core/datasource/localDataSource/bootcamps/bootcampsSlice"
+import { bootcampsDataSource } from "@renderer/core/datasource/remoteDataSource/bootcamps"
 const useLogic = () => {
   const { users } = useSelector(extractUsersSlice)
+  const { bootcamps } = useSelector(extractBootcampsSlice)
   let [filteredArray, setFilteredArray] = useState(users)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -18,6 +20,17 @@ const useLogic = () => {
       console.log(error)
     }
   }
+  const getBootcamps = async () => {
+    async function getBootcamps() {
+      try {
+        const response = await bootcampsDataSource.getBootcamps({})
+        dispatch(setBootcamps(response))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getBootcamps()
+  }
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {
       const fullName = user.firstname + ' ' + user.lastname;
@@ -26,6 +39,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, searchUsers }
+  return { fetchUsers, filteredArray, searchUsers, bootcamps, getBootcamps }
 }
 export default useLogic
