@@ -13,6 +13,7 @@ type Bootcamp struct {
 	TargetAudiance   string   `json:"audience" gorm:"not null;;size:255"`
 	Users            []*User  `gorm:"many2many:bootcamp_users;"`
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
+	Schedule         Schedule
 }
 type BootcampDetails struct {
 	ID               uint       `json:"id"`

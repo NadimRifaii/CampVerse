@@ -8,17 +8,17 @@ const useLogic = () => {
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const dispatch = useDispatch()
   useEffect(() => {
-    const fetchCurriculums = async () => {
-      try {
-        const response = await curriculumsDataSource.getCurriculums({ ["id"]: currentBootcamp.id })
-        dispatch(setCurriculums(response))
-      } catch (error) {
-        console.log(error)
-      }
-    }
+
     fetchCurriculums()
   }, [])
-
+  const fetchCurriculums = async () => {
+    try {
+      const response = await curriculumsDataSource.getCurriculums({ ["id"]: currentBootcamp.id })
+      dispatch(setCurriculums(response))
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const [currentCurriculum, setCurrentCurriculum] = useState('')
   const [stacksArray, setStacksArray] = useState([{
     name: ""
@@ -35,8 +35,26 @@ const useLogic = () => {
     updatedStacksArray[index] = { name: newName };
     setStacksArray(updatedStacksArray);
   };
-
-  return { stacksArray, currentCurriculum, curriculums, updateStack, addNewStack, currentCurriculumChangeHandler };
+  const saveCurriculum = async () => {
+    if (currentCurriculum != "" && stacksArray[stacksArray.length - 1].name != "") {
+      try {
+        const response = await curriculumsDataSource.addCurriculumToBootcamp({
+          bootcampId: currentBootcamp.id,
+          title: currentCurriculum,
+          stacks: stacksArray
+        })
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+      setCurrentCurriculum('')
+      setStacksArray([{
+        name: ""
+      }])
+      await fetchCurriculums()
+    }
+  }
+  return { stacksArray, currentCurriculum, curriculums, updateStack, addNewStack, currentCurriculumChangeHandler, saveCurriculum };
 };
 
 export default useLogic;

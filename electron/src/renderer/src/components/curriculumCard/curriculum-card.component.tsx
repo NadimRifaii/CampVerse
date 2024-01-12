@@ -15,7 +15,7 @@ const CurriculumCard = ({ curriculum }: CurriculumCardPropsType) => {
   return (
     <div className="curiculum-card">
       <div className="title">
-        <h2>Stack title: {curriculum.title}</h2>
+        <h2>{curriculum.title}</h2>
       </div>
       <div className="inputs-container">
         <h3>Technologies</h3>

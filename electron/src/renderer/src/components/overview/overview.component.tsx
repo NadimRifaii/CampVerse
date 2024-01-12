@@ -4,16 +4,11 @@ import CurriculumCard from '../curriculumCard/curriculum-card.component'
 import useLogic from './logic.hook'
 import './overview.styles.css'
 const Overview = () => {
-  const { stacksArray, curriculums, currentCurriculum, addNewStack, updateStack, currentCurriculumChangeHandler } = useLogic();
+  const { stacksArray, curriculums, currentCurriculum, addNewStack, updateStack, currentCurriculumChangeHandler, saveCurriculum } = useLogic();
   console.log(curriculums)
   return (
     <div className="overview">
       <div className="curriculum-cards-container">
-        <div className="bootcamp-curriculum-cards">
-          {
-            curriculums.map((curriculum, index) => <CurriculumCard key={index} curriculum={curriculum} />)
-          }
-        </div>
         <div className="curiculum-card">
           <div className="title">
             <InputLabel info={{ type: 'text', label: "Curriculum title", name: "Current Curriculum", value: currentCurriculum, onChange: currentCurriculumChangeHandler }} />
@@ -32,9 +27,13 @@ const Overview = () => {
           </div>
           <div className="buttons-container">
             <Button text="+ Add a stack" className='add-btn' handleClick={addNewStack} />
-            <Button text="Save" className='save-btn' />
+            <Button text="Save" handleClick={saveCurriculum} className='save-btn' />
           </div>
         </div>
+
+        {
+          curriculums.map((curriculum, index) => <CurriculumCard key={index} curriculum={curriculum} />)
+        }
       </div>
     </div>
   )

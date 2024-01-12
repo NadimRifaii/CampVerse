@@ -7,9 +7,10 @@ import (
 )
 
 type Schedule struct {
-	ID   uint   `gorm:"primarykey"`
-	Week string `json:"week" gorm:"not null;size:255;unique"`
-	Days []*Day `gorm:"foreignKey:ScheduleId"`
+	ID         uint `gorm:"primarykey"`
+	BootcampID uint
+	Week       string `json:"week" gorm:"not null;size:255;unique"`
+	Days       []*Day `gorm:"foreignKey:ScheduleId"`
 }
 type Day struct {
 	gorm.Model
@@ -45,3 +46,8 @@ func (schedule *Schedule) GetScheduleDays(db *gorm.DB) error {
 	}
 	return nil
 }
+
+/*
+a mentor can give many sessions
+a session can be given by many mentors
+*/

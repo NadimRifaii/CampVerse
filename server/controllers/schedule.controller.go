@@ -9,8 +9,9 @@ import (
 )
 
 type scheduleBody struct {
-	Week string        `json:"week"`
-	Days []*models.Day `json:"days"`
+	Week       string        `json:"week"`
+	BootcampID uint          `json:"bootcamp_id"`
+	Days       []*models.Day `json:"days"`
 }
 
 func HttpCreateSchedule(c *fiber.Ctx) error {
@@ -25,6 +26,8 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	}
 	schedule := new(models.Schedule)
 	schedule.Week = body.Week
+	schedule.BootcampID = body.BootcampID
+
 	if err := CreateRecordInDb(schedule); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}

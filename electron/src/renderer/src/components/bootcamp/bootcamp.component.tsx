@@ -37,7 +37,7 @@ const BootcampC = ({ bootcamp }: BootcampProps) => {
         <div className="details">
           <Link to={"/dashboard/details"} onClick={() => {
             dispatch(setcurrentBootcamp(bootcamp))
-          }} >See details</Link>
+          }}  >See details</Link>
         </div>
       </div>
     </div>

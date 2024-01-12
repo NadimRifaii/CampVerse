@@ -13,7 +13,7 @@ export const curriculumsDataSource = {
       throw new Error(error)
     }
   },
-  addCurriculum: async (data: {}) => {
+  addCurriculumToBootcamp: async (data: {}) => {
     try {
       const response = await sendRequest({
         body: data,

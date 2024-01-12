@@ -2,10 +2,26 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  align-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 20px;
   height: 100%;
   padding: 20px;
+  overflow-y: auto;
+}
 
+.curriculum-cards-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+.curriculum-cards-container::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+
+.curriculum-cards-container::-webkit-scrollbar-track {
+  background-color: #ccc;
 }
 
 .curriculum-cards-container .curiculum-card {
@@ -37,19 +53,24 @@
   width: 25%;
 }
 
-.add-curiculum-card .input-label input:focus+label {
+.curriculum-cards-container .input-label input:focus+label {
   color: var(--main-white-color);
 }
 
-.add-curiculum-card .input-label label.active {
+.curriculum-cards-container .input-label label.active {
   color: var(--main-white-color);
 }
 
-.bootcamp-curriculum-cards input {
-  color: var(--main-white-color);
+.curriculum-cards-container input {
+  color: var(--main-black-color);
+  width: 100%;
 }
 
-.bootcamp-curriculum-cards h2 {
+.curriculum-cards-container .curiculum-card:not(:first-child) input {
+  color: white;
+}
+
+.curriculum-cards-container h2 {
   color: var(--main-white-color);
   text-align: center;
 }
