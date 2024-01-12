@@ -7,7 +7,7 @@ import { CurrentUserContext } from '@renderer/utils/contexts/current-user.contex
 type UsersProps = {
   userType?: "user" | "student" | "mentor",
   showBtn: string,
-  bootcampUsers: [] | null
+  bootcampUsers?: [] | null
 }
 const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps) => {
   const { filteredArray: users, bootcamps, searchUsers, getBootcamps, addUserToBootcamp, fetchUsers, setBootcampUsers } = useLogic()

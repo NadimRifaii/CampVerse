@@ -5,7 +5,6 @@ import useLogic from './logic.hook'
 import './overview.styles.css'
 const Overview = () => {
   const { stacksArray, curriculums, currentCurriculum, addNewStack, updateStack, currentCurriculumChangeHandler, saveCurriculum } = useLogic();
-  console.log(curriculums)
   return (
     <div className="overview">
       <div className="curriculum-cards-container">

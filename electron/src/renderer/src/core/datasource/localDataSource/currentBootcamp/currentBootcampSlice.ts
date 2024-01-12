@@ -10,6 +10,7 @@ const initialState: CurrentBootcampType = {
     name: "",
     audience: "",
     outcomes: "",
+    numberOfWeeks: 0,
     stacks: [],
     students: [],
     mentors: []

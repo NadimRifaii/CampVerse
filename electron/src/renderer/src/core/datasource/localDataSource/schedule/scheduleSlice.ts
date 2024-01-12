@@ -15,14 +15,10 @@ export type Schedule = {
   days: Day[]
 }
 export type ScheduleSliceType = {
-  schedule: Schedule
+  schedule: Schedule[]
 }
 const initialState: ScheduleSliceType = {
-  schedule: {
-    bootcampID: 0,
-    week: "",
-    days: []
-  }
+  schedule: []
 }
 export const scheduleSlice = createSlice({
   name: "schedule",

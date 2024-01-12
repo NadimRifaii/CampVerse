@@ -4,6 +4,7 @@ export type Bootcamp = {
   name: string,
   outcomes: string,
   audience: string,
+  numberOfWeeks: number,
   mentors: [],
   students: [],
   stacks: Stack[]

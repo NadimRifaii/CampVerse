@@ -4,12 +4,18 @@ import toast from "react-hot-toast";
 const defaultCredentials = {
   name: "",
   outcomes: "",
-  audience: ""
+  audience: "",
+  numberOfWeeks: ""
 }
 const useLogic = () => {
   const [credentials, setCredentials] = useState(defaultCredentials)
   const changeHandler = (event) => {
-    setCredentials({ ...credentials, [event?.target.name]: event?.target.value })
+    if (event.target.name == "numberOfWeeks") {
+      const value = +event.target.value
+      setCredentials({ ...credentials, [event?.target.name]: value })
+    } else {
+      setCredentials({ ...credentials, [event?.target.name]: event?.target.value })
+    }
   }
   const resetFields = () => {
     setCredentials({ ...defaultCredentials })

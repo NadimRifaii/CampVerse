@@ -61,7 +61,7 @@ func HttpGetBootcampSchedule(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	cleanedData := models.CleanSchedulesData(schedules)
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedules": cleanedData})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": cleanedData})
 }
 func handleDayRecords(c *fiber.Ctx, action string, schedule *models.Schedule) error {
 	db := database.Db

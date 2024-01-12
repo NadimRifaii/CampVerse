@@ -5,10 +5,11 @@ export const scheduleDataSource = {
     try {
       const response = await sendRequest({
         body: data,
-        route: "/schedule-days",
+        route: "/schedule/bootcamp-schedule",
         method: "POST"
       })
-      return response
+
+      return response.schedule
     } catch (error: any) {
       throw new Error(error)
     }

@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { store } from './core/datasource/localDataSource/store';
 import { ActiveEditContextProvider } from './utils/contexts/active-edit-profile.context';
 import { CurrentUserContextProvider } from './utils/contexts/current-user.context';
+import "react-big-calendar/lib/css/react-big-calendar.css"
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store} >
