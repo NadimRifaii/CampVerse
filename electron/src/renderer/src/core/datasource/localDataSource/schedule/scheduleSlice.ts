@@ -29,6 +29,9 @@ export const scheduleSlice = createSlice({
   initialState,
   reducers: {
     setSchedule(state, { type, payload }: { payload: any, type: string }) {
+      if (state && type) {
+
+      }
       return {
         schedule: payload
       }

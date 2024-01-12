@@ -12,6 +12,9 @@ export const curriculumsSlice = createSlice({
   initialState,
   reducers: {
     setCurriculums(state, { type, payload }: { payload: any, type: string }) {
+      if (state && type) {
+
+      }
       return {
         ...payload
       }
