@@ -1,6 +1,6 @@
 import { sendRequest } from "@renderer/core/helpers/request"
 
-export const bootcampsDataSource = {
+export const scheduleDataSource = {
   getSchedule: async (data: {}) => {
     try {
       const response = await sendRequest({

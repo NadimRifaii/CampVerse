@@ -41,6 +41,6 @@ export const scheduleSlice = createSlice({
 export const { setSchedule } = scheduleSlice.actions
 export const schedule = scheduleSlice.name
 export default scheduleSlice.reducer
-export const extractCurriculumsSlice = (global: RootState) => {
+export const extractScheduleSlice = (global: RootState) => {
   return global[schedule]
 }

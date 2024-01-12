@@ -47,7 +47,21 @@ func HttpGetScheduleByWeek(c *fiber.Ctx) error {
 	schedule.GetScheduleDays(db)
 	handleDayRecords(c, "get", schedule)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
-
+}
+func HttpGetBootcampSchedule(c *fiber.Ctx) error {
+	var body struct {
+		BootcampID uint `json:"bootcamp_id"`
+	}
+	db := database.Db
+	if err := ValidateRequest(c, &body); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	schedules, err := models.GetBootcampSchedules(db, body.BootcampID)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	cleanedData := models.CleanSchedulesData(schedules)
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedules": cleanedData})
 }
 func handleDayRecords(c *fiber.Ctx, action string, schedule *models.Schedule) error {
 	db := database.Db

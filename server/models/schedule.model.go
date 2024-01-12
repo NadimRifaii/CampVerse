@@ -27,6 +27,14 @@ type Session struct {
 	DayId        uint
 }
 
+func GetBootcampSchedules(db *gorm.DB, bootcampID uint) ([]Schedule, error) {
+	var schedules []Schedule
+	result := db.Preload("Days.Sessions").Where("bootcamp_id = ?", bootcampID).Find(&schedules)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+	return schedules, nil
+}
 func (day *Day) GetDaySessions(db *gorm.DB) error {
 	if err := db.Model(day).Association("Sessions").Find(&day.Sessions); err != nil {
 		return err
@@ -51,3 +59,53 @@ func (schedule *Schedule) GetScheduleDays(db *gorm.DB) error {
 a mentor can give many sessions
 a session can be given by many mentors
 */
+type CleanedSchedule struct {
+	Week       string       `json:"week"`
+	BootcampID uint         `json:"bootcampID"`
+	Days       []CleanedDay `json:"days"`
+}
+
+type CleanedDay struct {
+	Day      string           `json:"day"`
+	Sessions []CleanedSession `json:"sessions"`
+}
+
+type CleanedSession struct {
+	Title     string `json:"title"`
+	StartTime string `json:"startTime"`
+	EndTime   string `json:"endTime"`
+}
+
+func CleanSchedulesData(schedules []Schedule) []CleanedSchedule {
+	var cleanedSchedules []CleanedSchedule
+
+	for _, schedule := range schedules {
+		cleanedSchedule := CleanedSchedule{
+			Week:       schedule.Week,
+			BootcampID: schedule.BootcampID,
+			Days:       make([]CleanedDay, len(schedule.Days)),
+		}
+
+		for i, day := range schedule.Days {
+			cleanedDay := CleanedDay{
+				Day:      day.Day,
+				Sessions: make([]CleanedSession, len(day.Sessions)),
+			}
+
+			for j, session := range day.Sessions {
+				cleanedSession := CleanedSession{
+					Title:     session.SessionTitle,
+					StartTime: session.StartTime,
+					EndTime:   session.EndTime,
+				}
+				cleanedDay.Sessions[j] = cleanedSession
+			}
+
+			cleanedSchedule.Days[i] = cleanedDay
+		}
+
+		cleanedSchedules = append(cleanedSchedules, cleanedSchedule)
+	}
+
+	return cleanedSchedules
+}
