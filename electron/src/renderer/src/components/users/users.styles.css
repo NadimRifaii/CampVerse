@@ -61,8 +61,8 @@ ul::-webkit-scrollbar-track {
 }
 
 .users-container .search-bar img {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   position: absolute;
   top: 50%;
   left: 10px;
@@ -74,12 +74,12 @@ ul::-webkit-scrollbar-track {
   display: block;
   padding: 8px 15px;
   border: 1px solid var(--main-black-color);
-  background-color: #050c12;
+  background-color: var(--main-white-color);
   border-radius: 5px;
   width: 250px;
   outline: none;
-  caret-color: white;
-  color: white;
+  caret-color: var(--main-black-color);
+  color: var(--main-black-color);
   font-size: 18px;
   padding-left: 35px;
   transition: .5s;
@@ -92,6 +92,7 @@ ul::-webkit-scrollbar-track {
 
 .users-container .search-bar input::placeholder {
   transition: .5;
+  color: var(--main-black-color);
 }
 
 .users-container .search-bar input:focus::placeholder {

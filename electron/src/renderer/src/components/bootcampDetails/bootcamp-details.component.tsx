@@ -5,6 +5,7 @@ import { Button } from "../common/button/button.component"
 import './bootcamp-details.styles.css'
 import Users from "../users/users.component"
 import Curriculum from "../curriculum/curriculum.component"
+import Schedule from "../schedule/schedule.component"
 const BootcampDetails = () => {
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
@@ -14,12 +15,14 @@ const BootcampDetails = () => {
         <Button text="Students" handleClick={() => setCurrentActiveComponent('student')} className={`${currentActiveComponent == "student" ? 'active' : ""}`} />
         <Button text="Mentors" handleClick={() => setCurrentActiveComponent('mentor')} className={`${currentActiveComponent == "mentor" ? 'active' : ""}`} />
         <Button text="Curriculum" handleClick={() => setCurrentActiveComponent('curriculum')} className={`${currentActiveComponent == "curriculum" ? 'active' : ""}`} />
+        <Button text="Schedule" handleClick={() => setCurrentActiveComponent('schedule')} className={`${currentActiveComponent == 'schedule' ? 'active' : ''}`} />
       </div>
       <div className="details-container">
         {
           currentActiveComponent == "student" ? <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.students} showBtn="Chat" /> :
             currentActiveComponent == "mentor" ? <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.mentors} showBtn="Chat" /> :
-              <Curriculum />
+              currentActiveComponent == "schedule" ? <Schedule /> :
+                <Curriculum />
         }
       </div>
     </div>

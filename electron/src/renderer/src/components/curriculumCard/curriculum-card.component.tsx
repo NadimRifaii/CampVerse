@@ -18,11 +18,10 @@ const CurriculumCard = ({ curriculum }: CurriculumCardPropsType) => {
         <h2>{curriculum.title}</h2>
       </div>
       <div className="inputs-container">
-        <h3>Technologies</h3>
         {
           curriculum.stacks.map((stack, index) => {
             return <InputLabel key={index} info={{
-              label: 'Stack title',
+              label: '',
               type: 'text', value: stack.name, name: `${index}`, disabled: true
             }} />
           })

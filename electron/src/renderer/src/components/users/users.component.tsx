@@ -47,7 +47,7 @@ const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps
       <div className="search-bar-container">
         <div className="search-bar">
           <input type="search" placeholder="Search..." onChange={(e) => searchUsers(e.target.value)} />
-          <img src={`http://localhost:8000/images/search.png`} alt="" />
+          <img src={`http://localhost:8000/images/black-search.png`} alt="" />
         </div>
       </div>
       <div className="holder">

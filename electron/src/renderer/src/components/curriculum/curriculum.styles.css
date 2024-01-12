@@ -57,7 +57,7 @@
   left: 0;
 }
 
-.overview-schedule .schedule {
+.overview-schedule .weeks {
   z-index: 1;
   left: -100%;
 }
@@ -67,6 +67,6 @@
   left: 100%;
 }
 
-.overview-schedule.active .schedule {
+.overview-schedule.active .weeks {
   left: 0;
 }

@@ -28,8 +28,10 @@
   padding: 20px;
   background-color: var(--main-black-color);
   border-radius: 5px;
-
 }
+
+
+
 
 .curriculum-cards-container .buttons-container {
   display: flex;

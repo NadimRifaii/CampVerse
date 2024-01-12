@@ -54,7 +54,7 @@ const EditProfile = () => {
           }
         </div>
         <div className="buttons-container">
-          <Button text="Cancle" className='cancle-btn' handleClick={() => {
+          <Button text="Cancel" className='cancle-btn' handleClick={() => {
             resetCredentials()
             if (setActive)
               setActive(false)
