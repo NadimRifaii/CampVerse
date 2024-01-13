@@ -17,9 +17,23 @@ export const messagesDataSource = {
     try {
       const response = await messagesRequest({
         body: data,
-        route: `/api/message/${data.chatId}`
+        route: `/api/message/${data.chatId}`,
+        method: "GET"
       })
       return response.messages
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  },
+  sendMessage: async (data: {}) => {
+    try {
+      const response = await messagesRequest({
+        body: data,
+        route: `/api/message`,
+        method: "POST"
+      })
+      console.log(response)
+      return response
     } catch (error: any) {
       throw new Error(error)
     }

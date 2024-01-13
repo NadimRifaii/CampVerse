@@ -11,6 +11,7 @@ const useLogic = () => {
   const [chat, setChat] = useState([])
   const [messages, setMessages] = useState([])
   const [loadingChat, setLoadingChat] = useState('')
+  const [content, setContent] = useState("")
   const fetchUsers = async () => {
     try {
       setLoadingChat('active')
@@ -23,6 +24,7 @@ const useLogic = () => {
     }
   }
   const getChatMessages = async () => {
+    console.log(chat)
     try {
       if (chat._id) {
         setLoadingChat('active')
