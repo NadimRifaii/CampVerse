@@ -1,0 +1,19 @@
+.message-container {
+  display: flex;
+}
+
+.message-container .message {
+  background-color: var(--main-black-color);
+  color: var(--main-white-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.message-container.sender {
+  justify-content: flex-end;
+}
+
+.message-container.sender .message {
+  background-color: var(--main-white-color);
+  color: var(--main-black-color)
+}

@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import useLogic from "./logic.hook"
-import { InputLabel } from '../common/inputLabel/input-label.component';
+import Message from '../message/message.component'
 import './chat.styles.css'
 const Chat = () => {
-  const { chat, user, currentUser } = useLogic()
+  const { chat, user, messages, currentUser, loadingChat } = useLogic()
   useEffect(() => {
-    console.log(chat)
-  }, [chat])
+    // console.log(chat)
+    console.log(messages)
+  }, [messages])
   return (
     <div className="chat-page">
       <div className="header">
@@ -18,7 +19,10 @@ const Chat = () => {
         </div>
       </div>
       <div className="messages-container">
-
+        {messages?.map((message, index) => {
+          return <Message key={index} content={message.content} className={`${message.sender.email == user.email ? 'sender' : ""}`} />
+        })}
+        <div className={`loading-spinner ${loadingChat} `}></div>
       </div>
       <div className="typing-input">
         <input type="text" placeholder="Enter your message" />

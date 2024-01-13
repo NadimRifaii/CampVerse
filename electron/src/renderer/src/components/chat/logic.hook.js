@@ -9,21 +9,37 @@ const useLogic = () => {
   const currentUserContext = useContext(CurrentUserContext)
   const { currentUser } = currentUserContext || {}
   const [chat, setChat] = useState([])
-  const [loadingChat, setLoadingChat] = useState(false)
+  const [messages, setMessages] = useState([])
+  const [loadingChat, setLoadingChat] = useState('')
   const fetchUsers = async () => {
-    console.log(currentUser)
     try {
+      setLoadingChat('active')
       const data = await messagesDataSource.accessChat({
         email: currentUser?.email
       })
       setChat(data)
     } catch (error) {
-      console.log(error)
+      console.log("ERROR")
+    }
+  }
+  const getChatMessages = async () => {
+    try {
+      if (chat._id) {
+        setLoadingChat('active')
+        const data = await messagesDataSource.getChatMessages({ chatId: chat._id })
+        setMessages(data)
+        setLoadingChat('')
+      }
+    } catch (error) {
+      console.log("error")
     }
   }
   useEffect(() => {
     fetchUsers()
   }, [])
-  return { chat, user, currentUser }
+  useEffect(() => {
+    getChatMessages()
+  }, [chat])
+  return { chat, messages, user, currentUser, loadingChat }
 }
 export default useLogic
