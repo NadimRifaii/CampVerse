@@ -4,7 +4,7 @@
  * latestmessage
  */
 const mongoose = require('mongoose')
-const chatSchema = mongoose.Schema(
+const ChatSchema = new mongoose.Schema(
   {
     chatName: {
       type: String,
@@ -28,5 +28,5 @@ const chatSchema = mongoose.Schema(
   timestamps: true
 }
 )
-const ChatModel = mongoose.model("Chat", chatSchema)
+const ChatModel = mongoose.model("Chat", ChatSchema)
 module.exports = ChatModel
