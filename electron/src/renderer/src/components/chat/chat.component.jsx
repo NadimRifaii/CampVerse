@@ -1,9 +1,10 @@
 import { useEffect } from "react"
 import useLogic from "./logic.hook"
 import Message from '../message/message.component'
+import ScrollableFeed from 'react-scrollable-feed'
 import './chat.styles.css'
 const Chat = () => {
-  const { chat, user, messages, currentUser, loadingChat } = useLogic()
+  const { chat, user, messages, currentUser, loadingChat, typingHandler, sendMessage, content } = useLogic()
   useEffect(() => {
     // console.log(chat)
     console.log(messages)
@@ -25,7 +26,7 @@ const Chat = () => {
         <div className={`loading-spinner ${loadingChat} `}></div>
       </div>
       <div className="typing-input">
-        <input type="text" placeholder="Enter your message" />
+        <input type="text" onChange={typingHandler} onKeyDown={sendMessage} value={content} placeholder="Enter your message" />
       </div>
     </div>
   )

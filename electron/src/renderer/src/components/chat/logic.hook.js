@@ -36,12 +36,27 @@ const useLogic = () => {
       console.log("error")
     }
   }
+  const typingHandler = (e) => {
+    setContent(e.target.value)
+    // typing indicator logic
+  }
+  const sendMessage = async (event) => {
+    if (event.key == "Enter" && content) {
+      setContent("")
+      try {
+        const response = await messagesDataSource.sendMessage({ chatId: chat._id, content: content })
+        setMessages([...messages, response.message])
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
   useEffect(() => {
     fetchUsers()
   }, [])
   useEffect(() => {
     getChatMessages()
   }, [chat])
-  return { chat, messages, user, currentUser, loadingChat }
+  return { chat, messages, user, currentUser, loadingChat, content, typingHandler, sendMessage }
 }
 export default useLogic

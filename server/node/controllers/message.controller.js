@@ -5,7 +5,6 @@ const UserModel = require("../models/user.model")
 const httpSendMessage = async (req, res) => {
   const { content, chatId } = req.body
   if (!content || !chatId) {
-    console.log("dsfjl;sdaf")
     return res.status(400).send("Invalid data passed into the request")
   }
   const newMessage = {
