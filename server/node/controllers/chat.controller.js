@@ -52,6 +52,22 @@ const httpAccessChat = async (req, res) => {
     }
   }
 }
+
+const httpGetUserChats = async (req, res) => {
+  try {
+    const chatRooms = await ChatModel.find({ users: { $elemMatch: { $eq: req.user._id } } }).populate("users").populate("latestMessage")
+      .sort({ updatedAt: -1 })
+    const populatedChatRooms = await ChatModel.populate(chatRooms, {
+      path: "latestMessage.sender",
+      select: "email",
+    });
+    return res.json({ "rooms": populatedChatRooms })
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  httpAccessChat
+  httpAccessChat,
+  httpGetUserChats
 }
