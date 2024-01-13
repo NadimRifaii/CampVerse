@@ -1,7 +1,7 @@
 const express = require('express')
-const { httpSendMessage } = require('../controllers/message.controller')
+const { httpSendMessage, httpGetChatMessages } = require('../controllers/message.controller')
 const messageRouter = express.Router()
 
 messageRouter.post("/", httpSendMessage)
-// messageRouter.get("/", httpGetChatMessages)
+messageRouter.get("/:chatId", httpGetChatMessages)
 module.exports = messageRouter

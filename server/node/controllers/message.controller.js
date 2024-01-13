@@ -16,7 +16,6 @@ const httpSendMessage = async (req, res) => {
     let message = await MessageModel.create(newMessage);
     message = await message.populate("sender", "email");
     message = await message.populate("chat")
-    console.log(message);
     message = await UserModel.populate(message, {
       path: "chat.users",
       select: "email",
@@ -29,6 +28,15 @@ const httpSendMessage = async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 }
+const httpGetChatMessages = async (req, res) => {
+  try {
+    const messages = await MessageModel.find({ chat: req.params.chatId }).populate("sender", "email").populate("chat")
+    return res.status(200).json({ "messages": messages })
+  } catch (error) {
+    return res.status(400).json({ "error": error })
+  }
+}
 module.exports = {
-  httpSendMessage
+  httpSendMessage,
+  httpGetChatMessages
 }
