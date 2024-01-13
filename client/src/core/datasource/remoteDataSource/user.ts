@@ -1,4 +1,4 @@
-import { sendRequest } from "../../helpers/request";
+import { sendRequest, sendFileRequest } from "../../helpers/request";
 export const userDataSource = {
   getUser: async (data: {}) => {
     try {
@@ -14,7 +14,7 @@ export const userDataSource = {
   },
   uploadImage: async (data: {}) => {
     try {
-      const response = await sendRequest({
+      const response = await sendFileRequest({
         body: data,
         route: "/user/profile",
         method: "POST"
@@ -24,12 +24,24 @@ export const userDataSource = {
       throw new Error(error)
     }
   },
-  updateProfile: async (data: {}) => {
+  updateProfile: async (data: any) => {
     try {
       const response = await sendRequest({
         body: data,
         route: "/user",
         method: "PUT"
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  },
+  getAllUsers: async (data: {}, userType: string) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: `/user/all-${userType}s`,
+        method: "GET"
       })
       return response
     } catch (error: any) {

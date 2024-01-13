@@ -8,12 +8,6 @@ const Curriculum = () => {
     <div className="curriculum-container">
       <div className={`overview-schedule ${currentPage == 'overview' ? '' : 'active'}`}>
         <Overview />
-        <Weeks />
-      </div>
-      <div className={`toggler ${currentPage == 'schedule' ? 'active' : ''}`} onClick={() => {
-        currentPage == "overview" ? setCurrentPage("schedule") : setCurrentPage("overview")
-      }} >
-        <div className="circle"></div>
       </div>
     </div>
   )

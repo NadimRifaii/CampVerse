@@ -21,6 +21,7 @@ type BootcampDetails struct {
 	Name             string     `json:"name"`
 	LearningOutcomes string     `json:"outcomes"`
 	TargetAudience   string     `json:"audience"`
+	NumberOfWeeks    int        `json:"numberOfWeeks"`
 	Mentors          []Response `json:"mentors"`
 	Students         []Response `json:"students"`
 }
@@ -62,6 +63,7 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 			Name:             bootcamp.Name,
 			LearningOutcomes: bootcamp.LearningOutcomes,
 			TargetAudience:   bootcamp.TargetAudiance,
+			NumberOfWeeks:    bootcamp.NumberOfWeeks,
 			Mentors:          mentors,
 			Students:         students,
 		}

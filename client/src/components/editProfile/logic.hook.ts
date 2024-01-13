@@ -14,6 +14,7 @@ const useLogic = () => {
     profilePicture: user.profilePicture,
     firstname: user.firstname,
     lastname: user.lastname,
+    role: user.role,
     ...(user.role === 'mentor' ? { speciality: user.speciality } : {}),
     ...(user.role === 'mentor' ? { position: user.position } : {})
   }

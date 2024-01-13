@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -41,6 +42,7 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 
 func (user *User) UpdateUser(db *gorm.DB, newRole string) error {
 	if user.UserRole.RoleName != newRole {
+		fmt.Println(user.UserRole.RoleName)
 		user.UpdateUserRoleByEmail(db, user.Email, newRole)
 	}
 	return db.Save(user).Error

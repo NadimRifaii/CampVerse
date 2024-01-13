@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"fmt"
+
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -32,8 +34,9 @@ func HttpGetUser(c *fiber.Ctx) error {
 	} else {
 		student := new(models.Student)
 		if err := student.GetStudentByID(db, user.ID); err != nil {
-			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
+			return Loger(c, fiber.StatusNotFound, fiber.Map{"user": user, "error": err.Error()})
 		}
+		fmt.Println("sss")
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": student})
 	}
 }
@@ -98,6 +101,7 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+	fmt.Println(body)
 	currentUser := new(models.User)
 	if err := currentUser.GetUserByEmail(body.Email, db); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
@@ -123,13 +127,9 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 		}
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
-	} else {
-		student := new(models.Student)
-		if err := student.GetStudentByID(db, currentUser.ID); err != nil {
-			return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
-		}
-		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully"})
 	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully"})
+
 }
 
 func HttpUpdateUserRole(c *fiber.Ctx) error {
