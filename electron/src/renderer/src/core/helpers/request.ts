@@ -6,7 +6,7 @@ type SendRequestRequirements = {
   method?: "GET" | "POST" | "PUT" | "DELETE";
   body?: {};
 };
-
+//REACT_APP_SERVER_GO
 
 export const sendRequest = async ({
   route,
