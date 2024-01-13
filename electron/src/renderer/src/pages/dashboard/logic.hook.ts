@@ -20,7 +20,6 @@ const useLogic = () => {
   async function getUserInfo() {
     try {
       const data = await userDataSource.getUser({})
-      console.log(data)
       dispatch(updateUser(data.info))
     } catch (error: any) {
       console.log(error)

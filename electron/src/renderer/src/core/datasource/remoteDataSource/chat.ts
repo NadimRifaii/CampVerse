@@ -1,12 +1,12 @@
-import { sendRequest } from "@renderer/core/helpers/request"
+import { messagesRequest } from "@renderer/core/helpers/request"
 
-export const authDataSource = {
-  login: async (data: {}) => {
+export const messagesDataSource = {
+  fetchMessages: async (data: {}) => {
     try {
-      const response = await sendRequest({
+      const response = await messagesRequest({
         body: data,
-        route: "/auth/login",
-        method: "POST"
+        route: "/api/chat",
+        method: "GET"
       })
       return response
     } catch (error: any) {

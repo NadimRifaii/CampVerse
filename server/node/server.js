@@ -8,11 +8,12 @@ const { chats } = require('./data/data.js')
 app.get('/', (req, res) => {
   res.send("API is running")
 })
+app.get('/api/chat', (req, res) => {
+  res.send(chats)
+})
 app.get('/api/chat/:id', (req, res) => {
   const id = req.params.id
-  console.log(id)
   const singleChat = chats.find(c => c._id == id)
-  console.log(singleChat)
   res.send(singleChat)
 })
 httpServer.listen(PORT, () => {
