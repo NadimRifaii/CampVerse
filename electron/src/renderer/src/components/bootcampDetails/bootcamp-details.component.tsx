@@ -9,7 +9,6 @@ import Schedule from "../schedule/schedule.component"
 const BootcampDetails = () => {
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
-  console.log(<Schedule />)
   return (
     <div className="bootcamp-details-container">
       <div className="toggler-header">

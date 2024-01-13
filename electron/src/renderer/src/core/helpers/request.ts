@@ -84,7 +84,7 @@ export const messagesRequest = async ({
       baseURL,
       headers: {
         Authorization: authorizationHeader,
-        "Content-Type": "multipart/form-data"
+        "Content-Type": "application/json"
       },
     });
     return response.data;

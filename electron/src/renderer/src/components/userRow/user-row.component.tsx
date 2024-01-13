@@ -4,6 +4,7 @@ import { ActiveEditContext } from '@renderer/utils/contexts/active-edit-profile.
 import { CurrentUserContext } from '@renderer/utils/contexts/current-user.context'
 import './user-row.styles.css'
 import { User } from '@renderer/core/types/user'
+import { useNavigate } from 'react-router-dom'
 type UserRowProps = {
   info: User,
   activeBootcamp?: string | boolean
@@ -13,6 +14,7 @@ type UserRowProps = {
 const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowProps) => {
   const activeEditContext = useContext(ActiveEditContext)
   const currentUserContext = useContext(CurrentUserContext)
+  const navigate = useNavigate()
   const { setCurrentUser } = currentUserContext || {};
   const { active, setActive } = activeEditContext || {};
   return (
@@ -45,7 +47,10 @@ const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowPr
                 setActiveBootcamp(true)
               }
             }} />
-            : <Button text='Chat' />
+            : <Button text='Chat' handleClick={() => {
+              setCurrentUser(info)
+              navigate("/dashboard/chat")
+            }} />
         }
       </div>
     </div>

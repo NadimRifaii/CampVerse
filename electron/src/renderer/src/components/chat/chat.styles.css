@@ -1,0 +1,34 @@
+.chat-page .header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background-color: white;
+  margin-bottom: 0;
+  padding: 5px 15px;
+}
+
+.chat-page .messages-container {
+  background-color: #ccc;
+  height: 680px;
+  overflow-y: auto;
+}
+
+.chat-page .header .user-profile {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.chat-page .typing-input {
+  height: 45px;
+  background-color: black;
+}
+
+.chat-page .typing-input input {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 15px;
+}

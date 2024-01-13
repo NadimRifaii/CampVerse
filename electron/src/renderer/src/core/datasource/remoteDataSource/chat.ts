@@ -1,16 +1,16 @@
 import { messagesRequest } from "@renderer/core/helpers/request"
 
 export const messagesDataSource = {
-  fetchMessages: async (data: {}) => {
+  accessChat: async (data: {}) => {
     try {
       const response = await messagesRequest({
         body: data,
         route: "/api/chat",
-        method: "GET"
+        method: "POST"
       })
       return response
     } catch (error: any) {
       throw new Error(error)
     }
-  },
+  }
 }

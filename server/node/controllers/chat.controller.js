@@ -5,7 +5,7 @@ const httpAccessChat = async (req, res) => {
   const { email } = req.body
   let user = null;
   if (!email) {
-    throw new Error("Email not provided")
+    return res.status(400).json({ "error": "email not provided" })
   } else {
     user = await UserModel.findOne({ email });
     // If user doesn't exist, create a new user
@@ -46,7 +46,7 @@ const httpAccessChat = async (req, res) => {
     try {
       const createdChat = await ChatModel.create(chatData);
       const fullChat = await ChatModel.findOne({ _id: createdChat._id }).populate("users")
-      return res.status(200).contentType('application/json').json({ createdChat: fullChat })
+      return res.status(200).contentType('application/json').json({ fullChat })
     } catch (error) {
       return res.status(400).json({ "error": error })
     }
