@@ -1,7 +1,7 @@
 const express = require('express')
-const { httpAccessChat, httpGetUserChats } = require('../controllers/chat.controller.js')
+const { httpSendMessage } = require('../controllers/message.controller')
 const messageRouter = express.Router()
 
-chatRouter.post("/", httpAccessChat)
-chatRouter.get("/", httpGetUserChats)
+messageRouter.post("/", httpSendMessage)
+// messageRouter.get("/", httpGetChatMessages)
 module.exports = messageRouter
