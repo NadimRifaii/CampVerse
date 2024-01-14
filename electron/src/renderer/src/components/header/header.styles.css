@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 .notification {
@@ -23,6 +24,18 @@
   background-color: #ffffffa8;
   cursor: pointer;
 
+}
+
+.profile-notification-container .notification {
+  position: relative;
+}
+
+.profile-notification-container .notification span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 .profile {

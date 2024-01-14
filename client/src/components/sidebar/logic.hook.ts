@@ -31,7 +31,7 @@ const useLogic = () => {
       icon: ResultsIcon
     },
     {
-      text: "Schedule",
+      text: "schedule",
       icon: ScheduleIcon
     }
   ]

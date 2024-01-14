@@ -8,7 +8,20 @@ export const messagesDataSource = {
         route: "/api/chat",
         method: "POST"
       })
-      return response
+      const { _id, chatName, users, latestMessage } = response
+      console.log({
+        _id,
+        chatName,
+        users,
+        latestMessage
+      })
+      // return response
+      return {
+        _id,
+        chatName,
+        users,
+        latestMessage
+      }
     } catch (error: any) {
       throw new Error(error)
     }

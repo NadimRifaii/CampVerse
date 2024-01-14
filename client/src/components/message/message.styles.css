@@ -1,0 +1,21 @@
+.message-container {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.message-container .message {
+  background-color: var(--main-black-color);
+  color: var(--main-white-color);
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 50%;
+}
+
+.message-container.sender {
+  justify-content: flex-end;
+}
+
+.message-container.sender .message {
+  background-color: var(--main-white-color);
+  color: var(--main-black-color)
+}

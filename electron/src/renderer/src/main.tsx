@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './core/datasource/localDataSource/store';
 import { ActiveEditContextProvider } from './utils/contexts/active-edit-profile.context';
 import { CurrentUserContextProvider } from './utils/contexts/current-user.context';
+import { NotificationsContextProvider } from './utils/contexts/notifications.context';
 import "react-big-calendar/lib/css/react-big-calendar.css"
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -12,7 +13,9 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store} >
       <CurrentUserContextProvider>
         <ActiveEditContextProvider>
-          <App />
+          <NotificationsContextProvider>
+            <App />
+          </NotificationsContextProvider>
         </ActiveEditContextProvider>
       </CurrentUserContextProvider>
     </Provider>

@@ -5,9 +5,11 @@ import ArrowUp from '../../assets/arrow-up.component.jsx'
 import ArrowDown from '../../assets/arrow-down.component.jsx'
 import Dropdown from '../dropdown/dropdown.component'
 import { ActiveEditContext } from '../../utils/contexts/active-edit-profile.context'
-import { useContext, useEffect } from 'react'
+import Notifications from '../../components/notifications/notifications.component'
+import { useContext, useEffect, useState } from 'react'
 const Header = () => {
-  const { user, dropdownActive, setDropdownActive } = useLogic()
+  const { user, dropdownActive, setDropdownActive, notifications } = useLogic()
+  const [activeNotification, setActiveNotification] = useState(false)
   const activeEditContext = useContext(ActiveEditContext)
 
   const { active, setActive } = activeEditContext || {};
@@ -18,11 +20,17 @@ const Header = () => {
   }, [active])
   return (
     <div className="header">
+
       <h1>Dashboard</h1>
       <div className="profile-notification-container">
-        <div className="notification">
+        <div className="notification" onClick={() => setActiveNotification(!activeNotification)} >
           <BellIcon />
+          <span>{notifications.length}</span>
         </div>
+        {/* {
+          activeNotification ? <Notifications /> : ''
+        } */}
+        <Notifications className={activeNotification ? 'active' : ''} />
         <div className={`profile ${dropdownActive ? 'active' : ""} `}>
           <div className="image">
             <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />

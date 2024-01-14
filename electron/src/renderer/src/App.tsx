@@ -9,6 +9,7 @@ import CreateBootcamp from './components/createBootcamp/create-bootcamp.componen
 import Users from './components/users/users.component'
 import BootcampDetails from './components/bootcampDetails/bootcamp-details.component'
 import Chat from './components/chat/chat.component'
+
 function App(): JSX.Element {
 
   return (

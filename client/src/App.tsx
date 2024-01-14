@@ -6,6 +6,8 @@ import { Toaster } from 'react-hot-toast'
 import { LandingPage } from './pages/LandingPage/landing-page.component';
 import { SideBar } from './components/sidebar/sidebar.component';
 import DashBoard from './pages/dashboard/dashboard.component';
+import Chat from './components/chat/chat.component';
+import Users from './components/users/users.component';
 function App() {
   return (
     <div className="page">
@@ -16,9 +18,10 @@ function App() {
         <Route path='/dashboard' element={<DashBoard />}>
           <Route index element={<h1>Assignments</h1>} />
           <Route path='/dashboard/Assignments' element={<h1>Assignments</h1>} />
-          <Route path='/dashboard/Users' element={<h1>Users</h1>} />
+          <Route path='/dashboard/Users' element={<Users />} />
           <Route path='/dashboard/Results' element={<h1>Results</h1>} />
           <Route path='/dashboard/Schedule' element={<h1>Schedule</h1>} />
+          <Route path={'/dashboard/chat'} element={<Chat />} />
         </Route>
       </Routes>
     </div>

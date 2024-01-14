@@ -3,6 +3,7 @@ import { CurrentBootcampType } from "../datasource/localDataSource/currentBootca
 import { CurriculumSliceType } from "../datasource/localDataSource/curriculums/curriculumsSlice"
 import { ScheduleSliceType } from "../datasource/localDataSource/schedule/scheduleSlice"
 import { UsersSliceType } from "../datasource/localDataSource/users/usersSlice"
+import { ChatType } from "./chatType"
 import { User } from "./user"
 
 export type RootState = {
@@ -11,5 +12,6 @@ export type RootState = {
   users: UsersSliceType,
   currentBootcam: CurrentBootcampType,
   curriculums: CurriculumSliceType,
-  schedule: ScheduleSliceType
+  schedule: ScheduleSliceType,
+  chat: ChatType
 }

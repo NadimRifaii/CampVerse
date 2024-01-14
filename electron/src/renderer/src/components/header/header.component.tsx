@@ -3,13 +3,14 @@ import BellIcon from '../../assets/bell-icon.component.jsx'
 import ArrowUp from '../../assets/arrow-up.component.jsx'
 import ArrowDown from '../../assets/arrow-down.component.jsx'
 import Dropdown from '../dropdown/dropdown.component'
-import { useContext, useEffect } from 'react'
+import Notifications from '../notifications/notifications.component.jsx'
+import { useContext, useEffect, useState } from 'react'
 import { ActiveEditContext } from '@renderer/utils/contexts/active-edit-profile.context'
 import useLogic from './logic.hook'
 const Header = () => {
-  const { user, dropdownActive, setDropdownActive } = useLogic()
+  const { user, dropdownActive, setDropdownActive, notifications } = useLogic()
   const activeEditContext = useContext(ActiveEditContext)
-
+  const [activeNotification, setActiveNotification] = useState(false)
   const { active } = activeEditContext || {};
 
   useEffect(() => {
@@ -20,9 +21,14 @@ const Header = () => {
     <div className="header">
       <h1>Dashboard</h1>
       <div className="profile-notification-container">
-        <div className="notification">
+        <div className="notification" onClick={() => setActiveNotification(!activeNotification)} >
           <BellIcon />
+          <span>{notifications.length}</span>
         </div>
+        {/* {
+          activeNotification ? <Notifications /> : ''
+        } */}
+        <Notifications className={activeNotification?'active':''} />
         <div className={`profile ${dropdownActive ? 'active' : ""} `}>
           <div className="image">
             <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />

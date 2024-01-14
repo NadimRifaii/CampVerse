@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './core/datasource/localDataSource/store';
 import { ActiveEditContextProvider } from './utils/contexts/active-edit-profile.context';
+import { NotificationsContextProvider } from './utils/contexts/notifications.context';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -15,7 +16,9 @@ root.render(
     <Provider store={store}>
       <ActiveFormContextProvider>
         <ActiveEditContextProvider>
+          <NotificationsContextProvider>
           <App />
+          </NotificationsContextProvider>
         </ActiveEditContextProvider>
       </ActiveFormContextProvider>
     </Provider>

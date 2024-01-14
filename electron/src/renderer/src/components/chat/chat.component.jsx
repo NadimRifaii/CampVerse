@@ -5,10 +5,6 @@ import ScrollableFeed from 'react-scrollable-feed'
 import './chat.styles.css'
 const Chat = () => {
   const { chat, user, messages, currentUser, loadingChat, typingHandler, sendMessage, content } = useLogic()
-  useEffect(() => {
-    // console.log(chat)
-    console.log(messages)
-  }, [messages])
   return (
     <div className="chat-page">
       <div className="header">
@@ -20,6 +16,11 @@ const Chat = () => {
         </div>
       </div>
       <div className="messages-container">
+        <div className={`typing-bullets  `}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         {messages?.map((message, index) => {
           return <Message key={index} content={message.content} className={`${message.sender.email == user.email ? 'sender' : ""}`} />
         })}

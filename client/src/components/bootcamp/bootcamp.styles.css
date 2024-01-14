@@ -1,0 +1,26 @@
+.bootcamp {
+  border-radius: 10px;
+  background-color: #fff;
+  overflow: hidden;
+  max-width: 300px;
+}
+
+.image-holder img {
+  height: 120%;
+}
+
+.bootcamp .name {
+  color: var(--main-black-color)
+}
+
+.name-details-holder {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.name-details-holder a {
+  text-decoration: none;
+  color: var(--main-black-color);
+}

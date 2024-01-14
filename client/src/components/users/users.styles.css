@@ -1,0 +1,185 @@
+.users-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--main-black-color);
+  width: 600px;
+  height: 386px;
+
+  overflow-y: auto;
+  border-radius: 5px;
+}
+
+.users-container::-webkit-scrollbar,
+ul::-webkit-scrollbar {
+  width: 12px;
+}
+
+.users-container::-webkit-scrollbar-thumb,
+ul::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+
+.users-container::-webkit-scrollbar-track,
+ul::-webkit-scrollbar-track {
+  background-color: #ccc;
+}
+
+
+.users-container .holder {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.users-container h1 {
+  color: white;
+  text-align: center;
+}
+
+.users-container .search-bar-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background-color: var(--main-black-color);
+  margin-top: -3px;
+  padding: 20px;
+}
+
+.users-container .search-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 250px;
+  position: relative;
+  margin-left: auto;
+}
+
+.users-container .search-bar img {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: .5s;
+}
+
+.users-container .search-bar input {
+  display: block;
+  padding: 8px 15px;
+  border: 1px solid var(--main-black-color);
+  background-color: var(--main-white-color);
+  border-radius: 5px;
+  width: 250px;
+  outline: none;
+  caret-color: var(--main-black-color);
+  color: var(--main-black-color);
+  font-size: 18px;
+  padding-left: 35px;
+  transition: .5s;
+}
+
+.users-container .search-bar input:focus {
+  padding-left: 10px;
+  box-shadow: 0 0 0 2px var(--main-white-color);
+}
+
+.users-container .search-bar input::placeholder {
+  transition: .5;
+  color: var(--main-black-color);
+}
+
+.users-container .search-bar input:focus::placeholder {
+  opacity: 0;
+}
+
+.users-container .search-bar input:focus+img {
+  opacity: 0;
+}
+
+.users-container .bootcamps-list {
+  position: absolute;
+  top: -250%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ece8efd1;
+  color: var(--main-black-color);
+  width: 300px;
+  border-radius: 5px;
+  padding: 10px;
+  ;
+}
+
+.users-container .bootcamps-list.active {
+  top: 50%;
+}
+
+.users-container .bootcamps-list ul {
+  height: 148px;
+  overflow-y: auto;
+
+}
+
+.users-container .bootcamps-list ul li {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid var(--main-black-color);
+  cursor: pointer;
+  position: relative;
+
+  transition: .5s;
+}
+
+.users-container .bootcamps-list h3 {
+  text-align: center;
+  color: var(--main-black-color);
+}
+
+.users-container .bootcamps-list ul li span {
+  position: relative;
+  z-index: 2;
+  color: var(--main-black-color);
+  transition: .5s;
+}
+
+.users-container .bootcamps-list ul li:not(:last-child) {
+  border-bottom: 1px solid var(--main-black-color)
+}
+
+.users-container .bootcamps-list ul li::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0px;
+  background-color: var(--main-black-color);
+  transition: .5s;
+}
+
+.users-container .bootcamps-list ul li.active span {
+  color: var(--main-white-color);
+}
+
+.users-container .bootcamps-list ul li.active::before {
+  width: 100%;
+}
+
+.users-container .bootcamps-list button {
+  margin: auto;
+  width: 100px;
+  margin-top: 10px;
+  color: var(--main-white-color);
+  background-color: #0235488c;
+  border-radius: 5px;
+}
+
+.users-container .bootcamps-list button.active {
+  background-color: var(--main-blue-color)
+}

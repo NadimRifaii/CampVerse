@@ -40,7 +40,8 @@
     "react-router-dom": "^6.21.1",
     "react-scrollable-feed": "^2.0.1",
     "react-super-responsive-table": "^5.2.2",
-    "redux": "^5.0.1"
+    "redux": "^5.0.1",
+    "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^1.0.1",
