@@ -4,6 +4,7 @@ import './bootcamps.styles.css'
 import useLogic from "./logic.hook"
 const Bootcamps = () => {
   const { bootcamps } = useLogic()
+
   return (
     <div className="bootcamps-container">
       {

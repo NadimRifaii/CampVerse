@@ -2,7 +2,7 @@ const ChatModel = require("../models/chat.model")
 const UserModel = require("../models/user.model")
 
 const httpAccessChat = async (req, res) => {
-  const { email } = req.body
+  const { email, profilePicture, username, firstname, lastname, role } = req.body
   let user = null;
   if (!email) {
     return res.status(400).json({ "error": "email not provided" })
@@ -12,6 +12,11 @@ const httpAccessChat = async (req, res) => {
     if (!user) {
       user = new UserModel({
         email: email,
+        profilePicture: profilePicture,
+        firstname: firstname,
+        lastname: lastname,
+        username: username,
+        role: role
       });
       try {
         await user.save();
@@ -20,23 +25,21 @@ const httpAccessChat = async (req, res) => {
       }
     }
   }
-  let isChat = await ChatModel.find(
-    {
-      isGroupChat: false,
-      $and: [
-        {
-          users: { $elemMatch: { $eq: req.user._id } },
-          users: { $elemMatch: { $eq: user._id } }
-        }
-      ]
-    }
-  ).populate("users").populate("latestMessage")
+
+  let isChat = await ChatModel.find({
+    isGroupChat: false,
+    users: { $all: [req.user._id, user._id] }
+  }).populate("users").populate("latestMessage");
+
   isChat = await UserModel.populate(isChat, {
     path: "latestMessage.sender",
     select: "email"
-  })
+  });
+
+
   if (isChat.length > 0) {
     return res.send(isChat[0])
+    // return res.status(200).json({ "chat exists": isChat[0], "user1": req.user, "user2": user })
   } else {
     const chatData = {
       chatName: "sender",

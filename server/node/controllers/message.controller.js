@@ -14,7 +14,11 @@ const httpSendMessage = async (req, res) => {
   }
   try {
     let message = await MessageModel.create(newMessage);
-    message = await message.populate("sender", "email");
+    // message = await message.populate("sender", "email");
+    message = await message.populate({
+      path: "sender",
+      model: "User",
+    })
     message = await message.populate("chat")
     message = await UserModel.populate(message, {
       path: "chat.users",

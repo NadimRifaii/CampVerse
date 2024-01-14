@@ -19,9 +19,17 @@ export const chatSlice = createSlice({
         chat: payload
       }
     },
+    removeChat(state, { type, payload }: { payload: any, type: string }) {
+      if (type && payload) {
+
+      }
+      return {
+        chat: {}
+      }
+    },
   }
 })
-export const { setChatX } = chatSlice.actions
+export const { setChatX, removeChat } = chatSlice.actions
 export const chat = chatSlice.name
 export default chatSlice.reducer
 export const extractChatSlice = (global: RootState) => {

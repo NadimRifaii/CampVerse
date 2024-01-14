@@ -5,10 +5,16 @@
   width: 300px;
   max-height: 200px;
   overflow-y: auto;
-  background-color: #ccc;
+  background-color: var(--main-black-color);
   padding: 5px;
   z-index: 100;
   display: none;
+  color: var(--main-white-color);
+  text-align: center;
+}
+
+.notifications-container p {
+  margin: 0;
 }
 
 .notifications-container.active {
@@ -16,11 +22,30 @@
 }
 
 .notifications-container .info {
-  background-color: white;
-  padding: 5px;
+  background-color: var(--main-white-color);
+  color: var(--main-black-color);
+  padding: 2px;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .notifications-container .info:last-child {
   margin-bottom: 0px;
+}
+
+.notifications-container .info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.notifications-container .info .profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.notifications-container .info .profile img {
+  border-radius: 50%;
 }

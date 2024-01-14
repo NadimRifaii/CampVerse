@@ -4,18 +4,18 @@ import Message from '../message/message.component'
 
 import './chat.styles.css'
 const Chat = () => {
-  const { chat, user, messages, currentUser, loadingChat, typingHandler, sendMessage, content } = useLogic()
+  const { chat, user, messages, currentUser, loadingChat, content, messagesContainerRef, typingHandler, sendMessage, } = useLogic()
   return (
     <div className="chat-page">
       <div className="header">
         <div className="user-profile">
-          <img src={`http://localhost:8000/images/default_profile_picture`} alt="" />
+          <img src={`http://localhost:8000/images/${currentUser.profilePicture}`} alt="" />
         </div>
         <div className="user-name">
-          `admin`
+          {currentUser.username}
         </div>
       </div>
-      <div className="messages-container">
+      <div className="messages-container" ref={messagesContainerRef}>
         <div className={`typing-bullets  `}>
           <span></span>
           <span></span>

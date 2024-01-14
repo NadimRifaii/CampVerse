@@ -34,9 +34,9 @@ func HttpGetUser(c *fiber.Ctx) error {
 	} else {
 		student := new(models.Student)
 		if err := student.GetStudentByID(db, user.ID); err != nil {
+			fmt.Println("sss")
 			return Loger(c, fiber.StatusNotFound, fiber.Map{"user": user, "error": err.Error()})
 		}
-		fmt.Println("sss")
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": student})
 	}
 }

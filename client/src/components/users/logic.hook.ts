@@ -1,13 +1,27 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast"
+import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { UsersSliceType, extractUsersSlice, setUsers } from "../../core/datasource/localDataSource/users/usersSlice"
 import { userDataSource } from "../../core/datasource/remoteDataSource/user"
-import { bootcampsDataSource } from "../../core/datasource/remoteDataSource/bootcamps"
-import { setBootcamps } from "../../core/datasource/localDataSource/bootcamps/bootcampsSlice"
+import { CurrentBootcampType, extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
+import { User } from "../../core/types/user"
 const useLogic = () => {
   const dispatch = useDispatch()
   const { users }: UsersSliceType = useSelector(extractUsersSlice)
+  const user = useSelector(extractUserSlice)
+  const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
+  useEffect(() => {
+    const allUsers: User[] = [...currentBootcamp.students, ...currentBootcamp.mentors]
+    console.log(user)
+    for (let i = 0; i < allUsers.length; i++) {
+      if (allUsers[i].email == user.email) {
+        allUsers.splice(i, 1)
+        break;
+      }
+    }
+    dispatch(setUsers(allUsers))
+  }, [currentBootcamp])
   let [filteredArray, setFilteredArray] = useState(users)
   useEffect(() => {
     setFilteredArray(users)

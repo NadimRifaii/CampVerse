@@ -1,12 +1,12 @@
 import { messagesDataSource } from "@renderer/core/datasource/remoteDataSource/chat";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { extractUserSlice } from "@renderer/core/datasource/localDataSource/user/userSlice";
-import { extractChatSlice, setChatX } from "@renderer/core/datasource/localDataSource/chat/chatSlice"
+import { extractChatSlice, setChatX, removeChat } from "@renderer/core/datasource/localDataSource/chat/chatSlice"
 import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { CurrentUserContext } from "@renderer/utils/contexts/current-user.context";
 import io from 'socket.io-client';
-const ENDPOINT = `http://localhost:5000`;
+const ENDPOINT = `http://localhost:5000`;//
 let socket;
 let selectedChatCompare;
 
@@ -16,9 +16,6 @@ const useLogic = () => {
   const { currentUser } = currentUserContext || {};
   const { chat } = useSelector(extractChatSlice)
   const dispatch = useDispatch()
-  useEffect(() => {
-    console.log(chat)
-  }, [chat])
   const [messages, setMessages] = useState([]);
   const [loadingChat, setLoadingChat] = useState('');
   const [content, setContent] = useState("");
@@ -37,21 +34,29 @@ const useLogic = () => {
     // Clean up socket connection on component unmount
     return () => {
       socket.disconnect();
+      dispatch(removeChat({}))
     };
-  });
+  }, [user]);
 
   // Fetch users function with error handling and logging
   const fetchUsers = async () => {
-    try {
-      setLoadingChat('active');
-      const data = await messagesDataSource.accessChat({
-        email: currentUser?.email
-      });
-      dispatch(setChatX(data))
-      selectedChatCompare = data; // Move this line here
-    } catch (error) {
-      console.error("Error fetching users:", error);
-      setLoadingChat('');
+    if (currentUser) {
+      try {
+        setLoadingChat('active');
+        const data = await messagesDataSource.accessChat({
+          email: currentUser?.email,
+          username: currentUser?.username,
+          firstname: currentUser?.firstname,
+          lastname: currentUser?.lastname,
+          profilePicture: currentUser?.profilePicture,
+          role: currentUser?.role
+        });
+        dispatch(setChatX(data))
+        selectedChatCompare = data; // Move this line here
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        setLoadingChat('');
+      }
     }
   };
 
@@ -86,23 +91,25 @@ const useLogic = () => {
     }
   };
 
-  // Fetch users on component mount
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [currentUser]);
 
-  // Get chat messages when the chat changes
+  useEffect(() => {
+    console.log(chat)
+  }, [chat])
+
   useEffect(() => {
     getChatMessages();
   }, [chat]);
 
-  // Listen for new messages
   useEffect(() => {
     const handleNewMessage = (newMessageRecieved) => {
       if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
         // notification logic
       } else {
         setMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
+        scrollToBottom()
       }
     };
     socket.on("message received", handleNewMessage);
@@ -111,7 +118,6 @@ const useLogic = () => {
     };
   }, [selectedChatCompare, messages]);
 
-  // Return the necessary variables and functions
   return { chat, messages, user, currentUser, loadingChat, content, typingHandler, sendMessage };
 };
 

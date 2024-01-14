@@ -172,10 +172,13 @@ func checkExistingEmail(result *gorm.DB) error {
 }
 func createJwtToken(user *models.User, roleName string) *jwt.Token {
 	return jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"exp":      time.Now().Add(time.Hour).Unix(),
-		"role":     roleName,
-		"username": user.UserName,
-		"email":    user.Email,
+		"exp":            time.Now().Add(time.Hour).Unix(),
+		"role":           roleName,
+		"username":       user.UserName,
+		"firstname":      user.FirstName,
+		"lastname":       user.LastName,
+		"email":          user.Email,
+		"profilePicture": user.ProfilePicture,
 	})
 }
 func getRoleId(userRole *models.UserRole, roleName string) {

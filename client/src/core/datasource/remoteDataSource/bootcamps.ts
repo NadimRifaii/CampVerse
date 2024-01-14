@@ -8,7 +8,6 @@ export const bootcampsDataSource = {
         route: "/bootcamp/user-bootcamps",
         method: "GET"
       })
-      console.log(response)
       return response
     } catch (error: any) {
       throw new Error(error)

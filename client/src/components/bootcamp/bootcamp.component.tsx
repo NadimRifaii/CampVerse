@@ -3,15 +3,18 @@ import './bootcamp.styles.css';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Bootcamp } from '../../core/types/bootcamp';
-import { setcurrentBootcamp } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice';
+import { CurrentBootcampType, extractcurrentBootcampSlice, setcurrentBootcamp } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice';
+import { currentBootcampSlice } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice';
 type BootcampProps = {
   bootcamp: Bootcamp;
 };
 
 const BootcampC = ({ bootcamp }: BootcampProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
+  console.log(currentBootcamp)
   const dispatch = useDispatch()
   const handleImageLoad = () => {
     setImageLoaded(true);

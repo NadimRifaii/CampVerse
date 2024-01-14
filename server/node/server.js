@@ -62,7 +62,6 @@ async function startServer() {
         if (user.email == newMessageReceived.sender.email)
           return
         socket.in(user.email).emit("message received", newMessageReceived)
-        console.log(user.email === socket.id)
         if (user.email === socket.id) {
           io.to(user.email).emit("notification", {
             type: "new_message",

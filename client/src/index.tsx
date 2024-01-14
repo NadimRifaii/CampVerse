@@ -8,19 +8,22 @@ import { Provider } from 'react-redux';
 import { store } from './core/datasource/localDataSource/store';
 import { ActiveEditContextProvider } from './utils/contexts/active-edit-profile.context';
 import { NotificationsContextProvider } from './utils/contexts/notifications.context';
+import { CurrentUserContextProvider } from './utils/contexts/current-user.context';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <ActiveFormContextProvider>
-        <ActiveEditContextProvider>
-          <NotificationsContextProvider>
-          <App />
-          </NotificationsContextProvider>
-        </ActiveEditContextProvider>
-      </ActiveFormContextProvider>
+      <CurrentUserContextProvider>
+        <ActiveFormContextProvider>
+          <ActiveEditContextProvider>
+            <NotificationsContextProvider>
+              <App />
+            </NotificationsContextProvider>
+          </ActiveEditContextProvider>
+        </ActiveFormContextProvider>
+      </CurrentUserContextProvider>
     </Provider>
   </BrowserRouter>
 );

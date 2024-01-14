@@ -3,6 +3,10 @@
   margin-bottom: 10px;
 }
 
+.message-container p {
+  margin: 0;
+}
+
 .message-container .message {
   background-color: var(--main-black-color);
   color: var(--main-white-color);

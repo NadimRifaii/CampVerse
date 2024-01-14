@@ -9,12 +9,15 @@ export const messagesDataSource = {
         method: "POST"
       })
       const { _id, chatName, users, latestMessage } = response
+      console.log("#####From messageRequest")
+      console.log(data)
       console.log({
         _id,
         chatName,
         users,
         latestMessage
       })
+      console.log("#####From messageRequest")
       // return response
       return {
         _id,

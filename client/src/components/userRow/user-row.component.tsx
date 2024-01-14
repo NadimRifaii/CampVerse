@@ -49,7 +49,7 @@ const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowPr
             }} />
             : <Button text='Chat' handleClick={() => {
               setCurrentUser(info)
-              navigate("/dashboard/chat")
+              navigate('/dashboard/chat')
             }} />
         }
       </div>

@@ -14,12 +14,19 @@ const authMiddleware = async (req, res, next) => {
       if (!user) {
         user = new UserModel({
           email: decoded.email,
+          profilePicture: decoded.profilePicture,
+          firstname: decoded.firstname,
+          lastname: decoded.lastname,
+          username: decoded.username,
+          role: decoded.role
         });
+        console.log(decoded)
         await user.save();
       }
       req.user = user;
       next();
     } catch (err) {
+      console.log(err)
       return res.status(401).send("Unauthorized");
     }
   }

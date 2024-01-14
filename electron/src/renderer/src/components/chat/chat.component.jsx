@@ -5,6 +5,7 @@ import ScrollableFeed from 'react-scrollable-feed'
 import './chat.styles.css'
 const Chat = () => {
   const { chat, user, messages, currentUser, loadingChat, typingHandler, sendMessage, content } = useLogic()
+
   return (
     <div className="chat-page">
       <div className="header">
@@ -15,7 +16,7 @@ const Chat = () => {
           {currentUser.username}
         </div>
       </div>
-      <div className="messages-container">
+      <div className="messages-container" >
         <div className={`typing-bullets  `}>
           <span></span>
           <span></span>
