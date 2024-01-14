@@ -8,6 +8,7 @@ import { SideBar } from './components/sidebar/sidebar.component';
 import DashBoard from './pages/dashboard/dashboard.component';
 import Chat from './components/chat/chat.component';
 import Users from './components/users/users.component';
+import Bootcamps from './components/bootcamps/bootcamps.component';
 function App() {
   return (
     <div className="page">
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path='/auth' element={<AuthPage />} />
         <Route path='/' element={<LandingPage />} />
+        <Route path="/home" element={<Bootcamps />} />
         <Route path='/dashboard' element={<DashBoard />}>
           <Route index element={<h1>Assignments</h1>} />
           <Route path='/dashboard/Assignments' element={<h1>Assignments</h1>} />

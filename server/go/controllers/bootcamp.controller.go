@@ -46,7 +46,7 @@ func HttpGetUserBootcamps(c *fiber.Ctx) error {
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-	bootcamps, err := user.GetUserBootcamps(db)
+	bootcamps, err := user.GetAllBootcampsWithCleanedData(db)
 	if err != nil {
 		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
 	}

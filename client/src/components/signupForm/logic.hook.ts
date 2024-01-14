@@ -59,9 +59,8 @@ export const useLogic = () => {
   function handleSignup(data: any) {
     dispatch(setUser(data.user))
     setGoogleSignUpComplete(false);
-
     setCredentials({ ...defaultCredentials })
-    navigate("/dashboard")
+    navigate("/home")
   }
   const signupClick = async () => {
     const loadingToastId = toast.loading('Logging in...');

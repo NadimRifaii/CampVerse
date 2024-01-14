@@ -137,13 +137,54 @@ func (u *User) DeleteUser(db *gorm.DB) error {
 	return nil
 }
 
-/**
-updating a user role
-if user.role == body.role , just update profile
+func (u *User) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]BootcampDetails, error) {
+	var bootcampDetailsList []BootcampDetails
 
-if user.role != body.role{
-	if user.role==mentor && body.role==student => delete the mentor record and create a new student record
+	// Fetch the user with associated bootcamps and related data
+	if err := db.Preload("Bootcamp").Preload("Bootcamp.Stacks").Preload("Bootcamp.Users.UserRole").Where("id = ?", u.ID).Find(u).Error; err != nil {
+		return nil, err
+	}
 
-	if user.role==student && body.role==mentor => delete the student record and create a new mentor record
+	for _, bootcamp := range u.Bootcamp {
+		var mentors []Response
+		var students []Response
+
+		for _, user := range bootcamp.Users {
+			cleanedUser := Response{
+				ID:             user.ID,
+				UserName:       user.UserName,
+				FirstName:      user.FirstName,
+				LastName:       user.LastName,
+				Email:          user.Email,
+				Role:           user.UserRole.RoleName,
+				ProfilePicture: user.ProfilePicture,
+			}
+
+			if cleanedUser.Role == "mentor" {
+				mentor := new(Mentor)
+				mentor.GetMentorByID(db, cleanedUser.ID)
+				cleanedUser.Speciality = mentor.Speciality
+				cleanedUser.Position = mentor.Position
+				mentors = append(mentors, cleanedUser)
+			} else {
+				cleanedUser.Speciality = ""
+				cleanedUser.Position = ""
+				students = append(students, cleanedUser)
+			}
+		}
+
+		bootcampDetails := BootcampDetails{
+			ID:               bootcamp.ID,
+			Name:             bootcamp.Name,
+			LearningOutcomes: bootcamp.LearningOutcomes,
+			TargetAudience:   bootcamp.TargetAudiance,
+			NumberOfWeeks:    bootcamp.NumberOfWeeks,
+			Mentors:          mentors,
+			Students:         students,
+		}
+
+		bootcampDetailsList = append(bootcampDetailsList, bootcampDetails)
+	}
+
+	return bootcampDetailsList, nil
 }
-*/

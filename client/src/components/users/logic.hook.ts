@@ -20,18 +20,6 @@ const useLogic = () => {
       console.log(error)
     }
   }
-  const setBootcampUsers = (bootcampUsers: []) => {
-    dispatch(setUsers(bootcampUsers))
-  }
-  const getBootcamps = async () => {
-    try {
-      const response = await bootcampsDataSource.getBootcamps({})
-      dispatch(setBootcamps(response))
-    } catch (error) {
-      console.log(error)
-    }
-
-  }
 
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {
@@ -41,6 +29,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, searchUsers, getBootcamps, setBootcampUsers }
+  return { fetchUsers, filteredArray, searchUsers }
 }
 export default useLogic

@@ -10,18 +10,11 @@ type UsersProps = {
   bootcampUsers?: [] | null
 }
 const Users = ({ userType = "user", bootcampUsers }: UsersProps) => {
-  const { filteredArray: users, searchUsers, getBootcamps, fetchUsers, setBootcampUsers } = useLogic()
+  const { filteredArray: users, searchUsers, fetchUsers } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
   const currentUserContext = useContext(CurrentUserContext)
   const { currentUser, setCurrentUser } = currentUserContext;
-  useEffect(() => {
-    if (bootcampUsers) {
-      setBootcampUsers(bootcampUsers)
-    } else {
-      fetchUsers(userType)
-    }
-    getBootcamps()
-  }, [userType])
+
   return (
     <div className="users-container">
       <div className="search-bar-container">
