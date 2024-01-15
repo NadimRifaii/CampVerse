@@ -17,8 +17,11 @@ type User struct {
 	ProfilePicture string `json:"profilePicture" gorm:"default:'default_profile_picture.jpg'"`
 	RoleID         uint
 	UserRole       UserRole    `gorm:"foreignKey:RoleID"`
+	Session        []*Session  `gorm:"many2many:user_sessions"`
 	Bootcamp       []*Bootcamp `gorm:"many2many:bootcamp_users;"`
 }
+
+
 
 func (user *User) GetUserById(id string, db *gorm.DB) error {
 	if db.Find(user, "id = ?", id); user.ID == 0 {

@@ -32,9 +32,6 @@ func ConnectToDb() {
 			new(models.Mentor),
 			new(models.Student),
 			new(models.Stack),
-			new(models.Schedule),
-			new(models.Day),
-			new(models.Session),
 			new(models.Assignment),
 			new(models.AssignmentFile),
 			new(models.StudentSubmission),
@@ -42,6 +39,8 @@ func ConnectToDb() {
 			new(models.Result),
 			new(models.Grade),
 			new(models.Curriculum),
+			new(models.Session),
+			new(models.Schedule),
 		)
 	}
 	Db = db

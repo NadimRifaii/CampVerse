@@ -1,80 +1,74 @@
 package controllers
 
 import (
-	"errors"
-
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
 )
 
-type scheduleBody struct {
-	Week       string        `json:"week"`
-	BootcampID uint          `json:"bootcamp_id"`
-	Days       []*models.Day `json:"days"`
+type ScheduleRequest struct {
+	BootcampID  uint          `json:"bootcampId"`
+	InitialDate string        `json:"initialDate"`
+	Sessions    []SessionData `json:"sessions"`
+}
+
+type SessionData struct {
+	StartDate string     `json:"startDate"`
+	EndDate   string     `json:"endDate"`
+	Users     []UserData `json:"users"`
+}
+
+type UserData struct {
+	Email string `json:"email"`
 }
 
 func HttpCreateSchedule(c *fiber.Ctx) error {
 	db := database.Db
-	mentor, err := GetMentor(c, db)
-	if err != nil {
-		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
+	user := new(models.User)
+	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "admin" {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-	body := new(scheduleBody)
-	if err := ValidateRequest(c, body); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error(), "mentor": mentor})
-	}
-	schedule := new(models.Schedule)
-	schedule.Week = body.Week
-	schedule.BootcampID = body.BootcampID
 
-	if err := CreateRecordInDb(schedule); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	scheduleRequest := new(ScheduleRequest)
+	if err := c.BodyParser(scheduleRequest); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid request body"})
 	}
-	schedule.Days = body.Days
-	handleDayRecords(c, "create", schedule)
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
-}
-func HttpGetScheduleByWeek(c *fiber.Ctx) error {
-	body := new(scheduleBody)
-	if err := ValidateRequest(c, body); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+
+	bootcamp := new(models.Bootcamp)
+	if err := db.First(&bootcamp, scheduleRequest.BootcampID).Error; err != nil {
+		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": "Bootcamp not found"})
 	}
-	db := database.Db
-	schedule := new(models.Schedule)
-	schedule.Week = body.Week
-	schedule.GetScheduleByWeek(db)
-	schedule.GetScheduleDays(db)
-	handleDayRecords(c, "get", schedule)
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
-}
-func HttpGetBootcampSchedule(c *fiber.Ctx) error {
-	var body struct {
-		BootcampID uint `json:"bootcamp_id"`
+
+	schedule := &models.Schedule{
+		BootcampID: scheduleRequest.BootcampID,
+		Bootcamp:   *bootcamp,
+		Sessions:   []*models.Session{},
 	}
-	db := database.Db
-	if err := ValidateRequest(c, &body); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
-	}
-	schedules, err := models.GetBootcampSchedules(db, body.BootcampID)
-	if err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
-	}
-	cleanedData := models.CleanSchedulesData(schedules)
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": cleanedData})
-}
-func handleDayRecords(c *fiber.Ctx, action string, schedule *models.Schedule) error {
-	db := database.Db
-	for _, day := range schedule.Days {
-		day.ScheduleId = schedule.ID
-		if action == "create" {
-			if err := CreateRecordInDb(day); err != nil {
-				return errors.New("internal server error")
-			}
-		} else if action == "get" {
-			day.GetDaySessions(db)
+
+	for _, sessionData := range scheduleRequest.Sessions {
+		session := &models.Session{
+			StartDate: sessionData.StartDate,
+			EndDate:   sessionData.EndDate,
+			Schedule:  *schedule,
+			User:      []*models.User{},
 		}
-		schedule.Days = append(schedule.Days, day)
+
+		for _, userData := range sessionData.Users {
+			user := &models.User{}
+			if err := db.Where("email = ?", userData.Email).First(user).Error; err != nil {
+				return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "User not found"})
+			}
+			session.User = append(session.User, user)
+			if err := models.AssociateUserWithSession(user, session, db); err != nil {
+				return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Failed to associate user with session"})
+			}
+		}
+		schedule.Sessions = append(schedule.Sessions, session)
 	}
-	return nil
+
+	if err := db.Create(schedule).Error; err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Failed to create schedule"})
+	}
+
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
 }

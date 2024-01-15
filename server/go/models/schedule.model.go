@@ -1,18 +1,26 @@
 package models
 
 import (
+	"fmt"
+
 	"gorm.io/gorm"
 )
 
 type Schedule struct {
-	ID          uint `gorm:"primarykey"`
-	BootcampID  uint
-	InitialDate string `json:"initialDate"`
+	gorm.Model
+	BootcampID uint `json:"bootcampId"`
+	Bootcamp   Bootcamp
+	Sessions   []*Session `json:"sessions"`
 }
 
-/*
-	schedule
-	mentor has many events
-	events can have many mentors
-
-*/
+func (s *Schedule) AssociateUsersWithSessions(db *gorm.DB) error {
+	for _, session := range s.Sessions {
+		for _, user := range session.User {
+			if err := db.Model(&session).Association("Users").Append(user); err != nil {
+				return err
+			}
+		}
+		fmt.Println(session.User)
+	}
+	return nil
+}

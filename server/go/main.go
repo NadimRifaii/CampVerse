@@ -45,20 +45,19 @@ func registerRoutes(groups []fiber.Router, routeFuncs ...func(group fiber.Router
 func main() {
 	app := setupApp()
 
-	protectedPaths := []string{"/auth", "/bootcamp", "/stacks", "/mentor", "/schedule", "/assignment", "/result", "/user", "/curriculum"}
+	protectedPaths := []string{"/auth", "/schedule", "/bootcamp", "/stacks", "/mentor", "/assignment", "/result", "/user", "/curriculum"}
 	groups := setupProtectedGroups(app, protectedPaths)
 
 	registerRoutes(groups,
 		routes.AuthRoutes,
+		routes.ScheduleRoutes,
 		routes.BootcampRoutes,
 		routes.StackRoutes,
 		routes.MentorRoutes,
-		routes.ScheduleRoutes,
 		routes.AssignmentRoutes,
 		routes.ResultRoutes,
 		routes.UserRoutes,
 		routes.CurriculumRoutes,
 	)
-
-	app.Listen(os.Getenv("PORT"))
+	app.Listen(os.Getenv("PORT")) //
 }
