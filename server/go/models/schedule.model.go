@@ -25,6 +25,15 @@ func (schedule *Schedule) GetScheduleWithSessionsAndUsers(db *gorm.DB, id uint) 
 	return nil
 }
 
+func (schedule *Schedule) GetSchedulesWithSessionsAndUsersByBootcampID(db *gorm.DB, bootcampID uint) ([]Schedule, error) {
+	var schedules []Schedule
+	if err := db.Preload("Sessions").Preload("Sessions.User").Where("bootcamp_id = ?", bootcampID).Find(&schedules).Error; err != nil {
+		return nil, err
+	}
+
+	return schedules, nil
+}
+
 type CleanedSchedule struct {
 	ID          uint             `json:"ID"`
 	InitialDate string           `json:"initialDate"`

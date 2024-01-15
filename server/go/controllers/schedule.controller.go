@@ -45,6 +45,29 @@ func HttpGetSchedule(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": cleaned})
 }
+func HttpGetBootcampSchedules(c *fiber.Ctx) error {
+	db := database.Db
+	scheduleID := c.Params("id")
+	id, err := strconv.ParseUint(scheduleID, 10, 64)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid schedule ID"})
+	}
+	uintId := uint(id)
+	schedule := new(models.Schedule)
+	arr, err := schedule.GetSchedulesWithSessionsAndUsersByBootcampID(db, uintId)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	var cleanedSchedules []models.CleanedSchedule
+	for _, schedule := range arr {
+		cleaned, err := schedule.GetCleanedScheduleWithSessionsAndUsers()
+		if err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
+		cleanedSchedules = append(cleanedSchedules, cleaned)
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedules": cleanedSchedules})
+}
 
 func HttpCreateSchedule(c *fiber.Ctx) error {
 	db := database.Db
