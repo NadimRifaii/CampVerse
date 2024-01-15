@@ -11,5 +11,17 @@ export const schedulesDataSource = {
     } catch (error: any) {
       throw new Error(error)
     }
+  },
+  setSchedule: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: `/schedule`,
+        method: 'POST'
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error)
+    }
   }
 }
