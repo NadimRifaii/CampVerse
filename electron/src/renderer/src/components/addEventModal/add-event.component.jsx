@@ -3,7 +3,7 @@ import Datetime from 'react-datetime';
 import { useState, useEffect } from 'react';
 import { Button } from '../common/button/button.component';
 
-const AddEventModal = ({ onEventAdded, setModalOpen }) => {
+const AddEventModal = ({ onEventAdded, hideModal }) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -18,7 +18,7 @@ const AddEventModal = ({ onEventAdded, setModalOpen }) => {
     };
 
     onEventAdded(newEvent);
-    setModalOpen(false)
+    hideModal(false)
   };
 
   return (
