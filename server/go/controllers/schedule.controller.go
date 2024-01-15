@@ -18,6 +18,7 @@ type ScheduleRequest struct {
 type SessionData struct {
 	StartDate string     `json:"startDate"`
 	EndDate   string     `json:"endDate"`
+	Title     string     `json:"title"`
 	Users     []UserData `json:"users"`
 }
 
@@ -101,6 +102,7 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 		session := &models.Session{
 			StartDate:  sessionData.StartDate,
 			EndDate:    sessionData.EndDate,
+			Title:      sessionData.Title,
 			ScheduleID: schedule.ID, // Set ScheduleID for the session
 			User:       []*models.User{},
 		}

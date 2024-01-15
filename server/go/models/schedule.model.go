@@ -45,6 +45,7 @@ type CleanedSchedule struct {
 // CleanedSession represents the cleaned session structure.
 type CleanedSession struct {
 	ID        uint          `json:"ID"`
+	Title     string        `json:"title"`
 	StartDate string        `json:"startDate"`
 	EndDate   string        `json:"endDate"`
 	User      []CleanedUser `json:"User"`
@@ -77,6 +78,7 @@ func (schedule *Schedule) GetCleanedScheduleWithSessionsAndUsers() (CleanedSched
 	for _, session := range schedule.Sessions {
 		cleanedSession := CleanedSession{
 			ID:        session.ID,
+			Title:     session.Title,
 			StartDate: session.StartDate,
 			EndDate:   session.EndDate,
 		}

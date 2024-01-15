@@ -16,6 +16,6 @@ export const store = configureStore({
     [curriculums]: curriculumsSlice,
     [schedule]: scheduleSlice,
     [chat]: chatSlice,
-    [schedules]: scheduleSlice
+    [schedules]: schedulesSlice
   }
 })

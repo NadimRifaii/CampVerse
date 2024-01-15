@@ -9,10 +9,6 @@ import useLogic from './logic.hook'
 
 const Calendar = () => {
   const { modalOpen, setModalOpen, calendarRef, events, onEventAdded } = useLogic()
-  useEffect(() => {
-    console.log(modalOpen)
-    console.log(new Date())
-  }, [modalOpen])
   return (
     <section>
       <Button text='Add event' handleClick={() => setModalOpen(!modalOpen)} />
@@ -24,7 +20,7 @@ const Calendar = () => {
           eventContent={(info) => (
             <div>
               <p>{info.event.title}</p>
-              <p>{new Date(info.event.start).toLocaleTimeString()} - {new Date(info.event.end).toLocaleTimeString()}</p>
+              <p>{new Date(info.event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(info.event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
               <p>{info.event.extendedProps.description}</p>
             </div>
           )}

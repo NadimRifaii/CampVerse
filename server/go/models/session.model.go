@@ -4,6 +4,7 @@ import "gorm.io/gorm"
 
 type Session struct {
 	gorm.Model
+	Title      string `json:"title"`
 	StartDate  string `json:"startDate"`
 	EndDate    string `json:"endDate"`
 	ScheduleID uint
