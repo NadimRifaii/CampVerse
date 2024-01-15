@@ -20,31 +20,33 @@ const useLogic = () => {
   const [content, setContent] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
   const messagesContainerRef = useRef(null);
-
-  // Function to scroll the messages container to the bottom
+  const [typing, setTyping] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   };
-  // Establish socket connection and handle cleanup
   useEffect(() => {
     socket = io(ENDPOINT);
-
-    // Wait for the "connect" event before emitting other events
     socket.on('connect', () => {
       console.log("in electron, socket connected");
       setSocketConnected(true);
     });
     socket.emit("setup", user);
-    // Clean up socket connection on component unmount
+    socket.on("user-typing", () => {
+      console.log("typing event received")
+      setIsTyping(true)
+    })
+    socket.on("user-stoped-typing", () => {
+      console.log("stop typing event received")
+      setIsTyping(false)
+    })
     return () => {
       socket.disconnect();
       dispatch(setChatX({}))
     };
   }, [user]);
-
-  // Fetch users function with error handling and logging
   const fetchUsers = async () => {
     if (currentUser) {
       try {
@@ -53,7 +55,7 @@ const useLogic = () => {
           email: currentUser?.email
         });
         dispatch(setChatX(data))
-        selectedChatCompare = data; // Move this line here
+        selectedChatCompare = data;
       } catch (error) {
         console.error("Error fetching users:", error);
         setLoadingChat('');
@@ -61,7 +63,6 @@ const useLogic = () => {
     }
   };
 
-  // Get chat messages function
   const getChatMessages = async () => {
     try {
       if (chat._id) {
@@ -78,6 +79,23 @@ const useLogic = () => {
 
   const typingHandler = (e) => {
     setContent(e.target.value);
+
+    if (!socketConnected)
+      return
+    if (!typing) {
+      setTyping(true)
+      socket.emit("typing", user)
+    }
+    let lastTypingTime = new Date().getTime()
+    let timerLength = 3000
+    setTimeout(() => {
+      let timeNow = new Date().getTime()
+      let timeDifference = timeNow - lastTypingTime
+      if (timeDifference > timerLength && typing) {
+        socket.emit("stop typing", user)
+        setTyping(false)
+      }
+    }, timerLength)
   };
   const sendMessage = async (event) => {
     if (event.key === "Enter" && content) {
@@ -107,7 +125,6 @@ const useLogic = () => {
   useEffect(() => {
     const handleNewMessage = (newMessageRecieved) => {
       if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
-        // notification logic
       } else {
         setMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
         scrollToBottom()
@@ -119,7 +136,7 @@ const useLogic = () => {
     };
   }, [selectedChatCompare, messages]);
 
-  return { chat, messages, user, currentUser, loadingChat, content, messagesContainerRef, typingHandler, sendMessage };
+  return { chat, messages, user, currentUser, loadingChat, content, messagesContainerRef, isTyping, typingHandler, sendMessage };
 };
 
 export default useLogic;

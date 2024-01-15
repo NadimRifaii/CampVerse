@@ -54,6 +54,14 @@ async function startServer() {
       socket.join(room._id)
       console.log("User joined room: " + room)
     })
+    socket.on("typing", (user) => {
+      console.log(`${user} started typing`)
+      socket.broadcast.emit("user-typing", user)
+    })
+    socket.on("stop typing", (user) => {
+      console.log(`${user} stoped typing`)
+      socket.broadcast.emit("user-stoped-typing")
+    })
     socket.on("new message", (newMessageReceived) => {
       const chat = newMessageReceived.chat
       if (!chat.users)

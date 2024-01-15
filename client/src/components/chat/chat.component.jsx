@@ -4,7 +4,7 @@ import Message from '../message/message.component'
 
 import './chat.styles.css'
 const Chat = () => {
-  const { chat, user, messages, currentUser, loadingChat, content, messagesContainerRef, typingHandler, sendMessage, } = useLogic()
+  const { chat, user, messages, currentUser, loadingChat, content, messagesContainerRef, isTyping, typingHandler, sendMessage, } = useLogic()
   return (
     <div className="chat-page">
       <div className="header">
@@ -16,7 +16,7 @@ const Chat = () => {
         </div>
       </div>
       <div className="messages-container" ref={messagesContainerRef}>
-        <div className={`typing-bullets  `}>
+        <div className={`typing-bullets ${isTyping ? 'typing' : ''} `}>
           <span></span>
           <span></span>
           <span></span>

@@ -20,7 +20,6 @@ const useLogic = () => {
   const [loadingChat, setLoadingChat] = useState('');
   const [content, setContent] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
-
   // Establish socket connection and handle cleanup
   useEffect(() => {
     socket = io(ENDPOINT);
