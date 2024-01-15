@@ -2,7 +2,7 @@ import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import { useState, useEffect } from 'react';
 import { Button } from '../common/button/button.component';
-
+import MentorsList from '../mentorsListPopup/mentors-list.component';
 const AddEventModal = ({ onEventAdded, hideModal }) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
@@ -23,6 +23,7 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
 
   return (
     <div className="add-model">
+      <MentorsList />
       <form onSubmit={onSubmit}>
         <div className="title">
           <input type="text" required placeholder='Enter event title' value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -42,10 +43,7 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
           }} />
         </div>
         <div className="btn-container">
-          <Button text='Save' type="submit" handleClick={() => {
-
-          }
-          } />
+          <Button text='Save' type="submit" />
         </div>
       </form>
     </div>
