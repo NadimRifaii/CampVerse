@@ -5,6 +5,9 @@ import Message from '../message/message.component'
 import './chat.styles.css'
 const Chat = () => {
   const { chat, user, messages, currentUser, loadingChat, content, messagesContainerRef, isTyping, typingHandler, sendMessage, } = useLogic()
+  useEffect(() => {
+    console.log(loadingChat)
+  }, [loadingChat])
   return (
     <div className="chat-page">
       <div className="header">
@@ -17,6 +20,7 @@ const Chat = () => {
       </div>
       <div className="messages-container" ref={messagesContainerRef}>
         <div className={`typing-bullets ${isTyping ? 'typing' : ''} `}>
+          typing
           <span></span>
           <span></span>
           <span></span>
@@ -24,8 +28,10 @@ const Chat = () => {
         {messages?.map((message, index) => {
           return <Message key={index} content={message.content} className={`${message.sender.email == user.email ? 'sender' : ""}`} />
         })}
-        <div className={`loading-spinner ${loadingChat} `}></div>
 
+        {
+          loadingChat && <div className={`loading-spinner active `}></div>
+        }
       </div>
       <div className="typing-input">
         <input type="text" onChange={typingHandler} onKeyDown={sendMessage} value={content} placeholder="Enter your message" />

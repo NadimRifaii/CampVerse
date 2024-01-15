@@ -1,10 +1,8 @@
 
-import { useEffect, useState } from "react"
-import { Button } from "../common/button/button.component"
-import { InputLabel } from "../common/inputLabel/input-label.component"
+import { useEffect } from "react"
+
 import useLogic from "./logic.hook"
 import './weeks.styles.css'
-import Schedule from "../schedule/schedule.component"
 const Weeks = () => {
   const { currentBootcamp, schedule } = useLogic()
   useEffect(() => {
@@ -17,7 +15,6 @@ const Weeks = () => {
           <h1 >Week {index + 1}</h1>
         </div>
       ))}
-      <Schedule />
     </div>
   )
 }

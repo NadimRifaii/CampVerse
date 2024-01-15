@@ -20,6 +20,8 @@ const useLogic = () => {
   const [loadingChat, setLoadingChat] = useState('');
   const [content, setContent] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
+  const [typing, setTyping] = useState(false)
+  const [isTyping, setIsTyping] = useState(false)
   // Establish socket connection and handle cleanup
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -30,7 +32,14 @@ const useLogic = () => {
       setSocketConnected(true);
     });
     socket.emit("setup", user);
-    // Clean up socket connection on component unmount
+    socket.on("user-typing", () => {
+      console.log("typing event received")
+      setIsTyping(true)
+    })
+    socket.on("user-stoped-typing", () => {
+      console.log("stop typing event received")
+      setIsTyping(false)
+    })
     return () => {
       socket.disconnect();
       dispatch(removeChat({}))
@@ -76,6 +85,22 @@ const useLogic = () => {
 
   const typingHandler = (e) => {
     setContent(e.target.value);
+    if (!socketConnected)
+      return
+    if (!typing) {
+      setTyping(true)
+      socket.emit("typing", user)
+    }
+    let lastTypingTime = new Date().getTime()
+    let timerLength = 3000
+    setTimeout(() => {
+      let timeNow = new Date().getTime()
+      let timeDifference = timeNow - lastTypingTime
+      if (timeDifference > timerLength && typing) {
+        socket.emit("stop typing", user)
+        setTyping(false)
+      }
+    }, timerLength)
   };
   const sendMessage = async (event) => {
     if (event.key === "Enter" && content) {
@@ -117,7 +142,7 @@ const useLogic = () => {
     };
   }, [selectedChatCompare, messages]);
 
-  return { chat, messages, user, currentUser, loadingChat, content, typingHandler, sendMessage };
+  return { chat, messages, user, currentUser, loadingChat, content, isTyping, typingHandler, sendMessage };
 };
 
 export default useLogic;

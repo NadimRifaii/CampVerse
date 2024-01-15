@@ -95,7 +95,7 @@
 .typing-bullets span {
   width: 15px;
   height: 15px;
-  background-color: var(--main-black-color);
+  background-color: var(--main-blue-color);
   /* Adjust the color as needed */
   border-radius: 50%;
   animation: bounce 0.5s infinite alternate;

@@ -1,7 +1,7 @@
 .bootcamp-details-container {
   width: 100%;
   height: calc(100vh - 170px);
-  position: relative;
+  overflow-y: auto;
 }
 
 .details-container {

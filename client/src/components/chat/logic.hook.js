@@ -16,7 +16,7 @@ const useLogic = () => {
   const { chat } = useSelector(extractChatSlice)
   const dispatch = useDispatch()
   const [messages, setMessages] = useState([]);
-  const [loadingChat, setLoadingChat] = useState('');
+  const [loadingChat, setLoadingChat] = useState(false);
   const [content, setContent] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
   const messagesContainerRef = useRef(null);
@@ -50,7 +50,7 @@ const useLogic = () => {
   const fetchUsers = async () => {
     if (currentUser) {
       try {
-        setLoadingChat('active');
+        setLoadingChat(true);
         const data = await messagesDataSource.accessChat({
           email: currentUser?.email
         });
@@ -58,7 +58,7 @@ const useLogic = () => {
         selectedChatCompare = data;
       } catch (error) {
         console.error("Error fetching users:", error);
-        setLoadingChat('');
+        setLoadingChat(false);
       }
     }
   };
@@ -66,10 +66,10 @@ const useLogic = () => {
   const getChatMessages = async () => {
     try {
       if (chat._id) {
-        setLoadingChat('active');
+        setLoadingChat(true);
         const data = await messagesDataSource.getChatMessages({ chatId: chat._id });
         setMessages(data);
-        setLoadingChat('');
+        setLoadingChat(false);
         socket.emit("join chat", chat._id);
       }
     } catch (error) {
@@ -79,7 +79,6 @@ const useLogic = () => {
 
   const typingHandler = (e) => {
     setContent(e.target.value);
-
     if (!socketConnected)
       return
     if (!typing) {

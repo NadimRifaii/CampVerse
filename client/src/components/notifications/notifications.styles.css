@@ -6,11 +6,12 @@
   max-height: 200px;
   overflow-y: auto;
   background-color: var(--main-black-color);
-  padding: 5px;
   z-index: 100;
   display: none;
   color: var(--main-white-color);
   text-align: center;
+  border-radius: 5px;
+  border: 2px solid var(--main-black-color);
 }
 
 .notifications-container p {

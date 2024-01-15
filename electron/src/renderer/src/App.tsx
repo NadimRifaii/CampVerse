@@ -9,6 +9,7 @@ import CreateBootcamp from './components/createBootcamp/create-bootcamp.componen
 import Users from './components/users/users.component'
 import BootcampDetails from './components/bootcampDetails/bootcamp-details.component'
 import Chat from './components/chat/chat.component'
+import Schedule from './components/schedule/schedule.component'
 
 function App(): JSX.Element {
 
@@ -24,6 +25,7 @@ function App(): JSX.Element {
           <Route path='/dashboard/Users' element={<Users />} />
           <Route path='/dashboard/details' element={<BootcampDetails />} />
           <Route path="/dashboard/chat" element={<Chat />} />
+          <Route path="/dashboard/schedule" element={<Schedule />} />
         </Route>
       </Routes>
     </>
