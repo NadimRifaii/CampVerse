@@ -13,6 +13,7 @@ type Mentor struct {
 	UserId     uint
 	User       User
 	Stack      []*Stack `gorm:"many2many:teaches;"`
+	Events     []*Event `gorm:"many2many:schedule_events;"`
 }
 
 func (mentor *Mentor) GetMentorByID(db *gorm.DB, id uint) error {

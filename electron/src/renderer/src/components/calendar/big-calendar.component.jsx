@@ -5,21 +5,13 @@ import AddEventModal from '../addEventModal/add-event.component'
 import { Button } from '../common/button/button.component'
 import './calendar.styles.css'
 import { useEffect, useRef, useState } from 'react'
+import useLogic from './logic.hook'
 
 const Calendar = () => {
-  const [modalOpen, setModalOpen] = useState(false)
-  const calendarRef = useRef(null)
-  const [events, setEvents] = useState([])
-
-  const onEventAdded = event => {
-    const updatedEvents = [...events, event];
-    setEvents(updatedEvents);
-    let calendarApi = calendarRef.current.getApi();
-    // calendarApi.removeAll();
-    calendarApi.addEventSource(updatedEvents);
-  }
+  const { modalOpen, setModalOpen, calendarRef, events, onEventAdded } = useLogic()
   useEffect(() => {
     console.log(modalOpen)
+    console.log(new Date())
   }, [modalOpen])
   return (
     <section>
