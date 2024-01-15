@@ -13,5 +13,6 @@ export type RootState = {
   currentBootcam: CurrentBootcampType,
   curriculums: CurriculumSliceType,
   schedule: ScheduleSliceType,
-  chat: ChatType
+  chat: ChatType,
+  schedules: ScheduleSliceType
 }

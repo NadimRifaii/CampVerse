@@ -6,6 +6,7 @@ import currentBootcampSlice, { currentBootcamp } from "./currentBootcamp/current
 import curriculumsSlice, { curriculums } from "./curriculums/curriculumsSlice";
 import scheduleSlice, { schedule } from "./schedule/scheduleSlice";
 import chatSlice, { chat } from './chat/chatSlice'
+import schedulesSlice, { schedules } from "./schedules/schedulesSlice";
 export const store = configureStore({
   reducer: {
     [user]: userSlice,
@@ -14,6 +15,7 @@ export const store = configureStore({
     [currentBootcamp]: currentBootcampSlice,
     [curriculums]: curriculumsSlice,
     [schedule]: scheduleSlice,
-    [chat]: chatSlice
+    [chat]: chatSlice,
+    [schedules]: scheduleSlice
   }
 })
