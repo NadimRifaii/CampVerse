@@ -7,4 +7,5 @@ import (
 
 func ScheduleRoutes(app fiber.Router) {
 	app.Post("/", controllers.HttpCreateSchedule)
+	app.Get("/:id", controllers.HttpGetSchedule)
 }

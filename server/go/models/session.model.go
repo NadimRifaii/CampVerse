@@ -18,7 +18,6 @@ func AssociateUserWithSession(user *User, session *Session, db *gorm.DB) error {
 		if err := db.Model(session).Association("User").Append(user); err != nil {
 			return err
 		}
-
 		// Update the session in the database
 		if err := db.Save(session).Error; err != nil {
 			return err
