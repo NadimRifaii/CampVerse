@@ -23,21 +23,35 @@ const useLogic = () => {
   const displayEvents = () => {
     let calendarApi = calendarRef.current.getApi();
     calendarApi.removeAllEventSources();
-    const newEvents = schedules.flatMap(schedule =>
-      schedule.sessions.map(event => {
-        const { startDate: start, endDate: end, title, User } = event;
-        const obj = {
-          start: new Date(start),
-          end: new Date(end),
-          title,
-          mentors: User.map(user => user.username).join(",")
-        };
-        return obj;
-      })
-    );
-    setEvents(newEvents);
-    calendarApi.addEventSource(newEvents);
+    if (schedules.length > 0) {
+      const newEvents = schedules.flatMap(schedule =>
+        schedule.sessions.map(event => {
+          const { startDate: start, endDate: end, title, User } = event;
+          const obj = {
+            start: new Date(start),
+            end: new Date(end),
+            title,
+            mentors: User.map(user => user.username).join(",")
+          };
+          return obj;
+        })
+      );
+      setEvents(newEvents);
+      calendarApi.addEventSource(newEvents);
+    }
   };
+  const saveEvents = async () => {
+    try {
+      const response = await schedulesDataSource.setSchedule({
+        bootcampId: currentBootcamp.id,
+        initialDate: `${new Date()}`,
+        sessions
+      })
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   useEffect(() => {
     fetchBootcampSchedules()
   }, [])
@@ -45,17 +59,18 @@ const useLogic = () => {
     console.log(sessions)
   }, [sessions])
   useEffect(() => {
-    displayEvents()
+    if (schedules)
+      displayEvents()
   }, [schedules])
   const onEventAdded = event => {
     let calendarApi = calendarRef.current.getApi();
     calendarApi.removeAllEventSources();
     const { title, start, end, description: { mentors, users } } = event
     const updatedEvents = [...events, { title, start, end, mentors, users }];
-    setSessions([...sessions, { start, end, title, users }])
+    setSessions([...sessions, { startDate: `${start}`, endDate: `${end}`, title, users }])
     setEvents(updatedEvents);
     calendarApi.addEventSource(updatedEvents);
   }
-  return { modalOpen, setModalOpen, onEventAdded, events, sessions, calendarRef }
+  return { modalOpen, setModalOpen, onEventAdded, saveEvents, events, sessions, calendarRef }
 }
 export default useLogic

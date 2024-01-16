@@ -81,7 +81,8 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 	if err := c.BodyParser(scheduleRequest); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid request body"})
 	}
-	fmt.Println(scheduleRequest)
+	fmt.Println(scheduleRequest.BootcampID)
+	fmt.Println(scheduleRequest.InitialDate)
 	bootcamp := new(models.Bootcamp)
 	if err := db.First(&bootcamp, scheduleRequest.BootcampID).Error; err != nil {
 		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": "Bootcamp not found"})

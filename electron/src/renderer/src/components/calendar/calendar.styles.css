@@ -44,3 +44,9 @@ section button {
   color: var(--main-white-color);
   margin: auto;
 }
+
+section .buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

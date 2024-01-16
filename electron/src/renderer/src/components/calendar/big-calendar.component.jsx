@@ -7,10 +7,13 @@ import './calendar.styles.css'
 import useLogic from './logic.hook'
 
 const Calendar = () => {
-  const { modalOpen, setModalOpen, calendarRef, events, sessions, onEventAdded } = useLogic()
+  const { modalOpen, calendarRef, events, sessions, onEventAdded, setModalOpen, saveEvents } = useLogic()
   return (
     <section>
-      <Button text='Add event' handleClick={() => setModalOpen(!modalOpen)} />
+      <div className="buttons-container">
+        <Button text='Add event' handleClick={() => setModalOpen(!modalOpen)} />
+        <Button text='Save schedule' handleClick={() => saveEvents()} />
+      </div>
       <div className='calendar-holder' style={{ position: 'relative', zIndex: 0, height: 700 }}>
         <FullCalendar
           ref={calendarRef}
@@ -19,8 +22,7 @@ const Calendar = () => {
           eventContent={(info) => (
             <div>
               <p>{info.event.title}</p>
-              <p>{new Date(info.event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(info.event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-              <p>{info.event.extendedProps.mentors}</p>
+              <p>{new Date(info.event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(info.event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} | {info.event.extendedProps.mentors}</p>
             </div>
           )}
           initialView='timeGridWeek'

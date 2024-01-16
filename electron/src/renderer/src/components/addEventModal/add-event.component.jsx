@@ -50,7 +50,7 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
           }} />
         </div>
         <div className="btn-container">
-          <Button text='Save' type="submit" />
+          <Button text='Add' type="submit" />
         </div>
       </form>
     </div>
