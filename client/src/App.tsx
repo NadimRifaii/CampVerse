@@ -11,6 +11,7 @@ import Users from './components/users/users.component';
 import Bootcamps from './components/bootcamps/bootcamps.component';
 import HomePage from './pages/homePage/home-page.component';
 import Calendar from './components/calendar/big-calendar.component';
+import Assignment from './components/assignments/assignment.component';
 function App() {
   return (
     <div className="page">
@@ -20,8 +21,8 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path='/dashboard' element={<DashBoard />}>
-          <Route index element={<h1>Assignments</h1>} />
-          <Route path='/dashboard/Assignments' element={<h1>Assignments</h1>} />
+          <Route index element={<Assignment />} />
+          <Route path='/dashboard/Assignments' element={<Assignment />} />
           <Route path='/dashboard/Users' element={<Users />} />
           <Route path='/dashboard/Results' element={<h1>Results</h1>} />
           <Route path='/dashboard/Schedule' element={<Calendar />} />
