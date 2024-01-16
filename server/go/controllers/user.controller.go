@@ -59,11 +59,15 @@ func HttpUploadFile(c *fiber.Ctx) error {
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
+	substring := c.Query("substring")
+	if substring == "" {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Substring parameter is missing"})
+	}
 	file, err := c.FormFile("file")
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	c.SaveFile(file, "public/files/"+file.Filename)
+	c.SaveFile(file, "public/files/"+substring+file.Filename)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
 }
 func HttpGetAllUsers(c *fiber.Ctx) error {

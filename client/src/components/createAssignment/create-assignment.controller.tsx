@@ -2,15 +2,10 @@ import Datetime from 'react-datetime'
 import useLogic from "./logic.hook"
 import { useCallback, useEffect } from 'react'
 import 'react-datetime/css/react-datetime.css';
-import { useDropzone } from 'react-dropzone';
 import StyledDropzone from '../dropZone/drop-zone.component';
+import './create-assignment.styles.css'
 const CreateAssignment = () => {
-  const { user, currentDate } = useLogic()
-  const onDrop = useCallback((acceptedFiles: any) => {
-    // Do something with the files
-    console.log(acceptedFiles)
-  }, [])
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+  const { user, currentDate, uploadedFiles, assignmentTitle, instructions, setAssignmentTitle, setUploadedFiles, setInstructions } = useLogic()
   useEffect(() => {
     console.log(user)
   }, [user])
@@ -18,17 +13,35 @@ const CreateAssignment = () => {
     <div className="create-assignment-container">
       <div className="assignment-info">
         <div className="title">
-          <input type='text' placeholder='Assignment title' />
+          <input type='text' value={assignmentTitle} onChange={(e) => {
+            setAssignmentTitle(e.target.value)
+          }} placeholder='Assignment title' />
         </div>
         <div className="due-date">
-          <Datetime value={currentDate} />
+          <Datetime value={currentDate} inputProps={{ placeholder: 'Select Due date' }} />
         </div>
         <div className="mentor-name">
           <input type="text" disabled value={user.username} />
         </div>
-        <div className="files-container">
-          <StyledDropzone />
-        </div>
+      </div>
+      <div className="instructions">
+        {
+          instructions.map((instruction, index) => {
+            return (
+              <div className="instruction">
+                <div className="title">
+                  <input type="text" value={instruction.content} placeholder='Instruction title' />
+                </div>
+                <div className="content">
+                  <textarea value={instruction.instructionTitle} placeholder='Instruction' ></textarea>
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+      <div className="files-container">
+        <StyledDropzone assignmentTitle={assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
       </div>
     </div>
   )

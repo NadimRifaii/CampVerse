@@ -5,12 +5,31 @@ type InstructionType = {
   instructionTitle: string,
   content: string
 }
+type FileType = {
+  fileName: string,
+  fileType: string,
+  fileUrl: string
+}
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
-  const [currentDate, setCurrentDate] = useState<Date>(new Date())
+  const [currentDate, setCurrentDate] = useState<Date | string>("")
   const [assignmentTitle, setAssignmentTitle] = useState<string>("")
-  const [instructions, setInstructions] = useState<InstructionType[]>([])
-  const [assignmentFiles, setAssignmentFiles] = useState()
-  return { user, currentDate }
+  const [instructions, setInstructions] = useState<InstructionType[]>([{
+    instructionTitle: "",
+    content: ''
+  }])
+  const updateInstructionTitle = (index: number, value: string) => {
+    const updatedInstructions = [...instructions];
+    updatedInstructions[index].instructionTitle = value;
+    setInstructions(updatedInstructions);
+  };
+
+  const updateInstructionContent = (index: number, value: string) => {
+    const updatedInstructions = [...instructions];
+    updatedInstructions[index].content = value;
+    setInstructions(updatedInstructions);
+  };
+  const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
+  return { user, currentDate, uploadedFiles, setUploadedFiles, assignmentTitle, instructions, setInstructions, setAssignmentTitle }
 }
 export default useLogic

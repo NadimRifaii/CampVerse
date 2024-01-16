@@ -24,11 +24,11 @@ export const userDataSource = {
       throw new Error(error)
     }
   },
-  uploadFile: async (data: {}) => {
+  uploadFile: async (data: { formData: any, name?: string }) => {
     try {
       const response = await sendFileRequest({
-        body: data,
-        route: "/assignment/upload-file",
+        body: data.formData,
+        route: `/assignment/upload-file?substring=${data.name}`,
         method: "POST"
       })
       return response;

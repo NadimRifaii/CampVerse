@@ -92,7 +92,6 @@ type FileInfo struct {
 func HttpGetFilesByName(c *fiber.Ctx) error {
 	fileDir := "public/files"
 
-	// Get the query parameter for the substring
 	substring := c.Query("substring")
 	if substring == "" {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Substring parameter is missing"})
@@ -108,7 +107,6 @@ func HttpGetFilesByName(c *fiber.Ctx) error {
 		if file.IsDir() {
 			continue
 		}
-		// Check if the file name contains the specified substring
 		if strings.Contains(file.Name(), substring) {
 			filePath := filepath.Join(fileDir, file.Name())
 			content, err := ioutil.ReadFile(filePath)
@@ -120,7 +118,7 @@ func HttpGetFilesByName(c *fiber.Ctx) error {
 				Name:        file.Name(),
 				Size:        file.Size(),
 				ModTime:     file.ModTime().String(),
-				DownloadURL: fmt.Sprintf("/download?filename=%s", file.Name()), // Adjust the endpoint as needed
+				DownloadURL: fmt.Sprintf("/download?filename=%s", file.Name()),
 				Base64Data:  base64.StdEncoding.EncodeToString(content),
 			}
 			matchingFiles = append(matchingFiles, fileInfo)

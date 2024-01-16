@@ -1,0 +1,33 @@
+.create-assignment-container {
+  padding: 10px;
+  background-color: var(--main-black-color);
+  border-radius: 5px;
+  width: 650px;
+  margin: auto;
+}
+
+.create-assignment-container input {
+  display: block;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.create-assignment-container input::placeholder {
+  transition: .5s;
+}
+
+.create-assignment-container input:focus::placeholder {
+  opacity: 0;
+}
+
+.create-assignment-container .assignment-info .mentor-name input {
+  color: var(--main-white-color)
+}
+
+.create-assignment-container .assignment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
