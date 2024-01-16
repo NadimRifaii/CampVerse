@@ -12,7 +12,8 @@ type Mentor struct {
 	Position   string `json:"position" gorm:"not null;default:'x';size:255"`
 	UserId     uint
 	User       User
-	Stack      []*Stack `gorm:"many2many:teaches;"`
+	Stack      []*Stack      `gorm:"many2many:teaches;"`
+	Assignment []*Assignment `json:"assignments"`
 }
 
 func (mentor *Mentor) GetMentorByID(db *gorm.DB, id uint) error {

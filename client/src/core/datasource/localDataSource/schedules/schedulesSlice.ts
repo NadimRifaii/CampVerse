@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Event } from "@renderer/core/types/event";
-import { RootState } from "@renderer/core/types/rootState";
+import { RootState } from "../../../types/rootState";
 type ScheduleType = {
   bootcampId: number,
   initialDate: number,

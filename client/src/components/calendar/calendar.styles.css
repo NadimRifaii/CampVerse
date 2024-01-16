@@ -1,0 +1,52 @@
+.add-model {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--main-black-color);
+  padding: 10px;
+}
+
+.add-model input {
+  padding: 10px;
+  width: 400px;
+  display: block;
+  outline: none;
+}
+
+section>div.calendar-holder {
+  overflow-y: auto;
+}
+
+section>div.calendar-holder::-webkit-scrollbar {
+  width: 12px;
+}
+
+section>div.calendar-holder::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+
+section>div::-webkit-scrollbar-track {
+  background-color: #ccc;
+}
+
+.add-model .btn-container {
+  margin-top: 10px;
+  display: block;
+}
+
+section button {
+  color: var(--main-white-color)
+}
+
+.add-model .btn-container button {
+  color: var(--main-white-color);
+  margin: auto;
+}
+
+section .buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

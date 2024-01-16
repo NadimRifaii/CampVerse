@@ -36,7 +36,7 @@ func populateAssignment(c *fiber.Ctx, assignment *models.Assignment, body *Assig
 	if mentorErr != nil {
 		return errors.New("mentor not found")
 	}
-	assignment.MentorId = mentor.ID
+	assignment.MentorID = mentor.ID
 	bootcamp := new(models.Bootcamp)
 	if bootcampErr := bootcamp.GetBootcampByName(db, body.BootcampName); bootcampErr != nil {
 		return errors.New("bootcamp not found")
@@ -45,8 +45,8 @@ func populateAssignment(c *fiber.Ctx, assignment *models.Assignment, body *Assig
 	if stackErr := stack.GetStackByName(db, body.StackName); stackErr != nil {
 		return errors.New("stack not found")
 	}
-	assignment.BootcampId = bootcamp.ID
-	assignment.StackId = stack.ID
+	assignment.BootcampID = bootcamp.ID
+	assignment.StackID = stack.ID
 	return nil
 }
 func HttpGetAllAssignments(c *fiber.Ctx) error {

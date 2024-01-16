@@ -7,15 +7,24 @@ import (
 )
 
 type Assignment struct {
-	ID                uint   `gorm:"primarykey"`
+	gorm.Model
 	Title             string `json:"assignmentTitle" gorm:"unique"`
 	Description       string `json:"description" gorm:"not null;size:255"`
-	DueDate           string `json:"dueDate" gorm:"type:date"`
-	MentorId          uint
-	StackId           uint
-	BootcampId        uint
+	DueDate           string `json:"dueDate" gorm:"size:255"`
+	MentorID          uint
+	StackID           uint
+	BootcampID        uint
 	AssignmentFiles   []*AssignmentFile    `json:"files"`
+	Instructions      []*Instruction       `json:"instructions"`
 	StudentSubmission []*StudentSubmission //
+}
+
+type Instruction struct {
+	gorm.Model
+	Title        string `json:"instructionTitle" gorm:"size:255"`
+	Content      string `json:"content" gorm:"size:255"`
+	AssignmentID uint
+	Assignment   Assignment
 }
 type AssignmentFile struct {
 	gorm.Model

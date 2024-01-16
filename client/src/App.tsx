@@ -10,6 +10,7 @@ import Chat from './components/chat/chat.component';
 import Users from './components/users/users.component';
 import Bootcamps from './components/bootcamps/bootcamps.component';
 import HomePage from './pages/homePage/home-page.component';
+import Calendar from './components/calendar/big-calendar.component';
 function App() {
   return (
     <div className="page">
@@ -23,7 +24,7 @@ function App() {
           <Route path='/dashboard/Assignments' element={<h1>Assignments</h1>} />
           <Route path='/dashboard/Users' element={<Users />} />
           <Route path='/dashboard/Results' element={<h1>Results</h1>} />
-          <Route path='/dashboard/Schedule' element={<h1>Schedule</h1>} />
+          <Route path='/dashboard/Schedule' element={<Calendar />} />
           <Route path={'/dashboard/chat'} element={<Chat />} />
         </Route>
       </Routes>
