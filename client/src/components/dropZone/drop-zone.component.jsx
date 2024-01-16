@@ -49,17 +49,26 @@ function StyledDropzone(props) {
     acceptedFiles,
   } = useDropzone({
     onDrop: async (newFiles) => {
+      if (assignmentTitle.length === 0) {
+        toast.error("Assignment title can't be null");
+        return;
+      }
+
       const validFiles = newFiles.filter((file) => {
         const acceptedTypes = ['application/pdf', 'text/plain'];
-        return acceptedTypes.includes(file.type);
+        const validExtensions = ['.pdf', '.txt'];
+
+        return (
+          acceptedTypes.includes(file.type) &&
+          validExtensions.some((ext) => file.name.toLowerCase().endsWith(ext))
+        );
       });
 
       if (validFiles.length === 0) {
-        toast.error('Invalid file types. Only PDF and plain text files are allowed.');
+        toast.error(
+          'Invalid file types or extensions. Only PDF and plain text files are allowed.'
+        );
         return;
-      } else if (assignmentTitle.length == 0) {
-        toast.error("Assignment title can't be null")
-        return
       }
 
       const updatedFiles = validFiles.map((file) => ({
@@ -76,7 +85,10 @@ function StyledDropzone(props) {
         const formData = new FormData();
         formData.append('file', file);
         try {
-          const response = await userDataSource.uploadFile({ formData, name: "assignment" });
+          const response = await userDataSource.uploadFile({
+            formData,
+            name: 'assignment',
+          });
           console.log('File uploaded to server:', response.data);
         } catch (error) {
           console.error('Error uploading file:', error);

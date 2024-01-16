@@ -4,8 +4,9 @@ import { useCallback, useEffect } from 'react'
 import 'react-datetime/css/react-datetime.css';
 import StyledDropzone from '../dropZone/drop-zone.component';
 import './create-assignment.styles.css'
+import { Button } from '../common/button/button.component';
 const CreateAssignment = () => {
-  const { user, currentDate, uploadedFiles, assignmentTitle, instructions, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
+  const { user, currentDate, uploadedFiles, assignmentTitle, instructions, createAssignment, setCurrentDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
   useEffect(() => {
     console.log(user)
   }, [user])
@@ -18,7 +19,7 @@ const CreateAssignment = () => {
           }} placeholder='Assignment title' />
         </div>
         <div className="due-date">
-          <Datetime value={currentDate} inputProps={{ placeholder: 'Select Due date' }} />
+          <Datetime value={currentDate} onChange={() => setCurrentDate(new Date())} inputProps={{ placeholder: 'Select Due date' }} />
         </div>
         <div className="mentor-name">
           <input type="text" disabled value={user.username} />
@@ -30,18 +31,30 @@ const CreateAssignment = () => {
             return (
               <div className="instruction">
                 <div className="title">
-                  <input type="text" onChange={(e) => updateInstructionTitle(index, e.target.value)} value={instruction.content} placeholder='Instruction title' />
+                  <input type="text" onChange={(e) => updateInstructionTitle(index, e.target.value)} value={instruction.instructionTitle} placeholder='Instruction title' />
                 </div>
                 <div className="instruction-content">
-                  <textarea value={instruction.instructionTitle} onChange={(e) => updateInstructionContent(index, e.target.value)} placeholder='Instruction' ></textarea>
+                  <textarea value={instruction.content} onChange={(e) => updateInstructionContent(index, e.target.value)} placeholder='Instruction' ></textarea>
                 </div>
               </div>
             )
           })
         }
       </div>
+      <div className="add-instruction-btn">
+        <Button text='Add' handleClick={() => {
+          if (instructions[instructions.length - 1].content != "" && instructions[instructions.length - 1].instructionTitle != "")
+            setInstructions([...instructions, {
+              instructionTitle: "",
+              content: ''
+            }])
+        }} />
+      </div>
       <div className="files-container">
         <StyledDropzone assignmentTitle={assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+      </div>
+      <div className="create-assignment-btn">
+        <Button text='Create' handleClick={createAssignment} />
       </div>
     </div>
   )

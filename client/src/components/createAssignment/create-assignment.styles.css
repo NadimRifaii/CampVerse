@@ -34,8 +34,8 @@
 
 .create-assignment-container .instructions .instruction {
   display: flex;
-  gap: 10px;
-  margin: 10px auto
+  gap: 18px;
+  margin: 15px auto
 }
 
 .create-assignment-container .instructions .instruction-content {
@@ -51,4 +51,25 @@
   font-family: sans-serif;
   padding: 10px 15px;
   outline: none;
+}
+
+.add-instruction-btn,
+.create-assignment-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px auto;
+}
+
+.add-instruction-btn button,
+.create-assignment-btn button {
+  color: var(--main-white-color);
+  border-radius: 5px;
+}
+
+.create-assignment-btn {
+  justify-content: center;
+}
+
+.create-assignment-btn button {
+  width: 100px;
 }
