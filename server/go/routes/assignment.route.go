@@ -10,4 +10,5 @@ func AssignmentRoutes(app fiber.Router) {
 	app.Post("/submit", controllers.HttpSubmitAssignment)
 	app.Get("/user-submissions", controllers.HttpGetSubmittedFiles)
 	app.Get("/", controllers.HttpGetAllAssignments)
+	app.Post("/stack-assignments", controllers.HttpGetAssignmentsByStackAndBootcamp)
 }

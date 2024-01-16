@@ -50,9 +50,14 @@ func (assignment *Assignment) GetAssignmentByTitle(db *gorm.DB, title string) er
 	}
 	return nil
 }
-func (assignment *Assignment) GetStackAssignments(db *gorm.DB, bootcampID uint, stackName string) error {
-	if err := db.Where("bootcamp_id=? AND stack_name=?", bootcampID, stackName).Preload("AssignmentFiles").Preload("StudentSubmission"); err != nil {
-		return errors.New("error finding the stacks")
+func (assignment *Assignment) GetAssignmentsByStackAndBootcamp(db *gorm.DB, stackID, bootcampID uint) ([]Assignment, error) {
+	var assignments []Assignment
+	if err := db.Where("stack_id = ? AND bootcamp_id = ?", stackID, bootcampID).
+		Preload("AssignmentFiles").
+		Preload("Instructions").
+		Preload("StudentSubmission").
+		Find(&assignments).Error; err != nil {
+		return nil, err
 	}
-	return nil
+	return assignments, nil
 }

@@ -58,3 +58,20 @@ func HttpGetAllAssignments(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignments": assignments})
 }
+func HttpGetAssignmentsByStackAndBootcamp(c *fiber.Ctx) error {
+	assignment := new(models.Assignment)
+	db := database.Db
+
+	var requestBody struct {
+		StackID    uint `json:"stackID"`
+		BootcampID uint `json:"bootcampID"`
+	}
+	if err := c.BodyParser(&requestBody); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	assignments, err := assignment.GetAssignmentsByStackAndBootcamp(db, requestBody.StackID, requestBody.BootcampID)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return c.JSON(fiber.Map{"assignments": assignments})
+}
