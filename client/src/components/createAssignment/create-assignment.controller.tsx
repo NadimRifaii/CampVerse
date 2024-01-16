@@ -5,7 +5,7 @@ import 'react-datetime/css/react-datetime.css';
 import StyledDropzone from '../dropZone/drop-zone.component';
 import './create-assignment.styles.css'
 const CreateAssignment = () => {
-  const { user, currentDate, uploadedFiles, assignmentTitle, instructions, setAssignmentTitle, setUploadedFiles, setInstructions } = useLogic()
+  const { user, currentDate, uploadedFiles, assignmentTitle, instructions, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
   useEffect(() => {
     console.log(user)
   }, [user])
@@ -30,10 +30,10 @@ const CreateAssignment = () => {
             return (
               <div className="instruction">
                 <div className="title">
-                  <input type="text" value={instruction.content} placeholder='Instruction title' />
+                  <input type="text" onChange={(e) => updateInstructionTitle(index, e.target.value)} value={instruction.content} placeholder='Instruction title' />
                 </div>
-                <div className="content">
-                  <textarea value={instruction.instructionTitle} placeholder='Instruction' ></textarea>
+                <div className="instruction-content">
+                  <textarea value={instruction.instructionTitle} onChange={(e) => updateInstructionContent(index, e.target.value)} placeholder='Instruction' ></textarea>
                 </div>
               </div>
             )

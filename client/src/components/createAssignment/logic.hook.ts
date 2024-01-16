@@ -30,6 +30,6 @@ const useLogic = () => {
     setInstructions(updatedInstructions);
   };
   const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
-  return { user, currentDate, uploadedFiles, setUploadedFiles, assignmentTitle, instructions, setInstructions, setAssignmentTitle }
+  return { user, currentDate, uploadedFiles, assignmentTitle, instructions, updateInstructionContent, updateInstructionTitle, setInstructions, setAssignmentTitle, setUploadedFiles }
 }
 export default useLogic

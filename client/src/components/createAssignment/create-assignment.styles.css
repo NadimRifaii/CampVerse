@@ -13,11 +13,11 @@
   border-radius: 5px;
 }
 
-.create-assignment-container input::placeholder {
+.create-assignment-container :where(input, textarea)::placeholder {
   transition: .5s;
 }
 
-.create-assignment-container input:focus::placeholder {
+.create-assignment-container :where(input, textarea):focus::placeholder {
   opacity: 0;
 }
 
@@ -30,4 +30,25 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+}
+
+.create-assignment-container .instructions .instruction {
+  display: flex;
+  gap: 10px;
+  margin: 10px auto
+}
+
+.create-assignment-container .instructions .instruction-content {
+  flex: 1;
+
+}
+
+.create-assignment-container .instructions .instruction textarea {
+  resize: none;
+  height: 100px;
+  width: 100%;
+  border-radius: 5px;
+  font-family: sans-serif;
+  padding: 10px 15px;
+  outline: none;
 }
