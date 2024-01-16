@@ -4,11 +4,10 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import AddEventModal from '../addEventModal/add-event.component'
 import { Button } from '../common/button/button.component'
 import './calendar.styles.css'
-import { useEffect, useRef, useState } from 'react'
 import useLogic from './logic.hook'
 
 const Calendar = () => {
-  const { modalOpen, setModalOpen, calendarRef, events, onEventAdded } = useLogic()
+  const { modalOpen, setModalOpen, calendarRef, events, sessions, onEventAdded } = useLogic()
   return (
     <section>
       <Button text='Add event' handleClick={() => setModalOpen(!modalOpen)} />
@@ -21,7 +20,7 @@ const Calendar = () => {
             <div>
               <p>{info.event.title}</p>
               <p>{new Date(info.event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(info.event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
-              <p>{info.event.extendedProps.description}</p>
+              <p>{info.event.extendedProps.mentors}</p>
             </div>
           )}
           initialView='timeGridWeek'

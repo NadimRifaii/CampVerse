@@ -2,12 +2,16 @@ import Modal from 'react-modal';
 import Datetime from 'react-datetime';
 import { useState, useEffect } from 'react';
 import { Button } from '../common/button/button.component';
-import MentorsList from '../mentorsListPopup/mentors-list.component';
+import MentorsList from '../mentorsList/mentors-list.component';
 const AddEventModal = ({ onEventAdded, hideModal }) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [description, setDescription] = useState('')
+  const [mentorsListOpen, setMentorsListOpen] = useState(false)
+  const [description, setDescription] = useState({
+    mentors: '',
+    users: []
+  })
   const onSubmit = (event) => {
     event.preventDefault();
     const newEvent = {
@@ -16,14 +20,15 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
       end: new Date(endDate),
       description: description
     };
-
     onEventAdded(newEvent);
     hideModal(false)
   };
-
   return (
     <div className="add-model">
-      <MentorsList />
+      {
+        mentorsListOpen &&
+        <MentorsList setMentorsListOpen={setMentorsListOpen} setDescription={setDescription} description={description} />
+      }
       <form onSubmit={onSubmit}>
         <div className="title">
           <input type="text" required placeholder='Enter event title' value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -38,7 +43,9 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
         </div>
         <div className="description">
           <label htmlFor="">Description</label>
-          <input required type="text" placeholder='Instructor' value={description} onChange={(e) => {
+          <input onFocus={() => {
+            setMentorsListOpen(true)
+          }} required type="text" placeholder='Instructors' value={description.mentors} onChange={(e) => {
             setDescription(e.target.value)
           }} />
         </div>

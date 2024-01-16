@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 const useLogic = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const calendarRef = useRef(null)
+  const [sessions, setSessions] = useState([])
   const [events, setEvents] = useState([])
   const { schedules } = useSelector(extractSchedulesSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
@@ -29,7 +30,7 @@ const useLogic = () => {
           start: new Date(start),
           end: new Date(end),
           title,
-          description: User.map(user => user.username).join(","),
+          mentors: User.map(user => user.username).join(",")
         };
         return obj;
       })
@@ -41,15 +42,20 @@ const useLogic = () => {
     fetchBootcampSchedules()
   }, [])
   useEffect(() => {
+    console.log(sessions)
+  }, [sessions])
+  useEffect(() => {
     displayEvents()
   }, [schedules])
   const onEventAdded = event => {
     let calendarApi = calendarRef.current.getApi();
     calendarApi.removeAllEventSources();
-    const updatedEvents = [...events, event];
+    const { title, start, end, description: { mentors, users } } = event
+    const updatedEvents = [...events, { title, start, end, mentors, users }];
+    setSessions([...sessions, { start, end, title, users }])
     setEvents(updatedEvents);
     calendarApi.addEventSource(updatedEvents);
   }
-  return { modalOpen, setModalOpen, onEventAdded, events, calendarRef }
+  return { modalOpen, setModalOpen, onEventAdded, events, sessions, calendarRef }
 }
 export default useLogic

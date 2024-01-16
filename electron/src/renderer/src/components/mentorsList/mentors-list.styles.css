@@ -1,0 +1,36 @@
+.mentors-list-container {
+  color: var(--main-black-color);
+  background-color: var(--main-white-color);
+  padding: 5px;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 300px;
+}
+
+.mentors-list-container .mentor-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--main-white-color);
+  padding: 5px;
+  cursor: pointer;
+}
+
+.mentors-list-container .mentor-row:not(:last-of-type) {
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--main-black-color)
+}
+
+.mentor-row img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.mentors-list-container .save-mentors button {
+  width: 100%
+}
