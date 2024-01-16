@@ -8,7 +8,7 @@ import (
 
 type Assignment struct {
 	gorm.Model
-	Title             string `json:"assignmentTitle" gorm:"unique"`
+	Title             string `json:"assignmentTitle"`
 	Description       string `json:"description" gorm:"not null;size:255"`
 	DueDate           string `json:"dueDate" gorm:"size:255"`
 	MentorID          uint
@@ -24,7 +24,6 @@ type Instruction struct {
 	Title        string `json:"instructionTitle" gorm:"size:255"`
 	Content      string `json:"content" gorm:"size:255"`
 	AssignmentID uint
-	Assignment   Assignment
 }
 type AssignmentFile struct {
 	gorm.Model
@@ -48,6 +47,12 @@ func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 func (assignment *Assignment) GetAssignmentByTitle(db *gorm.DB, title string) error {
 	if db.Find(assignment, "description = ?", title); assignment.ID == 0 {
 		return errors.New("Assignment not found")
+	}
+	return nil
+}
+func (assignment *Assignment) GetStackAssignments(db *gorm.DB, bootcampID uint, stackName string) error {
+	if err := db.Where("bootcamp_id=? AND stack_name=?", bootcampID, stackName).Preload("AssignmentFiles").Preload("StudentSubmission"); err != nil {
+		return errors.New("error finding the stacks")
 	}
 	return nil
 }
