@@ -24,27 +24,28 @@ const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps
   }, [userType])
   return (
     <div className="users-container">
-      <div className={`bootcamps-list ${activeBootcamp ? 'active' : ''}`}>
-        <h3>Choose a bootcamp</h3>
-        <ul>
-          {
-            bootcamps.map(bootcamp => <li key={bootcamp.id} className={`${activeBootcamp == bootcamp.name ? 'active' : ""}`} onClick={(() => {
-              setActiveBootcamp(bootcamp.name)
-            })} ><span>{bootcamp.name}</span></li>)
-          }
-        </ul>
-        <div className="save-btn">
-          <Button text='Save' handleClick={() => {
-            addUserToBootcamp({
-              'email': currentUser?.email,
-              'bootcampName': activeBootcamp
-            })
-            setCurrentUser(null)
-            setActiveBootcamp(false)
-          }} className={activeBootcamp ? 'active' : ""} />
-        </div>
-      </div>
+
       <div className="search-bar-container">
+        <div className={`bootcamps-list ${activeBootcamp ? 'active' : ''}`}>
+          <h3>Choose a bootcamp</h3>
+          <ul>
+            {
+              bootcamps.map(bootcamp => <li key={bootcamp.id} className={`${activeBootcamp == bootcamp.name ? 'active' : ""}`} onClick={(() => {
+                setActiveBootcamp(bootcamp.name)
+              })} ><span>{bootcamp.name}</span></li>)
+            }
+          </ul>
+          <div className="save-btn">
+            <Button text='Save' handleClick={() => {
+              addUserToBootcamp({
+                'email': currentUser?.email,
+                'bootcampName': activeBootcamp
+              })
+              setCurrentUser(null)
+              setActiveBootcamp(false)
+            }} className={activeBootcamp ? 'active' : ""} />
+          </div>
+        </div>
         <div className="search-bar">
           <input type="search" placeholder="Search..." onChange={(e) => searchUsers(e.target.value)} />
           <img src={`http://localhost:8000/images/black-search.png`} alt="" />

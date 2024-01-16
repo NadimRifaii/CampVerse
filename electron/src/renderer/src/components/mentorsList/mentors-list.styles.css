@@ -41,3 +41,21 @@
 .mentors-list-container .save-mentors button {
   width: 100%
 }
+
+.mentors-list-container .mentors {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.mentors-list-container .mentors::-webkit-scrollbar {
+  width: 12px;
+}
+
+.mentors-list-container .mentors::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+
+.mentors-list-container .mentors::-webkit-scrollbar-track {
+  background-color: #ccc;
+}

@@ -14,7 +14,7 @@ const Calendar = () => {
         <Button text='Add event' handleClick={() => setModalOpen(!modalOpen)} />
         <Button text='Save schedule' handleClick={() => saveEvents()} />
       </div>
-      <div className='calendar-holder' style={{ position: 'relative', zIndex: 0, height: 700 }}>
+      <div className='calendar-holder' style={{ position: 'relative', zIndex: 0, height: 550 }}>
         <FullCalendar
           ref={calendarRef}
           plugins={[dayGridPlugin, timeGridPlugin]}

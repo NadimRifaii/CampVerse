@@ -34,16 +34,18 @@ const MentorsList = ({ setDescription, description, setMentorsListOpen }) => {
 
   return (
     <div className="mentors-list-container">
-      {currentBootcamp.mentors.map((mentor, index) => (
-        <div key={index} onClick={() => handleMentorClick(mentor)} className={mentorRowClassName(mentor)}>
-          <div className="profile">
-            <img src={`http://localhost:8000/images/${mentor.profilePicture}`} alt="" />
+      <div className="mentors">
+        {currentBootcamp.mentors.map((mentor, index) => (
+          <div key={index} onClick={() => handleMentorClick(mentor)} className={mentorRowClassName(mentor)}>
+            <div className="profile">
+              <img src={`http://localhost:8000/images/${mentor.profilePicture}`} alt="" />
+            </div>
+            <div className="username">
+              <p>{mentor.username}</p>
+            </div>
           </div>
-          <div className="username">
-            <p>{mentor.username}</p>
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
       <div className="save-mentors">
         <Button text="Save mentors" handleClick={() => setMentorsListOpen(false)} />
       </div>

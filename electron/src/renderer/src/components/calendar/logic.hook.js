@@ -3,6 +3,7 @@ import { schedulesDataSource } from '../../core/datasource/remoteDataSource/sche
 import { extractSchedulesSlice, setSchedules } from '../../core/datasource/localDataSource/schedules/schedulesSlice'
 import { extractcurrentBootcampSlice } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice'
 import { useSelector, useDispatch } from 'react-redux'
+import toast from "react-hot-toast";
 const useLogic = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const calendarRef = useRef(null)
@@ -41,14 +42,18 @@ const useLogic = () => {
     }
   };
   const saveEvents = async () => {
+
+    const loadingToastId = toast.loading('Saving...');
     try {
       const response = await schedulesDataSource.setSchedule({
         bootcampId: currentBootcamp.id,
         initialDate: `${new Date()}`,
         sessions
       })
+      toast.success('Schedule saved!', { id: loadingToastId });
       console.log(response)
     } catch (error) {
+      toast.error(`${error}`, { id: loadingToastId });
       console.log(error)
     }
   }

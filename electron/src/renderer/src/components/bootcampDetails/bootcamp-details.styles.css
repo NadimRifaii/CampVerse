@@ -7,6 +7,12 @@
   height: calc(100% - 51px);
 }
 
+.details-container .users-container {
+  position: static;
+  transform: translate(0);
+  margin: 10px auto
+}
+
 .toggler-header {
   display: flex;
   align-items: center;

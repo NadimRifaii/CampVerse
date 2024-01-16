@@ -28,18 +28,7 @@
   border-radius: 5px;
 }
 
-.messages-container::-webkit-scrollbar {
-  width: 12px;
-}
 
-.messages-container::-webkit-scrollbar-thumb {
-  background-color: var(--blue-color);
-  border-radius: 6px;
-}
-
-.messages-container::-webkit-scrollbar-track {
-  background-color: #ccc;
-}
 
 .chat-page .header .user-profile {
   width: 50px;
