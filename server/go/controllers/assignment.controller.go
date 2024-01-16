@@ -1,7 +1,12 @@
 package controllers
 
 import (
+	"encoding/base64"
 	"errors"
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
+	"strings"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
@@ -74,4 +79,53 @@ func HttpGetAssignmentsByStackAndBootcamp(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return c.JSON(fiber.Map{"assignments": assignments})
+}
+
+type FileInfo struct {
+	Name        string `json:"name"`
+	Size        int64  `json:"size"`
+	ModTime     string `json:"mod_time"`
+	DownloadURL string `json:"download_url"`
+	Base64Data  string `json:"base64_data"`
+}
+
+func HttpGetFilesByName(c *fiber.Ctx) error {
+	fileDir := "public/files"
+
+	// Get the query parameter for the substring
+	substring := c.Query("substring")
+	if substring == "" {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Substring parameter is missing"})
+	}
+
+	files, err := ioutil.ReadDir(fileDir)
+	if err != nil {
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
+	}
+
+	var matchingFiles []FileInfo
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		}
+		// Check if the file name contains the specified substring
+		if strings.Contains(file.Name(), substring) {
+			filePath := filepath.Join(fileDir, file.Name())
+			content, err := ioutil.ReadFile(filePath)
+			if err != nil {
+				return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
+			}
+
+			fileInfo := FileInfo{
+				Name:        file.Name(),
+				Size:        file.Size(),
+				ModTime:     file.ModTime().String(),
+				DownloadURL: fmt.Sprintf("/download?filename=%s", file.Name()), // Adjust the endpoint as needed
+				Base64Data:  base64.StdEncoding.EncodeToString(content),
+			}
+			matchingFiles = append(matchingFiles, fileInfo)
+		}
+	}
+
+	return Loger(c, fiber.StatusOK, fiber.Map{"files": matchingFiles})
 }

@@ -1,8 +1,10 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { useCallback, useState } from 'react';
 import { FaFileImage, FaFile } from 'react-icons/fa';
-import './drop-zone.styles.css'
+import axios from 'axios';
+import './drop-zone.styles.css';
+import { userDataSource } from '../../core/datasource/remoteDataSource/user';
+import toast from "react-hot-toast";
 const baseStyle = {
   flex: 1,
   display: 'flex',
@@ -16,19 +18,19 @@ const baseStyle = {
   backgroundColor: '#fafafa',
   color: '#bdbdbd',
   outline: 'none',
-  transition: 'border .24s ease-in-out'
+  transition: 'border .24s ease-in-out',
 };
 
 const focusedStyle = {
-  borderColor: '#2196f3'
+  borderColor: '#2196f3',
 };
 
 const acceptStyle = {
-  borderColor: '#00e676'
+  borderColor: '#00e676',
 };
 
 const rejectStyle = {
-  borderColor: '#ff1744'
+  borderColor: '#ff1744',
 };
 
 function StyledDropzone(props) {
@@ -42,12 +44,26 @@ function StyledDropzone(props) {
     isDragReject,
     acceptedFiles,
   } = useDropzone({
-    onDrop: (newFiles) => {
-      // Combine the new files with the existing ones
-      const combinedFiles = [...uploadedFiles, ...newFiles];
+    onDrop: async (newFiles) => {
+      const validFiles = newFiles.filter(file => (
+        file.type === 'application/pdf' || file.type === 'text/plain'
+      ));
+
+      const combinedFiles = [...uploadedFiles, ...validFiles];
       setUploadedFiles(combinedFiles);
       console.log('Accepted Files:', combinedFiles);
+      validFiles.forEach(async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        try {
+          const response = await userDataSource.uploadFile(formData);
+          console.log('File uploaded to server:', response.data);
+        } catch (error) {
+          console.error('Error uploading file:', error);
+        }
+      });
     },
+    accept: ['.pdf', 'text/plain'],
     multiple: true, // Allow multiple files
   });
 

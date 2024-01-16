@@ -24,6 +24,18 @@ export const userDataSource = {
       throw new Error(error)
     }
   },
+  uploadFile: async (data: {}) => {
+    try {
+      const response = await sendFileRequest({
+        body: data,
+        route: "/assignment/upload-file",
+        method: "POST"
+      })
+      return response;
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  },
   updateProfile: async (data: any) => {
     try {
       const response = await sendRequest({

@@ -54,7 +54,18 @@ func HttpUploadImage(c *fiber.Ctx) error {
 	c.SaveFile(file, "public/images/"+file.Filename)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
 }
-
+func HttpUploadFile(c *fiber.Ctx) error {
+	user := new(models.User)
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	file, err := c.FormFile("file")
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	c.SaveFile(file, "public/files/"+file.Filename)
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
+}
 func HttpGetAllUsers(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
