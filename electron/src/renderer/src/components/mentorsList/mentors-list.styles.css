@@ -18,6 +18,13 @@
   background-color: var(--main-white-color);
   padding: 5px;
   cursor: pointer;
+  transition: .5s;
+  opacity: 1;
+}
+
+.mentors-list-container .mentor-row.selected {
+  opacity: .5;
+  pointer-events: none;
 }
 
 .mentors-list-container .mentor-row:not(:last-of-type) {
