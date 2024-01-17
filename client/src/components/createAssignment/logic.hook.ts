@@ -28,27 +28,24 @@ const useLogic = () => {
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const dispatch = useDispatch()
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
-  const [dueDate, setDueDate] = useState<Date | string>("")
+  const [dueDate, setDueDate] = useState<Date>(new Date())
   const [assignmentTitle, setAssignmentTitle] = useState<string>("")
   const [stackName, setStackName] = useState<string>("")
   const [bootcampStacks, setBoocampStacks] = useState<string[]>([])
+  const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
   const [instructions, setInstructions] = useState<InstructionType[]>([{
     instructionTitle: "",
     content: ''
   }])
-
+  useEffect(() => {
+    setBoocampStacks([])
+  }, [])
   const updateInstructionTitle = (index: number, value: string) => {
     const updatedInstructions = [...instructions];
     updatedInstructions[index].instructionTitle = value;
     setInstructions(updatedInstructions);
   };
-  useEffect(() => {
-    curriculums.map((curriculum: CurriculumType) => {
-      curriculum.stacks.map((stack: Stack) => {
-        setBoocampStacks([...bootcampStacks, stack.name])
-      })
-    })
-  }, [curriculums])
+
   const updateInstructionContent = (index: number, value: string) => {
     const updatedInstructions = [...instructions];
     updatedInstructions[index].content = value;
@@ -62,9 +59,17 @@ const useLogic = () => {
       const response = await curriculumsDataSource.getCurriculums({ id: currentBootcamp.id })
       dispatch(setCurriculums(response))
     } catch (error) {
-      console.log(error)
     }
   }
+  useEffect(() => {
+    const arr: string[] = []
+    curriculums.map((curriculum: CurriculumType) => {
+      curriculum.stacks.map((stack: Stack) => {
+        arr.push(stack.name)
+      })
+    })
+    setBoocampStacks(arr)
+  }, [curriculums])
   const createAssignment = async () => {
     const loadingToastId = toast.loading('Posting...');
     if (!stackName || !dueDate || !assignmentTitle) {
@@ -81,21 +86,16 @@ const useLogic = () => {
           }
         })
         toast.success(`Assignment created successfully`, { id: loadingToastId })
+        setStackName("")
+        setAssignmentTitle("")
+        setInstructions([])
+        setUploadedFiles([])
       } catch (error) {
         toast.error(`${error}`, { id: loadingToastId });
       }
     }
-    console.log({
-      bootcampName: currentBootcamp.name,
-      stackName: stackName,
-      dueDate: dueDate,
-      assignment: {
-        files: uploadedFiles,
-        instructions
-      }
-    })
   }
-  const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
+
   return { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, bootcampStacks, setStackName, createAssignment, setDueDate, updateInstructionContent, updateInstructionTitle, setInstructions, setAssignmentTitle, setUploadedFiles }
 }
 export default useLogic

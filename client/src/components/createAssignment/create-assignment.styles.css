@@ -4,6 +4,7 @@
   border-radius: 5px;
   width: 650px;
   margin: auto;
+  position: relative;
 }
 
 .create-assignment-container input {
@@ -72,4 +73,30 @@
 
 .create-assignment-btn button {
   width: 100px;
+}
+
+.create-assignment-container .stacks-list {
+  color: var(--main-black-color);
+  background-color: var(--main-white-color);
+
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 300px;
+}
+
+.create-assignment-container .stacks-list .stack {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.create-assignment-container .stacks-list .stack:not(:last-child) {
+  border-bottom: 1px solid var(--main-black-color);
+}
+
+.create-assignment-container .stacks-list .stack p {
+  margin: 0
 }

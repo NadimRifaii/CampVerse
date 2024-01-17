@@ -1,15 +1,13 @@
 import Datetime from 'react-datetime'
 import useLogic, { CurriculumType } from "./logic.hook"
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import 'react-datetime/css/react-datetime.css';
 import StyledDropzone from '../dropZone/drop-zone.component';
 import './create-assignment.styles.css'
 import { Button } from '../common/button/button.component';
 const CreateAssignment = () => {
+  const [stacksListOpen, setStacksListOpen] = useState<boolean>(false)
   const { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, bootcampStacks, setStackName, createAssignment, setDueDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
-  useEffect(() => {
-    console.log(bootcampStacks)
-  }, [bootcampStacks])
   return (
     <div className="create-assignment-container">
       <div className="assignment-info">
@@ -23,12 +21,21 @@ const CreateAssignment = () => {
         </div>
         <div className="stack-name">
           <input type="text" value={stackName} placeholder='Stack name' onChange={(e) => {
-            setStackName(e.target.value)
-          }} />
+            console.log(e.target.value)
+          }} onFocus={() => setStacksListOpen(true)} />
         </div>
       </div>
       <div className="stacks-list">
-
+        {
+          stacksListOpen && bootcampStacks.map(stack => {
+            return <div className="stack" onClick={(e) => {
+              setStackName(stack)
+              setStacksListOpen(false)
+            }} >
+              <p>{stack}</p>
+            </div>
+          })
+        }
       </div>
       <div className="instructions">
         {

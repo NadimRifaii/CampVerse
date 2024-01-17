@@ -35,7 +35,8 @@ const rejectStyle = {
 };
 
 function StyledDropzone(props) {
-  const { uploadedFiles, setUploadedFiles, assignmentTitle } = props
+  const { uploadedFiles, setUploadedFiles, assignmentTitle } = props;
+
   useEffect(() => {
     console.log(uploadedFiles);
   }, [uploadedFiles]);
@@ -49,27 +50,13 @@ function StyledDropzone(props) {
     acceptedFiles,
   } = useDropzone({
     onDrop: async (newFiles) => {
-      if (assignmentTitle.length === 0) {
-        toast.error("Assignment title can't be null");
-        return;
-      }
-
-      const validFiles = newFiles.filter((file) => {
-        const acceptedTypes = ['application/pdf', 'text/plain'];
-        const validExtensions = ['.pdf', '.txt'];
-
-        return (
-          acceptedTypes.includes(file.type) &&
-          validExtensions.some((ext) => file.name.toLowerCase().endsWith(ext))
-        );
+      // Log the MIME types of the dropped files
+      newFiles.forEach((file) => {
+        console.log(`${file.name}: ${file.type}`);
       });
 
-      if (validFiles.length === 0) {
-        toast.error(
-          'Invalid file types or extensions. Only PDF and plain text files are allowed.'
-        );
-        return;
-      }
+      // Accept all files for now
+      const validFiles = newFiles;
 
       const updatedFiles = validFiles.map((file) => ({
         fileName: file.name,
@@ -95,7 +82,7 @@ function StyledDropzone(props) {
         }
       });
     },
-    accept: ['.pdf', '.txt'],
+    accept: () => true, // Accept all file types
     multiple: true, // Allow multiple files
   });
 
