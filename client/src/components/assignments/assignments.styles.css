@@ -13,7 +13,7 @@
 }
 
 .toggler-header button {
-  width: 150px;
+  flex: 1;
   color: var(--main-white-color);
   border-radius: 5px;
   background-color: #02baff8c;

@@ -4,9 +4,11 @@ import { local } from '../../core/helpers/localStorage'
 import { useContext } from 'react'
 import { ActiveEditContext } from '../../utils/contexts/active-edit-profile.context'
 import { useDispatch } from 'react-redux'
+import { removeBootcamps } from '../../core/datasource/localDataSource/bootcamps/bootcampsSlice'
+import { removeCurrentBootcamp } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice'
 const Dropdown = () => {
   const activeEditContext = useContext(ActiveEditContext)
-
+  const dispatch = useDispatch()
   const { active, setActive } = activeEditContext || {};
   return (
     <div className="dropdown">
@@ -20,7 +22,8 @@ const Dropdown = () => {
         <li>
           <Link to='/' onClick={() => {
             local('token', "xxxx")
-
+            dispatch(removeBootcamps([]))
+            dispatch(removeCurrentBootcamp({}))
           }}>Logout</Link>
         </li>
       </ul>

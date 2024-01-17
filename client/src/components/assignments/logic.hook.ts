@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment"
 import { useDispatch } from "react-redux"
+import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 const useLogic = () => {
   const { assignments } = useSelector(extractAssignmentsSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
+  const user = useSelector(extractUserSlice)
   const [upcomingAssignments, setUpcomingAssignments] = useState<Assignment[]>([])
   const [oldAssignments, setOldAssignments] = useState<Assignment[]>([])
   const dispatch = useDispatch()
@@ -59,6 +61,6 @@ const useLogic = () => {
     setUpcomingAssignments(upcoming)
     setOldAssignments(old)
   }
-  return { assignments, oldAssignments, upcomingAssignments }
+  return { assignments, oldAssignments, upcomingAssignments, user }
 }
 export default useLogic

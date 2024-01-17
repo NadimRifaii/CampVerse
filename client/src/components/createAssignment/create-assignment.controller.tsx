@@ -3,11 +3,17 @@ import useLogic, { CurriculumType } from "./logic.hook"
 import { useCallback, useEffect, useState } from 'react'
 import 'react-datetime/css/react-datetime.css';
 import StyledDropzone from '../dropZone/drop-zone.component';
+import { useNavigate } from 'react-router-dom';
 import './create-assignment.styles.css'
 import { Button } from '../common/button/button.component';
 const CreateAssignment = () => {
   const [stacksListOpen, setStacksListOpen] = useState<boolean>(false)
+  const navigate = useNavigate()
   const { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, bootcampStacks, setStackName, createAssignment, setDueDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
+  useEffect(() => {
+    if (user.role == "student")
+      navigate('/home')
+  }, [])
   return (
     <div className="create-assignment-container">
       <div className="assignment-info">
@@ -41,7 +47,7 @@ const CreateAssignment = () => {
         {
           instructions.map((instruction, index) => {
             return (
-              <div className="instruction">
+              <div key={index} className="instruction">
                 <div className="title">
                   <input type="text" onChange={(e) => updateInstructionTitle(index, e.target.value)} value={instruction.instructionTitle} placeholder='Instruction title' />
                 </div>
