@@ -61,7 +61,7 @@ function StyledDropzone(props) {
       const updatedFiles = validFiles.map((file) => ({
         fileName: file.name,
         fileType: file.type.split('/')[1], // Extracting file extension
-        fileUrl: `assignment_${file.name}`, // Adjust the URL format as needed
+        fileUrl: `${assignmentTitle}_${file.name}`, // Adjust the URL format as needed
       }));
 
       const combinedFiles = [...uploadedFiles, ...updatedFiles];
@@ -74,7 +74,7 @@ function StyledDropzone(props) {
         try {
           const response = await userDataSource.uploadFile({
             formData,
-            name: 'assignment',
+            name: assignmentTitle,
           });
           console.log('File uploaded to server:', response.data);
         } catch (error) {
