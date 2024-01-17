@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import './assignments.styles.css'
 import useLogic from "./logic.hook"
 import AssignmentsList from "../assignmentsList/assignments-list.component"
+import Submissions from "../submissions/submissions.component"
 const Assignment = () => {
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>("old")
   const { assignments, oldAssignments, upcomingAssignments, user } = useLogic()
@@ -21,7 +22,8 @@ const Assignment = () => {
         }
       </div>
       {
-        currentActiveComponent == "create" ? <CreateAssignment /> : <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
+        user.role == "student" ? currentActiveComponent == "old" ? <Submissions /> : <AssignmentsList assignments={upcomingAssignments} /> :
+          currentActiveComponent == "create" ? <CreateAssignment /> : <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
       }
 
     </div>

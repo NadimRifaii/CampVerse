@@ -1,6 +1,6 @@
 
 import { sendRequest } from "../../helpers/request"
-export const messagesDataSource = {
+export const submissionsDataSource = {
   getStudentSubmissions: async (data: {}) => {
     try {
       const response = await sendRequest({

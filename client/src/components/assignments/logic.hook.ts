@@ -18,11 +18,11 @@ const useLogic = () => {
   useEffect(() => {
     categorizeAssignments(assignments)
   }, [assignments])
+
   const fetchBootcampAssignments = async () => {
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
       dispatch(setAssignments(cleanAssignmentData(response)))
-
     } catch (error) {
       console.log(error)
     }
