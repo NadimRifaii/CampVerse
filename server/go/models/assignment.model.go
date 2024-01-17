@@ -63,6 +63,7 @@ func (assignment *Assignment) GetAssignmentsByStackAndBootcamp(db *gorm.DB, stac
 }
 
 type AssignmentResponse struct {
+	Id              uint              `json:"id"`
 	Title           string            `json:"title"`
 	DueDate         string            `json:"dueDate"`
 	Stack           Stack             `json:"stack"`
@@ -85,6 +86,7 @@ func (a *Assignment) GetAssignmentsByBootcampID(db *gorm.DB, bootcampID uint) ([
 		}
 
 		assignmentData := AssignmentResponse{
+			Id:              assignment.ID,
 			Title:           assignment.Title,
 			DueDate:         assignment.DueDate,
 			Stack:           stack,
@@ -93,6 +95,5 @@ func (a *Assignment) GetAssignmentsByBootcampID(db *gorm.DB, bootcampID uint) ([
 		}
 		response = append(response, assignmentData)
 	}
-
 	return response, nil
 }

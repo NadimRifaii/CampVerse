@@ -7,10 +7,11 @@ import (
 )
 
 type StudentSubmission struct {
-	ID              uint `gorm:"primarykey"`
-	StackId         uint `gorm:"foreignkey:StackId"`
-	StudentId       uint `gorm:"foreignkey:StudentId"`
-	AssignmentId    uint `gorm:"foreignkey:AssignmentId"` //
+	ID              uint       `gorm:"primarykey"`
+	StackId         uint       `gorm:"foreignkey:StackId"`
+	StudentId       uint       `gorm:"foreignkey:StudentId"`
+	AssignmentId    uint       `gorm:"foreignkey:AssignmentId"`
+	Assignment      Assignment `json:"assignment"`
 	SubmissionFiles []*SubmissionFile
 }
 type SubmissionFile struct {
