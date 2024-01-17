@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AssignmentFile } from '../assignments/assignmentsSlice'
+import { RootState } from '../../../types/rootState'
 
 type submissionType = {
   stackId: number,
@@ -8,7 +9,7 @@ type submissionType = {
   submitedAt: string,
   assignmentDueDate: string
 }
-type submissionsSliceType = {
+export type submissionsSliceType = {
   submissions: submissionType[]
 }
 const initialState: submissionsSliceType = {
@@ -25,3 +26,9 @@ export const submissionsSlice = createSlice({
     }
   }
 })
+export const { setSubmissions } = submissionsSlice.actions
+export const submissions = submissionsSlice.name
+export default submissionsSlice.reducer
+export const extractSubmissionsSlice = (global: RootState) => {
+  return global[submissions]
+}

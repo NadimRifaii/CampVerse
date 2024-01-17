@@ -8,6 +8,7 @@ export const submissionsDataSource = {
         route: "/assignment/user-submissions",
         method: "GET"
       })
+      return response
     } catch (error: any) {
       throw new Error(error)
     }

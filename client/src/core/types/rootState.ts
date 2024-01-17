@@ -6,6 +6,7 @@ import { User } from "./user"
 import { SchedulesSliceType } from "../datasource/localDataSource/schedules/schedulesSlice"
 import { CurriculumSliceType } from "../datasource/localDataSource/curriculums/curriculumsSlice"
 import { AssignmentsSliceType } from "../datasource/localDataSource/assignments/assignmentsSlice"
+import { submissionsSliceType } from "../datasource/localDataSource/submissions/submissionsSlice"
 export type RootState = {
   user: User,
   chat: ChatType,
@@ -14,5 +15,6 @@ export type RootState = {
   bootcamps: BootcampsSliceType,
   schedules: SchedulesSliceType,
   curriculums: CurriculumSliceType,
-  assignments: AssignmentsSliceType
+  assignments: AssignmentsSliceType,
+  submissions: submissionsSliceType
 }
