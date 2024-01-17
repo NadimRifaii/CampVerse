@@ -11,9 +11,6 @@ const useLogic = () => {
   useEffect(() => {
     getStudentSubmissions()
   }, [user])
-  useEffect(() => {
-    console.log(submissions)
-  }, [submissions])
   const getStudentSubmissions = async () => {
     try {
       const response = await submissionsDataSource.getStudentSubmissions({})
@@ -22,6 +19,6 @@ const useLogic = () => {
       console.log(error)
     }
   }
-  return { user }
+  return { user, submissions }
 }
 export default useLogic

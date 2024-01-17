@@ -2,10 +2,10 @@ import { useEffect } from "react"
 import useLogic from "./logic.hook"
 
 const Submissions = () => {
-  const { user } = useLogic()
+  const { submissions } = useLogic()
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    console.log(submissions)
+  }, [submissions])
   return (
     <h1>Hello</h1>
   )
