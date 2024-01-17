@@ -16,10 +16,6 @@ const useLogic = () => {
   useEffect(() => {
     categorizeAssignments(assignments)
   }, [assignments])
-  useEffect(() => {
-    console.log(oldAssignments)
-    console.log(upcomingAssignments)
-  }, [assignments])
   const fetchBootcampAssignments = async () => {
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
@@ -63,6 +59,6 @@ const useLogic = () => {
     setUpcomingAssignments(upcoming)
     setOldAssignments(old)
   }
-  return { assignments }
+  return { assignments, oldAssignments, upcomingAssignments }
 }
 export default useLogic

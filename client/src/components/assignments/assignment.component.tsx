@@ -5,7 +5,7 @@ import './assignments.styles.css'
 import useLogic from "./logic.hook"
 const Assignment = () => {
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>("create")
-  const { assignments } = useLogic()
+  const { assignments ,oldAssignments,upcomingAssignments} = useLogic()
   return (
     <div className="assignments-section">
       <div className="toggler-header">
