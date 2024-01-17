@@ -1,0 +1,8 @@
+.submissions-list-container {
+  display: flex;
+  color: var(--main-white-color);
+}
+
+.submissions-list-container>div {
+  width: 300px
+}

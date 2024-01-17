@@ -1,6 +1,18 @@
-const SubmissionCard = () => {
+import { useEffect } from "react"
+import { submissionType } from "../../core/datasource/localDataSource/submissions/submissionsSlice"
+import './submission-card.styles.css'
+type SubmissionCardType = {
+  submission: submissionType
+}
+
+const SubmissionCard = ({ submission }: SubmissionCardType) => {
+  useEffect(() => {
+    console.log(submission)
+  }, [])
   return (
-    <h1>Card</h1>
+    <div className="submission-card">
+
+    </div>
   )
 }
 export default SubmissionCard
