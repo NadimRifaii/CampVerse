@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"time"
 
 	"gorm.io/gorm"
 )
@@ -28,6 +29,7 @@ func (submission *StudentSubmission) CreateSubmission(db *gorm.DB) error {
 	if db.First(&existingSubmission, "stack_id = ? AND student_id = ? AND assignment_id = ?", submission.StackId, submission.StudentId, submission.AssignmentId); existingSubmission.ID != 0 {
 		return errors.New("submission already exists for the given Stack, Student, and Assignment")
 	}
+	submission.SubmitedAt = time.Now().Format(time.RFC3339)
 	if err := db.Create(submission).Error; err != nil {
 		return err
 	}

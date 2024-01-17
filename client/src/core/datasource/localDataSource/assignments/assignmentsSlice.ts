@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../../types/rootState';
-type AssignmentFile = {
+export type AssignmentFile = {
   fileName: string,
   fileType: string,
   fileUrl: string
