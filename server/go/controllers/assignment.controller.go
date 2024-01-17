@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -126,4 +127,20 @@ func HttpGetFilesByName(c *fiber.Ctx) error {
 	}
 
 	return Loger(c, fiber.StatusOK, fiber.Map{"files": matchingFiles})
+}
+func HttpGetBootcampAssignments(c *fiber.Ctx) error {
+	bootcampId := c.Query("substring")
+	id, err := strconv.ParseUint(bootcampId, 10, 64)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	db := database.Db
+	finalBootcampId := uint(id)
+	assignment := new(models.Assignment)
+	assignments, err := assignment.GetAssignmentsByBootcampID(db, finalBootcampId)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"assignments": assignments})
 }
