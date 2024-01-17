@@ -71,16 +71,32 @@ const useLogic = () => {
     setBoocampStacks(arr)
   }, [curriculums])
   const createAssignment = async () => {
+    console.log("dsfadsfdasf")
+    console.log(
+      {
+        bootcampName: currentBootcamp.name,
+        stackName: stackName,
+        dueDate: `${dueDate}`,
+        assignment: {
+          files: uploadedFiles,
+          instructions
+        }
+      }
+    )
+    console.log("dsfadsfdasf")
     const loadingToastId = toast.loading('Posting...');
     if (!stackName || !dueDate || !assignmentTitle) {
       toast.error(`Invalid credentials`, { id: loadingToastId });
     } else {
       try {
+
         const response = await assignmentDataSource.createAssignment({
           bootcampName: currentBootcamp.name,
           stackName: stackName,
           dueDate: `${dueDate}`,
           assignment: {
+            assignmentTitle,
+            dueDate: `${dueDate}`,
             files: uploadedFiles,
             instructions
           }
@@ -88,7 +104,10 @@ const useLogic = () => {
         toast.success(`Assignment created successfully`, { id: loadingToastId })
         setStackName("")
         setAssignmentTitle("")
-        setInstructions([])
+        setInstructions([{
+          instructionTitle: "",
+          content: ''
+        }])
         setUploadedFiles([])
       } catch (error) {
         toast.error(`${error}`, { id: loadingToastId });

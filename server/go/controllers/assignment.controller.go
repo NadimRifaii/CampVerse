@@ -129,7 +129,7 @@ func HttpGetFilesByName(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusOK, fiber.Map{"files": matchingFiles})
 }
 func HttpGetBootcampAssignments(c *fiber.Ctx) error {
-	bootcampId := c.Query("substring")
+	bootcampId := c.Query("id")
 	id, err := strconv.ParseUint(bootcampId, 10, 64)
 	if err != nil {
 		fmt.Println("Error:", err)

@@ -12,4 +12,15 @@ export const assignmentDataSource = {
       throw new Error(error.message)
     }
   },
+  getBootcampAssignments: async (data: { id: number }) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: `/assignment/bootcamp-assignments?id=${data.id}`
+      })
+      return response.assignments
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
 }
