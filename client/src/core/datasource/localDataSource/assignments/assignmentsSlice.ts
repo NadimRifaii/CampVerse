@@ -36,6 +36,6 @@ export const assignmentsSlice = createSlice({
 export const { setAssignments } = assignmentsSlice.actions
 export const assignments = assignmentsSlice.name
 export default assignmentsSlice.reducer
-export const extractBootcampsSlice = (global: RootState) => {
+export const extractAssignmentsSlice = (global: RootState) => {
   return global[assignments]
 }
