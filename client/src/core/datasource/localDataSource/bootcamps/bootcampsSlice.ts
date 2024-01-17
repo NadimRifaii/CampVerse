@@ -15,10 +15,15 @@ export const bootcampsSlice = createSlice({
       return {
         ...payload
       }
+    },
+    removeBootcamps(state, { type, payload }: { payload: any, type: string }) {
+      return {
+        bootcamps: []
+      }
     }
   }
 })
-export const { setBootcamps } = bootcampsSlice.actions
+export const { setBootcamps, removeBootcamps } = bootcampsSlice.actions
 export const bootcamps = bootcampsSlice.name
 export default bootcampsSlice.reducer
 export const extractBootcampsSlice = (global: RootState) => {

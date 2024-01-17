@@ -3,7 +3,7 @@ import './dropdown.styles.css'
 import { local } from '../../core/helpers/localStorage'
 import { useContext } from 'react'
 import { ActiveEditContext } from '../../utils/contexts/active-edit-profile.context'
-
+import { useDispatch } from 'react-redux'
 const Dropdown = () => {
   const activeEditContext = useContext(ActiveEditContext)
 
@@ -18,7 +18,10 @@ const Dropdown = () => {
           }}>Edit profile</Link>
         </li>
         <li>
-          <Link to='/' onClick={() => local('token', "xxxx")}>Logout</Link>
+          <Link to='/' onClick={() => {
+            local('token', "xxxx")
+
+          }}>Logout</Link>
         </li>
       </ul>
     </div>

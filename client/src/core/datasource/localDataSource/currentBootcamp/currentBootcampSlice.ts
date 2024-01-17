@@ -41,7 +41,7 @@ export const currentBootcampSlice = createSlice({
     }
   }
 })
-export const { setcurrentBootcamp } = currentBootcampSlice.actions
+export const { setcurrentBootcamp, removeCurrentBootcamp } = currentBootcampSlice.actions
 export const currentBootcamp = currentBootcampSlice.name
 export default currentBootcampSlice.reducer
 export const extractcurrentBootcampSlice = (global: RootState) => {
