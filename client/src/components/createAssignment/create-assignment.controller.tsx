@@ -6,7 +6,7 @@ import StyledDropzone from '../dropZone/drop-zone.component';
 import './create-assignment.styles.css'
 import { Button } from '../common/button/button.component';
 const CreateAssignment = () => {
-  const { user, currentDate, uploadedFiles, assignmentTitle, instructions, createAssignment, setCurrentDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
+  const { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, setStackName, createAssignment, setDueDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
   useEffect(() => {
     console.log(user)
   }, [user])
@@ -19,10 +19,12 @@ const CreateAssignment = () => {
           }} placeholder='Assignment title' />
         </div>
         <div className="due-date">
-          <Datetime value={currentDate} onChange={() => setCurrentDate(new Date())} inputProps={{ placeholder: 'Select Due date' }} />
+          <Datetime value={dueDate} onChange={() => setDueDate(new Date())} inputProps={{ placeholder: 'Select Due date' }} />
         </div>
-        <div className="mentor-name">
-          <input type="text" disabled value={user.username} />
+        <div className="stack-name">
+          <input type="text" value={stackName} placeholder='Stack name' onChange={(e) => {
+            setStackName(e.target.value)
+          }} />
         </div>
       </div>
       <div className="instructions">
