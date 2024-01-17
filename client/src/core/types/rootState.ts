@@ -4,11 +4,13 @@ import { UsersSliceType } from "../datasource/localDataSource/users/usersSlice"
 import { ChatType } from "./chatType"
 import { User } from "./user"
 import { SchedulesSliceType } from "../datasource/localDataSource/schedules/schedulesSlice"
+import { CurriculumSliceType } from "../datasource/localDataSource/curriculums/curriculumsSlice"
 export type RootState = {
   user: User,
   chat: ChatType,
   users: UsersSliceType,
   currentBootcamp: CurrentBootcampType,
   bootcamps: BootcampsSliceType,
-  schedules: SchedulesSliceType
+  schedules: SchedulesSliceType,
+  curriculums: CurriculumSliceType,
 }
