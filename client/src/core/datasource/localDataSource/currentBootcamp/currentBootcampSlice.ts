@@ -24,6 +24,20 @@ export const currentBootcampSlice = createSlice({
       return {
         currentBootcamp: payload
       }
+    },
+    removeCurrentBootcamp(state, { type, payload }: { payload: any, type: string }) {
+      return {
+        currentBootcamp: {
+          id: 0,
+          name: "",
+          audience: "",
+          outcomes: "",
+          numberOfWeeks: 0,
+          stacks: [],
+          students: [],
+          mentors: []
+        }
+      }
     }
   }
 })

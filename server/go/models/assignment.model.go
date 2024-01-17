@@ -45,7 +45,7 @@ func (a *Assignment) GetAllAssignments(db *gorm.DB) ([]Assignment, error) {
 	return assignments, nil
 }
 func (assignment *Assignment) GetAssignmentByTitle(db *gorm.DB, title string) error {
-	if db.Find(assignment, "description = ?", title); assignment.ID == 0 {
+	if db.Find(assignment, "title = ?", title); assignment.ID == 0 {
 		return errors.New("Assignment not found")
 	}
 	return nil
