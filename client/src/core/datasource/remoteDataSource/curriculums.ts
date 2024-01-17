@@ -2,6 +2,7 @@ import { sendRequest } from "../../helpers/request"
 
 export const curriculumsDataSource = {
   getCurriculums: async (data: {}) => {
+    console.log(data)
     try {
       const response = await sendRequest({
         body: data,

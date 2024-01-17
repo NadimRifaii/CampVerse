@@ -1,15 +1,15 @@
 import Datetime from 'react-datetime'
-import useLogic from "./logic.hook"
+import useLogic, { CurriculumType } from "./logic.hook"
 import { useCallback, useEffect } from 'react'
 import 'react-datetime/css/react-datetime.css';
 import StyledDropzone from '../dropZone/drop-zone.component';
 import './create-assignment.styles.css'
 import { Button } from '../common/button/button.component';
 const CreateAssignment = () => {
-  const { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, setStackName, createAssignment, setDueDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
+  const { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, bootcampStacks, setStackName, createAssignment, setDueDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
   useEffect(() => {
-    console.log(user)
-  }, [user])
+    console.log(bootcampStacks)
+  }, [bootcampStacks])
   return (
     <div className="create-assignment-container">
       <div className="assignment-info">
@@ -26,6 +26,9 @@ const CreateAssignment = () => {
             setStackName(e.target.value)
           }} />
         </div>
+      </div>
+      <div className="stacks-list">
+
       </div>
       <div className="instructions">
         {
