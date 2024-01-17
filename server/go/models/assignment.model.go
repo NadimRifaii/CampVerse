@@ -61,3 +61,38 @@ func (assignment *Assignment) GetAssignmentsByStackAndBootcamp(db *gorm.DB, stac
 	}
 	return assignments, nil
 }
+
+type AssignmentResponse struct {
+	Title           string            `json:"title"`
+	DueDate         string            `json:"dueDate"`
+	Stack           Stack             `json:"stack"`
+	AssignmentFiles []*AssignmentFile `json:"assignmentFiles"`
+	Instructions    []*Instruction    `json:"instructions"`
+}
+
+func (a *Assignment) GetAssignmentsByBootcampID(db *gorm.DB, bootcampID uint) ([]AssignmentResponse, error) {
+	var assignments []Assignment
+	if err := db.Preload("AssignmentFiles").Preload("Instructions").
+		Where("bootcamp_id = ?", bootcampID).Find(&assignments).Error; err != nil {
+		return nil, err
+	}
+
+	var response []AssignmentResponse
+	for _, assignment := range assignments {
+		var stack Stack
+		if err := db.First(&stack, assignment.StackID).Error; err != nil {
+			return nil, err
+		}
+
+		assignmentData := AssignmentResponse{
+			Title:           assignment.Title,
+			DueDate:         assignment.DueDate,
+			Stack:           stack,
+			AssignmentFiles: assignment.AssignmentFiles,
+			Instructions:    assignment.Instructions,
+		}
+		response = append(response, assignmentData)
+	}
+
+	return response, nil
+}

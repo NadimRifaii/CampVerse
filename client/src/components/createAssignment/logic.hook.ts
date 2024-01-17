@@ -79,7 +79,7 @@ const useLogic = () => {
         const response = await assignmentDataSource.createAssignment({
           bootcampName: currentBootcamp.name,
           stackName: stackName,
-          dueDate: dueDate,
+          dueDate: `${dueDate}`,
           assignment: {
             files: uploadedFiles,
             instructions

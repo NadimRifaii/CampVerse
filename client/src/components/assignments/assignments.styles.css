@@ -1,0 +1,24 @@
+.assignments-section {}
+
+.toggler-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: var(--main-black-color);
+  width: 500px;
+  gap: 10px;
+  border-radius: 5px;
+  margin: 0 auto 12px;
+}
+
+.toggler-header button {
+  width: 150px;
+  color: var(--main-white-color);
+  border-radius: 5px;
+  background-color: #02baff8c;
+}
+
+.toggler-header button.active {
+  background-color: var(--main-blue-color)
+}
