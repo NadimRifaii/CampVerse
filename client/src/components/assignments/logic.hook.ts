@@ -7,18 +7,24 @@ import { useDispatch } from "react-redux"
 const useLogic = () => {
   const { assignments } = useSelector(extractAssignmentsSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
-  const [upcomingAssignments, setUpcomingAssignments] = useState<Assignment[][]>([])
+  const [upcomingAssignments, setUpcomingAssignments] = useState<Assignment[]>([])
+  const [oldAssignments, setOldAssignments] = useState<Assignment[]>([])
   const dispatch = useDispatch()
   useEffect(() => {
     fetchBootcampAssignments()
   }, [])
   useEffect(() => {
-    console.log(assignments)
+    categorizeAssignments(assignments)
+  }, [assignments])
+  useEffect(() => {
+    console.log(oldAssignments)
+    console.log(upcomingAssignments)
   }, [assignments])
   const fetchBootcampAssignments = async () => {
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
       dispatch(setAssignments(cleanAssignmentData(response)))
+
     } catch (error) {
       console.log(error)
     }
@@ -41,6 +47,21 @@ const useLogic = () => {
       })
     }
     return arr
+  }
+  const categorizeAssignments = (assignments: Assignment[]) => {
+    const currentDate = new Date()
+
+    const upcoming = assignments.filter(assignment => {
+      const dueDate = new Date(assignment.dueDate);
+      return currentDate < dueDate;
+    });
+
+    const old = assignments.filter(assignment => {
+      const dueDate = new Date(assignment.dueDate);
+      return currentDate >= dueDate;
+    });
+    setUpcomingAssignments(upcoming)
+    setOldAssignments(old)
   }
   return { assignments }
 }

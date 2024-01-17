@@ -17,7 +17,7 @@ const CreateAssignment = () => {
           }} placeholder='Assignment title' />
         </div>
         <div className="due-date">
-          <Datetime value={dueDate} onChange={() => setDueDate(new Date())} inputProps={{ placeholder: 'Select Due date' }} />
+          <Datetime value={dueDate} onChange={(date) => setDueDate(date)} inputProps={{ placeholder: 'Select Due date' }} />
         </div>
         <div className="stack-name">
           <input type="text" value={stackName} placeholder='Stack name' onChange={(e) => {

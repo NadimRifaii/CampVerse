@@ -28,7 +28,7 @@ const useLogic = () => {
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const dispatch = useDispatch()
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
-  const [dueDate, setDueDate] = useState<Date>(new Date())
+  const [dueDate, setDueDate] = useState<any>(new Date())
   const [assignmentTitle, setAssignmentTitle] = useState<string>("")
   const [stackName, setStackName] = useState<string>("")
   const [bootcampStacks, setBoocampStacks] = useState<string[]>([])
