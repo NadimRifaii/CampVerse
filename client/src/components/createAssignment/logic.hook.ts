@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import toast from "react-hot-toast"
+import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment"
 type InstructionType = {
   instructionTitle: string,
   content: string
@@ -41,7 +42,20 @@ const useLogic = () => {
     if (!stackName || !dueDate || !assignmentTitle) {
       toast.error(`Invalid credentials`, { id: loadingToastId });
     } else {
-      toast.success(`Assignment created successfully`, { id: loadingToastId })
+      try {
+        const response = await assignmentDataSource.createAssignment({
+          bootcampName: currentBootcamp.name,
+          stackName: stackName,
+          dueDate: dueDate,
+          assignment: {
+            files: uploadedFiles,
+            instructions
+          }
+        })
+        toast.success(`Assignment created successfully`, { id: loadingToastId })
+      } catch (error) {
+        toast.error(`${error}`, { id: loadingToastId });
+      }
     }
     console.log({
       bootcampName: currentBootcamp.name,
