@@ -9,7 +9,7 @@ type Instruction = {
   instructionTitle: string,
   content: string,
 }
-type Assignment = {
+export type Assignment = {
   title: string,
   dueDate: string,
   stackName: string,
@@ -26,9 +26,9 @@ export const assignmentsSlice = createSlice({
   name: "assignments",
   initialState,
   reducers: {
-    setAssignments(state, { type, payload }: { payload: AssignmentsSliceType, type: string }) {
+    setAssignments(state, { type, payload }: { payload: Assignment[], type: string }) {
       return {
-        ...payload
+        assignments: payload
       }
     }
   }

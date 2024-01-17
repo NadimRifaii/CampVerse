@@ -27,8 +27,8 @@ const CreateAssignment = () => {
       </div>
       <div className="stacks-list">
         {
-          stacksListOpen && bootcampStacks.map(stack => {
-            return <div className="stack" onClick={(e) => {
+          stacksListOpen && bootcampStacks.map((stack, index) => {
+            return <div className="stack" key={index} onClick={(e) => {
               setStackName(stack)
               setStacksListOpen(false)
             }} >
