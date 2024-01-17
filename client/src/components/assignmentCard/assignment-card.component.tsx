@@ -11,6 +11,9 @@ const AssignmentCard = ({ assignment }: AssignmentCardProps) => {
   }, [])
   return (
     <div className="assignment-card">
+      <div className="header">
+        <h2>Assignment</h2>
+      </div>
       <div className="icon">
         <AssignmentsIcon />
       </div>

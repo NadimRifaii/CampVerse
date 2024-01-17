@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { Assignment } from "../../core/datasource/localDataSource/assignments/assignmentsSlice"
 import AssignmentCard from "../assignmentCard/assignment-card.component"
+import './assignments-list.styles.css'
 type AssignmentsListProps = {
   assignments: Assignment[]
 }

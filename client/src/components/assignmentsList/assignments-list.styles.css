@@ -1,0 +1,8 @@
+.assignments-list-container {
+  display: flex;
+  color: var(--main-white-color);
+}
+
+.assignments-list-container>div {
+  width: 300px
+}

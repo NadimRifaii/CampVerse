@@ -15,6 +15,32 @@
   margin: 10px auto;
 }
 
+.assignment-card .icon svg {
+  width: 50px;
+}
+
 .assignment-card .icon svg path {
   fill: var(--main-blue-color);
+}
+
+.assignment-card .stat {
+  text-align: center;
+}
+
+.assignment-card>div:not(:last-of-type) {
+  margin-bottom: 15px;
+}
+
+.assignment-card .progress-bar .bar {
+  height: 7px;
+  border-radius: 3px;
+  background-color: #385682;
+  overflow: hidden;
+}
+
+.assignment-card .progress-bar .bar span {
+  display: block;
+  height: 100%;
+  width: 76%;
+  background-color: var(--main-blue-color);
 }
