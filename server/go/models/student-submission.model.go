@@ -12,6 +12,7 @@ type StudentSubmission struct {
 	StudentId       uint       `gorm:"foreignkey:StudentId"`
 	AssignmentId    uint       `gorm:"foreignkey:AssignmentId"`
 	Assignment      Assignment `json:"assignment"`
+	SubmitedAt      string     `json:"submitedAt" gorm:"size:255"`
 	SubmissionFiles []*SubmissionFile
 }
 type SubmissionFile struct {
