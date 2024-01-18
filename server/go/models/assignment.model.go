@@ -99,10 +99,13 @@ func (a *Assignment) GetAssignmentsByBootcampID(db *gorm.DB, bootcampID uint) ([
 }
 
 // Receiver function to find the number of student submissions for the assignment
-func (a *Assignment) NumStudentSubmissions(db *gorm.DB, id uint) (int, error) {
-	var count int
-	if err := db.Raw("SELECT COUNT(*) FROM student_submissions WHERE assignment_id = ?", a.ID).Scan(&count).Error; err != nil {
-		return 0, err
+func (a *Assignment) GetAllAssignmentSubmissions(db *gorm.DB) ([]*StudentSubmission, error) {
+	var submissions []*StudentSubmission
+
+	// Assuming there's a foreign key relationship between Assignment and StudentSubmission
+	if err := db.Model(a).Association("StudentSubmission").Find(&submissions); err != nil {
+		return nil, err
 	}
-	return count, nil
+
+	return submissions, nil
 }

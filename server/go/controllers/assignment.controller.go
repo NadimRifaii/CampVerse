@@ -160,16 +160,17 @@ func HttpGetBootcampAssignments(c *fiber.Ctx) error {
 }
 func HttpGetNumOfAssignmentSubmissions(c *fiber.Ctx) error {
 	var body struct {
-		ID uint `json:"id"`
+		AssignmentTitle string `json:"assignmentTitle"`
 	}
-	if err := ValidateRequest(c, body); err != nil {
+	if err := ValidateRequest(c, &body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	db := database.Db
 	assignment := new(models.Assignment)
-	count, err := assignment.NumStudentSubmissions(db, body.ID)
+	assignment.GetAssignmentByTitle(db, body.AssignmentTitle)
+	count, err := assignment.GetAllAssignmentSubmissions(db)
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"numberOfSubmissions": count})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"numberOfSubmissions": len(count)})
 }

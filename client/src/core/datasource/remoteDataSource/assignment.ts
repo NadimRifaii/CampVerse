@@ -34,5 +34,16 @@ export const assignmentDataSource = {
     } catch (error: any) {
       throw new Error(error.message)
     }
+  },
+  getNumberOfSubmissions: async (data: { assignmentTitle: string }) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/assignment/assignment-submissions"
+      })
+      return response.numberOfSubmissions
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
   }
 }

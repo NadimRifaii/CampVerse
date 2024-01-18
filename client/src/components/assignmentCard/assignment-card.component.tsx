@@ -15,6 +15,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const user = useSelector(extractUserSlice)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   useEffect(() => {
     console.log(assignment)
   }, [])
