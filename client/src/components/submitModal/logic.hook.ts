@@ -6,6 +6,7 @@ import toast from "react-hot-toast"
 import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment"
 import { curriculumsDataSource } from "../../core/datasource/remoteDataSource/curriculums"
 import { extractCurriculumsSlice, setCurriculums } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
+import { extractCurrentAssignmentSlice } from "../../core/datasource/localDataSource/currentAssignment/currentAssignmentSlice"
 type InstructionType = {
   instructionTitle: string,
   content: string
@@ -25,29 +26,12 @@ export type CurriculumType = {
 
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
-  const { curriculums } = useSelector(extractCurriculumsSlice)
   const dispatch = useDispatch()
   const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
-  const [instructions, setInstructions] = useState<InstructionType[]>([{
-    instructionTitle: "",
-    content: ''
-  }])
-
-  const updateInstructionTitle = (index: number, value: string) => {
-    const updatedInstructions = [...instructions];
-    updatedInstructions[index].instructionTitle = value;
-    setInstructions(updatedInstructions);
-  };
-
-  const updateInstructionContent = (index: number, value: string) => {
-    const updatedInstructions = [...instructions];
-    updatedInstructions[index].content = value;
-    setInstructions(updatedInstructions);
-  };
-
-
-
-
-  return { user, uploadedFiles, setUploadedFiles }
+  const { assignment } = useSelector(extractCurrentAssignmentSlice)
+  useEffect(() => {
+    console.log(assignment)
+  }, [])
+  return { user, uploadedFiles, assignment, setUploadedFiles, }
 }
 export default useLogic

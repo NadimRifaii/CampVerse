@@ -1,0 +1,89 @@
+.submission-container {
+  padding: 10px;
+  background-color: var(--main-black-color);
+  border-radius: 5px;
+  width: 650px;
+  margin: auto;
+  position: relative;
+}
+
+.submission-container input {
+  display: block;
+  outline: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.submission-container :where(input, textarea)::placeholder {
+  transition: .5s;
+}
+
+.submission-container :where(input, textarea):focus::placeholder {
+  opacity: 0;
+}
+
+.submission-container .assignment-info .mentor-name input {
+  color: var(--main-white-color)
+}
+
+.submission-container .assignment-info .title input,
+.submission-container .assignment-info .stack-name input {
+  color: var(--main-white-color);
+}
+
+.submission-container .assignment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.submission-container .instructions :where(input, textarea) {
+  color: var(--main-white-color);
+}
+
+.submission-container .instructions .instruction {
+  display: flex;
+  gap: 18px;
+  margin: 15px auto
+}
+
+.submission-container .instructions .instruction-content {
+  flex: 1;
+
+}
+
+.submission-container .instructions .instruction textarea {
+  resize: none;
+  height: 100px;
+  width: 100%;
+  border-radius: 5px;
+  font-family: sans-serif;
+  padding: 10px 15px;
+  outline: none;
+}
+
+.assignment-files h2 {
+  color: var(--main-white-color);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.assignment-files .file {
+  color: var(--main-white-color);
+  width: fit-content;
+  text-align: center;
+}
+
+.assignment-files .file p {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+.assignment-files .file a {
+  color: var(--main-blue-color);
+}
+
+.assignment-files .file a svg {
+  height: 80px
+}
