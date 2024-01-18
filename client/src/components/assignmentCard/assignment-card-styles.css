@@ -4,6 +4,10 @@
   background-color: var(--main-black-color)
 }
 
+.assignment-card .due-date {
+  font-size: 12px;
+}
+
 .assignment-card .icon {
   display: grid;
   place-items: center;

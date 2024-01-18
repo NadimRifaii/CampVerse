@@ -34,10 +34,18 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
     getNumberOfSubmissions();
   }, [assignment]);
 
-  useEffect(() => {
-    console.log(assignment);
-  }, []);
+  const formattedDueDate = (dueDate: any) => {
+    const date = new Date(dueDate);
 
+    const options: Intl.DateTimeFormatOptions = {
+      month: 'long' as const,
+      day: 'numeric',
+      hour: 'numeric',
+      hour12: true,
+    };
+
+    return new Intl.DateTimeFormat('en-US', options).format(date);
+  };
   const percentageSubmitted = (numberOfSubmissions / users.length) * 100;
 
   return (
@@ -46,6 +54,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
     }}>
       <div className="header">
         <h2>Assignment</h2>
+        <span className="due-date">{formattedDueDate(assignment.dueDate)}</span>
       </div>
       <div className="icon">
         <AssignmentsIcon />
