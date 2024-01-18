@@ -97,3 +97,12 @@ func (a *Assignment) GetAssignmentsByBootcampID(db *gorm.DB, bootcampID uint) ([
 	}
 	return response, nil
 }
+
+// Receiver function to find the number of student submissions for the assignment
+func (a *Assignment) NumStudentSubmissions(db *gorm.DB, id uint) (int, error) {
+	var count int
+	if err := db.Raw("SELECT COUNT(*) FROM student_submissions WHERE assignment_id = ?", a.ID).Scan(&count).Error; err != nil {
+		return 0, err
+	}
+	return count, nil
+}

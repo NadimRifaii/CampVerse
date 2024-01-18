@@ -56,12 +56,12 @@
 }
 
 .submission-card .done {
-  border: 1px solid yellowgreen;
+  border: 1px solid #4caf50;
   gap: 5px;
 }
 
 .submission-card .done svg {
-  color: yellowgreen
+  color: #4caf50
 }
 
 .submission-card div:where(.done, .missed) span {
