@@ -1,6 +1,8 @@
 .assignments-list-container {
   display: flex;
   color: var(--main-white-color);
+  flex-wrap: wrap;
+  gap: 20px
 }
 
 .assignments-list-container>div {

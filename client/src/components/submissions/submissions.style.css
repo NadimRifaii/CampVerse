@@ -1,6 +1,8 @@
 .submissions {
   display: flex;
   color: var(--main-white-color);
+  flex-wrap: wrap;
+  gap: 20px
 }
 
 .submissions>div {

@@ -30,14 +30,17 @@ const SubmissionCard = ({ submission }: SubmissionCardType) => {
       <div className="title">
         {submission.assignmentTitle}
       </div>
-      <div className="missed">
-        <FontAwesomeIcon icon={faTimes} />
-        <span>Missed</span>
-      </div>
-      <div className="done">
-        <FontAwesomeIcon icon={faCheck} />
-        <span>Done</span>
-      </div>
+      {
+        new Date(submission.submitedAt) > new Date(submission.dueDate) ?
+          <div className="missed">
+            <FontAwesomeIcon icon={faTimes} />
+            <span>Missed</span>
+          </div> :
+          <div className="done">
+            <FontAwesomeIcon icon={faCheck} />
+            <span>Done</span>
+          </div>
+      }
     </div>
   )
 }

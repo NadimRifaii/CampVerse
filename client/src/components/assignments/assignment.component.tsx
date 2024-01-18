@@ -25,7 +25,6 @@ const Assignment = () => {
         user.role == "student" ? currentActiveComponent == "old" ? <Submissions /> : <AssignmentsList assignments={upcomingAssignments} /> :
           currentActiveComponent == "create" ? <CreateAssignment /> : <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
       }
-
     </div>
   )
 }
