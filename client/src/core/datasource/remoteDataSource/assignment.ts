@@ -39,7 +39,8 @@ export const assignmentDataSource = {
     try {
       const response = await sendRequest({
         body: data,
-        route: "/assignment/assignment-submissions"
+        route: "/assignment/assignment-submissions",
+        method: "POST"
       })
       return response.numberOfSubmissions
     } catch (error: any) {

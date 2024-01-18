@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { submissionType } from "../../core/datasource/localDataSource/submissions/submissionsSlice"
 import './submission-card.styles.css'
 import AssignmentsIcon from "../../assets/assignments-icon.component"
@@ -15,6 +15,7 @@ type SubmissionCardType = {
 }
 
 const SubmissionCard = ({ submission }: SubmissionCardType) => {
+
   return (
     <div className="submission-card">
       <div className="header">

@@ -41,7 +41,7 @@
 .assignment-card .progress-bar .bar span {
   display: block;
   height: 100%;
-  width: 76%;
+
   background-color: var(--main-blue-color);
 }
 
