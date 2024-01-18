@@ -24,5 +24,17 @@ export const submissionsDataSource = {
     } catch (error: any) {
       throw new Error(error)
     }
-  }
+  },
+  submitAssignment: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/assignment/submit",
+        method: "POST"
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  },
 }

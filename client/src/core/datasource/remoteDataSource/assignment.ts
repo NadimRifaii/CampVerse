@@ -12,6 +12,7 @@ export const assignmentDataSource = {
       throw new Error(error.message)
     }
   },
+
   getBootcampAssignments: async (data: { id: number }) => {
     try {
       const response = await sendRequest({
