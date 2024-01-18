@@ -2,6 +2,9 @@ import { useEffect } from "react"
 import { submissionType } from "../../core/datasource/localDataSource/submissions/submissionsSlice"
 import './submission-card.styles.css'
 import AssignmentsIcon from "../../assets/assignments-icon.component"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheck, faT } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 type SubmissionCardType = {
   submission: {
     dueDate: string,
@@ -13,7 +16,8 @@ type SubmissionCardType = {
 
 const SubmissionCard = ({ submission }: SubmissionCardType) => {
   useEffect(() => {
-    console.log(submission)
+    console.log(new Date(submission.submitedAt) > new Date(submission.dueDate))
+    console.log(new Date(submission.dueDate))
   }, [])
   return (
     <div className="submission-card">
@@ -25,6 +29,14 @@ const SubmissionCard = ({ submission }: SubmissionCardType) => {
       </div>
       <div className="title">
         {submission.assignmentTitle}
+      </div>
+      <div className="missed">
+        <FontAwesomeIcon icon={faTimes} />
+        <span>Missed</span>
+      </div>
+      <div className="done">
+        <FontAwesomeIcon icon={faCheck} />
+        <span>Done</span>
       </div>
     </div>
   )

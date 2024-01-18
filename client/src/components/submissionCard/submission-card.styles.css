@@ -31,3 +31,39 @@
 .submission-card>div:not(:last-of-type) {
   margin-bottom: 15px;
 }
+
+.submission-card div:where(.missed, .done) {
+  width: fit-content;
+  margin-left: auto;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 96px;
+}
+
+.submission-card .missed {
+  gap: 10px;
+  border: 1px solid red;
+}
+
+.submission-card svg {
+  width: fit-content;
+}
+
+.submission-card .missed svg {
+  color: red;
+}
+
+.submission-card .done {
+  border: 1px solid yellowgreen;
+  gap: 5px;
+}
+
+.submission-card .done svg {
+  color: yellowgreen
+}
+
+.submission-card div:where(.done, .missed) span {
+  flex: 1;
+}
