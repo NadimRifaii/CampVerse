@@ -10,7 +10,7 @@ type Instruction = {
   content: string,
 }
 export type Assignment = {
-  title: string,
+  assignmentTitle: string,
   dueDate: string,
   stackName: string,
   assignmentFiles: AssignmentFile[],

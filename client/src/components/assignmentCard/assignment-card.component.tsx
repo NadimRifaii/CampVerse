@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { Button } from "../common/button/button.component"
 type AssignmentCardProps = {
-  assignment: any,
+  assignment: Assignment,
   status?: string
 }
 const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {

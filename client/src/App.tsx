@@ -12,6 +12,7 @@ import Bootcamps from './components/bootcamps/bootcamps.component';
 import HomePage from './pages/homePage/home-page.component';
 import Calendar from './components/calendar/big-calendar.component';
 import Assignment from './components/assignments/assignment.component';
+import SubmitModal from './components/submitModal/submit-modal.component';
 function App() {
   return (
     <div className="page">
@@ -23,6 +24,7 @@ function App() {
         <Route path='/dashboard' element={<DashBoard />}>
           <Route index element={<Assignment />} />
           <Route path='/dashboard/Assignments' element={<Assignment />} />
+          <Route path='/dashboard/Assignments/submit' element={<SubmitModal />} />
           <Route path='/dashboard/Users' element={<Users />} />
           <Route path='/dashboard/Results' element={<h1>Results</h1>} />
           <Route path='/dashboard/Schedule' element={<Calendar />} />
