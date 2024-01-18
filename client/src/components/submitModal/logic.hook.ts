@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
-import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
+
 import toast from "react-hot-toast"
-import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment"
-import { curriculumsDataSource } from "../../core/datasource/remoteDataSource/curriculums"
-import { extractCurriculumsSlice, setCurriculums } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
 import { extractCurrentAssignmentSlice } from "../../core/datasource/localDataSource/currentAssignment/currentAssignmentSlice"
+import { submissionsDataSource } from "../../core/datasource/remoteDataSource/submissions"
 type InstructionType = {
   instructionTitle: string,
   content: string
@@ -32,6 +30,26 @@ const useLogic = () => {
   useEffect(() => {
     console.log(assignment)
   }, [])
-  return { user, uploadedFiles, assignment, setUploadedFiles, }
+  const submitAssignment = async () => {
+    const loadingToastId = toast.loading('Submitting...');
+    if (uploadedFiles.length == 0) {
+      toast.error(`Invalid credentials`, { id: loadingToastId });
+      return
+    }
+    try {
+      const data = {
+        stackName: assignment.stackName,
+        assignmentTitle: assignment.assignmentTitle,
+        files: uploadedFiles
+      }
+      const response = await submissionsDataSource.submitAssignment(data)
+      toast.success(`Assignment created successfully`, { id: loadingToastId })
+      setUploadedFiles([])
+    } catch (error) {
+      setUploadedFiles([])
+      toast.error(`${error}`, { id: loadingToastId });
+    }
+  }
+  return { user, uploadedFiles, assignment, setUploadedFiles, submitAssignment }
 }
 export default useLogic

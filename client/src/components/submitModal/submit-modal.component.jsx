@@ -2,23 +2,17 @@ import { useEffect, useState } from "react";
 import { FaFile } from 'react-icons/fa';
 import useLogic from "./logic.hook";
 import Datetime from 'react-datetime';
+import toast from "react-hot-toast";
 import './submit-modal.styles.css';
 import StyledDropzone from "../dropZone/drop-zone.component";
 import { Button } from "../common/button/button.component";
 const SubmitModal = () => {
-  const { assignment, uploadedFiles, setUploadedFiles } = useLogic();
+  const { assignment, uploadedFiles, setUploadedFiles, submitAssignment } = useLogic();
   const [dueDate, setDueDate] = useState(new Date(assignment.dueDate));
 
   useEffect(() => {
     console.log(assignment);
   }, [assignment]);
-  const submitAssignment = async () => {
-    try {
-
-    } catch (error) {
-
-    }
-  }
   return (
     <div className="submission-container">
       <div className="assignment-info">
