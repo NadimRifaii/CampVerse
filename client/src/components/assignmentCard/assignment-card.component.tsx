@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { Button } from "../common/button/button.component"
 type AssignmentCardProps = {
-  assignment: Assignment,
+  assignment: any,
   status?: string
 }
 const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
@@ -23,18 +23,22 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
         <AssignmentsIcon />
       </div>
       <div className="title">
-        {assignment.title}
+        {assignment.assignmentTitle}
       </div>
-      <div className="progress-bar">
-        <div className="bar">
-          <span></span>
-        </div>
-      </div>
+
       {
         user.role == "mentor" ?
-          <div className="stat">
-            76% Submited
-          </div> :
+          <>
+            <div className="stat">
+              76% Submited
+            </div>
+            <div className="progress-bar">
+              <div className="bar">
+                <span></span>
+              </div>
+            </div>
+          </>
+          :
           <div className="submit-btn">
             <Button text="Submit" />
           </div>
