@@ -10,10 +10,11 @@ const useLogic = () => {
   const { users }: UsersSliceType = useSelector(extractUsersSlice)
   const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
   let [filteredArray, setFilteredArray] = useState(users)
+  const [currentActiveComponent, setCurrentActiveComponent] = useState<"student" | "mentor">('student')
   useEffect(() => {
     setFilteredArray(users)
   }, [users])
-  const fetchUsers = async (userType: "user" | "student" | "mentor") => {
+  const fetchUsers = async (userType: "student" | "mentor") => {
     try {
       const response = await userDataSource.getAllUsers({}, userType)
       dispatch(setUsers(response.users))
@@ -52,6 +53,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, searchUsers, bootcamps, getBootcamps, addUserToBootcamp, setBootcampUsers }
+  return { fetchUsers, filteredArray, currentActiveComponent, setCurrentActiveComponent, searchUsers, bootcamps, getBootcamps, addUserToBootcamp, setBootcampUsers }
 }
 export default useLogic
