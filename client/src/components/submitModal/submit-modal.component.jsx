@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
-import { submissionsDataSource } from "../../core/datasource/remoteDataSource/submissions";
 import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment";
 const SubmitModal = () => {
-
   return (
-    <h1>xx</h1>
+    <div className="testing">
+      <a href="http://localhost:8000/assignment/download?substring=Final">Download</a>
+    </div>
   );
 };
 

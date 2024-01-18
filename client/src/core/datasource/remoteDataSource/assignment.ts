@@ -23,11 +23,11 @@ export const assignmentDataSource = {
       throw new Error(error.message)
     }
   },
-  getAssignmentFiles: async (data: {}) => {
+  downloadFile: async (data: { filename: string }) => {
     try {
       const response = await sendRequest({
         body: data,
-        route: `/files/assignmentSEC Results 4.pdf`
+        route: `/assignment/download?substring=${data.filename}`
       })
       return response
     } catch (error: any) {
