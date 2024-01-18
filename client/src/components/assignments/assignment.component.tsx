@@ -8,9 +8,6 @@ import Submissions from "../submissions/submissions.component"
 const Assignment = () => {
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>("old")
   const { assignments, oldAssignments, upcomingAssignments, user } = useLogic()
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   return (
     <div className="assignments-section">
       <div className="toggler-header">

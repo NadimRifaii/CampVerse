@@ -15,10 +15,6 @@ type SubmissionCardType = {
 }
 
 const SubmissionCard = ({ submission }: SubmissionCardType) => {
-  useEffect(() => {
-    console.log(new Date(submission.submitedAt) > new Date(submission.dueDate))
-    console.log(new Date(submission.dueDate))
-  }, [])
   return (
     <div className="submission-card">
       <div className="header">

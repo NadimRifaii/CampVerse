@@ -22,5 +22,16 @@ export const assignmentDataSource = {
     } catch (error: any) {
       throw new Error(error.message)
     }
+  },
+  getAssignmentFiles: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: `/files/assignmentSEC Results 4.pdf`
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
   }
 }

@@ -48,10 +48,10 @@ const useLogic = () => {
       text: "Results",
       icon: ResultsIcon
     },
-    {
-      text: "Votes",
-      icon: VotesIcon
-    },
+    // {
+    //   text: "Votes",
+    //   icon: VotesIcon
+    // },
     {
       text: "Schedule",
       icon: ScheduleIcon

@@ -50,12 +50,10 @@ function StyledDropzone(props) {
     acceptedFiles,
   } = useDropzone({
     onDrop: async (newFiles) => {
-      // Log the MIME types of the dropped files
       newFiles.forEach((file) => {
         console.log(`${file.name}: ${file.type}`);
       });
 
-      // Accept all files for now
       const validFiles = newFiles;
 
       const updatedFiles = validFiles.map((file) => ({
@@ -65,6 +63,7 @@ function StyledDropzone(props) {
       }));
 
       const combinedFiles = [...uploadedFiles, ...updatedFiles];
+      console.log(combinedFiles)
       setUploadedFiles(combinedFiles);
       console.log('Accepted Files:', combinedFiles);
 
@@ -82,8 +81,8 @@ function StyledDropzone(props) {
         }
       });
     },
-    accept: () => true, // Accept all file types
-    multiple: true, // Allow multiple files
+    accept: () => true,
+    multiple: true,
   });
 
   const style = useMemo(

@@ -14,11 +14,13 @@ export const submissionsDataSource = {
     }
   },
   getAssignmentFiles: async (data: { assignmentName: string }) => {
+    console.log(data)
     try {
       const response = await sendRequest({
         body: data,
-        route: `/assignment/assignment-files?substring=${data.assignmentName}`
+        route: `/assignment/assignment-files?substring=Final_destination`
       })
+      return response
     } catch (error: any) {
       throw new Error(error)
     }

@@ -5,12 +5,14 @@ import AssignmentsIcon from "../../assets/assignments-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { Button } from "../common/button/button.component"
+import { useNavigate } from "react-router-dom"
 type AssignmentCardProps = {
   assignment: Assignment,
   status?: string
 }
 const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const user = useSelector(extractUserSlice)
+  const navigate = useNavigate()
   useEffect(() => {
     console.log(assignment)
   }, [])
@@ -40,7 +42,9 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
           </>
           :
           <div className="submit-btn">
-            <Button text="Submit" />
+            <Button text="Submit" handleClick={() => {
+              navigate("/dashboard/submit")
+            }} />
           </div>
       }
     </div>

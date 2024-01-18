@@ -24,7 +24,7 @@ function App() {
         <Route path='/dashboard' element={<DashBoard />}>
           <Route index element={<Assignment />} />
           <Route path='/dashboard/Assignments' element={<Assignment />} />
-          <Route path='/dashboard/Assignments/submit' element={<SubmitModal />} />
+          <Route path='/dashboard/submit' element={<SubmitModal />} />
           <Route path='/dashboard/Users' element={<Users />} />
           <Route path='/dashboard/Results' element={<h1>Results</h1>} />
           <Route path='/dashboard/Schedule' element={<Calendar />} />

@@ -6,9 +6,6 @@ type AssignmentsListProps = {
   assignments: Assignment[]
 }
 const AssignmentsList = ({ assignments }: AssignmentsListProps) => {
-  useEffect(() => {
-    console.log(assignments)
-  }, [assignments])
   return (
     <div className="assignments-list-container">
       {

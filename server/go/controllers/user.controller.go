@@ -46,7 +46,6 @@ func HttpUploadImage(c *fiber.Ctx) error {
 	if user = GetAuthUser(c); user == nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
 	}
-
 	file, err := c.FormFile("file")
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})

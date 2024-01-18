@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"encoding/base64"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -109,24 +108,39 @@ func HttpGetFilesByName(c *fiber.Ctx) error {
 			continue
 		}
 		if strings.Contains(file.Name(), substring) {
-			filePath := filepath.Join(fileDir, file.Name())
-			content, err := ioutil.ReadFile(filePath)
-			if err != nil {
-				return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
-			}
-
 			fileInfo := FileInfo{
 				Name:        file.Name(),
 				Size:        file.Size(),
 				ModTime:     file.ModTime().String(),
 				DownloadURL: fmt.Sprintf("/download?filename=%s", file.Name()),
-				Base64Data:  base64.StdEncoding.EncodeToString(content),
 			}
 			matchingFiles = append(matchingFiles, fileInfo)
 		}
 	}
 
 	return Loger(c, fiber.StatusOK, fiber.Map{"files": matchingFiles})
+}
+func HttpDownloadFile(c *fiber.Ctx) error {
+
+	substring := c.Query("substring")
+	if substring == "" {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Substring parameter is missing"})
+	}
+	fileDir := "public/files"
+	files, err := ioutil.ReadDir(fileDir)
+	if err != nil {
+		return Loger(c, fiber.StatusInternalServerError, fiber.Map{"error": err.Error()})
+	}
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		}
+		if strings.Contains(file.Name(), substring) {
+			filePath := filepath.Join(fileDir, file.Name())
+			return c.Download(filePath, file.Name())
+		}
+	}
+	return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "File not found"})
 }
 func HttpGetBootcampAssignments(c *fiber.Ctx) error {
 	bootcampId := c.Query("id")
