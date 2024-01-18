@@ -13,7 +13,7 @@ const useLogic = () => {
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
   useEffect(() => {
     const allUsers: User[] = [...currentBootcamp.students, ...currentBootcamp.mentors]
-    console.log(user)
+
     for (let i = 0; i < allUsers.length; i++) {
       if (allUsers[i].email == user.email) {
         allUsers.splice(i, 1)
@@ -26,6 +26,7 @@ const useLogic = () => {
   useEffect(() => {
     setFilteredArray(users)
   }, [users])
+
   const fetchUsers = async (userType: "user" | "student" | "mentor") => {
     try {
       const response = await userDataSource.getAllUsers({}, userType)
@@ -34,7 +35,6 @@ const useLogic = () => {
       console.log(error)
     }
   }
-
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {
       const fullName = user.firstname + ' ' + user.lastname;

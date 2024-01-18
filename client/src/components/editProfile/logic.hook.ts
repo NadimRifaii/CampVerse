@@ -1,27 +1,30 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice";
 import { updateUser } from "../../core/datasource/localDataSource/user/userSlice";
 import { userDataSource } from "../../core/datasource/remoteDataSource/user";
+import { CurrentUserContext } from "../../utils/contexts/current-user.context";
 const useLogic = () => {
-  const user = useSelector(extractUserSlice)
+  // const user = useSelector(extractUserSlice)
+  const currentUserContext = useContext(CurrentUserContext)
+  const { currentUser: user } = currentUserContext
   const dispatch = useDispatch()
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   let defaultCredentials = {
-    username: user.username,
-    email: user.email,
-    profilePicture: user.profilePicture,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    role: user.role,
-    ...(user.role === 'mentor' ? { speciality: user.speciality } : {}),
-    ...(user.role === 'mentor' ? { position: user.position } : {})
+    username: user?.username,
+    email: user?.email,
+    profilePicture: user?.profilePicture,
+    firstname: user?.firstname,
+    lastname: user?.lastname,
+    role: user?.role,
+    ...(user?.role === 'mentor' ? { speciality: user?.speciality } : {}),
+    ...(user?.role === 'mentor' ? { position: user?.position } : {})
   }
   const [credentials, setCredentials] = useState(defaultCredentials)
 
   useEffect(() => {
-    setPreviewImage(`http://localhost:8000/images/${user.profilePicture}`);
+    setPreviewImage(`http://localhost:8000/images/${user?.profilePicture}`);
   }, [user]);
   function resetCredentials() {
     setCredentials(defaultCredentials);
@@ -103,7 +106,7 @@ const useLogic = () => {
       disabled: true
     }
   ]
-  if (user.role === 'mentor') {
+  if (user?.role === 'mentor') {
     fields.push(...[{
       label: "Speciality",
       name: "speciality",

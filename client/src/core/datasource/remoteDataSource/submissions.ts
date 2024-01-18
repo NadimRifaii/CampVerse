@@ -13,4 +13,14 @@ export const submissionsDataSource = {
       throw new Error(error)
     }
   },
+  getAssignmentFiles: async (data: { assignmentName: string }) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: `/assignment/assignment-files?substring=${data.assignmentName}`
+      })
+    } catch (error: any) {
+      throw new Error(error)
+    }
+  }
 }
