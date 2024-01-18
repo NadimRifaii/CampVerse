@@ -4,6 +4,7 @@ import './assignment-card-styles.css'
 import AssignmentsIcon from "../../assets/assignments-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
+import { Button } from "../common/button/button.component"
 type AssignmentCardProps = {
   assignment: Assignment,
   status?: string
@@ -34,8 +35,8 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
           <div className="stat">
             76% Submited
           </div> :
-          <div className="status">
-
+          <div className="submit-btn">
+            <Button text="Submit" />
           </div>
       }
     </div>
