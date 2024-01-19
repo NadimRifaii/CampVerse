@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { setCurrentAssignment } from "../../core/datasource/localDataSource/currentAssignment/currentAssignmentSlice";
 import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment";
 import { extractUsersSlice } from "../../core/datasource/localDataSource/users/usersSlice";
-
+import { setSubmissions, extractSubmissionsSlice } from "../../core/datasource/localDataSource/submissions/submissionsSlice";
 type AssignmentCardProps = {
   assignment: Assignment,
   status?: string
@@ -21,23 +21,24 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const navigate = useNavigate();
   const [numberOfSubmissions, setNumberOfSubmissions] = useState<number>(0);
   const { users } = useSelector(extractUsersSlice);
-
+  const { submissions } = useSelector(extractSubmissionsSlice)
   useEffect(() => {
     const getNumberOfSubmissions = async () => {
       try {
         const response: any = await assignmentDataSource.getNumberOfSubmissions({ assignmentTitle: assignment.assignmentTitle });
-        console.log(response)
         setNumberOfSubmissions(response.numberOfSubmissions);
+        dispatch(setSubmissions(response.submisssions))
       } catch (error) {
         console.log(error);
       }
     };
     getNumberOfSubmissions();
   }, [assignment, users]);
-
+  useEffect(() => {
+    console.log(submissions)
+  }, [numberOfSubmissions])
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
-
     const options: Intl.DateTimeFormatOptions = {
       month: 'long' as const,
       day: 'numeric',
