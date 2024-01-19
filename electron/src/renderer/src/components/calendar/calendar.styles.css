@@ -5,9 +5,11 @@
   transform: translate(-50%, -50%);
   background-color: var(--main-black-color);
   padding: 10px;
+  border-radius: 5px;
 }
 
 .add-model input {
+  border-radius: 5px;
   padding: 10px;
   width: 400px;
   display: block;

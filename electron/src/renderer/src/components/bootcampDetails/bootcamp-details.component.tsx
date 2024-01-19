@@ -23,9 +23,9 @@ const BootcampDetails = () => {
       </div>
       <div className="details-container">
         {currentActiveComponent === "student" ? (
-          <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.students} showBtn="Chat" />
+          <Users userType={currentActiveComponent} showHeader={false} bootcampUsers={currentBootcamp.students} showBtn="Chat" />
         ) : currentActiveComponent === "mentor" ? (
-          <Users userType={currentActiveComponent} bootcampUsers={currentBootcamp.mentors} showBtn="Chat" />
+          <Users userType={currentActiveComponent} showHeader={false} bootcampUsers={currentBootcamp.mentors} showBtn="Chat" />
         ) : currentActiveComponent === "curriculum" ? (
           <Curriculum />
         ) : (

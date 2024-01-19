@@ -22,7 +22,7 @@ function App(): JSX.Element {
           <Route index element={<Bootcamps />} />
           <Route path="/dashboard/bootcamps" element={<Bootcamps />} />
           <Route path='/dashboard/Create' element={<CreateBootcamp />} />
-          <Route path='/dashboard/Users' element={<Users />} />
+          <Route path='/dashboard/Users' element={<Users showHeader={true} userType='student' showBtn='Add' />} />
           <Route path='/dashboard/details' element={<BootcampDetails />} />
           <Route path="/dashboard/chat" element={<Chat />} />
           <Route path="/dashboard/schedule" element={<Schedule />} />

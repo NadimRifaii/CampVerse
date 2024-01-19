@@ -6,11 +6,12 @@ import { Button } from '../common/button/button.component'
 import { CurrentUserContext } from '@renderer/utils/contexts/current-user.context'
 import { useNavigate } from 'react-router-dom'
 type UsersProps = {
-  userType?: "user" | "student" | "mentor",
+  userType?: "student" | "mentor",
   showBtn: string,
-  bootcampUsers?: [] | null
+  bootcampUsers?: [] | null,
+  showHeader: boolean
 }
-const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps) => {
+const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeader }: UsersProps) => {
   const { filteredArray: users, bootcamps, currentActiveComponent, setCurrentActiveComponent, searchUsers, getBootcamps, addUserToBootcamp, fetchUsers, setBootcampUsers } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
   const currentUserContext = useContext(CurrentUserContext)
@@ -23,13 +24,16 @@ const Users = ({ userType = "user", showBtn = "Add", bootcampUsers }: UsersProps
       fetchUsers(currentActiveComponent)
     }
     getBootcamps()
-  }, [currentActiveComponent])
+  }, [currentActiveComponent, userType])
   return (
     <div className="users-section">
-      <div className="toggler-header">
-        <Button text="Students" handleClick={() => setCurrentActiveComponent('student')} className={`${currentActiveComponent == "student" ? 'active' : ""}`} />
-        <Button text="Mentors" handleClick={() => setCurrentActiveComponent('mentor')} className={`${currentActiveComponent == "mentor" ? 'active' : ""}`} />
-      </div>
+      {
+        showHeader &&
+        <div className="toggler-header">
+          <Button text="Students" handleClick={() => setCurrentActiveComponent('student')} className={`${currentActiveComponent == "student" ? 'active' : ""}`} />
+          <Button text="Mentors" handleClick={() => setCurrentActiveComponent('mentor')} className={`${currentActiveComponent == "mentor" ? 'active' : ""}`} />
+        </div>
+      }
       <div className="users-container">
         <div className="search-bar-container">
           <div className={`bootcamps-list ${activeBootcamp ? 'active' : ''}`}>
