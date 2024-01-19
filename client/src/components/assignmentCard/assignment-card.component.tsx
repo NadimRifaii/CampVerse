@@ -22,21 +22,18 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const [numberOfSubmissions, setNumberOfSubmissions] = useState<number>(0);
   const { users } = useSelector(extractUsersSlice);
   const { submissions } = useSelector(extractSubmissionsSlice)
+  const getNumberOfSubmissions = async () => {
+    try {
+      const response: any = await assignmentDataSource.getNumberOfSubmissions({ assignmentTitle: assignment.assignmentTitle });
+      setNumberOfSubmissions(response.numberOfSubmissions);
+      dispatch(setSubmissions(response.submisssions))
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const getNumberOfSubmissions = async () => {
-      try {
-        const response: any = await assignmentDataSource.getNumberOfSubmissions({ assignmentTitle: assignment.assignmentTitle });
-        setNumberOfSubmissions(response.numberOfSubmissions);
-        dispatch(setSubmissions(response.submisssions))
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getNumberOfSubmissions();
   }, [assignment, users]);
-  useEffect(() => {
-    console.log(submissions)
-  }, [numberOfSubmissions])
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
     const options: Intl.DateTimeFormatOptions = {
@@ -51,8 +48,9 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const percentageSubmitted = (numberOfSubmissions / users.length) * 100;
 
   return (
-    <div className="assignment-card" onClick={() => {
+    <div className="assignment-card" onClick={async () => {
       dispatch(setCurrentAssignment(assignment));
+      await getNumberOfSubmissions()
       navigate("/dashboard/assignment-submissions")
     }}>
       <div className="header">

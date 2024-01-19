@@ -1,0 +1,56 @@
+h2 span {
+  display: inline-block;
+  position: relative;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+h2 span::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--main-blue-color);
+}
+
+.submission {
+  padding: 10px;
+  background-color: var(--main-black-color);
+  color: var(--main-white-color);
+  border-radius: 5px;
+}
+
+.submission .profile {
+  margin: auto;
+  width: fit-content;
+  text-align: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.submission .profile .image {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.submissinos-container {
+  display: flex;
+  gap: 10px;
+}
+
+.submitted-at {
+  margin-bottom: 10px;
+}
+
+.submission button {
+  display: block;
+  margin: auto;
+  width: fit-content;
+  color: var(--main-white-color);
+  border-radius: 5px;
+}

@@ -10,7 +10,9 @@ export type submissionType = {
   submitedAt: string,
   assignmentDueDate: string,
   assignment: any,
-  user?: User,
+  student: {
+    User: User
+  },
   submissionFiles?: []
 }
 export type submissionsSliceType = {
