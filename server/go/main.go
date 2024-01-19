@@ -42,6 +42,10 @@ func registerRoutes(groups []fiber.Router, routeFuncs ...func(group fiber.Router
 	}
 }
 
+func openAi() {
+	apiKey := os.Getenv("OPENAI_API_KEY")
+}
+
 func main() {
 	app := setupApp()
 
