@@ -13,6 +13,7 @@ import HomePage from './pages/homePage/home-page.component';
 import Calendar from './components/calendar/big-calendar.component';
 import Assignment from './components/assignments/assignment.component';
 import SubmitModal from './components/submitModal/submit-modal.component';
+import AssignmentSubmissions from './components/assignmentSubmissions/assignment-submissions.component';
 function App() {
   return (
     <div className="page">
@@ -29,6 +30,7 @@ function App() {
           <Route path='/dashboard/Results' element={<h1>Results</h1>} />
           <Route path='/dashboard/Schedule' element={<Calendar />} />
           <Route path={'/dashboard/chat'} element={<Chat />} />
+          <Route path='/dashboard/assignment-submissions' element={<AssignmentSubmissions />} />
         </Route>
       </Routes>
     </div>

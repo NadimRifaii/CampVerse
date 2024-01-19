@@ -53,6 +53,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   return (
     <div className="assignment-card" onClick={() => {
       dispatch(setCurrentAssignment(assignment));
+      navigate("/dashboard/assignment-submissions")
     }}>
       <div className="header">
         <h3>Assignment</h3>
