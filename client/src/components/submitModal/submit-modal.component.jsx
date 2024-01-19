@@ -9,7 +9,6 @@ import { Button } from "../common/button/button.component";
 const SubmitModal = () => {
   const { assignment, uploadedFiles, setUploadedFiles, submitAssignment } = useLogic();
   const [dueDate, setDueDate] = useState(new Date(assignment.dueDate));
-
   useEffect(() => {
     console.log(assignment);
   }, [assignment]);

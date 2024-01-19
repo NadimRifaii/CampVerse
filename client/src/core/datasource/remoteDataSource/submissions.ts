@@ -26,7 +26,6 @@ export const submissionsDataSource = {
     }
   },
   submitAssignment: async (data: {}) => {
-    console.log(data)
     try {
       const response = await sendRequest({
         body: data,
@@ -38,4 +37,15 @@ export const submissionsDataSource = {
       throw new Error(error.message)
     }
   },
+  getAssignmentSubmissions: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: "/assignment/assignment-submissions",
+        method: "POST"
+      })
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
 }
