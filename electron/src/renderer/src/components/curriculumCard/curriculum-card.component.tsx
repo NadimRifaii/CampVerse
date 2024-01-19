@@ -1,4 +1,3 @@
-import { Button } from "../common/button/button.component"
 import { InputLabel } from "../common/inputLabel/input-label.component"
 type Stack = {
   name: string
@@ -13,7 +12,7 @@ type CurriculumCardPropsType = {
 const CurriculumCard = ({ curriculum }: CurriculumCardPropsType) => {
 
   return (
-    <div className="curiculum-card">
+    <div className="curriculum-card">
       <div className="title">
         <h2>{curriculum.title}</h2>
       </div>

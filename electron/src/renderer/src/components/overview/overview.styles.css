@@ -9,6 +9,11 @@
   height: 100%;
   padding: 20px;
   overflow-y: auto;
+  transition: .5s;
+}
+
+.curriculum-cards-container.active .curriculum-card {
+  opacity: .5;
 }
 
 .curriculum-cards-container::-webkit-scrollbar {
@@ -24,14 +29,45 @@
   background-color: #ccc;
 }
 
-.curriculum-cards-container .curiculum-card {
+.curriculum-cards-container :where(.curriculum-card, .add-curriculum-card) {
   padding: 20px;
   background-color: var(--main-black-color);
   border-radius: 5px;
+  transition: .5s;
+}
+
+.curriculum-cards-container .curriculum-card {
+  width: 100%;
+}
+
+.curriculum-cards-container .curriculum-card,
+.curriculum-card .inputs-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 
+.curriculum-card .inputs-container .input-label {
+  margin-bottom: 0px;
+}
 
+.curriculum-card .inputs-container .input-label input {
+  width: 130px;
+}
+
+.curriculum-cards-container .add-curriculum-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -250%);
+  z-index: 10;
+}
+
+.curriculum-cards-container .add-curriculum-card.active {
+  transform: translate(-50%, -50%);
+}
 
 .curriculum-cards-container .buttons-container {
   display: flex;
@@ -68,7 +104,7 @@
   width: 100%;
 }
 
-.curriculum-cards-container .curiculum-card:not(:first-child) input {
+.curriculum-cards-container .curriculum-card:not(:first-child) input {
   color: white;
 }
 
@@ -86,5 +122,4 @@
 .add-curriculum-btn button {
   border-radius: 5px;
   color: var(--main-white-color);
-
 }

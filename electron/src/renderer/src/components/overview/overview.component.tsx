@@ -4,11 +4,11 @@ import CurriculumCard from '../curriculumCard/curriculum-card.component'
 import useLogic from './logic.hook'
 import './overview.styles.css'
 const Overview = () => {
-  const { stacksArray, curriculums, currentCurriculum, addNewStack, updateStack, currentCurriculumChangeHandler, saveCurriculum } = useLogic();
+  const { stacksArray, curriculums, currentCurriculum, activeAddModal, setActiveAddModal, addNewStack, updateStack, currentCurriculumChangeHandler, saveCurriculum } = useLogic();
   return (
     <div className="overview">
-      <div className="curriculum-cards-container">
-        <div className="curiculum-card">
+      <div className={`curriculum-cards-container ${activeAddModal ? 'active' : ''} `}>
+        <div className={`add-curriculum-card ${activeAddModal ? 'active' : ''} `}>
           <div className="title">
             <InputLabel info={{ type: 'text', label: "Module title", name: "Current Curriculum", value: currentCurriculum, onChange: currentCurriculumChangeHandler }} />
           </div>
@@ -26,7 +26,10 @@ const Overview = () => {
           </div>
           <div className="buttons-container">
             <Button text="+ Add a stack" className='add-btn' handleClick={addNewStack} />
-            <Button text="Save" handleClick={saveCurriculum} className='save-btn' />
+            <Button text="Save" handleClick={() => {
+              saveCurriculum()
+              setActiveAddModal(false)
+            }} className='save-btn' />
           </div>
         </div>
 
@@ -36,7 +39,7 @@ const Overview = () => {
       </div>
       <div className="add-curriculum-btn">
         <Button text='Add Module' handleClick={() => {
-
+          setActiveAddModal(true)
         }} />
       </div>
     </div>

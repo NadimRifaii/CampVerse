@@ -6,6 +6,7 @@ import { curriculumsDataSource } from "@renderer/core/datasource/remoteDataSourc
 const useLogic = () => {
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice);
   const { curriculums } = useSelector(extractCurriculumsSlice)
+  const [activeAddModal, setActiveAddModal] = useState<boolean>(false)
   const dispatch = useDispatch()
   useEffect(() => {
 
@@ -54,7 +55,7 @@ const useLogic = () => {
       await fetchCurriculums()
     }
   }
-  return { stacksArray, currentCurriculum, curriculums, updateStack, addNewStack, currentCurriculumChangeHandler, saveCurriculum };
+  return { stacksArray, currentCurriculum, curriculums, activeAddModal, setActiveAddModal, updateStack, addNewStack, currentCurriculumChangeHandler, saveCurriculum };
 };
 
 export default useLogic;
