@@ -19,7 +19,7 @@ const SubmissionCard = ({ submission }: SubmissionCardType) => {
   return (
     <div className="submission-card">
       <div className="header">
-        <h2>Assignment</h2>
+        <h3>Assignment</h3>
       </div>
       <div className="icon">
         <AssignmentsIcon />

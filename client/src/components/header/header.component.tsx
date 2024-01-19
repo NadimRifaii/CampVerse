@@ -21,7 +21,7 @@ const Header = () => {
   return (
     <div className="header">
 
-      <h1>Dashboard</h1>
+      <h1></h1>
       <div className="profile-notification-container">
         <div className="notification" onClick={() => setActiveNotification(!activeNotification)} >
           <BellIcon />

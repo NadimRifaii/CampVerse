@@ -11,6 +11,10 @@ const Assignment = () => {
   return (
     <div className="assignments-section">
       <div className="toggler-header">
+        {
+          user.role == "student" &&
+          <Button text="Submissions" handleClick={() => setCurrentActiveComponent('submissions')} className={`${currentActiveComponent == "submissions" ? 'active' : ''}`} />
+        }
         <Button text="Old" handleClick={() => setCurrentActiveComponent('old')} className={`${currentActiveComponent == "old" ? 'active' : ""}`} />
         <Button text="In progress" handleClick={() => setCurrentActiveComponent('progress')} className={`${currentActiveComponent == "progress" ? 'active' : ""}`} />
         {
@@ -19,8 +23,10 @@ const Assignment = () => {
         }
       </div>
       {
-        user.role == "student" ? currentActiveComponent == "old" ? <Submissions /> : <AssignmentsList assignments={upcomingAssignments} /> :
-          currentActiveComponent == "create" ? <CreateAssignment /> : <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
+        user.role == "student" ? currentActiveComponent == "submissions" ? <Submissions /> : currentActiveComponent == "old" ? <AssignmentsList assignments={oldAssignments} />
+          : <AssignmentsList assignments={upcomingAssignments} /> :
+          currentActiveComponent == "create" ? <CreateAssignment /> :
+            <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
       }
     </div>
   )

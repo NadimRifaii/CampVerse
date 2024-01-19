@@ -38,6 +38,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
+  border-radius: 5px;
   justify-content: space-between;
   width: 96px;
 }
@@ -56,12 +57,12 @@
 }
 
 .submission-card .done {
-  border: 1px solid #4caf50;
+  border: 1px solid var(--main-blue-color);
   gap: 5px;
 }
 
 .submission-card .done svg {
-  color: #4caf50
+  color: var(--main-blue-color)
 }
 
 .submission-card div:where(.done, .missed) span {

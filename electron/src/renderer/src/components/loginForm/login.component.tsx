@@ -9,8 +9,7 @@ export const Login = () => {
         e.preventDefault()
         loginClick()
       }} >
-        <h1>log In</h1>
-
+        <h1>Log In</h1>
         {
           inputLabels.map(inputLabel => <InputLabel key={inputLabel.id} info={inputLabel} />)
         }

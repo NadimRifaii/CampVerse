@@ -55,6 +55,7 @@
 
 .curriculum-card .inputs-container .input-label input {
   width: 130px;
+  text-align: center;
 }
 
 .curriculum-cards-container .add-curriculum-card {
