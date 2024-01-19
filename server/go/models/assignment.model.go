@@ -102,7 +102,7 @@ func (a *Assignment) GetAllAssignmentSubmissions(db *gorm.DB) ([]*StudentSubmiss
 	var submissions []*StudentSubmission
 
 	// Assuming there's a foreign key relationship between Assignment and StudentSubmission
-	if err := db.Preload("SubmissionFiles").Model(a).Association("StudentSubmission").Find(&submissions); err != nil {
+	if err := db.Preload("SubmissionFiles").Preload("Student").Preload("Student.User").Model(a).Association("StudentSubmission").Find(&submissions); err != nil {
 		return nil, err
 	}
 

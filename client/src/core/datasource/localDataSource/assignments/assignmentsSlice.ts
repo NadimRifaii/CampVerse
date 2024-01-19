@@ -14,7 +14,8 @@ export type Assignment = {
   dueDate: string,
   stackName: string,
   assignmentFiles: AssignmentFile[],
-  instructions: Instruction[]
+  instructions: Instruction[],
+  submissionsFiles?: []
 }
 export type AssignmentsSliceType = {
   assignments: Assignment[]

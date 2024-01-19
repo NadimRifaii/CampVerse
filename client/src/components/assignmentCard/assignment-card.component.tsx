@@ -25,8 +25,9 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   useEffect(() => {
     const getNumberOfSubmissions = async () => {
       try {
-        const numberOfAssignmentSubmissions = await assignmentDataSource.getNumberOfSubmissions({ assignmentTitle: assignment.assignmentTitle });
-        setNumberOfSubmissions(numberOfAssignmentSubmissions);
+        const response: any = await assignmentDataSource.getNumberOfSubmissions({ assignmentTitle: assignment.assignmentTitle });
+        console.log(response)
+        setNumberOfSubmissions(response.numberOfSubmissions);
       } catch (error) {
         console.log(error);
       }

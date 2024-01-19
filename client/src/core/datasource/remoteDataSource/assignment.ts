@@ -42,7 +42,7 @@ export const assignmentDataSource = {
         route: "/assignment/assignment-submissions",
         method: "POST"
       })
-      return response.numberOfSubmissions
+      return response
     } catch (error: any) {
       throw new Error(error.message)
     }
