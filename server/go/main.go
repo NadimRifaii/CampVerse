@@ -1,6 +1,9 @@
 package main
 
 import (
+	"context"
+	"fmt"
+	"log"
 	"os"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -9,6 +12,7 @@ import (
 	"github.com/NadimRifaii/campverse/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/sashabaranov/go-openai"
 )
 
 func init() {
@@ -44,6 +48,30 @@ func registerRoutes(groups []fiber.Router, routeFuncs ...func(group fiber.Router
 
 func openAi() {
 	apiKey := os.Getenv("OPENAI_API_KEY")
+	if apiKey == "" {
+		log.Fatalln("Missing API KEY")
+	}
+
+	client := openai.NewClient(apiKey)
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model: openai.GPT3Dot5Turbo,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: "I want you to give me an json object , just json object and don't say anything else , the json object is of this form {name:'',lastname:''}",
+				},
+			},
+		},
+	)
+
+	if err != nil {
+		fmt.Printf("ChatCompletion error: %v\n", err)
+		return
+	}
+
+	fmt.Println(resp.Choices[0].Message.Content)
 }
 
 func main() {
@@ -63,5 +91,6 @@ func main() {
 		routes.UserRoutes,
 		routes.CurriculumRoutes,
 	)
-	app.Listen(os.Getenv("PORT")) //
+	// app.Listen(os.Getenv("PORT"))
+	openAi()
 }

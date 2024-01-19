@@ -3,6 +3,7 @@ module github.com/NadimRifaii/campverse
 go 1.21.4
 
 require (
+	github.com/PullRequestInc/go-gpt3 v1.2.0
 	github.com/go-sql-driver/mysql v1.7.1
 	github.com/gofiber/fiber/v2 v2.51.0
 	github.com/golang-jwt/jwt/v4 v4.5.0
@@ -13,14 +14,7 @@ require (
 )
 
 require (
-	github.com/fasthttp/websocket v1.5.3 // indirect
-	github.com/gorilla/websocket v1.5.1 // indirect
-	github.com/savsgio/gotils v0.0.0-20230208104028-c358bd845dee // indirect
-)
-
-require (
 	github.com/andybalholm/brotli v1.0.6 // indirect
-	github.com/gofiber/websocket/v2 v2.2.1
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
@@ -29,6 +23,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.15 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
+	github.com/sashabaranov/go-openai v1.18.3 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.51.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
