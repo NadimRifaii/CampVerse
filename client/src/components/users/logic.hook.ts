@@ -6,24 +6,36 @@ import { UsersSliceType, extractUsersSlice, setUsers } from "../../core/datasour
 import { userDataSource } from "../../core/datasource/remoteDataSource/user"
 import { CurrentBootcampType, extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { User } from "../../core/types/user"
+import { BootcampsSliceType, extractBootcampsSlice, setBootcamps } from "../../core/datasource/localDataSource/bootcamps/bootcampsSlice"
+import { bootcampsDataSource } from "../../core/datasource/remoteDataSource/bootcamps"
 const useLogic = () => {
   const dispatch = useDispatch()
   const { users }: UsersSliceType = useSelector(extractUsersSlice)
-  const user = useSelector(extractUserSlice)
-  const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
-
+  const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
   let [filteredArray, setFilteredArray] = useState(users)
+  const [currentActiveComponent, setCurrentActiveComponent] = useState<"student" | "mentor">('student')
   useEffect(() => {
     setFilteredArray(users)
   }, [users])
-
-  const fetchUsers = async (userType: "user" | "student" | "mentor") => {
+  const fetchUsers = async (userType: "student" | "mentor") => {
     try {
       const response = await userDataSource.getAllUsers({}, userType)
       dispatch(setUsers(response.users))
     } catch (error) {
       console.log(error)
     }
+  }
+  const setBootcampUsers = (bootcampUsers: []) => {
+    dispatch(setUsers(bootcampUsers))
+  }
+  const getBootcamps = async () => {
+    try {
+      const response = await bootcampsDataSource.getUserBootcamps({})
+      dispatch(setBootcamps(response))
+    } catch (error) {
+      console.log(error)
+    }
+
   }
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {
@@ -33,6 +45,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, searchUsers }
+  return { fetchUsers, filteredArray, currentActiveComponent, setCurrentActiveComponent, searchUsers, bootcamps, getBootcamps, setBootcampUsers }
 }
 export default useLogic

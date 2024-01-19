@@ -23,7 +23,6 @@ const useLogic = () => {
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
       dispatch(setAssignments(cleanAssignmentData(response)))
-      console.log(response)
     } catch (error) {
       console.log(error)
     }

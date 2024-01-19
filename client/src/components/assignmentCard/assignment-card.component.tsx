@@ -31,7 +31,6 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
         console.log(error);
       }
     };
-    console.log(users)
     getNumberOfSubmissions();
   }, [assignment, users]);
 
@@ -54,7 +53,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
       dispatch(setCurrentAssignment(assignment));
     }}>
       <div className="header">
-        <h2>Assignment</h2>
+        <h3>Assignment</h3>
         <span className="due-date">{formattedDueDate(assignment.dueDate)}</span>
       </div>
       <div className="icon">
@@ -63,12 +62,11 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
       <div className="title">
         {assignment.assignmentTitle}
       </div>
-
       {
         user.role === "mentor" ?
           <>
             <div className="stat">
-              {percentageSubmitted.toFixed(2)}% Submitted
+              {percentageSubmitted.toFixed(0)}% Submitted
             </div>
             <div className="progress-bar">
               <div className="bar" >
