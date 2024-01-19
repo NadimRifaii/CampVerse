@@ -76,3 +76,15 @@
   color: var(--main-white-color);
   text-align: center;
 }
+
+.add-curriculum-btn {
+  position: fixed;
+  bottom: 15px;
+  left: 50%;
+}
+
+.add-curriculum-btn button {
+  border-radius: 5px;
+  color: var(--main-white-color);
+
+}

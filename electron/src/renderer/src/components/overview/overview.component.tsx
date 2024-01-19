@@ -10,7 +10,7 @@ const Overview = () => {
       <div className="curriculum-cards-container">
         <div className="curiculum-card">
           <div className="title">
-            <InputLabel info={{ type: 'text', label: "Curriculum title", name: "Current Curriculum", value: currentCurriculum, onChange: currentCurriculumChangeHandler }} />
+            <InputLabel info={{ type: 'text', label: "Module title", name: "Current Curriculum", value: currentCurriculum, onChange: currentCurriculumChangeHandler }} />
           </div>
           <div className="inputs-container">
             {
@@ -33,6 +33,11 @@ const Overview = () => {
         {
           curriculums.map((curriculum, index) => <CurriculumCard key={index} curriculum={curriculum} />)
         }
+      </div>
+      <div className="add-curriculum-btn">
+        <Button text='Add Module' handleClick={() => {
+
+        }} />
       </div>
     </div>
   )

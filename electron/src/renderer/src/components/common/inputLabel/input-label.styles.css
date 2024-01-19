@@ -34,11 +34,11 @@
 }
 
 .input-label label.active {
-  font-size: 8px;
+  font-size: 10px;
   top: -15px;
 }
 
 .input-label input:focus+label {
-  font-size: 8px;
+  font-size: 10px;
   top: -15px;
 }
