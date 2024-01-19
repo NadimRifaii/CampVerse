@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Bootcamp } from '../../core/types/bootcamp';
 import { CurrentBootcampType, extractcurrentBootcampSlice, setcurrentBootcamp } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice';
-import { currentBootcampSlice } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice';
+import { local } from '../../core/helpers/localStorage';
 type BootcampProps = {
   bootcamp: Bootcamp;
 };
@@ -40,6 +40,7 @@ const BootcampC = ({ bootcamp }: BootcampProps) => {
         <div className="details">
           <Link to={"/dashboard"} onClick={() => {
             dispatch(setcurrentBootcamp(bootcamp))
+            local("currentBootcamp", JSON.stringify(bootcamp))
           }}  >Enter</Link>
         </div>
       </div>

@@ -11,17 +11,7 @@ const useLogic = () => {
   const { users }: UsersSliceType = useSelector(extractUsersSlice)
   const user = useSelector(extractUserSlice)
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
-  useEffect(() => {
-    const allUsers: User[] = [...currentBootcamp.students, ...currentBootcamp.mentors]
 
-    for (let i = 0; i < allUsers.length; i++) {
-      if (allUsers[i].email == user.email) {
-        allUsers.splice(i, 1)
-        break;
-      }
-    }
-    dispatch(setUsers(allUsers))
-  }, [currentBootcamp])
   let [filteredArray, setFilteredArray] = useState(users)
   useEffect(() => {
     setFilteredArray(users)

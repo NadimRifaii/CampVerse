@@ -14,7 +14,7 @@ const useLogic = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     fetchBootcampAssignments()
-  }, [])
+  }, [currentBootcamp])
   useEffect(() => {
     categorizeAssignments(assignments)
   }, [assignments])

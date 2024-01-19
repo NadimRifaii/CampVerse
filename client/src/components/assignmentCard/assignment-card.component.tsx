@@ -31,8 +31,9 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
         console.log(error);
       }
     };
+    console.log(users)
     getNumberOfSubmissions();
-  }, [assignment]);
+  }, [assignment, users]);
 
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
