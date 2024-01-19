@@ -1,7 +1,12 @@
 .assignment-card {
   padding: 15px;
   border-radius: 5px;
-  background-color: var(--main-black-color)
+  background-color: var(--main-black-color);
+}
+
+.assignment-card.point {
+  cursor: pointer;
+
 }
 
 .assignment-card .due-date {

@@ -54,3 +54,24 @@ h2 span::before {
   color: var(--main-white-color);
   border-radius: 5px;
 }
+
+.assignment-submissions-container {
+  position: relative;
+}
+
+.assignment-submissions-container.active .submissinos-container {
+  opacity: .5s;
+}
+
+.assignment-submissions-container .submission-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: .5s;
+  z-index: 100;
+  transform: translate(-50%, -250%);
+}
+
+.assignment-submissions-container.active .submission-container {
+  transform: translate(-50%, -50%);
+}

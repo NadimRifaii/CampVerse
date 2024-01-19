@@ -1,8 +1,11 @@
 import useLogic from "./logic.hook"
 import './assignment-submissions.styles.css'
 import { Button } from "../common/button/button.component";
+import SubmitModal from "../submitModal/submit-modal.component";
+import { useState } from "react";
 const AssignmentSubmissions = () => {
   const { submissions, currentAssignment } = useLogic()
+  const [activeSubmitModal, setActiveSubmitModal] = useState<boolean>(false)
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
     const options: Intl.DateTimeFormatOptions = {
@@ -15,7 +18,8 @@ const AssignmentSubmissions = () => {
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
   return (
-    <div className="assignment-submissions-container">
+    <div className={`assignment-submissions-container ${activeSubmitModal ? 'active' : ''} `}>
+      <SubmitModal showDropzone={false} className={activeSubmitModal} />
       <h2>Submissions for <span>{currentAssignment.assignmentTitle}</span></h2>
       <div className="submissinos-container">
         {
@@ -33,7 +37,9 @@ const AssignmentSubmissions = () => {
                 <div className="submitted-at">
                   <span>Submitted at: {formattedDueDate(submission.submitedAt)}</span>
                 </div>
-                <Button text="See submission" />
+                <Button text="See submission" handleClick={() => {
+                  setActiveSubmitModal(true)
+                }} />
               </div>
             )
           })

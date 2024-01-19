@@ -6,14 +6,15 @@ import toast from "react-hot-toast";
 import './submit-modal.styles.css';
 import StyledDropzone from "../dropZone/drop-zone.component";
 import { Button } from "../common/button/button.component";
-const SubmitModal = () => {
+
+const SubmitModal = ({ showDropzone = true, className = false }) => {
   const { assignment, uploadedFiles, setUploadedFiles, submitAssignment } = useLogic();
   const [dueDate, setDueDate] = useState(new Date(assignment.dueDate));
   useEffect(() => {
     console.log(assignment);
   }, [assignment]);
   return (
-    <div className="submission-container">
+    <div className={`submission-container ${className} `}>
       <div className="assignment-info">
         <div className="title">
           <input type='text' value={assignment.assignmentTitle} disabled />
@@ -50,9 +51,12 @@ const SubmitModal = () => {
           )
         })}
       </div>
-      <div className="files-container">
-        <StyledDropzone assignmentTitle={assignment.assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
-      </div>
+      {
+        showDropzone &&
+        <div className="files-container">
+          <StyledDropzone assignmentTitle={assignment.assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+        </div>
+      }
       <div className="create-assignment-btn">
         <Button text='Submit' handleClick={submitAssignment} />
       </div>

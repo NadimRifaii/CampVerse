@@ -37,10 +37,6 @@ const rejectStyle = {
 function StyledDropzone(props) {
   const { uploadedFiles, setUploadedFiles, assignmentTitle } = props;
 
-  useEffect(() => {
-    console.log(uploadedFiles);
-  }, [uploadedFiles]);
-
   const {
     getRootProps,
     getInputProps,

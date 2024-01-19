@@ -48,10 +48,12 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const percentageSubmitted = (numberOfSubmissions / users.length) * 100;
 
   return (
-    <div className="assignment-card" onClick={async () => {
+    <div className={`assignment-card ${user.role == "mentor" ? 'point' : ''}`} onClick={async () => {
       dispatch(setCurrentAssignment(assignment));
-      await getNumberOfSubmissions()
-      navigate("/dashboard/assignment-submissions")
+      if (user.role == "mentor") {
+        await getNumberOfSubmissions()
+        navigate("/dashboard/assignment-submissions")
+      }
     }}>
       <div className="header">
         <h3>Assignment</h3>
