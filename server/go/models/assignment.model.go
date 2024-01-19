@@ -98,12 +98,11 @@ func (a *Assignment) GetAssignmentsByBootcampID(db *gorm.DB, bootcampID uint) ([
 	return response, nil
 }
 
-// Receiver function to find the number of student submissions for the assignment
 func (a *Assignment) GetAllAssignmentSubmissions(db *gorm.DB) ([]*StudentSubmission, error) {
 	var submissions []*StudentSubmission
 
 	// Assuming there's a foreign key relationship between Assignment and StudentSubmission
-	if err := db.Model(a).Association("StudentSubmission").Find(&submissions); err != nil {
+	if err := db.Preload("SubmissionFiles").Model(a).Association("StudentSubmission").Find(&submissions); err != nil {
 		return nil, err
 	}
 

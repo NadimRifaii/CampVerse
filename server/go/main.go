@@ -65,7 +65,6 @@ func openAi() {
 			},
 		},
 	)
-
 	if err != nil {
 		fmt.Printf("ChatCompletion error: %v\n", err)
 		return
@@ -91,6 +90,6 @@ func main() {
 		routes.UserRoutes,
 		routes.CurriculumRoutes,
 	)
-	// app.Listen(os.Getenv("PORT"))
-	openAi()
+	app.Listen(os.Getenv("PORT"))
+	// openAi()
 }

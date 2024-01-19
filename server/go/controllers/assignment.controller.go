@@ -168,9 +168,9 @@ func HttpGetNumOfAssignmentSubmissions(c *fiber.Ctx) error {
 	db := database.Db
 	assignment := new(models.Assignment)
 	assignment.GetAssignmentByTitle(db, body.AssignmentTitle)
-	count, err := assignment.GetAllAssignmentSubmissions(db)
+	submissions, err := assignment.GetAllAssignmentSubmissions(db)
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"numberOfSubmissions": len(count)})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"numberOfSubmissions": len(submissions), "submisssions": submissions})
 }
