@@ -48,10 +48,10 @@ const AssignmentSubmissions = () => {
           <div className="ai-response">
             <textarea value={feedback} disabled placeholder="Ai feedback"></textarea>
           </div>
-          <Button text="Get feedback" handleClick={() => {
-
-          }} />
         </div>
+        <Button text="Get feedback" handleClick={() => {
+
+        }} />
       </div>
       <div className="submissinos-container">
         {

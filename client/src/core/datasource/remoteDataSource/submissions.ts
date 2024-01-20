@@ -37,4 +37,15 @@ export const submissionsDataSource = {
       throw new Error(error.message)
     }
   },
+  getAiFeedback: async (data: {}) => {
+    try {
+      const response = await sendRequest({
+        body: data,
+        route: `/assignment/get-feedback?substring=${data}`
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  }
 }

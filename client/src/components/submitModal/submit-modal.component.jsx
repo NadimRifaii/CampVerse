@@ -8,9 +8,12 @@ import StyledDropzone from "../dropZone/drop-zone.component";
 import { Button } from "../common/button/button.component";
 import FilesContainer from "../filesContainer/files-container.component";
 import InstructionsContainer from "../instructionsContainer/instructions-container.component";
+import { useSelector } from "react-redux";
+import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice";
 
 const SubmitModal = () => {
   const { assignment, uploadedFiles, setUploadedFiles, submitAssignment } = useLogic();
+  const user = useSelector(extractUserSlice)
   const [dueDate, setDueDate] = useState(new Date(assignment.dueDate));
   return (
     <div className={`submission-container`}>
@@ -31,7 +34,7 @@ const SubmitModal = () => {
         <FilesContainer files={assignment.assignmentFiles} />
       </div>
       <div className="files-container">
-        <StyledDropzone assignmentTitle={assignment.assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+        <StyledDropzone assignmentTitle={assignment.assignmentTitle} fileUrl={`${user.email.split('@')[0]}-submission-${assignment.assignmentTitle}`} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
       </div>
       <div className="create-assignment-btn">
         <Button text='Submit' handleClick={submitAssignment} />

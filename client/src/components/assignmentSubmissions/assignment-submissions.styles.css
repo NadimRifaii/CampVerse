@@ -163,3 +163,9 @@ h2 span::before {
 .ai-response textarea::placeholder {
   color: var(--main-white-color);
 }
+
+.ai-feedback button {
+  width: fit-content;
+  margin: auto;
+  color: var(--main-white-color);
+}

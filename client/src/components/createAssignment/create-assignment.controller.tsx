@@ -55,7 +55,7 @@ const CreateAssignment = () => {
         }} />
       </div>
       <div className="files-container">
-        <StyledDropzone assignmentTitle={assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+        <StyledDropzone assignmentTitle={assignmentTitle} fileUrl={`${user.email.split('@')[0]}-assignment-${assignmentTitle}`} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
       </div>
       <div className="create-assignment-btn">
         <Button text='Create' handleClick={createAssignment} />

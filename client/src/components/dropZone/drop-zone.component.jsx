@@ -1,10 +1,10 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { FaFileImage, FaFile } from 'react-icons/fa';
-import axios from 'axios';
-import './drop-zone.styles.css';
 import { userDataSource } from '../../core/datasource/remoteDataSource/user';
 import toast from 'react-hot-toast';
+
+import './drop-zone.styles.css';
 
 const baseStyle = {
   flex: 1,
@@ -35,7 +35,7 @@ const rejectStyle = {
 };
 
 function StyledDropzone(props) {
-  const { uploadedFiles, setUploadedFiles, assignmentTitle } = props;
+  const { uploadedFiles, setUploadedFiles, fileUrl, assignmentTitle } = props;
 
   const {
     getRootProps,
@@ -46,20 +46,33 @@ function StyledDropzone(props) {
     acceptedFiles,
   } = useDropzone({
     onDrop: async (newFiles) => {
-      newFiles.forEach((file) => {
+      if (!assignmentTitle.trim()) {
+        toast.error('Assignment title cannot be empty');
+        return;
+      }
+      const validFiles = newFiles.filter(file => {
+        const acceptedExtensions = ['txt', 'css', 'js', 'html'];
+        const fileExtension = file.name.split('.').pop();
+        return acceptedExtensions.includes(fileExtension.toLowerCase());
+      });
+
+      if (validFiles.length === 0) {
+        toast.error('Invalid file format. Please upload txt, css, js, or html files.');
+        return;
+      }
+
+      validFiles.forEach((file) => {
         console.log(`${file.name}: ${file.type}`);
       });
 
-      const validFiles = newFiles;
-
       const updatedFiles = validFiles.map((file) => ({
         fileName: file.name,
-        fileType: file.type.split('/')[1], // Extracting file extension
-        fileUrl: `${assignmentTitle}_${file.name}`, // Adjust the URL format as needed
+        fileType: file.type.split('/')[1],
+        fileUrl,
       }));
 
       const combinedFiles = [...uploadedFiles, ...updatedFiles];
-      console.log(combinedFiles)
+      console.log(combinedFiles);
       setUploadedFiles(combinedFiles);
       console.log('Accepted Files:', combinedFiles);
 
@@ -69,7 +82,7 @@ function StyledDropzone(props) {
         try {
           const response = await userDataSource.uploadFile({
             formData,
-            name: assignmentTitle,
+            name: fileUrl,
           });
           console.log('File uploaded to server:', response.data);
         } catch (error) {
@@ -77,7 +90,7 @@ function StyledDropzone(props) {
         }
       });
     },
-    accept: () => true,
+    accept: '.txt, .css, .js, .html',
     multiple: true,
   });
 
@@ -93,7 +106,7 @@ function StyledDropzone(props) {
 
   const renderFiles = useCallback(() => {
     return uploadedFiles.map((file, index) => (
-      <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px', }}>
+      <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
         {file.fileType.startsWith('image/') ? (
           <FaFileImage style={{ width: '30px', height: '30px', marginRight: '10px' }} />
         ) : (
@@ -111,7 +124,7 @@ function StyledDropzone(props) {
         <p>Drag 'n' drop some files here, or click to select files</p>
       </div>
       {uploadedFiles.length > 0 && (
-        <div style={{ display: 'inline-flex', flexDirection: 'row', marginTop: '10px', gap: '10px', padding: '10px', flexWrap: "wrap" }}>
+        <div style={{ display: 'inline-flex', flexDirection: 'row', marginTop: '10px', gap: '10px', padding: '10px', flexWrap: 'wrap' }}>
           {renderFiles()}
         </div>
       )}
