@@ -8,26 +8,21 @@ import { User } from "../../core/types/user"
 const useLogic = () => {
   const dispatch = useDispatch()
   const { students, mentors }: UsersSliceType = useSelector(extractUsersSlice)
-  const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
-  const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
   let [filteredArray, setFilteredArray] = useState<User[]>(students)
+  const [users, setUsers] = useState<User[]>([])
   const [currentActiveComponent, setCurrentActiveComponent] = useState<"student" | "mentor">('student')
   useEffect(() => {
-    if (currentActiveComponent == "student")
+    if (currentActiveComponent == "student") {
       setFilteredArray(students)
-    else
+      setUsers(students)
+    }
+    else {
       setFilteredArray(mentors)
+      setUsers(mentors)
+    }
   }, [currentActiveComponent, students, mentors])
-  // const fetchUsers = async (userType: "student" | "mentor") => {
-  //   try {
-  //     const response = await userDataSource.getAllBootcampUsers({ bootcampId: currentBootcamp.id })
-  //     dispatch(setUsers(response))
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
   const searchUsers = (query: string) => {
-    const filteredUsers = filteredArray.filter(user => {
+    const filteredUsers = users.filter(user => {
       const fullName = user.firstname + ' ' + user.lastname;
       const regex = new RegExp(query, 'i');
       return regex.test(fullName);

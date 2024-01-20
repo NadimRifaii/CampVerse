@@ -35,7 +35,7 @@
 
 .create-assignment-container .instructions .instruction {
   display: flex;
-  gap: 18px;
+  gap: 27px;
   margin: 15px auto
 }
 
@@ -58,7 +58,7 @@
 .create-assignment-btn {
   display: flex;
   justify-content: flex-end;
-  margin: 15px auto;
+  margin: 15px auto 5px;
 }
 
 .add-instruction-btn button,

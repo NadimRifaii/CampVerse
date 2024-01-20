@@ -15,13 +15,14 @@ const Calendar = () => {
           events={events}
           eventContent={(info) => (
             <div>
-              <p>{info.event.title}</p>
-              <p>{new Date(info.event.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(info.event.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} | {info.event.extendedProps.mentors}</p>
+              <p>{info?.event?.title}</p>
+              <p>{new Date(info?.event?.start || '').toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - {new Date(info.event.end || '').toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} | {info.event.extendedProps.mentors}</p>
             </div>
           )}
           initialView='timeGridWeek'
           slotMinTime='10:00:00'
           slotMaxTime='21:00:00'
+          height='100%'
         />
       </div>
     </section>

@@ -45,7 +45,7 @@ const CreateAssignment = () => {
         }
       </div>
       <InstructionsContainer updateInstructionTitle={updateInstructionTitle} updateInstructionContent={updateInstructionContent} instructions={instructions} disabled={false} />
-      <div className="add-instruction-btn">
+      {/* <div className="add-instruction-btn">
         <Button text='Add' handleClick={() => {
           if (instructions[instructions.length - 1].content != "" && instructions[instructions.length - 1].instructionTitle != "")
             setInstructions([...instructions, {
@@ -53,7 +53,7 @@ const CreateAssignment = () => {
               content: ''
             }])
         }} />
-      </div>
+      </div> */}
       <div className="files-container">
         <StyledDropzone assignmentTitle={assignmentTitle} fileUrl={`${user.email.split('@')[0]}-assignment-${assignmentTitle}`} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
       </div>

@@ -10,6 +10,7 @@ type Student struct {
 	ID                 uint `gorm:"primarykey"`
 	UserId             uint
 	User               User
+	Grade              []*Grade
 	StudentSubmissions []*StudentSubmission
 }
 
