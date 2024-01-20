@@ -44,7 +44,7 @@ const CreateAssignment = () => {
           })
         }
       </div>
-      <InstructionsContainer instructions={instructions} disabled={false} />
+      <InstructionsContainer updateInstructionTitle={updateInstructionTitle} updateInstructionContent={updateInstructionContent} instructions={instructions} disabled={false} />
       <div className="add-instruction-btn">
         <Button text='Add' handleClick={() => {
           if (instructions[instructions.length - 1].content != "" && instructions[instructions.length - 1].instructionTitle != "")

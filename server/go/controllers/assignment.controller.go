@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -199,14 +200,23 @@ func HttpGetFeedback(c *fiber.Ctx) error {
 			if err != nil {
 				return errors.New(err.Error())
 			}
-			return c.JSON(fiber.Map{"content": string(content)})
+			feedback, err := getFeedback(string(content))
+			if err != nil {
+				return errors.New(err.Error())
+			}
+
+			// JSON string into map, like Json.Parse and stringify in js
+			var feedbackMap map[string]interface{}
+			if err := json.Unmarshal([]byte(feedback), &feedbackMap); err != nil {
+				return errors.New(err.Error())
+			}
+
+			return c.Status(200).JSON(feedbackMap)
 		}
 	}
-
-	return errors.New("file not found")
+	return Loger(c, fiber.StatusNotFound, fiber.Map{"error": "File was not found"})
 }
-
-func getFeedback() (string, error) {
+func getFeedback(fileContent string) (string, error) {
 	apiKey := os.Getenv("OPENAI_API_KEY")
 	if apiKey == "" {
 		return "", errors.New("invalid api key")
@@ -219,8 +229,12 @@ func getFeedback() (string, error) {
 			Model: openai.GPT3Dot5Turbo,
 			Messages: []openai.ChatCompletionMessage{
 				{
+					Role:    openai.ChatMessageRoleSystem,
+					Content: "You are a helpful assistant helping the mentor of a student providing feedback on a student document, give your opinion on the student's work, and give his work a grade out of 10,make your response format in a valid json object, with two keys the feedback and the grade.",
+				},
+				{
 					Role:    openai.ChatMessageRoleUser,
-					Content: "I am gonna give a file content, and i want you to read it and give a feedback on it , just give the feedback and nothing else . And i return the point of approvments in a json object and i want a field called summarize and each point of approvement is also a key in the json object.",
+					Content: fileContent,
 				},
 			},
 		},
@@ -229,5 +243,6 @@ func getFeedback() (string, error) {
 		return "", errors.New(err.Error())
 	}
 
-	return resp.Choices[0].Message.Content, nil
+	feedback := resp.Choices[0].Message.Content
+	return feedback, nil
 }
