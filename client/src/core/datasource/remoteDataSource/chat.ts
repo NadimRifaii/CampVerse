@@ -1,21 +1,17 @@
 
 import { messagesRequest } from "../../helpers/request"
 export const messagesDataSource = {
-  accessChat: async (data: {}) => {
+  accessChat: async (data: { currentUser: {} }) => {
+    console.log("########################")
+    console.log(data)
+    console.log("########################")
     try {
       const response = await messagesRequest({
-        body: data,
+        body: data.currentUser,
         route: "/api/chat",
         method: "POST"
       })
       const { _id, chatName, users, latestMessage } = response
-      console.log({
-        _id,
-        chatName,
-        users,
-        latestMessage
-      })
-      // return response
       return {
         _id,
         chatName,

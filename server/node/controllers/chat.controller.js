@@ -39,7 +39,6 @@ const httpAccessChat = async (req, res) => {
 
   if (isChat.length > 0) {
     return res.send(isChat[0])
-    // return res.status(200).json({ "chat exists": isChat[0], "user1": req.user, "user2": user })
   } else {
     const chatData = {
       chatName: "sender",
@@ -49,7 +48,8 @@ const httpAccessChat = async (req, res) => {
     try {
       const createdChat = await ChatModel.create(chatData);
       const fullChat = await ChatModel.findOne({ _id: createdChat._id }).populate("users")
-      return res.status(200).contentType('application/json').json({ fullChat })
+      const { _id, chatName, users, latestMessage } = fullChat
+      return res.status(200).contentType('application/json').json({ _id, chatName, users, latestMessage })
     } catch (error) {
       return res.status(400).json({ "error": error })
     }

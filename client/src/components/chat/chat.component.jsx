@@ -5,9 +5,6 @@ import Message from '../message/message.component'
 import './chat.styles.css'
 const Chat = () => {
   const { chat, user, messages, currentUser, loadingChat, content, messagesContainerRef, isTyping, typingHandler, sendMessage, } = useLogic()
-  useEffect(() => {
-    console.log(loadingChat)
-  }, [loadingChat])
   return (
     <div className="chat-page">
       <div className="header">

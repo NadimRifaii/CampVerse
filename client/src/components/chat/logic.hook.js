@@ -51,8 +51,9 @@ const useLogic = () => {
     if (currentUser) {
       try {
         setLoadingChat(true);
+        console.log(currentUser)
         const data = await messagesDataSource.accessChat({
-          email: currentUser?.email
+          currentUser
         });
         dispatch(setChatX(data))
         selectedChatCompare = data;
