@@ -7,6 +7,7 @@ import './submit-modal.styles.css';
 import StyledDropzone from "../dropZone/drop-zone.component";
 import { Button } from "../common/button/button.component";
 import FilesContainer from "../filesContainer/files-container.component";
+import InstructionsContainer from "../instructionsContainer/instructions-container.component";
 
 const SubmitModal = () => {
   const { assignment, uploadedFiles, setUploadedFiles, submitAssignment } = useLogic();
@@ -24,18 +25,7 @@ const SubmitModal = () => {
           <input type="text" value={assignment.stackName} disabled />
         </div>
       </div>
-      <div className="instructions">
-        {assignment.instructions.map((instruction, index) => (
-          <div key={index} className="instruction">
-            <div className="title">
-              <input disabled type="text" value={instruction.instructionTitle} placeholder='Instruction title' />
-            </div>
-            <div className="instruction-content">
-              <textarea disabled value={instruction.content} placeholder='Instruction' ></textarea>
-            </div>
-          </div>
-        ))}
-      </div>
+      <InstructionsContainer instructions={assignment.instructions} disabled={true} />
       <div className="assignment-files">
         <h2>Click to download the assignment files</h2>
         <FilesContainer files={assignment.assignmentFiles} />

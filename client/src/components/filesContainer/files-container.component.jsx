@@ -1,8 +1,12 @@
+import { useEffect } from 'react';
 import { FaFile } from 'react-icons/fa';
 const FilesContainer = ({ files }) => {
+  useEffect(() => {
+    console.log(files)
+  }, [files])
   return (
     <div className="files-container">
-      {files.map((file, index) => {
+      {files?.map((file, index) => {
         return (
           <div className="file" key={index}>
             <a href={`http://localhost:8000/assignment/download?substring=${file.fileName}`}>

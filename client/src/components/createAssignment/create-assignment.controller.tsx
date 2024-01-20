@@ -6,6 +6,7 @@ import StyledDropzone from '../dropZone/drop-zone.component';
 import { useNavigate } from 'react-router-dom';
 import './create-assignment.styles.css'
 import { Button } from '../common/button/button.component';
+import InstructionsContainer from '../instructionsContainer/instructions-container.component';
 const CreateAssignment = () => {
   const [stacksListOpen, setStacksListOpen] = useState<boolean>(false)
   const navigate = useNavigate()
@@ -43,22 +44,7 @@ const CreateAssignment = () => {
           })
         }
       </div>
-      <div className="instructions">
-        {
-          instructions.map((instruction, index) => {
-            return (
-              <div key={index} className="instruction">
-                <div className="title">
-                  <input type="text" onChange={(e) => updateInstructionTitle(index, e.target.value)} value={instruction.instructionTitle} placeholder='Instruction title' />
-                </div>
-                <div className="instruction-content">
-                  <textarea value={instruction.content} onChange={(e) => updateInstructionContent(index, e.target.value)} placeholder='Instruction' ></textarea>
-                </div>
-              </div>
-            )
-          })
-        }
-      </div>
+      <InstructionsContainer instructions={instructions} disabled={false} />
       <div className="add-instruction-btn">
         <Button text='Add' handleClick={() => {
           if (instructions[instructions.length - 1].content != "" && instructions[instructions.length - 1].instructionTitle != "")

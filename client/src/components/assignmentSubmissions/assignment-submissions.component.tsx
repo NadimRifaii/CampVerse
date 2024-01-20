@@ -1,11 +1,18 @@
 import useLogic from "./logic.hook"
 import './assignment-submissions.styles.css'
 import { Button } from "../common/button/button.component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Datetime from 'react-datetime';
 import FilesContainer from "../filesContainer/files-container.component";
+import { submissionType } from "../../core/datasource/localDataSource/submissions/submissionsSlice";
+import InstructionsContainer from "../instructionsContainer/instructions-container.component";
 const AssignmentSubmissions = () => {
   const { submissions, currentAssignment } = useLogic()
   const [activeSubmission, setActiveSubmission] = useState<boolean>(false)
+  const [currentSubmission, setCurrentSubmission] = useState<submissionType>()
+  useEffect(() => {
+    console.log(currentSubmission)
+  }, [currentSubmission])
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
     const options: Intl.DateTimeFormatOptions = {
@@ -14,20 +21,36 @@ const AssignmentSubmissions = () => {
       hour: 'numeric',
       hour12: true,
     };
-
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
   return (
-    <div className={`assignment-submissions-container  `}>
+    <div className={`assignment-submissions-container ${activeSubmission ? "active" : ''}  `}>
       <h2>Submissions for <span>{currentAssignment.assignmentTitle}</span></h2>
       <div className="ai-feedback">
-        <h2>Hola!</h2>
+        <div className="assignment-info">
+          <div className="title">
+            <input type='text' value={currentAssignment.assignmentTitle} disabled />
+          </div>
+          <div className="due-date">
+            <input type="text" disabled value={currentAssignment.dueDate} />
+          </div>
+          <div className="stack-name">
+            <input type="text" value={currentAssignment.stackName} disabled />
+          </div>
+        </div>
+        <InstructionsContainer instructions={currentAssignment.instructions} disabled={true} />
+        <div className="files">
+          <h2>Click to download student submission filess</h2>
+          {
+            currentSubmission != undefined && <FilesContainer files={currentSubmission?.SubmissionFiles} />
+          }
+        </div>
       </div>
       <div className="submissinos-container">
         {
           submissions.map((submission, index) => {
             return (
-              <div key={index} className="submission">
+              <div key={index} className="submission"  >
                 <div className="profile">
                   <div className="image">
                     <img src={`http://localhost:8000/images/${submission.student.User.profilePicture}`} alt="" />
@@ -39,7 +62,10 @@ const AssignmentSubmissions = () => {
                 <div className="submitted-at">
                   <span>Submitted at: {formattedDueDate(submission.submitedAt)}</span>
                 </div>
-                <Button text="See submission" />
+                <Button text="See submission" handleClick={() => {
+                  setCurrentSubmission(submission)
+                  setActiveSubmission(true)
+                }} />
               </div>
             )
           })

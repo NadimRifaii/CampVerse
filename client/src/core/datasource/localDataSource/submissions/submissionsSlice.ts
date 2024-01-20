@@ -13,7 +13,7 @@ export type submissionType = {
   student: {
     User: User
   },
-  submissionFiles?: []
+  SubmissionFiles?: []
 }
 export type submissionsSliceType = {
   submissions: submissionType[]

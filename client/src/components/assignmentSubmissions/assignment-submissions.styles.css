@@ -69,6 +69,8 @@ h2 span::before {
   z-index: 100;
   transform: translate(-50%, -550%);
   opacity: 0;
+  background-color: var(--main-black-color);
+  padding: 10px;
 }
 
 .assignment-submissions-container.active .ai-feedback {
@@ -78,4 +80,68 @@ h2 span::before {
 
 .assignment-submissions-container.active .submissinos-container {
   opacity: 0.5;
+}
+
+.ai-feedback .assignment-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 15px;
+}
+
+.ai-feedback input {
+  color: var(--main-white-color);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.ai-feedback .instructions :where(input, textarea) {
+  color: var(--main-white-color);
+}
+
+.ai-feedback .instructions .instruction {
+  display: flex;
+  gap: 18px;
+  margin: 15px auto
+}
+
+.ai-feedback .instructions .instruction-content {
+  flex: 1;
+
+}
+
+.ai-feedback .instructions .instruction textarea {
+  resize: none;
+  height: 100px;
+  width: 100%;
+  border-radius: 5px;
+  font-family: sans-serif;
+  padding: 10px 15px;
+  outline: none;
+}
+
+.ai-feedback h2 {
+  color: var(--main-white-color);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.ai-feedback .file {
+  color: var(--main-white-color);
+  width: fit-content;
+  text-align: center;
+}
+
+.ai-feedback .file p {
+  margin-top: 0;
+  font-size: 12px;
+}
+
+.ai-feedback .file a {
+  color: var(--main-blue-color);
+}
+
+.ai-feedback .file a svg {
+  height: 80px
 }
