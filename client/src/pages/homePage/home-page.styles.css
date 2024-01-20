@@ -1,0 +1,13 @@
+.homepage {
+  height: 100vh;
+  display: flex;
+  color: var(--main-black-color);
+}
+
+.content {
+  flex: 1;
+  padding: 40px;
+  overflow-y: auto;
+  position: relative;
+  background-color: var(--main-white-color)
+}

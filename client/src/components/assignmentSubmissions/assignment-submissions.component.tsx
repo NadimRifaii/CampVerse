@@ -71,7 +71,7 @@ const AssignmentSubmissions = () => {
               <div key={index} className="submission"  >
                 <div className="profile">
                   <div className="image">
-                    <img src={`http://localhost:8000/images/${submission.student.User.profilePicture}`} alt="" />
+                    <img src={`${process.env.REACT_APP_SERVER_GO}/images/${submission.student.User.profilePicture}`} alt="" />
                   </div>
                   <div className="name">
                     {submission.student.User.username}

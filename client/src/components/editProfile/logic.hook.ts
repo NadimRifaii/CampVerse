@@ -24,7 +24,7 @@ const useLogic = () => {
   const [credentials, setCredentials] = useState(defaultCredentials)
 
   useEffect(() => {
-    setPreviewImage(`http://localhost:8000/images/${user?.profilePicture}`);
+    setPreviewImage(`${process.env.REACT_APP_SERVER_GO}/images/${user?.profilePicture}`);
   }, [user]);
   function resetCredentials() {
     setCredentials(defaultCredentials);

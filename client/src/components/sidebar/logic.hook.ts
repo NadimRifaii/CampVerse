@@ -7,16 +7,18 @@ import VotesIcon from "../../assets/votes-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { useNavigate } from "react-router-dom"
+import HomeIcon from "../../assets/home-icon.component"
 type ItemType = {
   text: string;
   icon: () => JSX.Element;
 }
 type ItemsType = ItemType[]
-const useLogic = () => {
+const useLogic = (homepage: boolean) => {
   const user = useSelector(extractUserSlice)
   const [sidebarHidden, setSidebarHidden] = useState<boolean>(false)
   const [activeItem, setActiveItem] = useState<string>("Assignments")
   const navigate = useNavigate()
+
   const studentItems: ItemsType = [
     {
       text: "Assignments",
@@ -35,6 +37,10 @@ const useLogic = () => {
       icon: ScheduleIcon
     }
   ]
+  const homepageItems: ItemsType = [{
+    text: "Bootcamps",
+    icon: HomeIcon
+  }]
   const mentorItems: ItemsType = [
     {
       text: "Assignments",
@@ -48,27 +54,31 @@ const useLogic = () => {
       text: "Results",
       icon: ResultsIcon
     },
-    // {
-    //   text: "Votes",
-    //   icon: VotesIcon
-    // },
     {
       text: "Schedule",
       icon: ScheduleIcon
     }
   ]
   let items: ItemsType = []
-  switch (user.role) {
-    case "student":
-      items = studentItems
-      break
-    case "mentor":
-      items = mentorItems
-      break;
+  if (homepage) {
+    console.log(homepage)
+    items = homepageItems
+  } else {
+    switch (user.role) {
+      case "student":
+        items = studentItems
+        break
+      case "mentor":
+        items = mentorItems
+        break;
+    }
   }
   const toggleActiveItem = (item: ItemType) => {
     setActiveItem(item.text)
-    navigate(`${item.text}`)
+    if (item.text == "Bootcamps") {
+      console.log("alsjdf;lkasdjf")
+    } else
+      navigate(`${item.text}`)
   }
   return { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem }
 }

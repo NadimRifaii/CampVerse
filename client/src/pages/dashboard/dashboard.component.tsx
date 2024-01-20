@@ -14,7 +14,7 @@ const DashBoard = () => {
   }, [])
   return (
     <div className="dashboard">
-      <SideBar />
+      <SideBar homepage={false} />
       <div className="content">
         <Header />
         <EditProfile />

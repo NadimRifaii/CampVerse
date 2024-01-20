@@ -8,11 +8,8 @@ type UsersProps = {
   showHeader: boolean
 }
 const Users = ({ showHeader, showBtn }: UsersProps) => {
-  const { filteredArray: users, currentActiveComponent, setCurrentActiveComponent, searchUsers, fetchUsers } = useLogic()
+  const { filteredArray: users, currentActiveComponent, setCurrentActiveComponent, searchUsers, } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
-  useEffect(() => {
-    fetchUsers(currentActiveComponent)
-  }, [currentActiveComponent])
   return (
     <div className="users-section">
       {
@@ -26,7 +23,7 @@ const Users = ({ showHeader, showBtn }: UsersProps) => {
         <div className="search-bar-container">
           <div className="search-bar">
             <input type="search" placeholder="Search..." onChange={(e) => searchUsers(e.target.value)} />
-            <img src={`http://localhost:8000/images/black-search.png`} alt="" />
+            <img src={`${process.env.REACT_APP_SERVER_GO}/images/black-search.png`} alt="" />
           </div>
         </div>
         <div className="holder">

@@ -20,7 +20,7 @@ const UserRow = ({ info, showBtn }: UserRowProps) => {
     <div className="user-row">
       <div className="left">
         <div className="profile-picture">
-          <img src={`http://localhost:8000/images/${info.profilePicture}`} alt="" />
+          <img src={`${process.env.REACT_APP_SERVER_GO}/images/${info.profilePicture}`} alt="" />
         </div>
         <div className="role-name">
           <div className="name">

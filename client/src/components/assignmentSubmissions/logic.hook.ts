@@ -24,7 +24,7 @@ const useLogic = () => {
     const loadingToastId = toast.loading('Getting feedback...');
     try {
       const response = await submissionsDataSource.getAiFeedback({ fileUrl })
-      toast.success(`Assignment created successfully`, { id: loadingToastId })
+      toast.success(`Feedback done!`, { id: loadingToastId })
       const message = response.feedback + `
       \n I would give him ${response.grade}/10
       `

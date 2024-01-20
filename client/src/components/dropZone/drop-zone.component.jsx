@@ -90,7 +90,6 @@ function StyledDropzone(props) {
         }
       });
     },
-    accept: '.txt, .css, .js, .html',
     multiple: true,
   });
 

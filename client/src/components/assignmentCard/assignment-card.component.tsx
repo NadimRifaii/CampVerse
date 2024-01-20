@@ -45,7 +45,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
 
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
-  const percentageSubmitted = (numberOfSubmissions / students.length) * 100;
+  const percentageSubmitted = (numberOfSubmissions / students?.length) * 100;
 
   return (
     <div className={`assignment-card ${user.role == "mentor" ? 'point' : ''}`} onClick={async () => {

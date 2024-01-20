@@ -15,9 +15,6 @@ type SubmissionCardType = {
 }
 
 const SubmissionCard = ({ submission }: SubmissionCardType) => {
-  useEffect(() => {
-    console.log(submission)
-  }, [])
   return (
     <div className="submission-card">
       <div className="header">

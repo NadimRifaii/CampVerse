@@ -3,8 +3,8 @@ import SmallLogo from "../../assets/small-logo.component"
 import SidebarItem from "../sidebarItem/sidebar-item.component"
 import useLogic from "./logic.hook"
 import './sidebar.styles.css'
-export const SideBar = () => {
-  const { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem } = useLogic()
+export const SideBar = ({ homepage = false }) => {
+  const { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem } = useLogic(homepage)
   return (
     <div className={`sidebar ${sidebarHidden ? 'hidden' : ""} `}>
       <div className="top">

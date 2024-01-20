@@ -44,11 +44,17 @@ section button {
 
 .add-model .btn-container button {
   color: var(--main-white-color);
+  border-radius: 5px;
   margin: auto;
+  width: 100px
 }
 
 section .buttons-container {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+section .buttons-container button {
+  border-radius: 5px;
 }

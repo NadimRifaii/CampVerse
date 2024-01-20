@@ -17,15 +17,15 @@ const useLogic = () => {
       setFilteredArray(students)
     else
       setFilteredArray(mentors)
-  }, [currentActiveComponent])
-  const fetchUsers = async (userType: "student" | "mentor") => {
-    try {
-      const response = await userDataSource.getAllBootcampUsers({ bootcampId: currentBootcamp.id })
-      dispatch(setUsers(response))
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  }, [currentActiveComponent, students, mentors])
+  // const fetchUsers = async (userType: "student" | "mentor") => {
+  //   try {
+  //     const response = await userDataSource.getAllBootcampUsers({ bootcampId: currentBootcamp.id })
+  //     dispatch(setUsers(response))
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   const searchUsers = (query: string) => {
     const filteredUsers = filteredArray.filter(user => {
       const fullName = user.firstname + ' ' + user.lastname;
@@ -34,6 +34,6 @@ const useLogic = () => {
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, currentActiveComponent, setCurrentActiveComponent, searchUsers }
+  return { filteredArray, currentActiveComponent, setCurrentActiveComponent, searchUsers }
 }
 export default useLogic

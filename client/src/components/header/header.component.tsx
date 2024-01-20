@@ -33,7 +33,7 @@ const Header = () => {
         <Notifications setActiveNotification={setActiveNotification} className={activeNotification ? 'active' : ''} />
         <div className={`profile ${dropdownActive ? 'active' : ""} `}>
           <div className="image">
-            <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />
+            <img src={`${process.env.REACT_APP_SERVER_GO}/images/${user.profilePicture}`} alt="" />
           </div>
           <div className="name-role">
             <div className="name">

@@ -14,7 +14,7 @@ export const sendRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://localhost:8000/`
+  const baseURL = process.env.REACT_APP_SERVER_GO
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({
@@ -44,7 +44,7 @@ export const sendFileRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://localhost:8000/`
+  const baseURL = process.env.REACT_APP_SERVER_GO
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({
@@ -74,7 +74,7 @@ export const messagesRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://localhost:5000/`
+  const baseURL = process.env.REACT_APP_SERVER_NODE
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({

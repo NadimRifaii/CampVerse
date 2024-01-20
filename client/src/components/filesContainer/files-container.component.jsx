@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import { FaFile } from 'react-icons/fa';
 const FilesContainer = ({ files }) => {
-  useEffect(() => {
-    console.log(files)
-  }, [files])
   return (
     <div className="files-container">
       {files?.map((file, index) => {
