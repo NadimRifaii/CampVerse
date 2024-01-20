@@ -1,0 +1,72 @@
+- difference between a library and a framework 
+A library is a collection of pre-written code that you can use in your projects
+You call its functions when you need them 
+It gives you specific functionality , but you controll the overall structure of the application
+
+A framework on the otherhand have more controll over the overall architecture of your application , while you have more controll with libraries 
+
+Framework provide a pre-built structure , while libraries offer specific functions that you can integrate into your own structure 
+
+With frameworks, the framework calls your code when needed
+With libraries you call the libraries functions when needed 
+-------------------------------------------------------------------------
+- Difference between react & react native
+# React: builds user interfaces for web applications running on browsers
+# React native: builds native mobiles apps for ios and android using react concepts
+
+# React is a library that offers a set of pre built functions that you can call
+# React native provides a pre built project structure for you to build the app
+
+so react is a library that offers a set of pre built functions that you can call whenever you need them on the other hand react native is a framework that provides a structure for you to follow while you build your applications and uses react concepts
+
+---------------------------------------------------------------------------
+- Difference between stack and queue
+Both stacks and queues are data structures 
+# Stack
+LIFO (Last in first out): the element added last is the first to be removed
+unde/redo functionalities
+# Queue
+FIFO (First in first out): the first eleemnt that is added is the first to be removed
+doctor appoitments 
+
+----------------------------------------------------------------------------
+- What is OOP
+It is a programming paradigm that revolves around the concept of classes and objects , where a class is the blueprint of an object which is an instance of that class , so in the class we define the set of attributes and actions that each object will have  
+Some principles about OOP are 
+# Encapsulation: This principle insists on keeping the object's internal state hidden from the outside world , only authorized methods within the object can directly access it's state
+
+# Inheritance: This concept tells us that objects can inherit some properties from other objects allowing code reusiblity 
+
+# Polymorphism: This means that objects can take on different forms and respond differently to the same message , for example if we have a class called Animal , and all animals make a sound , but the sound that a dog makes is differnet than the sound that a cat make , so that is polymorphism
+
+# Abstraction: This concept's goal is to hide complexity , you make a function and the user just calls this function not knowing the complexity behind it
+--------------------------------------------------------------------------
+- What are react hooks
+A react hook is a function in react that let you "hook into" react features
+like state and lifecycle methods
+
+# useEffect: this hook allow me to perform side effects , such as fetching data
+a side effect occur when a function does something beyond simply returning a value based on its input 
+
+# useState: manages state withing a functional component 
+--------------------------------------------------------------------------
+
+- What is a graph
+A graph is a data structure that consists of a set of vertices (nodes) and edges (links) that connect these nodes
+
+A tree is a special type of graph 
+1- no cycles , trees can't have any closed loops 
+2- there is a root node unlike in a graph 
+3- There's only one unique path between any two nodes
+
+--------------------------------------------------------------------------
+- Difference between arrays and linkedlist 
+Arrays , elements are stored in sequential memory locations and with fixed size determined at the array declaration and cannot be changed dynamically
+
+Linked list, dynamic memory allocation , and nodes are not necessariliy stored in a sequential memory locations
+
+The access of elements in an array if O(1) but with linked list we might have to traverse all elements of the list to reach that element so it is O(n) 
+
+To insert at an array , inserting at the end requires o(1) if it's not full , insertion in the middle of the array is o(n/2) because we have to shift all elements to the right and inserting at the begining is o(n)
+
+Inserting and deleting from a linkedlist , from begining and start is much more efficient since it's o(1) , but in the middle it's same as array o(n/2)

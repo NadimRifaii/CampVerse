@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { Assignment, AssignmentFile } from '../assignments/assignmentsSlice'
+import { Assignment, File } from '../assignments/assignmentsSlice'
 import { RootState } from '../../../types/rootState'
 import { User } from '../../../types/user'
 
@@ -9,11 +9,11 @@ export type submissionType = {
   assignmentId: number,
   submitedAt: string,
   assignmentDueDate: string,
-  assignment: any,
+  assignment: Assignment,
   student: {
     User: User
   },
-  SubmissionFiles?: []
+  SubmissionFiles?: File[]
 }
 export type submissionsSliceType = {
   submissions: submissionType[]

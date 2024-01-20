@@ -63,9 +63,10 @@ h2 span::before {
 
 .assignment-submissions-container .ai-feedback {
   position: absolute;
+  border-radius: 5px;
   top: 50%;
   left: 50%;
-  transition: 1s;
+  transition: .5s;
   z-index: 100;
   transform: translate(-50%, -550%);
   opacity: 0;
@@ -102,6 +103,19 @@ h2 span::before {
 
 .ai-feedback .instructions :where(input, textarea) {
   color: var(--main-white-color);
+}
+
+.ai-response textarea::-webkit-scrollbar {
+  width: 12px;
+}
+
+.ai-response textarea::-webkit-scrollbar-thumb {
+  background-color: var(--blue-color);
+  border-radius: 6px;
+}
+
+.ai-response textarea::-webkit-scrollbar-track {
+  background-color: #ccc;
 }
 
 .ai-feedback .instructions .instruction {
@@ -164,8 +178,16 @@ h2 span::before {
   color: var(--main-white-color);
 }
 
-.ai-feedback button {
-  width: fit-content;
-  margin: auto;
+.ai-feedback .buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.ai-feedback .buttons-container button {
+  border-radius: 5px;
   color: var(--main-white-color);
+  width: 150px;
 }

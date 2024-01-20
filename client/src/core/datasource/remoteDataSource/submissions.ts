@@ -37,11 +37,11 @@ export const submissionsDataSource = {
       throw new Error(error.message)
     }
   },
-  getAiFeedback: async (data: {}) => {
+  getAiFeedback: async (data: {fileUrl:string}) => {
     try {
       const response = await sendRequest({
         body: data,
-        route: `/assignment/get-feedback?substring=${data}`
+        route: `/assignment/get-feedback?substring=${data.fileUrl}`
       })
       return response
     } catch (error: any) {

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../../types/rootState';
-export type AssignmentFile = {
+export type File = {
   fileName: string,
   fileType: string,
   fileUrl: string
@@ -10,10 +10,11 @@ type Instruction = {
   content: string,
 }
 export type Assignment = {
+  ID: number,
   assignmentTitle: string,
   dueDate: string,
   stackName: string,
-  assignmentFiles: AssignmentFile[],
+  assignmentFiles: File[],
   instructions: Instruction[],
   submissionsFiles?: []
 }

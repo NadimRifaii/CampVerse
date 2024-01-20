@@ -7,10 +7,12 @@ import FilesContainer from "../filesContainer/files-container.component";
 import { submissionType } from "../../core/datasource/localDataSource/submissions/submissionsSlice";
 import InstructionsContainer from "../instructionsContainer/instructions-container.component";
 const AssignmentSubmissions = () => {
-  const { submissions, currentAssignment } = useLogic()
+
+  const { submissions, currentAssignment, feedback, setFeedback, getAiFeedback } = useLogic()
   const [activeSubmission, setActiveSubmission] = useState<boolean>(false)
   const [currentSubmission, setCurrentSubmission] = useState<submissionType>()
-  const [feedback, setFeedback] = useState<string>("")
+
+
   useEffect(() => {
     console.log(currentSubmission)
   }, [currentSubmission])
@@ -43,15 +45,24 @@ const AssignmentSubmissions = () => {
         <div className="files">
           <h2>Click to download student submission filess</h2>
           {
-            currentSubmission != undefined && <FilesContainer files={currentSubmission?.SubmissionFiles} />
+            currentSubmission && currentSubmission.SubmissionFiles && <FilesContainer files={currentSubmission.SubmissionFiles} />
           }
           <div className="ai-response">
             <textarea value={feedback} disabled placeholder="Ai feedback"></textarea>
           </div>
         </div>
-        <Button text="Get feedback" handleClick={() => {
+        <div className="buttons-container">
+          <Button text="Get feedback" handleClick={() => {
+            if (currentSubmission?.SubmissionFiles?.[0]) {
+              getAiFeedback(currentSubmission?.SubmissionFiles?.[0].fileUrl)
+            }
 
-        }} />
+          }} />
+          <Button text="Close" handleClick={() => {
+            setFeedback("")
+            setActiveSubmission(false)
+          }} />
+        </div>
       </div>
       <div className="submissinos-container">
         {
@@ -81,4 +92,5 @@ const AssignmentSubmissions = () => {
     </div>
   )
 }
+
 export default AssignmentSubmissions

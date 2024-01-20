@@ -6,6 +6,7 @@ export type CurrentAssigmnentSliceType = {
 }
 const initialState: CurrentAssigmnentSliceType = {
   assignment: {
+    ID: 0,
     assignmentTitle: '',
     dueDate: '',
     stackName: '',
