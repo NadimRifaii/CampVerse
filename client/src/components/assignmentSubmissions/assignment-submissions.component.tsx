@@ -46,7 +46,7 @@ const AssignmentSubmissions = () => {
             currentSubmission != undefined && <FilesContainer files={currentSubmission?.SubmissionFiles} />
           }
           <div className="ai-response">
-            <textarea disabled placeholder="Ai feedback"></textarea>
+            <textarea value={feedback} disabled placeholder="Ai feedback"></textarea>
           </div>
           <Button text="Get feedback" handleClick={() => {
 
