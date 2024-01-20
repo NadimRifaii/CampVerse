@@ -7,16 +7,16 @@ import (
 )
 
 type Result struct {
-	ID         uint `gorm:"primarykey"`
-	BootcampId uint
+	ID         uint   `gorm:"primarykey"`
+	BootcampID uint   `json:"bootcampId"`
 	Week       string `json:"week" gorm:"unique"`
 	Grades     []*Grade
 } //
 type Grade struct {
 	gorm.Model
 	ResultId  uint
-	StackId   uint
-	StudentId uint
+	StackId   uint   `json:"stackId"`
+	StudentId uint   `json:"studentId"`
 	Grade     int    `json:"grade"`
 	Badge     string `json:"badge"`
 }

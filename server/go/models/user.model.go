@@ -21,8 +21,6 @@ type User struct {
 	Bootcamp       []*Bootcamp `gorm:"many2many:bootcamp_users;"`
 }
 
-
-
 func (user *User) GetUserById(id string, db *gorm.DB) error {
 	if db.Find(user, "id = ?", id); user.ID == 0 {
 		return errors.New("User not found")
