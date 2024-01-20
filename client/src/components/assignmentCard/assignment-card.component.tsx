@@ -20,7 +20,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [numberOfSubmissions, setNumberOfSubmissions] = useState<number>(0);
-  const { users } = useSelector(extractUsersSlice);
+  const { students } = useSelector(extractUsersSlice);
   const { submissions } = useSelector(extractSubmissionsSlice)
   const getNumberOfSubmissions = async () => {
     try {
@@ -33,7 +33,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
   };
   useEffect(() => {
     getNumberOfSubmissions();
-  }, [assignment, users]);
+  }, [assignment, students]);
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
     const options: Intl.DateTimeFormatOptions = {
@@ -45,7 +45,7 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
 
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
-  const percentageSubmitted = (numberOfSubmissions / users.length) * 100;
+  const percentageSubmitted = (numberOfSubmissions / students.length) * 100;
 
   return (
     <div className={`assignment-card ${user.role == "mentor" ? 'point' : ''}`} onClick={async () => {

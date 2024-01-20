@@ -48,11 +48,11 @@ export const userDataSource = {
       throw new Error(error)
     }
   },
-  getAllUsers: async (data: {}, userType: string) => {
+  getAllBootcampUsers: async (data: { bootcampId: number }) => {
     try {
       const response = await sendRequest({
         body: data,
-        route: `/user/all-${userType}s`,
+        route: `/bootcamp/${data.bootcampId}`,
         method: "GET"
       })
       return response
@@ -60,4 +60,5 @@ export const userDataSource = {
       throw new Error(error)
     }
   }
+
 }

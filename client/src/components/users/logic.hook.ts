@@ -3,44 +3,37 @@ import { useEffect, useState } from "react"
 import { UsersSliceType, extractUsersSlice, setUsers } from "../../core/datasource/localDataSource/users/usersSlice"
 import { userDataSource } from "../../core/datasource/remoteDataSource/user"
 import { BootcampsSliceType, extractBootcampsSlice, setBootcamps } from "../../core/datasource/localDataSource/bootcamps/bootcampsSlice"
-import { bootcampsDataSource } from "../../core/datasource/remoteDataSource/bootcamps"
+import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
+import { User } from "../../core/types/user"
 const useLogic = () => {
   const dispatch = useDispatch()
-  const { users }: UsersSliceType = useSelector(extractUsersSlice)
+  const { students, mentors }: UsersSliceType = useSelector(extractUsersSlice)
   const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
-  let [filteredArray, setFilteredArray] = useState(users)
+  const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
+  let [filteredArray, setFilteredArray] = useState<User[]>(students)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<"student" | "mentor">('student')
   useEffect(() => {
-    setFilteredArray(users)
-  }, [users])
+    if (currentActiveComponent == "student")
+      setFilteredArray(students)
+    else
+      setFilteredArray(mentors)
+  }, [currentActiveComponent])
   const fetchUsers = async (userType: "student" | "mentor") => {
     try {
-      const response = await userDataSource.getAllUsers({}, userType)
-      dispatch(setUsers(response.users))
+      const response = await userDataSource.getAllBootcampUsers({ bootcampId: currentBootcamp.id })
+      dispatch(setUsers(response))
     } catch (error) {
       console.log(error)
     }
-  }
-  const setBootcampUsers = (bootcampUsers: []) => {
-    dispatch(setUsers(bootcampUsers))
-  }
-  const getBootcamps = async () => {
-    try {
-      const response = await bootcampsDataSource.getUserBootcamps({})
-      dispatch(setBootcamps(response))
-    } catch (error) {
-      console.log(error)
-    }
-
   }
   const searchUsers = (query: string) => {
-    const filteredUsers = users.filter(user => {
+    const filteredUsers = filteredArray.filter(user => {
       const fullName = user.firstname + ' ' + user.lastname;
       const regex = new RegExp(query, 'i');
       return regex.test(fullName);
     });
     setFilteredArray(filteredUsers)
   };
-  return { fetchUsers, filteredArray, currentActiveComponent, setCurrentActiveComponent, searchUsers, bootcamps, getBootcamps, setBootcampUsers }
+  return { fetchUsers, filteredArray, currentActiveComponent, setCurrentActiveComponent, searchUsers }
 }
 export default useLogic

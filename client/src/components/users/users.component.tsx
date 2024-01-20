@@ -3,28 +3,16 @@ import useLogic from './logic.hook'
 import './users.styles.css'
 import UserRow from '../userRow/user-row.component'
 import { Button } from '../common/button/button.component'
-import { CurrentUserContext } from '../../utils/contexts/current-user.context'
-import { useNavigate } from 'react-router-dom'
 type UsersProps = {
-  userType?: "student" | "mentor",
   showBtn: string,
-  bootcampUsers?: [] | null,
   showHeader: boolean
 }
-const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeader }: UsersProps) => {
-  const { filteredArray: users, bootcamps, currentActiveComponent, setCurrentActiveComponent, searchUsers, getBootcamps, fetchUsers, setBootcampUsers } = useLogic()
+const Users = ({ showHeader, showBtn }: UsersProps) => {
+  const { filteredArray: users, currentActiveComponent, setCurrentActiveComponent, searchUsers, fetchUsers } = useLogic()
   const [activeBootcamp, setActiveBootcamp] = useState<boolean | string>(false)
-  const currentUserContext = useContext(CurrentUserContext)
-  const { currentUser, setCurrentUser } = currentUserContext;
-  const navigate = useNavigate()
   useEffect(() => {
-    if (bootcampUsers) {
-      setBootcampUsers(bootcampUsers)
-    } else {
-      fetchUsers(currentActiveComponent)
-    }
-    getBootcamps()
-  }, [currentActiveComponent, userType])
+    fetchUsers(currentActiveComponent)
+  }, [currentActiveComponent])
   return (
     <div className="users-section">
       {
@@ -44,8 +32,7 @@ const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeade
         <div className="holder">
           {
             users?.length > 0 ? users?.map(user => {
-              return <UserRow key={user.email} setActiveBootcamp={setActiveBootcamp} showBtn={showBtn} info={user} />
-              return null
+              return <UserRow key={user.email} showBtn={showBtn} info={user} />
             })
               : <h1>No such user</h1>
           }

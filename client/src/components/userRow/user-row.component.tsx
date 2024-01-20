@@ -8,10 +8,9 @@ import { User } from '../../core/types/user'
 type UserRowProps = {
   info: User,
   activeBootcamp?: string | boolean
-  setActiveBootcamp?: React.Dispatch<React.SetStateAction<string | boolean>>
   showBtn: string
 }
-const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowProps) => {
+const UserRow = ({ info, showBtn }: UserRowProps) => {
   const activeEditContext = useContext(ActiveEditContext)
   const currentUserContext = useContext(CurrentUserContext)
   const navigate = useNavigate()
@@ -42,10 +41,7 @@ const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowPr
         {
           showBtn == "Add" ?
             <Button text='Add' handleClick={() => {
-              if (setActiveBootcamp) {
-                setCurrentUser(info)
-                setActiveBootcamp(true)
-              }
+              setCurrentUser(info)
             }} />
             : <Button text='Chat' handleClick={() => {
               setCurrentUser(info)

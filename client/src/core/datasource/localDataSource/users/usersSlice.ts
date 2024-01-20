@@ -2,19 +2,20 @@ import { createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../../types/rootState';
 import { User } from '../../../types/user';
 export type UsersSliceType = {
-  users: User[]
+  students: User[],
+  mentors: User[]
 }
 const initialState: UsersSliceType = {
-  users: []
+  students: [],
+  mentors: []
 };
 export const usersSlice = createSlice({
   name: "users",
   initialState,
   reducers: {
-    setUsers(state, { type, payload }: { payload: any, type: string }) {
+    setUsers(state, { type, payload }: { payload: UsersSliceType, type: string }) {
       return {
-        users: payload
-        // ...payload
+        ...payload
       }
     }
   }
