@@ -140,8 +140,6 @@ func HttpGetBootcampStacks(c *fiber.Ctx) error {
 
 func HttpGetBootcampUsers(c *fiber.Ctx) error {
 	idStr := c.Params("id")
-
-	// Convert idStr to uint64
 	id64, _ := strconv.ParseUint(idStr, 10, 32)
 	id := uint(id64)
 	user := new(models.User)
@@ -151,13 +149,22 @@ func HttpGetBootcampUsers(c *fiber.Ctx) error {
 	}
 	bootcamp := new(models.Bootcamp)
 	bootcamp.GetBootcampByID(db, id)
-	// users, err := bootcamp.GetUsersInBootcamp(db)
-	// if err != nil {
-	// 	return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
-	// }
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"bootcamp": bootcamp})
-}
+	students := []*models.User{}
+	mentors := []*models.User{}
+	for _, u := range bootcamp.Users {
+		if u.RoleID == 2 {
+			students = append(students, u)
+		} else if u.RoleID == 3 {
+			mentors = append(mentors, u)
+		}
+	}
+	response := fiber.Map{
+		"students": students,
+		"mentors":  mentors,
+	}
 
+	return Loger(c, fiber.StatusAccepted, response)
+}
 func validateBootcampRequest(c *fiber.Ctx, body *models.Bootcamp) error {
 	if err := c.BodyParser(body); err != nil {
 		return errors.New("invalid request body")

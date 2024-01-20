@@ -44,8 +44,7 @@ const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeade
         <div className="holder">
           {
             users?.length > 0 ? users?.map(user => {
-              if (user.role != 'admin')
-                return <UserRow key={user.email} setActiveBootcamp={setActiveBootcamp} showBtn={showBtn} info={user} />
+              return <UserRow key={user.email} setActiveBootcamp={setActiveBootcamp} showBtn={showBtn} info={user} />
               return null
             })
               : <h1>No such user</h1>

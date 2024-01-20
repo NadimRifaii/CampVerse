@@ -2,9 +2,6 @@
 import { messagesRequest } from "../../helpers/request"
 export const messagesDataSource = {
   accessChat: async (data: { currentUser: {} }) => {
-    console.log("########################")
-    console.log(data)
-    console.log("########################")
     try {
       const response = await messagesRequest({
         body: data.currentUser,

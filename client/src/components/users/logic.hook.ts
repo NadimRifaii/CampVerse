@@ -1,11 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import toast from "react-hot-toast"
-import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { UsersSliceType, extractUsersSlice, setUsers } from "../../core/datasource/localDataSource/users/usersSlice"
 import { userDataSource } from "../../core/datasource/remoteDataSource/user"
-import { CurrentBootcampType, extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
-import { User } from "../../core/types/user"
 import { BootcampsSliceType, extractBootcampsSlice, setBootcamps } from "../../core/datasource/localDataSource/bootcamps/bootcampsSlice"
 import { bootcampsDataSource } from "../../core/datasource/remoteDataSource/bootcamps"
 const useLogic = () => {
