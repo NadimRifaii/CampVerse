@@ -1,15 +1,9 @@
 package controllers
 
 import (
-	"context"
 	"errors"
-	"io/ioutil"
-	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/NadimRifaii/campverse/database"
-	"github.com/sashabaranov/go-openai"
 
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -82,58 +76,4 @@ func populateSubmission(studentSubmission *models.StudentSubmission, body *Submi
 	studentSubmission.AssignmentId = assignment.ID
 	studentSubmission.SubmissionFiles = body.SubmissionFiles
 	return nil
-}
-func ReadFileContent(c *fiber.Ctx) error {
-	substring := c.Query("substring")
-	if substring == "" {
-		return errors.New("file name invalid")
-	}
-
-	fileDir := "public/files"
-	files, err := ioutil.ReadDir(fileDir)
-	if err != nil {
-		return errors.New(err.Error())
-	}
-
-	for _, file := range files {
-		if file.IsDir() {
-			continue
-		}
-		if strings.Contains(file.Name(), substring) {
-			filePath := filepath.Join(fileDir, file.Name())
-			content, err := ioutil.ReadFile(filePath)
-			if err != nil {
-				return errors.New(err.Error())
-			}
-			return c.JSON(fiber.Map{"content": string(content)})
-		}
-	}
-
-	return errors.New("file not found")
-}
-
-func openAi() (string, error) {
-	apiKey := os.Getenv("OPENAI_API_KEY")
-	if apiKey == "" {
-		return "", errors.New("Invalid api key")
-	}
-
-	client := openai.NewClient(apiKey)
-	resp, err := client.CreateChatCompletion(
-		context.Background(),
-		openai.ChatCompletionRequest{
-			Model: openai.GPT3Dot5Turbo,
-			Messages: []openai.ChatCompletionMessage{
-				{
-					Role:    openai.ChatMessageRoleUser,
-					Content: "I want you to give me an json object , just json object and don't say anything else , the json object is of this form {name:'',lastname:''}",
-				},
-			},
-		},
-	)
-	if err != nil {
-		return "", errors.New(err.Error())
-	}
-
-	return resp.Choices[0].Message.Content, nil
 }

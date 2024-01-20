@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -11,6 +13,7 @@ import (
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/sashabaranov/go-openai"
 )
 
 type AssignmentRequest struct {
@@ -173,4 +176,58 @@ func HttpGetNumOfAssignmentSubmissions(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"numberOfSubmissions": len(submissions), "submisssions": submissions})
+}
+func HttpGetFeedback(c *fiber.Ctx) error {
+	substring := c.Query("substring")
+	if substring == "" {
+		return errors.New("file name invalid")
+	}
+
+	fileDir := "public/files"
+	files, err := ioutil.ReadDir(fileDir)
+	if err != nil {
+		return errors.New(err.Error())
+	}
+
+	for _, file := range files {
+		if file.IsDir() {
+			continue
+		}
+		if strings.Contains(file.Name(), substring) {
+			filePath := filepath.Join(fileDir, file.Name())
+			content, err := ioutil.ReadFile(filePath)
+			if err != nil {
+				return errors.New(err.Error())
+			}
+			return c.JSON(fiber.Map{"content": string(content)})
+		}
+	}
+
+	return errors.New("file not found")
+}
+
+func getFeedback() (string, error) {
+	apiKey := os.Getenv("OPENAI_API_KEY")
+	if apiKey == "" {
+		return "", errors.New("invalid api key")
+	}
+
+	client := openai.NewClient(apiKey)
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model: openai.GPT3Dot5Turbo,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: "I am gonna give a file content, and i want you to read it and give a feedback on it , just give the feedback and nothing else . And i return the point of approvments in a json object and i want a field called summarize and each point of approvement is also a key in the json object.",
+				},
+			},
+		},
+	)
+	if err != nil {
+		return "", errors.New(err.Error())
+	}
+
+	return resp.Choices[0].Message.Content, nil
 }
