@@ -10,6 +10,7 @@ const AssignmentSubmissions = () => {
   const { submissions, currentAssignment } = useLogic()
   const [activeSubmission, setActiveSubmission] = useState<boolean>(false)
   const [currentSubmission, setCurrentSubmission] = useState<submissionType>()
+  const [feedback, setFeedback] = useState<string>("")
   useEffect(() => {
     console.log(currentSubmission)
   }, [currentSubmission])
@@ -47,6 +48,9 @@ const AssignmentSubmissions = () => {
           <div className="ai-response">
             <textarea disabled placeholder="Ai feedback"></textarea>
           </div>
+          <Button text="Get feedback" handleClick={() => {
+
+          }} />
         </div>
       </div>
       <div className="submissinos-container">
