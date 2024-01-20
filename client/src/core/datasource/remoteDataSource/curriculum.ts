@@ -1,6 +1,6 @@
 import { sendRequest } from "../../helpers/request"
 
-export const curriculumDataSource = {
+export const curriculumDatasource = {
   getBootcampCurriculum: async (data: {}) => {
     try {
       const response = await sendRequest({
