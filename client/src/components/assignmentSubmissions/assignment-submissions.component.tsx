@@ -44,6 +44,9 @@ const AssignmentSubmissions = () => {
           {
             currentSubmission != undefined && <FilesContainer files={currentSubmission?.SubmissionFiles} />
           }
+          <div className="ai-response">
+            <textarea disabled placeholder="Ai feedback"></textarea>
+          </div>
         </div>
       </div>
       <div className="submissinos-container">

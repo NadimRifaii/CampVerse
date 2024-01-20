@@ -96,13 +96,17 @@ h2 span::before {
   border-radius: 5px;
 }
 
+.ai-feedback .due-date input {
+  width: 155px;
+}
+
 .ai-feedback .instructions :where(input, textarea) {
   color: var(--main-white-color);
 }
 
 .ai-feedback .instructions .instruction {
   display: flex;
-  gap: 18px;
+  gap: 16px;
   margin: 15px auto
 }
 
@@ -144,4 +148,18 @@ h2 span::before {
 
 .ai-feedback .file a svg {
   height: 80px
+}
+
+.ai-response textarea {
+  width: 100%;
+  border-radius: 5px;
+  resize: none;
+  min-height: 150px;
+  padding: 10px;
+  color: var(--main-white-color);
+  font-family: sans-serif;
+}
+
+.ai-response textarea::placeholder {
+  color: var(--main-white-color);
 }
