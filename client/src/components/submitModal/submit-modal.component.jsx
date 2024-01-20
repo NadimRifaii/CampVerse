@@ -6,15 +6,13 @@ import toast from "react-hot-toast";
 import './submit-modal.styles.css';
 import StyledDropzone from "../dropZone/drop-zone.component";
 import { Button } from "../common/button/button.component";
+import FilesContainer from "../filesContainer/files-container.component";
 
-const SubmitModal = ({ showDropzone = true, className = false }) => {
+const SubmitModal = () => {
   const { assignment, uploadedFiles, setUploadedFiles, submitAssignment } = useLogic();
   const [dueDate, setDueDate] = useState(new Date(assignment.dueDate));
-  useEffect(() => {
-    console.log(assignment);
-  }, [assignment]);
   return (
-    <div className={`submission-container ${className} `}>
+    <div className={`submission-container`}>
       <div className="assignment-info">
         <div className="title">
           <input type='text' value={assignment.assignmentTitle} disabled />
@@ -40,23 +38,11 @@ const SubmitModal = ({ showDropzone = true, className = false }) => {
       </div>
       <div className="assignment-files">
         <h2>Click to download the assignment files</h2>
-        {assignment.assignmentFiles.map((file, index) => {
-          return (
-            <div className="file" key={index}>
-              <a href={`http://localhost:8000/assignment/download?substring=${assignment.assignmentTitle}`}>
-                <FaFile style={{ width: '30px', height: '30px', marginRight: '10px' }} />
-              </a>
-              <p className="file-name">{file.fileUrl}</p>
-            </div>
-          )
-        })}
+        <FilesContainer files={assignment.assignmentFiles} />
       </div>
-      {
-        showDropzone &&
-        <div className="files-container">
-          <StyledDropzone assignmentTitle={assignment.assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
-        </div>
-      }
+      <div className="files-container">
+        <StyledDropzone assignmentTitle={assignment.assignmentTitle} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
+      </div>
       <div className="create-assignment-btn">
         <Button text='Submit' handleClick={submitAssignment} />
       </div>

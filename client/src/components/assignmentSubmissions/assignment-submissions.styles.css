@@ -55,23 +55,27 @@ h2 span::before {
   border-radius: 5px;
 }
 
-.assignment-submissions-container {
-  position: relative;
-}
+
 
 .assignment-submissions-container.active .submissinos-container {
   opacity: .5s;
 }
 
-.assignment-submissions-container .submission-container {
+.assignment-submissions-container .ai-feedback {
   position: absolute;
   top: 50%;
   left: 50%;
-  transition: .5s;
+  transition: 1s;
   z-index: 100;
-  transform: translate(-50%, -250%);
+  transform: translate(-50%, -550%);
+  opacity: 0;
 }
 
-.assignment-submissions-container.active .submission-container {
+.assignment-submissions-container.active .ai-feedback {
   transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+.assignment-submissions-container.active .submissinos-container {
+  opacity: 0.5;
 }

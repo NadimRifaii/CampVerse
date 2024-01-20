@@ -27,6 +27,7 @@ const useLogic = () => {
   const dispatch = useDispatch()
   const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
   const { assignment } = useSelector(extractCurrentAssignmentSlice)
+
   useEffect(() => {
     console.log(assignment)
   }, [])
