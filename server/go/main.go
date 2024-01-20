@@ -2,13 +2,9 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
-	"path/filepath"
-	"strings"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/initializers"
@@ -48,34 +44,6 @@ func registerRoutes(groups []fiber.Router, routeFuncs ...func(group fiber.Router
 	for i, routeFunc := range routeFuncs {
 		routeFunc(groups[i])
 	}
-}
-func ReadFileContent(c *fiber.Ctx) error {
-	substring := c.Query("substring")
-	if substring == "" {
-		return errors.New("file name invalid")
-	}
-
-	fileDir := "public/files"
-	files, err := ioutil.ReadDir(fileDir)
-	if err != nil {
-		return errors.New(err.Error())
-	}
-
-	for _, file := range files {
-		if file.IsDir() {
-			continue
-		}
-		if strings.Contains(file.Name(), substring) {
-			filePath := filepath.Join(fileDir, file.Name())
-			content, err := ioutil.ReadFile(filePath)
-			if err != nil {
-				return errors.New(err.Error())
-			}
-			return c.JSON(fiber.Map{"content": string(content)})
-		}
-	}
-
-	return errors.New("file not found")
 }
 
 func openAi() {
