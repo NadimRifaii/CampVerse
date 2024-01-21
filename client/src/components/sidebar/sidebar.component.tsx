@@ -25,7 +25,6 @@ export const SideBar = ({ homepage = false }) => {
   }, [screenWidth]);
   const handleToggleClick = () => {
     if (screenWidth >= 767) {
-      console.log(screenWidth)
       setSidebarHidden(!sidebarHidden);
     }
   };

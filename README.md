@@ -10,25 +10,25 @@
 > CampVerse simplifies the mentorship journey with a user-friendly platform. We're committed to saving time, maximizing learning, and ensuring satisfaction. Join us in elevating the educational experience, where mentors and students meet seamlessly for a transformative journey.
 
 ### Admin Stories
-- As an admin, I should be able to create new bootcamps with a name, description, and target audience.
+- As an admin, I should be able to create new bootcamps with a name, description, number of weeks and target audience.
 - As an admin, I should be able to add mentors and students to bootcamps.
 - As an admin, I want to access user profiles containing their details and edit their profile.
 - As an admin, I want to invite a certain user to a bootcamp , specifying their role.
-- As an admin, I want to communicate with them and possibility of deleting their account and removing them from all bootcamps.
+- As an admin, I want to the ability to live chat with all users 
+- As an admin, I want the ability to create the bootcamp curriculum containig all the modules and stack that will be given during the bootcamp
+- As an admin, I want the ability to create the bootcamp's schedule , assigning sessions to mentors with specific time and specific dates
 
 ### Student Stories
-- As a student, upon submitting an assignment, I expect to receive instant feedback from the AI system, highlighting areas of strength and suggesting improvements.
-- As a student, I want the opportunity to receive personalized feedback from the mentor after submitting an assignment. This could involve comments on specific aspects of my work or additional guidance for improvement.
-- As a student, I receive a notification  indicating that meeting results have been posted by the mentor.
-- As a student, I expect the ability to have a private chat with any of my mentors.
+- As a student, I have the ability to submit an assignment and upload my files
+- As a student, I have the ability to download assignment files 
+- As a student, I have the ability to see the bootcamp's weekly schedule 
+- As a student, I expect the ability to have a private chat with any of my mentors and friends in the bootcamp.
 
 ### Mentor Stories
-- As a mentor, I want to create new assignments for my bootcamp and have an option to get help from ai, defining the task, providing necessary resources, and setting due dates.
+- As a mentor, I want to create new assignments for my bootcamp 
+- As a mentor, I want the ability to get ai feedback on any of my students assignments
 - As a mentor, I want to post assignments to students and view all previous and upcoming assignments.
-- As a mentor, I want to create a schedule for the week and see schedules of all previous weeks.
-- As a mentor, I have the ability to post individual results for each student in the bootcamp.
 - As a mentor, I have the ability to live chat with other users.
-- As a mentor, I expect to receive notifications when a student submit his assignment.
 
 <br><br>
 
