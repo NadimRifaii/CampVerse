@@ -19,6 +19,7 @@ type Grade struct {
 	StudentId uint   `json:"studentId"`
 	Grade     int    `json:"grade"`
 	Badge     string `json:"badge"`
+	User      User   `gorm:"foreignkey:StudentId"`
 }
 
 func (r *Result) GetAllResultsInBootcamp(db *gorm.DB, bootcampID uint) ([]Result, error) {
@@ -30,10 +31,18 @@ func (r *Result) GetAllResultsInBootcamp(db *gorm.DB, bootcampID uint) ([]Result
 
 	for i := range results {
 		db.Model(&results[i]).Association("Grades").Find(&results[i].Grades)
+		for j := range results[i].Grades {
+			var user User
+			if err := db.First(&user, results[i].Grades[j].StudentId).Error; err != nil {
+				return nil, err
+			}
+			results[i].Grades[j].User = user
+		}
 	}
 
 	return results, nil
 }
+
 func (r *Result) GetWeeklyResult(db *gorm.DB, week string, bootcampId uint) error {
 	if db.First(r, "week = ? AND bootcamp_id = ?", week, bootcampId); r.ID == 0 {
 		return errors.New("record not found")
