@@ -20,6 +20,7 @@ type Grade struct {
 	Grade     int    `json:"grade"`
 	Badge     string `json:"badge"`
 	User      User   `gorm:"foreignkey:StudentId"`
+	Stack     Stack  `gorm:"goreignkey:StackId"`
 }
 
 func (r *Result) GetAllResultsInBootcamp(db *gorm.DB, bootcampID uint) ([]Result, error) {
@@ -37,6 +38,11 @@ func (r *Result) GetAllResultsInBootcamp(db *gorm.DB, bootcampID uint) ([]Result
 				return nil, err
 			}
 			results[i].Grades[j].User = user
+			var stack Stack
+			if err := db.First(&stack, results[i].Grades[j].StackId).Error; err != nil {
+				return nil, err
+			}
+			results[i].Grades[j].Stack = stack
 		}
 	}
 

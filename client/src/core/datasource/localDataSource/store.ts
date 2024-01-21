@@ -9,6 +9,7 @@ import curriculumsSlice, { curriculums } from "./curriculums/curriculumsSlice";
 import assignmentsSlice, { assignments } from "./assignments/assignmentsSlice";
 import submissionsSlice, { submissions } from "./submissions/submissionsSlice";
 import currentAssignmentSlice, { currentAssignment } from "./currentAssignment/currentAssignmentSlice";
+import resultsSlice, { results } from "./results/resultsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
     [curriculums]: curriculumsSlice,
     [assignments]: assignmentsSlice,
     [submissions]: submissionsSlice,
-    [currentAssignment]: currentAssignmentSlice
+    [currentAssignment]: currentAssignmentSlice,
+    [results]: resultsSlice
   }
 })
