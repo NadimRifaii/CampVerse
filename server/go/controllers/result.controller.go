@@ -9,20 +9,39 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+type Results struct {
+	Results []models.Result `json:"results"`
+}
+
+type ResultData struct {
+	Week       string         `json:"week"`
+	BootcampID uint           `json:"bootcampId"`
+	UserID     uint           `json:"userId"`
+	Grades     []models.Grade `json:"grades"`
+}
+
 func HttpCreateResults(c *fiber.Ctx) error {
 	db := database.Db
 	_, err := GetMentor(c, db)
 	if err != nil {
 		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": err.Error()})
 	}
-	result := new(models.Result)
-	if err := ValidateRequest(c, result); err != nil {
+
+	var results Results
+	if err := c.BodyParser(&results); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	if err := CreateRecordInDb(result); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+
+	for _, result := range results.Results {
+		if err := ValidateRequest(c, &result); err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
+		if err := CreateRecordInDb(&result); err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"result": result})
+
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"results": results.Results})
 }
 
 func HttpGetAllResultsInBootcamp(c *fiber.Ctx) error {
