@@ -37,21 +37,29 @@ const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeade
       <div className="users-container">
         <div className="search-bar-container">
           <div className={`bootcamps-list ${activeBootcamp ? 'active' : ''}`}>
-            <h3>Choose a bootcamp</h3>
+            {
+              bootcamps?.length > 0 ?
+                <h3>Choose a bootcamp</h3>
+                : ''
+            }
             <ul>
               {
-                bootcamps.map(bootcamp => <li key={bootcamp.id} className={`${activeBootcamp == bootcamp.name ? 'active' : ""}`} onClick={(() => {
-                  setActiveBootcamp(bootcamp.name)
-                })} ><span>{bootcamp.name}</span></li>)
+                bootcamps?.length > 0 ?
+                  bootcamps?.map(bootcamp => <li key={bootcamp.id} className={`${activeBootcamp == bootcamp.name ? 'active' : ""}`} onClick={(() => {
+                    setActiveBootcamp(bootcamp.name)
+                  })} ><span>{bootcamp.name}</span></li>)
+                  : <span className='no-bootcamps' >You need to create a bootcamp first</span>
               }
             </ul>
             <div className="save-btn">
               <Button text='Save' handleClick={() => {
-                addUserToBootcamp({
-                  'email': currentUser?.email,
-                  'bootcampName': activeBootcamp
-                })
-                setCurrentUser(null)
+                if (bootcamps?.length > 0) {
+                  addUserToBootcamp({
+                    'email': currentUser?.email,
+                    'bootcampName': activeBootcamp
+                  })
+                  setCurrentUser(null)
+                }
                 setActiveBootcamp(false)
               }} className={activeBootcamp ? 'active' : ""} />
             </div>

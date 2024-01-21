@@ -187,3 +187,9 @@ ul::-webkit-scrollbar-track {
 .users-container .bootcamps-list button.active {
   background-color: var(--main-blue-color)
 }
+
+ul .no-bootcamps {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}

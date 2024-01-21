@@ -76,7 +76,7 @@ func openAi() {
 func main() {
 	app := setupApp()
 
-	protectedPaths := []string{"/auth", "/schedule", "/bootcamp", "/stacks", "/mentor", "/assignment", "/result", "/user", "/curriculum"}
+	protectedPaths := []string{"/auth", "/schedule", "/bootcamp", "/stacks", "/mentor", "/assignment", "/user", "/curriculum"}
 	groups := setupProtectedGroups(app, protectedPaths)
 
 	registerRoutes(groups,
@@ -86,7 +86,6 @@ func main() {
 		routes.StackRoutes,
 		routes.MentorRoutes,
 		routes.AssignmentRoutes,
-		routes.ResultRoutes,
 		routes.UserRoutes,
 		routes.CurriculumRoutes,
 	)

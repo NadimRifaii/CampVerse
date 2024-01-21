@@ -9,8 +9,7 @@ type Stack struct {
 	ID        uint        `gorm:"primarykey"`
 	Name      string      `json:"name" gorm:"not null;default:'x';size:255"`
 	Bootcamps []*Bootcamp `gorm:"many2many:bootcamp_stack"`
-	// Grade     []*Grade
-	Mentors []*Mentor `gorm:"many2many:teaches;"`
+	Mentors   []*Mentor   `gorm:"many2many:teaches;"`
 }
 
 func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {

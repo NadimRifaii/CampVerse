@@ -36,8 +36,6 @@ func ConnectToDb() {
 			new(models.AssignmentFile),
 			new(models.StudentSubmission),
 			new(models.SubmissionFile),
-			new(models.Result),
-			new(models.Grade),
 			new(models.Curriculum),
 			new(models.Session),
 			new(models.Schedule),

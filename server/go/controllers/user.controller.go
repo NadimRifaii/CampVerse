@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -167,4 +168,10 @@ func HttpUpdateUserRole(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User updated"})
+}
+func ValidateRequest(c *fiber.Ctx, body interface{}) error {
+	if err := c.BodyParser(body); err != nil {
+		return errors.New("invalid request body")
+	}
+	return nil
 }

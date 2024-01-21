@@ -14,7 +14,6 @@ type Bootcamp struct {
 	NumberOfWeeks    int      `json:"numberOfWeeks" gorm:"not null;"`
 	Users            []*User  `gorm:"many2many:bootcamp_users;"`
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
-	Result           []*Result
 }
 type BootcampDetails struct {
 	ID               uint       `json:"id"`
@@ -158,4 +157,7 @@ func (bootcamp *Bootcamp) RemoveStackFromBootcamp(db *gorm.DB, stack *Stack) err
 		return err
 	}
 	return nil
+}
+func (b *Bootcamp) GetAllResults(db *gorm.DB) error {
+	return db.Preload("Results.Grades.Stack").Where("id = ?", b.ID).Find(b).Error
 }

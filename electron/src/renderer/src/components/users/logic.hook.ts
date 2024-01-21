@@ -9,6 +9,9 @@ const useLogic = () => {
   const dispatch = useDispatch()
   const { users }: UsersSliceType = useSelector(extractUsersSlice)
   const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
+  useEffect(() => {
+    console.log(bootcamps)
+  }, [])
   let [filteredArray, setFilteredArray] = useState(users)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<"student" | "mentor">('student')
   useEffect(() => {

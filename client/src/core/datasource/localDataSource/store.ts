@@ -21,6 +21,6 @@ export const store = configureStore({
     [curriculums]: curriculumsSlice,
     [assignments]: assignmentsSlice,
     [submissions]: submissionsSlice,
-    [currentAssignment]: currentAssignmentSlice
+    [currentAssignment]: currentAssignmentSlice,
   }
 })

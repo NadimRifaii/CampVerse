@@ -18,5 +18,5 @@ export type RootState = {
   curriculums: CurriculumSliceType,
   assignments: AssignmentsSliceType,
   submissions: submissionsSliceType,
-  currentAssignment: CurrentAssigmnentSliceType
+  currentAssignment: CurrentAssigmnentSliceType,
 }
