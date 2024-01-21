@@ -42,15 +42,18 @@ const useLogic = () => {
     }
   };
   const saveEvents = async () => {
-
     const loadingToastId = toast.loading('Saving...');
     try {
-      const response = await schedulesDataSource.setSchedule({
-        bootcampId: currentBootcamp.id,
-        initialDate: `${new Date()}`,
-        sessions
-      })
-      toast.success('Schedule saved!', { id: loadingToastId });
+      if (sessions.length > 0) {
+        const response = await schedulesDataSource.setSchedule({
+          bootcampId: currentBootcamp.id,
+          initialDate: `${new Date()}`,
+          sessions
+        })
+        toast.success('Schedule saved!', { id: loadingToastId });
+      } else {
+        throw new Error("Sessions were not provided!")
+      }
       console.log(response)
     } catch (error) {
       toast.error(`${error}`, { id: loadingToastId });
