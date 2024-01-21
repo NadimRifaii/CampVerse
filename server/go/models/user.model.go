@@ -19,6 +19,7 @@ type User struct {
 	UserRole       UserRole    `gorm:"foreignKey:RoleID"`
 	Session        []*Session  `gorm:"many2many:user_sessions"`
 	Bootcamp       []*Bootcamp `gorm:"many2many:bootcamp_users;"`
+	Results        []*Result   `gorm:"many2many:user_results;"`
 }
 
 func (user *User) GetUserById(id string, db *gorm.DB) error {
