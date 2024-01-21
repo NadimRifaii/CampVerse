@@ -3,15 +3,28 @@ import Datetime from 'react-datetime';
 import { useState, useEffect } from 'react';
 import { Button } from '../common/button/button.component';
 import MentorsList from '../mentorsList/mentors-list.component';
+
 const AddEventModal = ({ onEventAdded, hideModal }) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  const [mentorsListOpen, setMentorsListOpen] = useState(false)
+  const [mentorsListOpen, setMentorsListOpen] = useState(false);
   const [description, setDescription] = useState({
     mentors: '',
     users: []
-  })
+  });
+
+  const resetForm = () => {
+    setTitle('');
+    setStartDate(new Date());
+    setEndDate(new Date());
+    setDescription({
+      mentors: '',
+      users: []
+    });
+    setMentorsListOpen(false);
+  };
+
   const onSubmit = (event) => {
     event.preventDefault();
     const newEvent = {
@@ -21,17 +34,33 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
       description: description
     };
     onEventAdded(newEvent);
-    hideModal(false)
+    hideModal(false);
   };
+
+  const handleCancel = (event) => {
+    event.preventDefault();
+    resetForm();
+    hideModal(false);
+  };
+
   return (
     <div className="add-model">
-      {
-        mentorsListOpen &&
-        <MentorsList setMentorsListOpen={setMentorsListOpen} setDescription={setDescription} description={description} />
-      }
+      {mentorsListOpen && (
+        <MentorsList
+          setMentorsListOpen={setMentorsListOpen}
+          setDescription={setDescription}
+          description={description}
+        />
+      )}
       <form onSubmit={onSubmit}>
         <div className="title">
-          <input type="text" required placeholder='Enter event title' value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input
+            type="text"
+            required
+            placeholder="Enter event title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </div>
         <div className="start-date">
           <label htmlFor="">Start date</label>
@@ -43,14 +72,22 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
         </div>
         <div className="description">
           <label htmlFor="">Description</label>
-          <input onFocus={() => {
-            setMentorsListOpen(true)
-          }} required type="text" placeholder='Instructors' value={description.mentors} onChange={(e) => {
-            setDescription(e.target.value)
-          }} />
+          <input
+            onFocus={() => {
+              setMentorsListOpen(true);
+            }}
+            required
+            type="text"
+            placeholder="Instructors"
+            value={description.mentors}
+            onChange={(e) => {
+              setDescription({ ...description, mentors: e.target.value });
+            }}
+          />
         </div>
-        <div className="btn-container">
-          <Button text='Add' type="submit" />
+        <div className="btns-container">
+          <Button text="Add" type="submit" />
+          <Button text="Cancel" handleClick={handleCancel} />
         </div>
       </form>
     </div>
