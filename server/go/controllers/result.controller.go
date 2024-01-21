@@ -75,10 +75,12 @@ func HttpGetWeeklyResult(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	result := new(models.Result)
-	if err := result.GetWeeklyResult(db, body.Week, body.BootcampId); err != nil {
+	results, err := result.GetWeeklyResults(db, body.Week, body.BootcampId)
+	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"result": result})
+	groupedResults := models.GroupResultsByWeek(results)
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"results": groupedResults})
 }
 func ValidateRequest(c *fiber.Ctx, body interface{}) error {
 	if err := c.BodyParser(body); err != nil {
