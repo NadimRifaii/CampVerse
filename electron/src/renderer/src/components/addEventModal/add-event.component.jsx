@@ -3,7 +3,7 @@ import Datetime from 'react-datetime';
 import { useState, useEffect } from 'react';
 import { Button } from '../common/button/button.component';
 import MentorsList from '../mentorsList/mentors-list.component';
-
+import './add-event.styles.css'
 const AddEventModal = ({ onEventAdded, hideModal }) => {
   const [title, setTitle] = useState('');
   const [startDate, setStartDate] = useState(new Date());
@@ -85,7 +85,7 @@ const AddEventModal = ({ onEventAdded, hideModal }) => {
             }}
           />
         </div>
-        <div className="btns-container">
+        <div className="btns-container" style={{ marginTop: "10px", display: 'flex', alignItems: 'center', justifyContent: 'center', gap: "10px" }} >
           <Button text="Add" type="submit" />
           <Button text="Cancel" handleClick={handleCancel} />
         </div>
