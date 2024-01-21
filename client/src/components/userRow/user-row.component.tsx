@@ -32,12 +32,6 @@ const UserRow = ({ info, showBtn }: UserRowProps) => {
         </div>
       </div>
       <div className="buttons-container">
-        <Button text='Profile' handleClick={() => {
-          if (setActive) {
-            setCurrentUser(info)
-            setActive(!active)
-          }
-        }} />
         {
           showBtn == "Add" ?
             <Button text='Add' handleClick={() => {
