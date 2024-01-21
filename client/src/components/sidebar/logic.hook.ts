@@ -15,7 +15,7 @@ type ItemType = {
 type ItemsType = ItemType[]
 const useLogic = (homepage: boolean) => {
   const user = useSelector(extractUserSlice)
-  const [sidebarHidden, setSidebarHidden] = useState<boolean>(false)
+  const [sidebarHidden, setSidebarHidden] = useState<boolean>(true)
   const [activeItem, setActiveItem] = useState<string>("Assignments")
   const navigate = useNavigate()
 

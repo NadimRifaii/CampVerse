@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import SidebarToggler from "../../assets/sidebar-toggler-icon"
 import SmallLogo from "../../assets/small-logo.component"
 import SidebarItem from "../sidebarItem/sidebar-item.component"
@@ -5,6 +6,29 @@ import useLogic from "./logic.hook"
 import './sidebar.styles.css'
 export const SideBar = ({ homepage = false }) => {
   const { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem } = useLogic(homepage)
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleResize = () => {
+
+      setScreenWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    if (screenWidth < 767) {
+      setSidebarHidden(true);
+    }
+  }, [screenWidth]);
+  const handleToggleClick = () => {
+    if (screenWidth >= 767) {
+      console.log(screenWidth)
+      setSidebarHidden(!sidebarHidden);
+    }
+  };
   return (
     <div className={`sidebar ${sidebarHidden ? 'hidden' : ""} `}>
       <div className="top">
@@ -16,7 +40,7 @@ export const SideBar = ({ homepage = false }) => {
             CampVerse
           </div>
         </div>
-        <div className="toggler" onClick={() => setSidebarHidden(!sidebarHidden)}>
+        <div className="toggler" onClick={handleToggleClick}>
           <SidebarToggler />
         </div>
       </div>
