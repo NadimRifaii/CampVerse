@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AssignmentsIcon from "../../assets/assignments-icon.component"
 import UsersIcon from "../../assets/users-icon.component"
 import ResultsIcon from "../../assets/results-icon.component"
@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { useNavigate } from "react-router-dom"
 import HomeIcon from "../../assets/home-icon.component"
+import { local } from "../../core/helpers/localStorage"
 type ItemType = {
   text: string;
   icon: () => JSX.Element;
@@ -16,7 +17,7 @@ type ItemsType = ItemType[]
 const useLogic = (homepage: boolean) => {
   const user = useSelector(extractUserSlice)
   const [sidebarHidden, setSidebarHidden] = useState<boolean>(true)
-  const [activeItem, setActiveItem] = useState<string>("Assignments")
+  const [activeItem, setActiveItem] = useState<string>(`${local("activeItem") ? local("activeItem") : "Assignments"}`)
   const navigate = useNavigate()
 
   const studentItems: ItemsType = [
@@ -61,7 +62,6 @@ const useLogic = (homepage: boolean) => {
   ]
   let items: ItemsType = []
   if (homepage) {
-    console.log(homepage)
     items = homepageItems
   } else {
     switch (user.role) {
@@ -76,9 +76,9 @@ const useLogic = (homepage: boolean) => {
   const toggleActiveItem = (item: ItemType) => {
     setActiveItem(item.text)
     if (item.text == "Bootcamps") {
-      console.log("alsjdf;lkasdjf")
     } else
       navigate(`${item.text}`)
+    local("activeItem", item.text)
   }
   return { sidebarHidden, setSidebarHidden, items, activeItem, toggleActiveItem }
 }

@@ -14,7 +14,7 @@
 - As an admin, I should be able to add mentors and students to bootcamps.
 - As an admin, I want to access user profiles containing their details and edit their profile.
 - As an admin, I want to invite a certain user to a bootcamp , specifying their role.
-- As an admin, I want to the ability to live chat with all users 
+- As an admin, I want to the ability to live chat with all users and get notification when a user sends me a message.
 - As an admin, I want the ability to create the bootcamp curriculum containig all the modules and stack that will be given during the bootcamp
 - As an admin, I want the ability to create the bootcamp's schedule , assigning sessions to mentors with specific time and specific dates
 
@@ -22,13 +22,13 @@
 - As a student, I have the ability to submit an assignment and upload my files
 - As a student, I have the ability to download assignment files 
 - As a student, I have the ability to see the bootcamp's weekly schedule 
-- As a student, I expect the ability to have a private chat with any of my mentors and friends in the bootcamp.
+- As a student, I expect the ability to have a private chat with any of my mentors and friends in the bootcamp and get notification when a user sends me a message.
 
 ### Mentor Stories
 - As a mentor, I want to create new assignments for my bootcamp 
 - As a mentor, I want the ability to get ai feedback on any of my students assignments
 - As a mentor, I want to post assignments to students and view all previous and upcoming assignments.
-- As a mentor, I have the ability to live chat with other users.
+- As a mentor, I have the ability to live chat with other users and get notification when a user sends me a message.
 
 <br><br>
 
