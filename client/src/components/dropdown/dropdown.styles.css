@@ -33,16 +33,25 @@
   width: 100%;
 }
 
-.dropdown ul li:hover a {
+.dropdown ul li:hover :where(a, button) {
   color: var(--main-white-color);
   z-index: 3;
 }
 
-.dropdown ul li a {
+.dropdown ul li a,
+.dropdown ul li button {
   text-decoration: none;
   color: var(--main-black-color);
   display: block;
   padding: 10px;
   transition: .5s;
   position: relative;
+  color: var(--main-black-color);
+}
+
+.dropdown ul li button {
+  background-color: transparent;
+  width: 100%;
+  font-weight: normal;
+  text-align: left;
 }

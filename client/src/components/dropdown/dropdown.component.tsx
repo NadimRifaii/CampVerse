@@ -8,6 +8,7 @@ import { removeBootcamps } from '../../core/datasource/localDataSource/bootcamps
 import { removeCurrentBootcamp } from '../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice'
 import { CurrentUserContext } from '../../utils/contexts/current-user.context'
 import { extractUserSlice } from '../../core/datasource/localDataSource/user/userSlice'
+import { Button } from '../common/button/button.component'
 const Dropdown = () => {
   const activeEditContext = useContext(ActiveEditContext)
   const user = useSelector(extractUserSlice)
@@ -19,12 +20,12 @@ const Dropdown = () => {
     <div className="dropdown">
       <ul>
         <li>
-          <Link to={'/dashboard'} onClick={() => {
+          <Button text='Edit profile' handleClick={() => {
             if (setActive) {
               setCurrentUser(user)
               setActive(!active)
             }
-          }}>Edit profile</Link>
+          }} />
         </li>
         <li>
           <Link to='/' onClick={() => {
