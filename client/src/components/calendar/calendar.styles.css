@@ -50,3 +50,8 @@ section .buttons-container {
   align-items: center;
   gap: 10px;
 }
+
+.calendar-holder p {
+  margin: 0;
+  font-size: 12px;
+}
