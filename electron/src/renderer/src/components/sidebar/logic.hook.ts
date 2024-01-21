@@ -6,6 +6,7 @@ import EditIcon from "../../assets/edit-icon.component"
 import { useSelector } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
 import { useNavigate } from "react-router-dom"
+import { local } from "@renderer/core/helpers/localStorage"
 type ItemType = {
   text: string;
   icon: () => JSX.Element;
@@ -14,7 +15,7 @@ type ItemsType = ItemType[]
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
   const [sidebarHidden, setSidebarHidden] = useState<boolean>(false)
-  const [activeItem, setActiveItem] = useState<string>("Bootcamps")
+  const [activeItem, setActiveItem] = useState<string>(`${local("activeItem") ? local("activeItem") : "Bootcamps"}`)
   const navigate = useNavigate()
   const adminItems: ItemsType = [
     {
@@ -34,6 +35,7 @@ const useLogic = () => {
   const toggleActiveItem = (item: ItemType) => {
     setActiveItem(item.text)
     navigate(`${item.text.split(' ')[0]}`)
+    local("activeItem", item.text)
   }
   return { sidebarHidden, setSidebarHidden, adminItems, activeItem, toggleActiveItem }
 }

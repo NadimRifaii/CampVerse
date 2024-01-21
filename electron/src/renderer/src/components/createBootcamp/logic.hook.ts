@@ -25,6 +25,7 @@ const useLogic = () => {
     try {
       const response = await bootcampsDataSource.createBootcamp(credentials)
       toast.success(response.message, { id: loadingToastId });
+      resetFields()
     } catch (error) {
       resetFields()
       toast.error(`This bootcamp already exists`, { id: loadingToastId })
