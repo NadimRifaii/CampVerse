@@ -4,7 +4,9 @@ import { BootcampsSliceType, extractBootcampsSlice, setBootcamps } from "../../c
 import { bootcampsDataSource } from "../../core/datasource/remoteDataSource/bootcamps"
 const useLogic = () => {
   const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
-
+  useEffect(() => {
+    console.log(bootcamps)
+  }, [bootcamps])
   const dispatch = useDispatch()
   useEffect(() => {
     async function getBootcamps() {

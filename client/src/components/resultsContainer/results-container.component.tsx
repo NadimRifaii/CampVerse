@@ -6,7 +6,6 @@ import './results-container.styles.css'
 import { Stack } from "../../core/types/stack";
 import ResultsTable from "../resultsTable/results-table.component";
 
-// Update the ResultsContainer component
 const ResultsContainer = () => {
   const { results, curriculums } = useLogic();
   const [stacks, setStacks] = useState<string[]>([])
@@ -24,6 +23,9 @@ const ResultsContainer = () => {
   }, [results])
   return (
     <div className="results-container">
+      <div className="select-box">
+        <select name="week" id=""></select>
+      </div>
       <ResultsTable results={results} stacks={stacks} />
     </div>
   );

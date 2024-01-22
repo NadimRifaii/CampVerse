@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -14,7 +15,7 @@ type Bootcamp struct {
 	NumberOfWeeks    int      `json:"numberOfWeeks" gorm:"not null;"`
 	Users            []*User  `gorm:"many2many:bootcamp_users;"`
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
-	Week             []*Week
+	Weeks            []*Week
 }
 type BootcampDetails struct {
 	ID               uint       `json:"id"`
@@ -22,13 +23,14 @@ type BootcampDetails struct {
 	LearningOutcomes string     `json:"outcomes"`
 	TargetAudience   string     `json:"audience"`
 	NumberOfWeeks    int        `json:"numberOfWeeks"`
+	Weeks            []*Week    `json:"weeks"`
 	Mentors          []Response `json:"mentors"`
 	Students         []Response `json:"students"`
 }
 
 func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]BootcampDetails, error) {
 	var bootcamps []Bootcamp
-	if err := db.Preload("Stacks").Preload("Users").Preload("Users.UserRole").Find(&bootcamps).Error; err != nil {
+	if err := db.Preload("Stacks").Preload("Users.UserRole").Preload("Weeks").Find(&bootcamps).Error; err != nil {
 		return nil, err
 	}
 	var bootcampDetailsList []BootcampDetails
@@ -58,6 +60,7 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 				students = append(students, cleanedUser)
 			}
 		}
+		fmt.Println(bootcamp.Weeks)
 		bootcampDetails := BootcampDetails{
 			ID:               bootcamp.ID,
 			Name:             bootcamp.Name,
@@ -66,6 +69,7 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 			NumberOfWeeks:    bootcamp.NumberOfWeeks,
 			Mentors:          mentors,
 			Students:         students,
+			Weeks:            bootcamp.Weeks,
 		}
 
 		bootcampDetailsList = append(bootcampDetailsList, bootcampDetails)

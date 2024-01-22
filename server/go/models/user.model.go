@@ -142,7 +142,7 @@ func (u *User) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]BootcampDetails, e
 	var bootcampDetailsList []BootcampDetails
 
 	// Fetch the user with associated bootcamps and related data
-	if err := db.Preload("Bootcamp").Preload("Bootcamp.Stacks").Preload("Bootcamp.Users.UserRole").Where("id = ?", u.ID).Find(u).Error; err != nil {
+	if err := db.Preload("Bootcamp").Preload("Bootcamp.Stacks").Preload("Bootcamp.Weeks").Preload("Bootcamp.Users.UserRole").Where("id = ?", u.ID).Find(u).Error; err != nil {
 		return nil, err
 	}
 
@@ -182,6 +182,7 @@ func (u *User) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]BootcampDetails, e
 			NumberOfWeeks:    bootcamp.NumberOfWeeks,
 			Mentors:          mentors,
 			Students:         students,
+			Weeks:            bootcamp.Weeks,
 		}
 
 		bootcampDetailsList = append(bootcampDetailsList, bootcampDetails)
