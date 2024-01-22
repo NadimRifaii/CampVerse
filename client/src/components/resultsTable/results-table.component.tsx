@@ -27,9 +27,7 @@ const ResultsTable = ({ results, stacks }: ResultsTableProps) => {
                 {
                   grades.map((grade: Grade, index: number) => {
                     return (
-                      <>
-                        <td>{grade.score}</td>
-                      </>
+                      <td key={index} >{grade.score}</td>
                     )
                   })
                 }

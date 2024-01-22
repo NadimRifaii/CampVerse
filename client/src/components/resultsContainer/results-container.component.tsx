@@ -7,7 +7,7 @@ import Select from 'react-select'
 import './results-container.styles.css';
 
 const ResultsContainer = () => {
-  const { results, curriculums, currentBootcamp, currentWeek } = useLogic();
+  const { results, curriculums, currentBootcamp, currentWeek, setCurrentWeek } = useLogic();
   const [stacks, setStacks] = useState<string[]>([]);
 
   useEffect(() => {
@@ -32,8 +32,8 @@ const ResultsContainer = () => {
     <div className="results-container">
       <div className="select-box">
         <Select
-          onChange={() => {
-            console.log("alksdjfadsf")
+          onChange={(value) => {
+            setCurrentWeek(value?.value || 1)
           }}
           options={currentBootcamp?.weeks.map((week, index: number) => ({
             value: week.ID,

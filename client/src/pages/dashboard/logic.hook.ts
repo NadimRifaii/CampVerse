@@ -72,17 +72,7 @@ const useLogic = () => {
     dispatch(setUsers({ students: currentBootcamp.students, mentors: newMentors }))
     console.log(currentBootcamp)
   }, [currentBootcamp])
-  const getBootcampWeeklyResults = async () => {
-    try {
-      const response = await resultsDataSource.getBootcampWeeklyResults({ weekId: 1 })
-      dispatch(setResults(response.results))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  useEffect(() => {
-    getBootcampWeeklyResults()
-  }, [currentBootcamp])
+
   useEffect(() => {
     getBootcampCurriculum()
   }, [currentBootcamp])
