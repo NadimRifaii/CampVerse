@@ -36,7 +36,6 @@ const ResultsContainer = () => {
           }}
         />
       </div>
-
       {
         results.length > 0 ?
           <ResultsTable results={results} stacks={stacks} /> :

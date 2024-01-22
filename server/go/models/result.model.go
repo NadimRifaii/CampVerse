@@ -46,10 +46,15 @@ type CleanedGrade struct {
 
 func (r *Result) GetCleanedResultsByWeekID(db *gorm.DB) ([]CleanedResult, error) {
 	var results []*Result
-	if err := db.Preload("User").Preload("Grade.Stack").Where("week_id = ?", r.WeekId).Find(&results).Error; err != nil {
-		return nil, err
+	if r.UserId == 0 {
+		if err := db.Preload("User").Preload("Grade.Stack").Where("week_id = ?", r.WeekId).Find(&results).Error; err != nil {
+			return nil, err
+		}
+	} else {
+		if err := db.Preload("User").Preload("Grade.Stack").Where("week_id = ? AND user_id=?", r.WeekId, r.UserId).Find(&results).Error; err != nil {
+			return nil, err
+		}
 	}
-
 	cleanedResults := make([]CleanedResult, len(results))
 	for i, res := range results {
 		cleanedGrades := make([]CleanedGrade, len(res.Grade))

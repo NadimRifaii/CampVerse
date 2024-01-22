@@ -47,3 +47,27 @@ func HttpGetWeeklyResults(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"results": results})
 }
+func HttpGetUserWeeklyResults(c *fiber.Ctx) error {
+	weekIDStr := c.Params("weekId")
+
+	weekID, err := strconv.ParseUint(weekIDStr, 10, 0)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+
+	result := new(models.Result)
+	var request struct {
+		UserId uint `json:"userId"`
+	}
+	result.WeekId = uint(weekID)
+	if err := ValidateRequest(c, &request); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	result.UserId = request.UserId
+	db := database.Db
+	results, err := result.GetCleanedResultsByWeekID(db)
+	if err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"results": results})
+}

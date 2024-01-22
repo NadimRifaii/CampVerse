@@ -11,11 +11,6 @@ const AssignmentSubmissions = () => {
   const { submissions, currentAssignment, feedback, setFeedback, getAiFeedback } = useLogic()
   const [activeSubmission, setActiveSubmission] = useState<boolean>(false)
   const [currentSubmission, setCurrentSubmission] = useState<submissionType>()
-
-
-  useEffect(() => {
-    console.log(currentSubmission)
-  }, [currentSubmission])
   const formattedDueDate = (dueDate: any) => {
     const date = new Date(dueDate);
     const options: Intl.DateTimeFormatOptions = {

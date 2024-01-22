@@ -7,5 +7,6 @@ import (
 
 func ResultRoutes(app fiber.Router) {
 	app.Post("/:id", controllers.HttpCreateResults)
+	app.Post("/user-results/:weekId", controllers.HttpGetUserWeeklyResults)
 	app.Get("/:weekId", controllers.HttpGetWeeklyResults)
 }
