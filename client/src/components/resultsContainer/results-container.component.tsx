@@ -9,13 +9,13 @@ import CreateResultTable from "../createResultTable/create-result-table.componen
 
 const ResultsContainer = () => {
   const { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek } = useLogic();
-  const [stacks, setStacks] = useState<string[]>([]);
+  const [stacks, setStacks] = useState<Stack[]>([]);
 
   useEffect(() => {
-    let arr: string[] = [];
+    let arr: Stack[] = [];
     curriculums.map((curriculum: CurriculumType, index: number) => {
       curriculum.stacks.map((stack: Stack, stackIndex: number) => {
-        arr.push(stack.name);
+        arr.push(stack);
       });
     });
     setStacks(arr);
@@ -45,7 +45,7 @@ const ResultsContainer = () => {
       {
         results.length > 0 ?
           <ResultsTable results={results} stacks={stacks} /> :
-          <CreateResultTable />
+          <CreateResultTable students={students} stacks={stacks} />
       }
     </div>
   );

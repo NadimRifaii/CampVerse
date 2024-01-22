@@ -1,8 +1,9 @@
 import { Grade, Result } from "../../core/datasource/localDataSource/results/resultsSlice"
+import { Stack } from "../../core/types/stack";
 
 type ResultsTableProps = {
   results: Result[],
-  stacks: string[]
+  stacks: Stack[]
 }
 const ResultsTable = ({ results, stacks }: ResultsTableProps) => {
   return (
@@ -11,8 +12,8 @@ const ResultsTable = ({ results, stacks }: ResultsTableProps) => {
         <tr>
           <th>Student name</th>
           {
-            stacks.map((stack: string, index: number) => (
-              <th key={index} >{stack}</th>
+            stacks.map((stack: Stack, index: number) => (
+              <th key={index} >{stack.name}</th>
             ))
           }
         </tr>

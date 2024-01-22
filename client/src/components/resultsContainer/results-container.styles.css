@@ -22,6 +22,21 @@
   background-color: #fff;
 }
 
+.results-table td input {
+  outline: none;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.results-table td input::placeholder {
+  transition: .5s;
+}
+
+.results-table td input:focus::placeholder {
+  opacity: 0;
+}
+
 .select-box {
   display: flex;
   align-items: center;
