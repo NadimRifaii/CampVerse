@@ -8,9 +8,13 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+type ResultsRequestBody struct {
+	Results []*models.Result `json:"results"`
+}
+
 func HttpCreateResult(c *fiber.Ctx) error {
-	result := new(models.Result)
-	if err := ValidateRequest(c, result); err != nil {
+	results := new(ResultsRequestBody)
+	if err := ValidateRequest(c, results); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	idStr := c.Params("id")
@@ -18,22 +22,20 @@ func HttpCreateResult(c *fiber.Ctx) error {
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	result.WeekId = uint(id)
-	if err := CreateRecordInDb(result); err != nil {
-		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	for _, result := range results.Results {
+		result.WeekId = uint(id)
+		if err := CreateRecordInDb(result); err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Result was created successfully", "result": result})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Results were created successfully", "results": results})
 }
 func HttpGetWeeklyResults(c *fiber.Ctx) error {
 	weekIDStr := c.Params("weekId")
 
-	// Convert weekIDStr to uint
 	weekID, err := strconv.ParseUint(weekIDStr, 10, 0)
 	if err != nil {
-		// Handle the error, e.g., return an error response
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Invalid Week ID format",
-		})
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 
 	result := new(models.Result)

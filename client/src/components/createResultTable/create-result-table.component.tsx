@@ -39,7 +39,6 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
       const studentIndex = prevState.findIndex((student, index) => {
         return student.id == sId
       })
-      console.log(studentIndex)
       const studentGrades = prevState[studentIndex].grades
       studentGrades.map((studentGrade, index) => {
         if (studentGrade.stackId === stack.ID) {
@@ -54,7 +53,6 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
       return
     const arr: Request[] = []
     students.forEach((student, index) => {
-      console.log(student)
       const { id: userId } = student
       const grades: Request[`grades`] = []
       stacks.forEach((stack, stackIndex) => {
@@ -73,10 +71,6 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
     })
     setRequest(arr)
   }, [students, stacks])
-
-  useEffect(() => {
-    console.log(request)
-  }, [request])
   return (
     <table className="results-table" >
       <thead>
