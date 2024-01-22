@@ -3,6 +3,7 @@ import { Stack } from "../../core/types/stack"
 import { User } from "../../core/types/user"
 import { Grade } from "../../core/datasource/localDataSource/results/resultsSlice"
 import useLogic from "./logic.hook"
+import { Button } from "../common/button/button.component"
 
 export type Request = {
   bootcampId: number,
@@ -10,14 +11,15 @@ export type Request = {
     stackId: number,
     score?: number
   }[],
-  id?: number
+  userId?: number
 }
 type CreateResultProps = {
   stacks: Stack[],
-  students: User[]
+  students: User[],
+  currentWeek: number
 }
-const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
-  const { setRequest, changeHandler } = useLogic()
+const CreateResultTable = ({ stacks, students, currentWeek }: CreateResultProps) => {
+  const { setRequest, changeHandler, createWeeklyResults } = useLogic(currentWeek)
   useEffect(() => {
     if (!students || !stacks)
       return
@@ -35,48 +37,56 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
       })
       arr.push({
         bootcampId: 1,
-        id: userId,
+        userId,
         grades
       })
     })
     setRequest(arr)
   }, [students, stacks])
   return (
-    <table className="results-table" >
-      <thead>
-        <tr>
-          <th>Student name</th>
+    <form action="" onSubmit={(e) => {
+      e.preventDefault()
+      createWeeklyResults()
+    }}>
+      <table className="results-table" >
+        <thead>
+          <tr>
+            <th>Student name</th>
+            {
+              stacks.map((stack: Stack, index: number) => (
+                <th key={index} >{stack.name}</th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
           {
-            stacks.map((stack: Stack, index: number) => (
-              <th key={index} >{stack.name}</th>
-            ))
+            students.map((student: User, studentIndex: number) => {
+              const { username } = student
+              return (
+                <tr key={studentIndex} >
+                  <td>{username.split(" ")[0]}</td>
+                  {
+                    stacks.map((stack: Stack, index: number) => {
+                      return (
+                        <td key={index}>
+                          <input type="text" required onChange={(e) => {
+                            changeHandler(e, stack, student.id || 0)
+                          }} placeholder={`Grade for ${stack.name}`} />
+                        </td>
+                      )
+                    })
+                  }
+                </tr>
+              )
+            })
           }
-        </tr>
-      </thead>
-      <tbody>
-        {
-          students.map((student: User, studentIndex: number) => {
-            const { username } = student
-            return (
-              <tr key={studentIndex} >
-                <td>{username.split(" ")[0]}</td>
-                {
-                  stacks.map((stack: Stack, index: number) => {
-                    return (
-                      <td key={index}>
-                        <input type="text" onChange={(e) => {
-                          changeHandler(e, stack, student.id || 0)
-                        }} placeholder={`Grade for ${stack.name}`} />
-                      </td>
-                    )
-                  })
-                }
-              </tr>
-            )
-          })
-        }
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <div className="btn-container">
+        <Button text="Create result" />
+      </div>
+    </form>
   )
 }
 export default CreateResultTable

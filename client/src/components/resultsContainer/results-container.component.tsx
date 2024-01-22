@@ -46,7 +46,7 @@ const ResultsContainer = () => {
       {
         results.length > 0 ?
           <ResultsTable results={results} stacks={stacks} /> :
-          <CreateResultTable students={students} stacks={stacks} />
+          <CreateResultTable students={students} stacks={stacks} currentWeek={currentWeek} />
       }
     </div>
   );
