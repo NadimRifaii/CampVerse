@@ -18,6 +18,7 @@ const ResultsContainer = () => {
         arr.push(stack);
       });
     });
+    console.log(stacks)
     setStacks(arr);
   }, [curriculums]);
 

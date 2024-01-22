@@ -6,6 +6,7 @@ import toast from "react-hot-toast"
 import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment"
 import { curriculumsDataSource } from "../../core/datasource/remoteDataSource/curriculums"
 import { extractCurriculumsSlice, setCurriculums } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
+import { Stack } from "../../core/types/stack"
 type InstructionType = {
   instructionTitle: string,
   content: string
@@ -15,9 +16,7 @@ type FileType = {
   fileType: string,
   fileUrl: string
 }
-type Stack = {
-  name: string
-}
+
 export type CurriculumType = {
   title: string,
   stacks: Stack[]

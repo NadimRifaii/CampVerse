@@ -1,11 +1,45 @@
+import { useEffect, useState } from "react"
 import { Stack } from "../../core/types/stack"
 import { User } from "../../core/types/user"
-
+import { Grade } from "../../core/datasource/localDataSource/results/resultsSlice"
+/**
+ * {
+    "bootcampId":4,
+    "userId":4,
+    "grades":[
+        {
+            "stackId":1,
+            "score":450
+        },{
+            "stackId":2,
+            "score":950
+        },{
+            "stackId":3,
+            "score":350
+        }
+    ]
+}
+ */
+type Request = {
+  bootcampId: number,
+  grades: {
+    stackId: number,
+    score?: number
+  }[],
+  userId?: number
+}
 type CreateResultProps = {
   stacks: Stack[],
   students: User[]
 }
 const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
+
+  const [request, setRequest] = useState<Request[]>([])
+
+
+  useEffect(() => {
+    console.log(request)
+  }, [request])
   return (
     <table className="results-table" >
       <thead>
