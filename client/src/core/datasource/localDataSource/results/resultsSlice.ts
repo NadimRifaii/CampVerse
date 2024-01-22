@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { User } from "../../../types/user";
 import { RootState } from "../../../types/rootState";
 
-type Grade = {
+export type Grade = {
   stackName: string,
   score: number
 }
-type Result = {
+export type Result = {
   User: User,
   grades: Grade[],
   weekId: number
@@ -31,6 +31,6 @@ export const resultsSlice = createSlice({
 export const { setResults } = resultsSlice.actions
 export const results = resultsSlice.name
 export default resultsSlice.reducer
-export const extractResultsSlice=(global:RootState)=>{
+export const extractResultsSlice = (global: RootState) => {
   return global[results]
 }

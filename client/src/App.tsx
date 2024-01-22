@@ -14,6 +14,7 @@ import Calendar from './components/calendar/big-calendar.component';
 import Assignment from './components/assignments/assignment.component';
 import SubmitModal from './components/submitModal/submit-modal.component';
 import AssignmentSubmissions from './components/assignmentSubmissions/assignment-submissions.component';
+import ResultsContainer from './components/resultsContainer/results-container.component';
 function App() {
   return (
     <div className="page">
@@ -27,7 +28,7 @@ function App() {
           <Route path='/dashboard/Assignments' element={<Assignment />} />
           <Route path='/dashboard/submit' element={<SubmitModal />} />
           <Route path='/dashboard/Users' element={<Users showHeader={true} showBtn='Chat' />} />
-          {/* <Route path='/dashboard/Results' element={<ResultsContainer />} /> */}
+          <Route path='/dashboard/Results' element={<ResultsContainer />} />
           <Route path='/dashboard/Schedule' element={<Calendar />} />
           <Route path={'/dashboard/chat'} element={<Chat />} />
           <Route path='/dashboard/assignment-submissions' element={<AssignmentSubmissions />} />

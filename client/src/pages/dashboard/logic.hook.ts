@@ -12,9 +12,14 @@ import { setUsers } from "../../core/datasource/localDataSource/users/usersSlice
 import { setBootcamps } from "../../core/datasource/localDataSource/bootcamps/bootcampsSlice"
 import { extractcurrentBootcampSlice, setcurrentBootcamp } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { resultsDataSource } from "../../core/datasource/remoteDataSource/results"
+import { User } from "../../core/types/user"
+import { extractResultsSlice, setResults } from "../../core/datasource/localDataSource/results/resultsSlice"
+import { extractCurriculumsSlice, setCurriculums } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
+import { curriculumsDataSource } from "../../core/datasource/remoteDataSource/curriculums"
 const useLogic = () => {
   const dispatch = useDispatch()
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
+  const { results } = useSelector(extractResultsSlice)
   const navigate = useNavigate()
   const user = useSelector(extractUserSlice)
   useEffect(() => {
@@ -24,7 +29,7 @@ const useLogic = () => {
     try {
       const data = await authDataSource.refresh({})
       dispatch(setUser(data.user))
-      dispatch(setcurrentBootcamp(JSON.parse(local("currentBootcamp"))))
+      dispatch(setcurrentBootcamp(JSON.parse(local("currentBootcamp") || '')))
       local("token", data.token)
     } catch (error) {
       console.log(error)
@@ -57,24 +62,35 @@ const useLogic = () => {
     getBootcamps()
   }, [])
   useEffect(() => {
-    let newStudents = [], newMentors = []
+    let newStudents: User[] = [], newMentors: User[] = []
     if (user.role == "student") {
-      newStudents = currentBootcamp.students.filter(student => student.email != user.email)
+      newStudents = currentBootcamp.students.filter((student: User) => student.email != user.email)
     } else {
-      newMentors = currentBootcamp.mentors.filter(mentor => mentor.email != user.email)
+      newMentors = currentBootcamp.mentors.filter((mentor: User) => mentor.email != user.email)
     }
     dispatch(setUsers({ students: currentBootcamp.students, mentors: newMentors }))
   }, [currentBootcamp])
-  useEffect(() => {
-    const getBootcampWeeklyResults = async () => {
-      try {
-        const response = await resultsDataSource.getBootcampWeeklyResults({ weekId: 1 })
-      } catch (error) {
-        console.log(error)
-      }
+  const getBootcampWeeklyResults = async () => {
+    try {
+      const response = await resultsDataSource.getBootcampWeeklyResults({ weekId: 1 })
+      dispatch(setResults(response.results))
+    } catch (error) {
+      console.log(error)
     }
+  }
+  useEffect(() => {
     getBootcampWeeklyResults()
   }, [currentBootcamp])
+  useEffect(() => {
+    getBootcampCurriculum()
+  }, [currentBootcamp])
+  const getBootcampCurriculum = async () => {
+    try {
+      const response = await curriculumsDataSource.getCurriculums({ id: currentBootcamp.id })
+      dispatch(setCurriculums(response))
+    } catch (error) {
+    }
+  }
   return { getUserInfo, refresh }
 }
 export default useLogic

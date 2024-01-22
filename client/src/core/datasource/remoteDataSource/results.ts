@@ -7,7 +7,6 @@ export const resultsDataSource = {
         method: `GET`,
         body: data
       })
-      console.log(response)
       return response
     } catch (error: any) {
       throw new Error(error.message)

@@ -20,7 +20,7 @@ type Stack = {
 }
 export type CurriculumType = {
   title: string,
-  stacks: [Stack]
+  stacks: Stack[]
 }
 
 const useLogic = () => {
