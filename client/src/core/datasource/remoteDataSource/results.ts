@@ -13,6 +13,19 @@ export const resultsDataSource = {
       throw new Error(error.message)
     }
   },
+  getUserWeeklyResults: async (data: { userId: number, weekId: number }) => {
+    console.log(data)
+    try {
+      const response = await sendRequest({
+        route: `/result/user-results/${data.weekId}`,
+        method: "POST",
+        body: data
+      })
+      return response
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+  },
   createWeeklyResults: async (data: { results: Request[] }, weekId: number) => {
     try {
       const response = await sendRequest({

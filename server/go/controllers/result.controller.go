@@ -49,7 +49,6 @@ func HttpGetWeeklyResults(c *fiber.Ctx) error {
 }
 func HttpGetUserWeeklyResults(c *fiber.Ctx) error {
 	weekIDStr := c.Params("weekId")
-
 	weekID, err := strconv.ParseUint(weekIDStr, 10, 0)
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})

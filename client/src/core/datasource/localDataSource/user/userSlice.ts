@@ -3,6 +3,7 @@ import { User } from '../../../types/user'
 import { RootState } from '../../../types/rootState'
 
 const initialState: User = {
+  ID: 0,
   username: "",
   email: "",
   role: "student",

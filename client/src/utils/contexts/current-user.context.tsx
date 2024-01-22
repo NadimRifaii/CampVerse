@@ -11,6 +11,7 @@ export const CurrentUserContext = createContext<CurrentUserContextType>({} as Cu
 
 export const CurrentUserContextProvider = ({ children }: CurrentUserContextProviderProps) => {
   const [currentUser, setCurrentUser] = useState<User | null>({
+    ID: 0,
     username: "",
     firstname: "",
     lastname: "",
