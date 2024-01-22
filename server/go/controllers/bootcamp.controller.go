@@ -23,6 +23,16 @@ func HttpCreateBootcamp(c *fiber.Ctx) error {
 	if err := CreateRecordInDb(bootcamp); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+	for i := 1; i <= bootcamp.NumberOfWeeks; i++ {
+		week := models.Week{
+			BootcampId: bootcamp.ID,
+		}
+
+		if err := CreateRecordInDb(&week); err != nil {
+			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+		}
+	}
+
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})
 }
 

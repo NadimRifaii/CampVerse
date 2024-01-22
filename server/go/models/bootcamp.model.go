@@ -14,6 +14,7 @@ type Bootcamp struct {
 	NumberOfWeeks    int      `json:"numberOfWeeks" gorm:"not null;"`
 	Users            []*User  `gorm:"many2many:bootcamp_users;"`
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`
+	Week             []*Week
 }
 type BootcampDetails struct {
 	ID               uint       `json:"id"`

@@ -70,7 +70,6 @@ func HttpGetAllAssignments(c *fiber.Ctx) error {
 func HttpGetAssignmentsByStackAndBootcamp(c *fiber.Ctx) error {
 	assignment := new(models.Assignment)
 	db := database.Db
-
 	var requestBody struct {
 		StackID    uint `json:"stackID"`
 		BootcampID uint `json:"bootcampID"`
@@ -95,7 +94,6 @@ type FileInfo struct {
 
 func HttpGetFilesByName(c *fiber.Ctx) error {
 	fileDir := "public/files"
-
 	substring := c.Query("substring")
 	if substring == "" {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Substring parameter is missing"})

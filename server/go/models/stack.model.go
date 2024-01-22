@@ -10,6 +10,7 @@ type Stack struct {
 	Name      string      `json:"name" gorm:"not null;default:'x';size:255"`
 	Bootcamps []*Bootcamp `gorm:"many2many:bootcamp_stack"`
 	Mentors   []*Mentor   `gorm:"many2many:teaches;"`
+	Grade     []*Grade
 }
 
 func (stack *Stack) GetStacks(db *gorm.DB) ([]Stack, error) {

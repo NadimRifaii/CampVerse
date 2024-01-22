@@ -20,7 +20,6 @@ const authMiddleware = async (req, res, next) => {
           username: decoded.username,
           role: decoded.role
         });
-        console.log(decoded)
         await user.save();
       }
       req.user = user;

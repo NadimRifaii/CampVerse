@@ -40,6 +40,9 @@ func ConnectToDb() {
 			new(models.Session),
 			new(models.Schedule),
 			new(models.Instruction),
+			new(models.Week),
+			new(models.Grade),
+			new(models.Result),
 		)
 	}
 	Db = db

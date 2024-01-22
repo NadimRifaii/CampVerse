@@ -54,7 +54,6 @@ const useLogic = () => {
       } else {
         throw new Error("Sessions were not provided!")
       }
-      console.log(response)
     } catch (error) {
       toast.error(`${error}`, { id: loadingToastId });
       console.log(error)
