@@ -12,7 +12,7 @@ type ResultsRequestBody struct {
 	Results []*models.Result `json:"results"`
 }
 
-func HttpCreateResult(c *fiber.Ctx) error {
+func HttpCreateResults(c *fiber.Ctx) error {
 	results := new(ResultsRequestBody)
 	if err := ValidateRequest(c, results); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
