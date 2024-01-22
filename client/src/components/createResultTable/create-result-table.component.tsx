@@ -33,9 +33,30 @@ type CreateResultProps = {
   students: User[]
 }
 const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
-
   const [request, setRequest] = useState<Request[]>([])
-
+  useEffect(() => {
+    if (!students || !stacks)
+      return
+    const arr: Request[] = []
+    students.forEach((student, index) => {
+      const { userId } = student
+      const grades: Request[`grades`] = []
+      stacks.forEach((stack, stackIndex) => {
+        const { ID: stackId } = stack
+        const grade = {
+          stackId,
+          score: undefined
+        }
+        grades.push(grade)
+      })
+      arr.push({
+        bootcampId: 1,
+        userId,
+        grades
+      })
+    })
+    setRequest(arr)
+  }, [students, stacks])
 
   useEffect(() => {
     console.log(request)
