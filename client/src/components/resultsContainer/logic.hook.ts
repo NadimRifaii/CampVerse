@@ -24,6 +24,6 @@ const useLogic = () => {
   useEffect(() => {
     getBootcampWeeklyResults()
   }, [currentBootcamp, currentWeek])
-  return { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek }
+  return { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek, getBootcampWeeklyResults }
 }
 export default useLogic

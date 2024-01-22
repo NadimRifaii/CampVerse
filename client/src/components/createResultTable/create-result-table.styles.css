@@ -1,0 +1,11 @@
+.create-result-form {}
+
+.create-result-form .btn-container {
+  margin: 10px auto;
+  width: fit-content;
+}
+
+.create-result-form .btn-container button {
+  color: var(--main-white-color);
+  border-radius: 5px;
+}

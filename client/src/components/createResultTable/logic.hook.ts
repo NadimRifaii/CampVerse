@@ -2,7 +2,8 @@ import { useState } from "react"
 import { Stack } from "../../core/types/stack"
 import { Request } from "./create-result-table.component"
 import { resultsDataSource } from "../../core/datasource/remoteDataSource/results"
-const useLogic = (currentWeek: number) => {
+import toast from "react-hot-toast"
+const useLogic = (currentWeek: number, getBootcampWeeklyResults: () => Promise<void>) => {
   const [request, setRequest] = useState<Request[]>([])
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>, stack: Stack, sId: number) => {
     setRequest((prevState) => {
@@ -19,12 +20,13 @@ const useLogic = (currentWeek: number) => {
     })
   }
   const createWeeklyResults = async () => {
-    console.log(request)
+    const loadingToastId = toast.loading('Creating the result...');
     try {
       const response = await resultsDataSource.createWeeklyResults({ results: request }, currentWeek)
-      console.log(response)
-    } catch (error) {
-      console.log(error)
+      toast.success(`Result created successfully!`, { id: loadingToastId })
+      await getBootcampWeeklyResults()
+    } catch (error: any) {
+      toast.error(`${error.message}`, { id: loadingToastId });
     }
   }
   return { request, setRequest, changeHandler, createWeeklyResults }

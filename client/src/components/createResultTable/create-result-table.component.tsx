@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
 import { Stack } from "../../core/types/stack"
 import { User } from "../../core/types/user"
-import { Grade } from "../../core/datasource/localDataSource/results/resultsSlice"
 import useLogic from "./logic.hook"
 import { Button } from "../common/button/button.component"
-
+import './create-result-table.styles.css'
 export type Request = {
   bootcampId: number,
   grades: {
@@ -16,10 +15,11 @@ export type Request = {
 type CreateResultProps = {
   stacks: Stack[],
   students: User[],
-  currentWeek: number
+  currentWeek: number,
+  getBootcampWeeklyResults: () => Promise<void>
 }
-const CreateResultTable = ({ stacks, students, currentWeek }: CreateResultProps) => {
-  const { setRequest, changeHandler, createWeeklyResults } = useLogic(currentWeek)
+const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyResults }: CreateResultProps) => {
+  const { setRequest, changeHandler, createWeeklyResults } = useLogic(currentWeek, getBootcampWeeklyResults)
   useEffect(() => {
     if (!students || !stacks)
       return
@@ -44,9 +44,10 @@ const CreateResultTable = ({ stacks, students, currentWeek }: CreateResultProps)
     setRequest(arr)
   }, [students, stacks])
   return (
-    <form action="" onSubmit={(e) => {
+    <form action="" className="create-result-form" onSubmit={(e) => {
       e.preventDefault()
       createWeeklyResults()
+
     }}>
       <table className="results-table" >
         <thead>

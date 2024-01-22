@@ -24,7 +24,7 @@ const ResultsTable = ({ results, stacks }: ResultsTableProps) => {
             const { User, grades } = result
             return (
               <tr key={index} >
-                <td>{User.username}</td>
+                <td>{User.username.split(" ")[0]}</td>
                 {
                   grades.map((grade: Grade, index: number) => {
                     return (

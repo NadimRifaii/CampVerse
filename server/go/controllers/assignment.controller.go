@@ -194,10 +194,11 @@ func HttpGetFeedback(c *fiber.Ctx) error {
 		}
 		if strings.Contains(file.Name(), substring) {
 			filePath := filepath.Join(fileDir, file.Name())
-			content, err := ioutil.ReadFile(filePath)
+			content, err := os.ReadFile(filePath)
 			if err != nil {
 				return errors.New(err.Error())
 			}
+			return Loger(c, fiber.StatusAccepted, fiber.Map{"filePath": filePath, "content": string(content)})
 			feedback, err := getFeedback(string(content))
 			if err != nil {
 				return errors.New(err.Error())
@@ -208,7 +209,6 @@ func HttpGetFeedback(c *fiber.Ctx) error {
 			if err := json.Unmarshal([]byte(feedback), &feedbackMap); err != nil {
 				return errors.New(err.Error())
 			}
-
 			return c.Status(200).JSON(feedbackMap)
 		}
 	}

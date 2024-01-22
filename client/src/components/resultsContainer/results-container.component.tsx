@@ -8,9 +8,8 @@ import './results-container.styles.css';
 import CreateResultTable from "../createResultTable/create-result-table.component";
 
 const ResultsContainer = () => {
-  const { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek } = useLogic();
+  const { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek, getBootcampWeeklyResults } = useLogic();
   const [stacks, setStacks] = useState<Stack[]>([]);
-
   useEffect(() => {
     let arr: Stack[] = [];
     curriculums.map((curriculum: CurriculumType, index: number) => {
@@ -18,14 +17,8 @@ const ResultsContainer = () => {
         arr.push(stack);
       });
     });
-    console.log(stacks)
     setStacks(arr);
   }, [curriculums]);
-
-  useEffect(() => {
-    console.log(students)
-  }, [students])
-
   return (
     <div className="results-container">
       <div className="select-box">
@@ -43,10 +36,11 @@ const ResultsContainer = () => {
           }}
         />
       </div>
+
       {
         results.length > 0 ?
           <ResultsTable results={results} stacks={stacks} /> :
-          <CreateResultTable students={students} stacks={stacks} currentWeek={currentWeek} />
+          <CreateResultTable students={students} stacks={stacks} currentWeek={currentWeek} getBootcampWeeklyResults={getBootcampWeeklyResults} />
       }
     </div>
   );
