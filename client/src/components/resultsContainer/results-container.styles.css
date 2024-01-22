@@ -22,4 +22,16 @@
   background-color: #fff;
 }
 
-/* Add more styles as needed */
+.select-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.select-box select {
+  width: 100px;
+  border-radius: 5px;
+  padding: 5px 10px 5px 0px;
+  cursor: pointer;
+}
