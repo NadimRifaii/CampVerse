@@ -26,7 +26,7 @@ type Request = {
     stackId: number,
     score?: number
   }[],
-  userId?: number
+  id?: number
 }
 type CreateResultProps = {
   stacks: Stack[],
@@ -34,11 +34,12 @@ type CreateResultProps = {
 }
 const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
   const [request, setRequest] = useState<Request[]>([])
-  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>, stack: Stack) => {
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>, stack: Stack, sId: number) => {
     setRequest((prevState) => {
-      const studentIndex = prevState.findIndex((student) => {
-        return student.userId === student.userId
+      const studentIndex = prevState.findIndex((student, index) => {
+        return student.id == sId
       })
+      console.log(studentIndex)
       const studentGrades = prevState[studentIndex].grades
       studentGrades.map((studentGrade, index) => {
         if (studentGrade.stackId === stack.ID) {
@@ -53,7 +54,8 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
       return
     const arr: Request[] = []
     students.forEach((student, index) => {
-      const { userId } = student
+      console.log(student)
+      const { id: userId } = student
       const grades: Request[`grades`] = []
       stacks.forEach((stack, stackIndex) => {
         const { ID: stackId } = stack
@@ -65,7 +67,7 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
       })
       arr.push({
         bootcampId: 1,
-        userId,
+        id: userId,
         grades
       })
     })
@@ -89,16 +91,18 @@ const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
       </thead>
       <tbody>
         {
-          students.map((student: User, index: number) => {
+          students.map((student: User, studentIndex: number) => {
             const { username } = student
             return (
-              <tr key={index} >
+              <tr key={studentIndex} >
                 <td>{username.split(" ")[0]}</td>
                 {
                   stacks.map((stack: Stack, index: number) => {
                     return (
                       <td key={index}>
-                        <input type="text" placeholder={`Grade for ${stack.name}`} />
+                        <input type="text" onChange={(e) => {
+                          changeHandler(e, stack, student.id || 0)
+                        }} placeholder={`Grade for ${stack.name}`} />
                       </td>
                     )
                   })
