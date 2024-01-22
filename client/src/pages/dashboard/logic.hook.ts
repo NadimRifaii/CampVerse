@@ -14,7 +14,7 @@ import { extractcurrentBootcampSlice, setcurrentBootcamp } from "../../core/data
 import { resultsDataSource } from "../../core/datasource/remoteDataSource/results"
 import { User } from "../../core/types/user"
 import { extractResultsSlice, setResults } from "../../core/datasource/localDataSource/results/resultsSlice"
-import { extractCurriculumsSlice, setCurriculums } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
+import { setCurriculums } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
 import { curriculumsDataSource } from "../../core/datasource/remoteDataSource/curriculums"
 const useLogic = () => {
   const dispatch = useDispatch()
@@ -61,6 +61,7 @@ const useLogic = () => {
     }
     getBootcamps()
   }, [])
+
   useEffect(() => {
     let newStudents: User[] = [], newMentors: User[] = []
     if (user.role == "student") {
@@ -69,6 +70,7 @@ const useLogic = () => {
       newMentors = currentBootcamp.mentors.filter((mentor: User) => mentor.email != user.email)
     }
     dispatch(setUsers({ students: currentBootcamp.students, mentors: newMentors }))
+    console.log(currentBootcamp)
   }, [currentBootcamp])
   const getBootcampWeeklyResults = async () => {
     try {

@@ -1,4 +1,7 @@
 import { Stack } from "./stack"
+type Week = {
+  ID: number
+}
 export type Bootcamp = {
   id: number,
   name: string,
@@ -7,5 +10,6 @@ export type Bootcamp = {
   numberOfWeeks: number,
   mentors: [],
   students: [],
-  stacks: Stack[]
+  stacks: Stack[],
+  weeks: Week[]
 }

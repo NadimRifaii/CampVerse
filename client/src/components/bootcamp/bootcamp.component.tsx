@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './bootcamp.styles.css';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
@@ -14,12 +14,10 @@ type BootcampProps = {
 const BootcampC = ({ bootcamp }: BootcampProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
-  console.log(currentBootcamp)
   const dispatch = useDispatch()
   const handleImageLoad = () => {
     setImageLoaded(true);
   };
-
   return (
     <div className="bootcamp">
       <div className="image-holder">
