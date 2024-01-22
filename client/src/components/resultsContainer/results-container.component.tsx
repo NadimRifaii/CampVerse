@@ -4,6 +4,7 @@ import { CurriculumType } from "../createAssignment/logic.hook";
 import { Grade, Result } from "../../core/datasource/localDataSource/results/resultsSlice";
 import './results-container.styles.css'
 import { Stack } from "../../core/types/stack";
+import ResultsTable from "../resultsTable/results-table.component";
 
 // Update the ResultsContainer component
 const ResultsContainer = () => {
@@ -23,39 +24,7 @@ const ResultsContainer = () => {
   }, [results])
   return (
     <div className="results-container">
-      <table className="results-table" >
-        <thead>
-          <tr>
-            <th>Student name</th>
-            {
-              stacks.map((stack: string, index: number) => (
-                <th key={index} >{stack}</th>
-              ))
-            }
-          </tr>
-        </thead>
-        <tbody>
-          {
-            results.map((result: Result, index: number) => {
-              const { User, grades } = result
-              return (
-                <tr>
-                  <td>{result.User.username}</td>
-                  {
-                    grades.map((grade: Grade, index: number) => {
-                      return (
-                        <>
-                          <td>{grade.score}</td>
-                        </>
-                      )
-                    })
-                  }
-                </tr>
-              )
-            })
-          }
-        </tbody>
-      </table>
+      <ResultsTable results={results} stacks={stacks} />
     </div>
   );
 };
