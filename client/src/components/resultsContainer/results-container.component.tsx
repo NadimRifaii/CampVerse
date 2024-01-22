@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import useLogic from "./logic.hook";
 import { CurriculumType } from "../createAssignment/logic.hook";
 import { Grade, Result } from "../../core/datasource/localDataSource/results/resultsSlice";
+import './results-container.styles.css'
+import { Stack } from "../../core/types/stack";
 
-type Stack = {
-  name: string
-}
 // Update the ResultsContainer component
 const ResultsContainer = () => {
   const { results, curriculums } = useLogic();
@@ -24,7 +23,7 @@ const ResultsContainer = () => {
   }, [results])
   return (
     <div className="results-container">
-      <table>
+      <table className="results-table" >
         <thead>
           <tr>
             <th>Student name</th>
