@@ -23,11 +23,11 @@ const ResultsTable = ({ results, stacks }: ResultsTableProps) => {
             const { User, grades } = result
             return (
               <tr key={index} >
-                <td>{result.User.username}</td>
+                <td>{User.username}</td>
                 {
                   grades.map((grade: Grade, index: number) => {
                     return (
-                      <td key={index} >{grade.score}</td>
+                      <td key={index}>{grade.score}</td>
                     )
                   })
                 }

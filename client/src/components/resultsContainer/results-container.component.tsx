@@ -5,9 +5,10 @@ import { Stack } from "../../core/types/stack";
 import ResultsTable from "../resultsTable/results-table.component";
 import Select from 'react-select'
 import './results-container.styles.css';
+import CreateResultTable from "../createResultTable/create-result-table.component";
 
 const ResultsContainer = () => {
-  const { results, curriculums, currentBootcamp, currentWeek, setCurrentWeek } = useLogic();
+  const { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek } = useLogic();
   const [stacks, setStacks] = useState<string[]>([]);
 
   useEffect(() => {
@@ -21,12 +22,8 @@ const ResultsContainer = () => {
   }, [curriculums]);
 
   useEffect(() => {
-    console.log(results);
-  }, [results]);
-
-  useEffect(() => {
-    console.log(currentBootcamp);
-  }, [currentBootcamp]);
+    console.log(students)
+  }, [students])
 
   return (
     <div className="results-container">
@@ -45,7 +42,11 @@ const ResultsContainer = () => {
           }}
         />
       </div>
-      <ResultsTable results={results} stacks={stacks} />
+      {
+        results.length > 0 ?
+          <ResultsTable results={results} stacks={stacks} /> :
+          <CreateResultTable />
+      }
     </div>
   );
 };

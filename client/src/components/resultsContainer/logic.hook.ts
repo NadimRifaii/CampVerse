@@ -4,11 +4,13 @@ import { extractCurriculumsSlice } from "../../core/datasource/localDataSource/c
 import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { useEffect, useState } from "react"
 import { resultsDataSource } from "../../core/datasource/remoteDataSource/results"
+import { extractUsersSlice } from "../../core/datasource/localDataSource/users/usersSlice"
 
 const useLogic = () => {
   const { results } = useSelector(extractResultsSlice)
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
+  const { students } = useSelector(extractUsersSlice)
   const dispatch = useDispatch()
   const [currentWeek, setCurrentWeek] = useState<number>(currentBootcamp?.weeks[0]?.ID || 1)
   const getBootcampWeeklyResults = async () => {
@@ -22,6 +24,6 @@ const useLogic = () => {
   useEffect(() => {
     getBootcampWeeklyResults()
   }, [currentBootcamp, currentWeek])
-  return { results, curriculums, currentBootcamp, currentWeek, setCurrentWeek }
+  return { results, curriculums, currentBootcamp, currentWeek, students, setCurrentWeek }
 }
 export default useLogic
