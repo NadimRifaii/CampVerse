@@ -29,9 +29,6 @@
   margin-bottom: 10px;
 }
 
-.select-box select {
-  width: 100px;
-  border-radius: 5px;
-  padding: 5px 10px 5px 0px;
+.select-box>div {
   cursor: pointer;
 }
