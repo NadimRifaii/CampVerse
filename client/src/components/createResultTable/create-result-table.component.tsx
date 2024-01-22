@@ -34,6 +34,20 @@ type CreateResultProps = {
 }
 const CreateResultTable = ({ stacks, students }: CreateResultProps) => {
   const [request, setRequest] = useState<Request[]>([])
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>, stack: Stack) => {
+    setRequest((prevState) => {
+      const studentIndex = prevState.findIndex((student) => {
+        return student.userId === student.userId
+      })
+      const studentGrades = prevState[studentIndex].grades
+      studentGrades.map((studentGrade, index) => {
+        if (studentGrade.stackId === stack.ID) {
+          studentGrade.score = +event.target.value
+        }
+      })
+      return [...prevState]
+    })
+  }
   useEffect(() => {
     if (!students || !stacks)
       return
