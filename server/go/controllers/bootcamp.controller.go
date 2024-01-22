@@ -27,7 +27,6 @@ func HttpCreateBootcamp(c *fiber.Ctx) error {
 		week := models.Week{
 			BootcampId: bootcamp.ID,
 		}
-
 		if err := CreateRecordInDb(&week); err != nil {
 			return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 		}

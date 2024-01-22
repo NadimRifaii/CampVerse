@@ -8,6 +8,7 @@ import { CurriculumSliceType } from "../datasource/localDataSource/curriculums/c
 import { AssignmentsSliceType } from "../datasource/localDataSource/assignments/assignmentsSlice"
 import { submissionsSliceType } from "../datasource/localDataSource/submissions/submissionsSlice"
 import { CurrentAssigmnentSliceType } from "../datasource/localDataSource/currentAssignment/currentAssignmentSlice"
+import { ResultsSliceType } from "../datasource/localDataSource/results/resultsSlice"
 export type RootState = {
   user: User,
   chat: ChatType,
@@ -19,4 +20,5 @@ export type RootState = {
   assignments: AssignmentsSliceType,
   submissions: submissionsSliceType,
   currentAssignment: CurrentAssigmnentSliceType,
+  results:ResultsSliceType
 }

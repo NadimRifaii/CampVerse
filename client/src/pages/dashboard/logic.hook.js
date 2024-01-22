@@ -11,6 +11,7 @@ import { removeChat } from "../../core/datasource/localDataSource/chat/chatSlice
 import { setUsers } from "../../core/datasource/localDataSource/users/usersSlice"
 import { setBootcamps } from "../../core/datasource/localDataSource/bootcamps/bootcampsSlice"
 import { extractcurrentBootcampSlice, setcurrentBootcamp } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
+import { resultsDataSource } from "../../core/datasource/remoteDataSource/results"
 const useLogic = () => {
   const dispatch = useDispatch()
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
@@ -63,6 +64,16 @@ const useLogic = () => {
       newMentors = currentBootcamp.mentors.filter(mentor => mentor.email != user.email)
     }
     dispatch(setUsers({ students: currentBootcamp.students, mentors: newMentors }))
+  }, [currentBootcamp])
+  useEffect(() => {
+    const getBootcampWeeklyResults = async () => {
+      try {
+        const response = await resultsDataSource.getBootcampWeeklyResults({ weekId: 1 })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getBootcampWeeklyResults()
   }, [currentBootcamp])
   return { getUserInfo, refresh }
 }

@@ -76,7 +76,7 @@ func openAi() {
 func main() {
 	app := setupApp()
 
-	protectedPaths := []string{"/auth", "/schedule", "/bootcamp", "/stacks", "/mentor", "/assignment", "/user", "/curriculum"}
+	protectedPaths := []string{"/auth", "/schedule", "/bootcamp", "/stacks", "/mentor", "/assignment", "/user", "/curriculum", "/result"}
 	groups := setupProtectedGroups(app, protectedPaths)
 
 	registerRoutes(groups,
@@ -88,6 +88,7 @@ func main() {
 		routes.AssignmentRoutes,
 		routes.UserRoutes,
 		routes.CurriculumRoutes,
+		routes.ResultRoutes,
 	)
 	app.Listen(os.Getenv("PORT"))
 	// openAi()

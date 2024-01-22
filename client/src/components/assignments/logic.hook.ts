@@ -29,10 +29,10 @@ const useLogic = () => {
   }
   function cleanAssignmentData(response: any) {
     let arr: any[] = []
-    for (let i = 0; i < response.length; i++) {
+    for (let i = 0; i < response?.length; i++) {
       const { title: assignmentTitle, assignmentFiles, dueDate, instructions: allInstructions, stack: { name: stackName } } = response[i]
       const instructions: {}[] = []
-      for (let i = 0; i < allInstructions.length; i++) {
+      for (let i = 0; i < allInstructions?.length; i++) {
         const { instructionTitle, content } = allInstructions[i]
         instructions.push({ instructionTitle, content })
       }
