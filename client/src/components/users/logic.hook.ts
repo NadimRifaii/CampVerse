@@ -22,8 +22,7 @@ const useLogic = () => {
     }
   }, [currentActiveComponent, students, mentors])
   useEffect(() => {
-    console.log(users)
-    console.log(mentors)
+
   }, [users, students])
   const searchUsers = (query: string) => {
     const filteredUsers = users.filter(user => {

@@ -3,6 +3,7 @@ import { extractUserSlice } from "../../core/datasource/localDataSource/user/use
 import { submissionsDataSource, } from "../../core/datasource/remoteDataSource/submissions"
 import { useEffect } from "react"
 import { extractSubmissionsSlice, setSubmissions } from "../../core/datasource/localDataSource/submissions/submissionsSlice"
+import toast from "react-hot-toast"
 
 const useLogic = () => {
   const user = useSelector(extractUserSlice)
@@ -19,6 +20,6 @@ const useLogic = () => {
       console.log(error)
     }
   }
-  return { user, submissions }
+  return { user, submissions, getStudentSubmissions }
 }
 export default useLogic

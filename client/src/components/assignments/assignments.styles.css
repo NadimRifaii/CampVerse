@@ -11,6 +11,12 @@
   margin: 0 auto 20px;
 }
 
+.assignments-section svg {
+  width: 250px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
 .toggler-header button {
   /* flex: 1 1; */
   color: var(--main-white-color);

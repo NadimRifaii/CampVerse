@@ -61,9 +61,6 @@ function StyledDropzone(props) {
         return;
       }
 
-      validFiles.forEach((file) => {
-        console.log(`${file.name}: ${file.type}`);
-      });
 
       const updatedFiles = validFiles.map((file) => ({
         fileName: file.name,
@@ -72,10 +69,7 @@ function StyledDropzone(props) {
       }));
 
       const combinedFiles = [...uploadedFiles, ...updatedFiles];
-      console.log(combinedFiles);
       setUploadedFiles(combinedFiles);
-      console.log('Accepted Files:', combinedFiles);
-
       validFiles.forEach(async (file) => {
         const formData = new FormData();
         formData.append('file', file);
@@ -84,7 +78,6 @@ function StyledDropzone(props) {
             formData,
             name: fileUrl,
           });
-          console.log('File uploaded to server:', response.data);
         } catch (error) {
           console.error('Error uploading file:', error);
         }

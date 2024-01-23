@@ -5,6 +5,7 @@ import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSour
 import { assignmentDataSource } from "../../core/datasource/remoteDataSource/assignment"
 import { useDispatch } from "react-redux"
 import { extractUserSlice } from "../../core/datasource/localDataSource/user/userSlice"
+import toast from "react-hot-toast"
 const useLogic = () => {
   const { assignments } = useSelector(extractAssignmentsSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
@@ -20,11 +21,16 @@ const useLogic = () => {
   }, [assignments])
 
   const fetchBootcampAssignments = async () => {
+    const loadingToastId = toast.loading('Checking for new assignments...');
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
       dispatch(setAssignments(cleanAssignmentData(response)))
+      if (response?.length > 0)
+        toast.success('Check for new assignments is done', { id: loadingToastId });
+      else
+        toast.error(``, { id: loadingToastId });
     } catch (error) {
-      console.log(error)
+      toast.error(`${error}`, { id: loadingToastId });
     }
   }
   function cleanAssignmentData(response: any) {

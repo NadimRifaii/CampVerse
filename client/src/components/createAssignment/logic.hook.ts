@@ -70,19 +70,6 @@ const useLogic = () => {
     setBoocampStacks(arr)
   }, [curriculums])
   const createAssignment = async () => {
-    console.log("dsfadsfdasf")
-    console.log(
-      {
-        bootcampName: currentBootcamp.name,
-        stackName: stackName,
-        dueDate: `${dueDate}`,
-        assignment: {
-          files: uploadedFiles,
-          instructions
-        }
-      }
-    )
-    console.log("dsfadsfdasf")
     const loadingToastId = toast.loading('Posting...');
     if (!stackName || !dueDate || !assignmentTitle) {
       toast.error(`Invalid credentials`, { id: loadingToastId });

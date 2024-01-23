@@ -23,10 +23,10 @@ const Assignment = () => {
         }
       </div>
       {
-        user.role == "student" ? currentActiveComponent == "submissions" ? <Submissions /> : currentActiveComponent == "old" ? <AssignmentsList assignments={oldAssignments} />
-          : <AssignmentsList assignments={upcomingAssignments} /> :
+        user.role == "student" ? currentActiveComponent == "submissions" ? <Submissions /> : currentActiveComponent == "old" ? <AssignmentsList user={user} fetchBootcampAssignments={fetchBootcampAssignments} assignments={oldAssignments} />
+          : <AssignmentsList user={user} fetchBootcampAssignments={fetchBootcampAssignments} assignments={upcomingAssignments} /> :
           currentActiveComponent == "create" ? <CreateAssignment fetchBootcampAssignments={fetchBootcampAssignments} /> :
-            <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
+            <AssignmentsList user={user} fetchBootcampAssignments={fetchBootcampAssignments} assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
       }
     </div>
   )

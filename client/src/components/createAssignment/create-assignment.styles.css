@@ -1,8 +1,8 @@
 .create-assignment-container {
-  padding: 10px;
+  padding: 20px;
   background-color: var(--main-black-color);
   border-radius: 5px;
-  width: 650px;
+  width: 75%;
   margin: auto;
   position: relative;
 }
@@ -29,20 +29,18 @@
 .create-assignment-container .assignment-info {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 10px;
+  gap: 10px;
+  justify-content: space-between;
 }
 
 .create-assignment-container .instructions .instruction {
   display: flex;
-  gap: 27px;
-  margin: 15px auto
+  justify-content: space-between;
+  margin: 15px auto;
+  gap: 10px;
 }
 
-.create-assignment-container .instructions .instruction-content {
-  flex: 1;
-
-}
 
 .create-assignment-container .instructions .instruction textarea {
   resize: none;
@@ -99,4 +97,24 @@
 
 .create-assignment-container .stacks-list .stack p {
   margin: 0
+}
+
+.assignment-info>div {
+  width: calc(95% / 3)
+}
+
+.assignment-info>div input {
+  width: 100%;
+}
+
+.instruction .title {
+  width: calc(95% / 3)
+}
+
+.instruction .title input {
+  width: 100%;
+}
+
+.instruction .instruction-content {
+  width: 66%;
 }
