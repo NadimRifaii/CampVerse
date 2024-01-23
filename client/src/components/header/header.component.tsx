@@ -1,12 +1,13 @@
 import './header.styles.css'
-import BellIcon from '../../assets/bell-icon.component.jsx'
+
 import useLogic from './logic.hook'
-import ArrowUp from '../../assets/arrow-up.component.jsx'
-import ArrowDown from '../../assets/arrow-down.component.jsx'
+import ArrowUp from '../../assets/arrow-up.component'
+import ArrowDown from '../../assets/arrow-down.component'
 import Dropdown from '../dropdown/dropdown.component'
 import { ActiveEditContext } from '../../utils/contexts/active-edit-profile.context'
 import Notifications from '../../components/notifications/notifications.component'
 import { useContext, useEffect, useState } from 'react'
+import BellIcon from '../../assets/bell-icon.component'
 const Header = () => {
   const { user, dropdownActive, setDropdownActive, notifications } = useLogic()
   const [activeNotification, setActiveNotification] = useState(false)

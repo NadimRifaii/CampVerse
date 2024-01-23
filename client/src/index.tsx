@@ -9,6 +9,7 @@ import { store } from './core/datasource/localDataSource/store';
 import { ActiveEditContextProvider } from './utils/contexts/active-edit-profile.context';
 import { NotificationsContextProvider } from './utils/contexts/notifications.context';
 import { CurrentUserContextProvider } from './utils/contexts/current-user.context';
+import { ActiveSidebarItemContextProvider } from './utils/contexts/active-sidebar-item.context';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
@@ -16,13 +17,15 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <CurrentUserContextProvider>
-        <ActiveFormContextProvider>
-          <ActiveEditContextProvider>
-            <NotificationsContextProvider>
-              <App />
-            </NotificationsContextProvider>
-          </ActiveEditContextProvider>
-        </ActiveFormContextProvider>
+        <ActiveSidebarItemContextProvider>
+          <ActiveFormContextProvider>
+            <ActiveEditContextProvider>
+              <NotificationsContextProvider>
+                <App />
+              </NotificationsContextProvider>
+            </ActiveEditContextProvider>
+          </ActiveFormContextProvider>
+        </ActiveSidebarItemContextProvider>
       </CurrentUserContextProvider>
     </Provider>
   </BrowserRouter>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import AssignmentsIcon from "../../assets/assignments-icon.component"
 import UsersIcon from "../../assets/users-icon.component"
 import ResultsIcon from "../../assets/results-icon.component"
@@ -9,6 +9,7 @@ import { extractUserSlice } from "../../core/datasource/localDataSource/user/use
 import { useNavigate } from "react-router-dom"
 import HomeIcon from "../../assets/home-icon.component"
 import { local } from "../../core/helpers/localStorage"
+import { ActiveSidebarItemContext } from "../../utils/contexts/active-sidebar-item.context"
 type ItemType = {
   text: string;
   icon: () => JSX.Element;
@@ -17,7 +18,7 @@ type ItemsType = ItemType[]
 const useLogic = (homepage: boolean) => {
   const user = useSelector(extractUserSlice)
   const [sidebarHidden, setSidebarHidden] = useState<boolean>(true)
-  const [activeItem, setActiveItem] = useState<string>(`${local("activeItem") ? local("activeItem") : "Assignments"}`)
+  const { activeItem, setActiveItem } = useContext(ActiveSidebarItemContext)
   const navigate = useNavigate()
 
   const studentItems: ItemsType = [
