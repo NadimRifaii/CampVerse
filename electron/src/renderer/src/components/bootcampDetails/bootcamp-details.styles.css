@@ -15,14 +15,15 @@
 
 .toggler-header {
   display: flex;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: center;
+  padding: 15px;
   background-color: var(--main-black-color);
-  width: 500px;
-  gap: 10px;
+  width: fit-content;
+  gap: 20px;
   border-radius: 5px;
-  margin: 0 auto 12px;
+  margin: 0 auto 20px;
 }
 
 .toggler-header button {

@@ -11,6 +11,20 @@
   border-radius: 5px;
 }
 
+.users-container {
+  /* position: absolute; */
+  padding: 15px;
+  top: 50%;
+  left: 50%;
+  /* transform: translate(-50%, -50%); */
+  background-color: var(--main-black-color);
+  width: 75%;
+  height: 386px;
+  margin: auto;
+  overflow-y: auto;
+  border-radius: 5px;
+}
+
 .users-container::-webkit-scrollbar,
 ul::-webkit-scrollbar {
   width: 12px;

@@ -115,9 +115,10 @@
 }
 
 .add-curriculum-btn {
-  position: fixed;
+  position: absolute;
   bottom: 15px;
   left: 50%;
+  transform: translateX(-50%);
 }
 
 .add-curriculum-btn button {

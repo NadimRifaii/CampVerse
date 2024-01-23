@@ -8,16 +8,19 @@ import { CurrentUserContextProvider } from './utils/contexts/current-user.contex
 import { NotificationsContextProvider } from './utils/contexts/notifications.context';
 import 'react-datetime/css/react-datetime.css'
 import "react-big-calendar/lib/css/react-big-calendar.css"
+import { ActiveSidebarItemContextProvider } from './utils/contexts/active-sidebar-item.context';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Provider store={store} >
       <CurrentUserContextProvider>
-        <ActiveEditContextProvider>
-          <NotificationsContextProvider>
-            <App />
-          </NotificationsContextProvider>
-        </ActiveEditContextProvider>
+        <ActiveSidebarItemContextProvider>
+          <ActiveEditContextProvider>
+            <NotificationsContextProvider>
+              <App />
+            </NotificationsContextProvider>
+          </ActiveEditContextProvider>
+        </ActiveSidebarItemContextProvider>
       </CurrentUserContextProvider>
     </Provider>
   </BrowserRouter>

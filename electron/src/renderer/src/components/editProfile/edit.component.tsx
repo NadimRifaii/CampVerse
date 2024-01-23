@@ -6,9 +6,8 @@ import { InputLabel } from '../common/inputLabel/input-label.component';
 import { Button } from '../common/button/button.component';
 
 const EditProfile = () => {
-  const activeEditContext = useContext(ActiveEditContext);
+  const { active, setActive } = useContext(ActiveEditContext);
   const { handleFileChange, previewImage, fields, resetCredentials, updateProfile, role, setRole } = useLogic()
-  const { active, setActive } = activeEditContext || {};
 
   return (
     <div className={`edit-container ${active ? 'active' : ''}`}>

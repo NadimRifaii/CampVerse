@@ -36,11 +36,11 @@ const Overview = () => {
         {
           curriculums.map((curriculum, index) => <CurriculumCard key={index} curriculum={curriculum} />)
         }
-      </div>
-      <div className="add-curriculum-btn">
-        <Button text='Add Module' handleClick={() => {
-          setActiveAddModal(true)
-        }} />
+        <div className="add-curriculum-btn">
+          <Button text='Add Module' handleClick={() => {
+            setActiveAddModal(true)
+          }} />
+        </div>
       </div>
     </div>
   )

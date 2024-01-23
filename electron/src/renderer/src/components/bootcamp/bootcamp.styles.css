@@ -10,7 +10,8 @@
 }
 
 .bootcamp .name {
-  color: var(--main-black-color)
+  color: var(--main-black-color);
+  font-weight: bold;
 }
 
 .name-details-holder {
@@ -22,5 +23,6 @@
 
 .name-details-holder a {
   text-decoration: none;
-  color: var(--main-black-color);
+  color: var(--main-blue-color);
+  font-weight: bold;
 }

@@ -42,5 +42,6 @@
 .user-row .buttons-container button {
   color: white;
   width: 80px;
-
+  border-radius: 5px;
+  padding: 5px;
 }
