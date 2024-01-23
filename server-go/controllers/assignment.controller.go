@@ -148,7 +148,6 @@ func HttpGetBootcampAssignments(c *fiber.Ctx) error {
 	bootcampId := c.Query("id")
 	id, err := strconv.ParseUint(bootcampId, 10, 64)
 	if err != nil {
-		fmt.Println("Error:", err)
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	db := database.Db

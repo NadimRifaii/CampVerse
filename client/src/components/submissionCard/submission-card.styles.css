@@ -2,7 +2,10 @@
   padding: 15px;
   border-radius: 5px;
   text-align: center;
-  background-color: var(--main-black-color)
+  background-color: var(--main-black-color);
+  height: 300px;
+  width: 27%;
+  display: grid;
 }
 
 .submission-card .icon {

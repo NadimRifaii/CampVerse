@@ -25,7 +25,7 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
       return
     const arr: Request[] = []
     students.forEach((student, index) => {
-      const { ID: userId } = student
+      const { id: userId } = student
       const grades: Request[`grades`] = []
       stacks.forEach((stack, stackIndex) => {
         const { ID: stackId } = stack
@@ -40,6 +40,7 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
         userId,
         grades
       })
+      console.log(student)
     })
     setRequest(arr)
   }, [students, stacks])
@@ -72,7 +73,7 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
                       return (
                         <td key={index}>
                           <input type="text" required onChange={(e) => {
-                            changeHandler(e, stack, student.ID)
+                            changeHandler(e, stack, student.id)
                           }} placeholder={`Grade for ${stack.name}`} />
                         </td>
                       )

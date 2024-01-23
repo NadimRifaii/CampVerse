@@ -7,6 +7,7 @@ export const userDataSource = {
         route: "/user",
         method: "GET"
       })
+      console.log(response)
       return response
     } catch (error: any) {
       throw new Error(error)

@@ -7,7 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import './create-assignment.styles.css'
 import { Button } from '../common/button/button.component';
 import InstructionsContainer from '../instructionsContainer/instructions-container.component';
-const CreateAssignment = () => {
+type CreateAssignmentProps = {
+  fetchBootcampAssignments: () => Promise<void>
+}
+const CreateAssignment = ({ fetchBootcampAssignments }: CreateAssignmentProps) => {
   const [stacksListOpen, setStacksListOpen] = useState<boolean>(false)
   const navigate = useNavigate()
   const { user, dueDate, uploadedFiles, assignmentTitle, instructions, stackName, bootcampStacks, setStackName, createAssignment, setDueDate, setAssignmentTitle, setUploadedFiles, setInstructions, updateInstructionContent, updateInstructionTitle } = useLogic()
@@ -58,7 +61,10 @@ const CreateAssignment = () => {
         <StyledDropzone assignmentTitle={assignmentTitle} fileUrl={`${user.email.split('@')[0]}-assignment-${assignmentTitle}`} uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles} />
       </div>
       <div className="create-assignment-btn">
-        <Button text='Create' handleClick={createAssignment} />
+        <Button text='Create' handleClick={async () => {
+          await createAssignment()
+          await fetchBootcampAssignments()
+        }} />
       </div>
     </div>
   )

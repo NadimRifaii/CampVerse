@@ -19,9 +19,6 @@ const ResultsContainer = () => {
     });
     setStacks(arr);
   }, [curriculums]);
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   return (
     <div className="results-container">
       <div className="select-box">
@@ -31,7 +28,7 @@ const ResultsContainer = () => {
           }}
           options={currentBootcamp?.weeks.map((week, index: number) => ({
             value: week.ID,
-            label: `Week ${week.ID}`,
+            label: `Week ${index + 1}`,
           }))}
           defaultValue={{
             value: currentWeek,

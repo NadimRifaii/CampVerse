@@ -66,11 +66,11 @@ const useLogic = () => {
     let newStudents: User[] = [], newMentors: User[] = []
     if (user.role == "student") {
       newStudents = currentBootcamp.students.filter((student: User) => student.email != user.email)
+      dispatch(setUsers({ students: newStudents, mentors: currentBootcamp.mentors }))
     } else {
       newMentors = currentBootcamp.mentors.filter((mentor: User) => mentor.email != user.email)
+      dispatch(setUsers({ students: currentBootcamp.students, mentors: newMentors }))
     }
-    dispatch(setUsers({ students: currentBootcamp.students, mentors: newMentors }))
-    console.log(currentBootcamp)
   }, [currentBootcamp])
 
   useEffect(() => {

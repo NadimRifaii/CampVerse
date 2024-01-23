@@ -23,9 +23,13 @@ const useLogic = () => {
       console.log(error)
     }
   }
+  useEffect(() => {
+    console.log(user)
+  }, [user])
   const getUserWeeklyResults = async () => {
+
     try {
-      const response = await resultsDataSource.getUserWeeklyResults({ weekId: currentWeek, userId: user.ID })
+      const response = await resultsDataSource.getUserWeeklyResults({ weekId: currentWeek, userId: user.UserId })
       dispatch(setResults(response.results))
     } catch (error) {
       console.log(error)

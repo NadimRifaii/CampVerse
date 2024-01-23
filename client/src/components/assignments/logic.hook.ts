@@ -61,6 +61,6 @@ const useLogic = () => {
     setUpcomingAssignments(upcoming)
     setOldAssignments(old)
   }
-  return { assignments, oldAssignments, upcomingAssignments, user }
+  return { assignments, oldAssignments, upcomingAssignments, user, fetchBootcampAssignments }
 }
 export default useLogic

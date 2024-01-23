@@ -27,6 +27,7 @@ export const resultsDataSource = {
     }
   },
   createWeeklyResults: async (data: { results: Request[] }, weekId: number) => {
+    console.log(data)
     try {
       const response = await sendRequest({
         route: `/result/${weekId}`,

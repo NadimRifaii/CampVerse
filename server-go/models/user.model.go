@@ -2,13 +2,12 @@ package models
 
 import (
 	"errors"
-	"fmt"
 
 	"gorm.io/gorm"
 )
 
 type User struct {
-	ID             uint   `gorm:"primarykey"`
+	ID             uint   `gorm:"primarykey" json:"id"`
 	UserName       string `json:"username" gorm:"not null;default:'username';size:255;"`
 	FirstName      string `json:"firstname" gorm:"not null;default:'first';size:255;"`
 	LastName       string `json:"lastname" gorm:"not null;default:'last';size:255;"`
@@ -43,7 +42,6 @@ func (user *User) GetUserBootcamps(db *gorm.DB) ([]Bootcamp, error) {
 
 func (user *User) UpdateUser(db *gorm.DB, newRole string) error {
 	if user.UserRole.RoleName != newRole {
-		fmt.Println(user.UserRole.RoleName)
 		user.UpdateUserRoleByEmail(db, user.Email, newRole)
 	}
 	return db.Save(user).Error

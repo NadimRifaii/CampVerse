@@ -7,7 +7,7 @@ import AssignmentsList from "../assignmentsList/assignments-list.component"
 import Submissions from "../submissions/submissions.component"
 const Assignment = () => {
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>("old")
-  const { assignments, oldAssignments, upcomingAssignments, user } = useLogic()
+  const { assignments, oldAssignments, upcomingAssignments, user, fetchBootcampAssignments } = useLogic()
   return (
     <div className="assignments-section">
       <div className="toggler-header">
@@ -25,7 +25,7 @@ const Assignment = () => {
       {
         user.role == "student" ? currentActiveComponent == "submissions" ? <Submissions /> : currentActiveComponent == "old" ? <AssignmentsList assignments={oldAssignments} />
           : <AssignmentsList assignments={upcomingAssignments} /> :
-          currentActiveComponent == "create" ? <CreateAssignment /> :
+          currentActiveComponent == "create" ? <CreateAssignment fetchBootcampAssignments={fetchBootcampAssignments} /> :
             <AssignmentsList assignments={currentActiveComponent == 'old' ? oldAssignments : upcomingAssignments} />
       }
     </div>

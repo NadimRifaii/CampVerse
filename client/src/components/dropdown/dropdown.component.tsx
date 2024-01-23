@@ -32,6 +32,7 @@ const Dropdown = () => {
             local('token', "xxxx")
             dispatch(removeBootcamps([]))
             dispatch(removeCurrentBootcamp({}))
+            local("activeItem", 'Assignments')
           }}>Logout</Link>
         </li>
       </ul>

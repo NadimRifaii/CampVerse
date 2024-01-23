@@ -2,7 +2,6 @@ package models
 
 import (
 	"errors"
-	"fmt"
 
 	"gorm.io/gorm"
 )
@@ -60,7 +59,6 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 				students = append(students, cleanedUser)
 			}
 		}
-		fmt.Println(bootcamp.Weeks)
 		bootcampDetails := BootcampDetails{
 			ID:               bootcamp.ID,
 			Name:             bootcamp.Name,

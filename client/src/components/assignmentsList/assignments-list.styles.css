@@ -6,5 +6,8 @@
 }
 
 .assignments-list-container>div {
-  width: 300px
+  width: 27%;
+  height: 300px;
+  display: grid;
+  /* place-items: center; */
 }
