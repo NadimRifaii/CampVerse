@@ -8,4 +8,5 @@ import (
 func CurriculumRoutes(app fiber.Router) {
 	app.Post("/", controllers.HttpGetBootcampCurriculums)
 	app.Post("/add-to-bootcamp", controllers.HttpCreateCurriculum)
+	app.Post("/week-curriculum", controllers.HttpGetBootcampWeekCurriculum)
 }

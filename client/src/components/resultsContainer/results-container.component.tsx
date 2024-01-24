@@ -6,19 +6,10 @@ import ResultsTable from "../resultsTable/results-table.component";
 import Select from 'react-select'
 import './results-container.styles.css';
 import CreateResultTable from "../createResultTable/create-result-table.component";
+import toast from "react-hot-toast";
 
 const ResultsContainer = () => {
-  const { results, curriculums, currentBootcamp, currentWeek, students, user, setCurrentWeek, getBootcampWeeklyResults } = useLogic();
-  const [stacks, setStacks] = useState<Stack[]>([]);
-  useEffect(() => {
-    let arr: Stack[] = [];
-    curriculums.map((curriculum: CurriculumType, index: number) => {
-      curriculum.stacks.map((stack: Stack, stackIndex: number) => {
-        arr.push(stack);
-      });
-    });
-    setStacks(arr);
-  }, [curriculums]);
+  const { results, curriculums, currentBootcamp, currentWeek, students, user, weekStacks: stacks, setWeekStacks, setCurrentWeek, getBootcampWeeklyResults } = useLogic();
   return (
     <div className="results-container">
       <div className="select-box">
@@ -37,6 +28,7 @@ const ResultsContainer = () => {
         />
       </div>
       {
+
         user.role == "student" ? <ResultsTable user={user} students={students} results={results} stacks={stacks} /> :
           results.length > 0 ?
             <ResultsTable user={user} students={students} results={results} stacks={stacks} /> :

@@ -25,3 +25,22 @@ func HttpGetBootcampCurriculums(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"curriculums": curriculums})
 }
+func HttpGetBootcampWeekCurriculum(c *fiber.Ctx) error {
+	user := new(models.User)
+	db := database.Db
+	if user = GetAuthUser(c); user == nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	var body struct {
+		ID uint `json:"id"`
+	}
+	if err := ValidateRequest(c, &body); err != nil {
+		return Loger(c, fiber.StatusUnauthorized, fiber.Map{"error": "Unauthorized"})
+	}
+	curriculum := new(models.Curriculum)
+	curriculum.WeekId = body.ID
+	if err := curriculum.GetBootcampWeekCurriculum(db); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"curriculum": curriculum})
+}

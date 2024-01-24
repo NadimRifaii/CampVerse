@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -69,4 +70,20 @@ func HttpGetUserWeeklyResults(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"results": results})
+}
+func HttpTestingWeeklyResults(c *fiber.Ctx) error {
+	fmt.Println(";ajdflk;jasdf")
+	var request struct {
+		WeekId uint `json:"weekId"`
+	}
+	if err := ValidateRequest(c, &request); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	week := new(models.Week)
+	week.ID = request.WeekId
+	db := database.Db
+	if err := week.GetCurriculumAndResultsByWeekID(db); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"Week": week})
 }

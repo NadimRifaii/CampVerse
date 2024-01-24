@@ -4,7 +4,7 @@ import { User } from "../../core/types/user";
 
 type ResultsTableProps = {
   results: Result[],
-  stacks: Stack[],
+  stacks: { ID: number, name: string }[],
   students: User[],
   user: User
 }

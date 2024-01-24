@@ -6,6 +6,7 @@ type Week struct {
 	ID         uint `gorm:"primarykey"`
 	BootcampId uint `gorm:"foreignkey:BootcampId"`
 	Result     []*Result
+	Curriculum Curriculum
 }
 type Grade struct {
 	ID       uint `gorm:"primarykey"`
@@ -74,4 +75,11 @@ func (r *Result) GetCleanedResultsByWeekID(db *gorm.DB) ([]CleanedResult, error)
 	}
 
 	return cleanedResults, nil
+}
+func (w *Week) GetCurriculumAndResultsByWeekID(db *gorm.DB) error {
+	if err := db.Preload("Result").Preload("Result.Grade").Preload("Curriculum").Preload("Curriculum.Stack").Where("id=?", w.ID).Find(w).Error; err != nil {
+		return err
+	}
+
+	return nil
 }

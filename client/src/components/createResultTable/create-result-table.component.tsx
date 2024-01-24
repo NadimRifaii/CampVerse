@@ -64,6 +64,11 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
           {
             students.map((student: User, studentIndex: number) => {
               const { username } = student
+              if (stacks[0].ID == 0) {
+
+              } else {
+
+              }
               return (
                 <tr key={studentIndex} >
                   <td>{username.split(" ")[0]}</td>
@@ -71,9 +76,9 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
                     stacks.map((stack: Stack, index: number) => {
                       return (
                         <td key={index}>
-                          <input type="text" required onChange={(e) => {
+                          <input type="number" required onChange={(e) => {
                             changeHandler(e, stack, student.id)
-                          }} placeholder={`-`} />
+                          }} placeholder={`-`} disabled={stacks[0].ID === 0} />
                         </td>
                       )
                     })
@@ -85,7 +90,10 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
         </tbody>
       </table>
       <div className="btn-container">
-        <Button text="Create result" />
+        {
+          stacks[0]?.ID != 0 && students.length > 0 &&
+          <Button text="Create result" />
+        }
       </div>
     </form>
   )
