@@ -1,6 +1,9 @@
-const BootcampsEmptyState = () => {
+type BootcampsEmptyStateType = {
+  getBootcamps: () => Promise<void>
+}
+const BootcampsEmptyState = ({ getBootcamps }: BootcampsEmptyStateType) => {
   return (
-    <svg width="400" height="474" viewBox="0 0 400 474" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={getBootcamps} width="400" height="474" viewBox="0 0 400 474" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_0_219)">
         <g filter="url(#filter0_d_0_219)">
           <rect width="400" height="474" rx="28" fill="white" />

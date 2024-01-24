@@ -8,17 +8,20 @@ import EmptyState3 from "../../assets/EmptyState3"
 type AssignmentsListProps = {
   assignments: Assignment[],
   user: User,
-  fetchBootcampAssignments: () => Promise<void>
+  fetchBootcampAssignments: () => Promise<void>,
+  setCurrentActiveComponent: React.Dispatch<React.SetStateAction<string>>
 }
 
-const AssignmentsList = ({ assignments, fetchBootcampAssignments, user }: AssignmentsListProps) => {
+const AssignmentsList = ({ assignments, user, fetchBootcampAssignments, setCurrentActiveComponent }: AssignmentsListProps) => {
   return (
     <div className="assignments-list-container">
       {
         user.role == "student" && assignments.length == 0 ? <EmptyState1 handleClick={() => {
           fetchBootcampAssignments()
         }} /> :
-          user.role == "mentor" && assignments.length == 0 ? <EmptyState3 /> :
+          user.role == "mentor" && assignments.length == 0 ? <EmptyState3 handleClick={() => {
+            setCurrentActiveComponent('create')
+          }} /> :
             assignments.map((assignment, index) => {
               return <AssignmentCard key={index} assignment={assignment} />
             })

@@ -15,20 +15,23 @@ const useLogic = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     fetchBootcampAssignments()
-  }, [currentBootcamp])
+  }, [])
   useEffect(() => {
     categorizeAssignments(assignments)
+
   }, [assignments])
 
   const fetchBootcampAssignments = async () => {
     const loadingToastId = toast.loading('Checking for new assignments...');
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
-      dispatch(setAssignments(cleanAssignmentData(response)))
-      if (response?.length > 0)
+      if (response?.length > 0) {
+        console.log(response)
+        dispatch(setAssignments(cleanAssignmentData(response)))
         toast.success('Check for new assignments is done', { id: loadingToastId });
+      }
       else
-        toast.error(``, { id: loadingToastId });
+        throw new Error('No assignments')
     } catch (error) {
       toast.error(`${error}`, { id: loadingToastId });
     }
@@ -54,12 +57,11 @@ const useLogic = () => {
   }
   const categorizeAssignments = (assignments: Assignment[]) => {
     const currentDate = new Date()
-
     const upcoming = assignments.filter(assignment => {
       const dueDate = new Date(assignment.dueDate);
       return currentDate < dueDate;
     });
-
+    console.log('cadf')
     const old = assignments.filter(assignment => {
       const dueDate = new Date(assignment.dueDate);
       return currentDate >= dueDate;

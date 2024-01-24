@@ -1,6 +1,9 @@
-const EmptyState3 = () => {
+type EmptyState3Props = {
+  handleClick: () => void
+}
+const EmptyState3 = ({ handleClick }: EmptyState3Props) => {
   return (
-    <svg width="400" height="474" viewBox="0 0 400 474" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={handleClick} width="400" height="474" viewBox="0 0 400 474" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_0_286)">
         <g filter="url(#filter0_d_0_286)">
           <rect width="400" height="474" rx="28" fill="white" />

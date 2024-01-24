@@ -38,6 +38,8 @@ const BootcampC = ({ bootcamp }: BootcampProps) => {
         <div className="details">
           <Link to={"/dashboard"} onClick={() => {
             dispatch(setcurrentBootcamp(bootcamp))
+
+            local("activeItem", 'Assignments')
             local("currentBootcamp", JSON.stringify(bootcamp))
           }}  >Enter</Link>
         </div>

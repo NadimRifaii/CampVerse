@@ -29,6 +29,7 @@ export const assignmentsSlice = createSlice({
   initialState,
   reducers: {
     setAssignments(state, { type, payload }: { payload: Assignment[], type: string }) {
+      console.log("akdsljf")
       return {
         assignments: payload
       }

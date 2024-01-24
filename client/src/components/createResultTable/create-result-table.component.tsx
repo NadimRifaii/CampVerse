@@ -74,7 +74,7 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
                         <td key={index}>
                           <input type="text" required onChange={(e) => {
                             changeHandler(e, stack, student.id)
-                          }} placeholder={`Grade for ${stack.name}`} />
+                          }} placeholder={`-`} />
                         </td>
                       )
                     })
