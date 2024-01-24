@@ -23,9 +23,6 @@ const useLogic = () => {
       console.log(error)
     }
   }
-  useEffect(() => {
-    console.log(user)
-  }, [user])
   const getUserWeeklyResults = async () => {
 
     try {
@@ -41,7 +38,7 @@ const useLogic = () => {
     } else {
       getBootcampWeeklyResults()
     }
-  }, [currentBootcamp, currentWeek])
+  }, [currentBootcamp, currentWeek, user])
   return { results, curriculums, currentBootcamp, currentWeek, students, user, setCurrentWeek, getBootcampWeeklyResults }
 }
 export default useLogic

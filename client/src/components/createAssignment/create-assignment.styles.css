@@ -7,6 +7,12 @@
   position: relative;
 }
 
+.create-assignment-container h2 {
+  text-align: center;
+  color: var(--main-white-color);
+  margin-bottom: 15px;
+}
+
 .create-assignment-container input {
   display: block;
   outline: none;

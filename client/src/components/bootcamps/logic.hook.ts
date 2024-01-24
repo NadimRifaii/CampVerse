@@ -5,9 +5,6 @@ import { bootcampsDataSource } from "../../core/datasource/remoteDataSource/boot
 import toast from "react-hot-toast"
 const useLogic = () => {
   const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
-  useEffect(() => {
-    console.log(bootcamps)
-  }, [bootcamps])
   const dispatch = useDispatch()
   const getBootcamps = async () => {
     const loadingToastId = toast.loading('Getting bootcamps...');

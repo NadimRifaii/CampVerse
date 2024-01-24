@@ -27,10 +27,15 @@ export const userSlice = createSlice({
       return {
         ...state, ...payload
       }
+    },
+    removeUser(state, { type, payload }: { payload: any, type: string }) {
+      return {
+        ...initialState
+      }
     }
   }
 })
-export const { setUser, updateUser } = userSlice.actions
+export const { setUser, updateUser, removeUser } = userSlice.actions
 export const user = userSlice.name
 export default userSlice.reducer
 export const extractUserSlice = (global: RootState) => {

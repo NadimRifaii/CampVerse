@@ -30,6 +30,7 @@
   width: 150px;
   color: var(--main-white-color);
   border-radius: 5px;
+  padding: 12px;
   background-color: #02baff8c;
 }
 

@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import './user-row.styles.css'
 import { useNavigate } from 'react-router-dom'
 import { CurrentUserContext } from '../../utils/contexts/current-user.context'
-import { ActiveEditContext } from '../../utils/contexts/active-edit-profile.context'
 import { User } from '../../core/types/user'
 type UserRowProps = {
   info: User,
@@ -11,11 +10,8 @@ type UserRowProps = {
   showBtn: string
 }
 const UserRow = ({ info, showBtn }: UserRowProps) => {
-  const activeEditContext = useContext(ActiveEditContext)
-  const currentUserContext = useContext(CurrentUserContext)
+  const { setCurrentUser } = useContext(CurrentUserContext)
   const navigate = useNavigate()
-  const { setCurrentUser } = currentUserContext || {};
-  const { active, setActive } = activeEditContext || {};
   return (
     <div className="user-row">
       <div className="left">

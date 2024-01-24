@@ -3,6 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.user-row:not(:last-of-type) {
+  border-bottom: 1px solid #02baff40;
+
 }
 
 .user-row .left {

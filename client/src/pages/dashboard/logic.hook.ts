@@ -32,7 +32,6 @@ const useLogic = () => {
       dispatch(setcurrentBootcamp(JSON.parse(local("currentBootcamp") || '')))
       local("token", data.token)
     } catch (error) {
-      console.log(error)
       return navigate('/home')
     }
   }
@@ -41,7 +40,6 @@ const useLogic = () => {
       const data = await userDataSource.getUser({})
       dispatch(updateUser(data.info))
     } catch (error) {
-      console.log(error)
     }
   }
   useEffect(() => {
@@ -56,7 +54,6 @@ const useLogic = () => {
         }
         dispatch(setBootcamps(response))
       } catch (error) {
-        console.log(error)
       }
     }
     getBootcamps()

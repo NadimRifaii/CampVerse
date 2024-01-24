@@ -20,6 +20,8 @@ const CreateAssignment = ({ fetchBootcampAssignments }: CreateAssignmentProps) =
   }, [])
   return (
     <div className="create-assignment-container">
+      <h2>Create Assignment</h2>
+
       <div className="assignment-info">
         <div className="title">
           <input type='text' value={assignmentTitle} onChange={(e) => {

@@ -26,7 +26,6 @@ const useLogic = () => {
     try {
       const response = await assignmentDataSource.getBootcampAssignments({ id: currentBootcamp.id })
       if (response?.length > 0) {
-        console.log(response)
         dispatch(setAssignments(cleanAssignmentData(response)))
         toast.success('Check for new assignments is done', { id: loadingToastId });
       }
@@ -61,7 +60,6 @@ const useLogic = () => {
       const dueDate = new Date(assignment.dueDate);
       return currentDate < dueDate;
     });
-    console.log('cadf')
     const old = assignments.filter(assignment => {
       const dueDate = new Date(assignment.dueDate);
       return currentDate >= dueDate;

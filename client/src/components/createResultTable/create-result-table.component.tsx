@@ -40,7 +40,6 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
         userId,
         grades
       })
-      console.log(student)
     })
     setRequest(arr)
   }, [students, stacks])

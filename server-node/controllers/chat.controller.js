@@ -25,7 +25,7 @@ const httpAccessChat = async (req, res) => {
       }
     }
   }
-
+  console.log({ ['user']: req.user, ['user2']: user })
   let isChat = await ChatModel.find({
     isGroupChat: false,
     users: { $all: [req.user._id, user._id] }

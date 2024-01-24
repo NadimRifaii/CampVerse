@@ -19,7 +19,6 @@ const useLogic = () => {
     }
   }
   useEffect(() => {
-    // console.log(currentBootcamp)
     fetchSchedule()
   }, [])
   return { currentBootcamp, schedule }

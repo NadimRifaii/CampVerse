@@ -14,7 +14,6 @@ export const resultsDataSource = {
     }
   },
   getUserWeeklyResults: async (data: { userId: number, weekId: number }) => {
-    console.log(data)
     try {
       const response = await sendRequest({
         route: `/result/user-results/${data.weekId}`,

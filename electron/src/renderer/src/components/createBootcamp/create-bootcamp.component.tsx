@@ -26,7 +26,7 @@ const CreateBootcamp = () => {
             </div>
           </div>
           <div className="buttons-container">
-            <Button text="Cancle" className='cancle-btn' handleClick={resetFields} />
+            <Button text="Cancel" className='cancle-btn' handleClick={resetFields} />
             <Button text="Create" className='save-btn' />
           </div>
         </form>
