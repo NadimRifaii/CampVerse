@@ -125,3 +125,7 @@
   border-radius: 5px;
   color: var(--main-white-color);
 }
+
+.add-curriculum-card .select-box {
+  margin-bottom: 20px;
+}

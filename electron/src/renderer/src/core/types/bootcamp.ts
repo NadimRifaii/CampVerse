@@ -7,5 +7,6 @@ export type Bootcamp = {
   numberOfWeeks: number,
   mentors: [],
   students: [],
-  stacks: Stack[]
+  stacks: Stack[],
+  weeks: []
 }

@@ -3,13 +3,14 @@ import { extractCurriculumsSlice, setCurriculums } from "@renderer/core/datasour
 import { extractcurrentBootcampSlice } from "@renderer/core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { useSelector, useDispatch } from "react-redux"
 import { curriculumsDataSource } from "@renderer/core/datasource/remoteDataSource/curriculums";
+import toast from "react-hot-toast";
 const useLogic = () => {
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice);
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const [activeAddModal, setActiveAddModal] = useState<boolean>(false)
+  const [currentWeek, setCurrentWeek] = useState<number>(currentBootcamp?.weeks[0]?.ID || 1)
   const dispatch = useDispatch()
   useEffect(() => {
-
     fetchCurriculums()
   }, [])
   const fetchCurriculums = async () => {
@@ -37,16 +38,19 @@ const useLogic = () => {
     setStacksArray(updatedStacksArray);
   };
   const saveCurriculum = async () => {
+    let loadingToastId = ''
     if (currentCurriculum != "" && stacksArray[stacksArray.length - 1].name != "") {
       try {
+        loadingToastId = toast.loading('Creating the curriculum...');
         const response = await curriculumsDataSource.addCurriculumToBootcamp({
           bootcampId: currentBootcamp.id,
+          weekId: currentWeek,
           title: currentCurriculum,
           stacks: stacksArray
         })
-        console.log(response)
+        toast.success("Curriculum created successfully", { id: loadingToastId })
       } catch (error) {
-        console.log(error)
+        toast.error("This week already has a curriculum", { id: loadingToastId })
       }
       setCurrentCurriculum('')
       setStacksArray([{
@@ -55,7 +59,10 @@ const useLogic = () => {
       await fetchCurriculums()
     }
   }
-  return { stacksArray, currentCurriculum, curriculums, activeAddModal, setActiveAddModal, updateStack, addNewStack, currentCurriculumChangeHandler, saveCurriculum };
+  useEffect(() => {
+    console.log(currentBootcamp)
+  }, [])
+  return { stacksArray, currentCurriculum, curriculums, activeAddModal, currentBootcamp, currentWeek, setCurrentWeek, setActiveAddModal, updateStack, addNewStack, currentCurriculumChangeHandler, saveCurriculum };
 };
 
 export default useLogic;
