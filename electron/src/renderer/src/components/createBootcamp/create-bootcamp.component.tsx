@@ -16,7 +16,7 @@ const CreateBootcamp = () => {
               <input type="text" required value={credentials.name} name="name" placeholder="Bootcamp name" onChange={changeHandler} />
             </div>
             <div className="holder">
-              <input type="text" required value={credentials.numberOfWeeks} name="numberOfWeeks" placeholder="Number of weeks" onChange={changeHandler} />
+              <input type="number" required value={credentials.numberOfWeeks} name="numberOfWeeks" placeholder="Number of weeks" onChange={changeHandler} />
             </div>
             <div className="holder">
               <textarea required name="outcomes" value={credentials.outcomes} placeholder="Learning outcomes" onChange={changeHandler}></textarea>

@@ -67,7 +67,7 @@ export const useLogic = () => {
       const response = await signInWithGooglePopup()
       const userAuth = response.user
       if (userAuth.email !== null)
-        setCredentials({ ...credentials, ['email']: userAuth.email })
+        setCredentials({ ...credentials, ['email']: userAuth.email, ['password']: '' })
       setGoogleSignInComplete(true);
     } catch (error) {
       console.log(error)

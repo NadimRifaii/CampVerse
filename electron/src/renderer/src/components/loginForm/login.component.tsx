@@ -9,11 +9,11 @@ export const Login = () => {
         e.preventDefault()
         loginClick()
       }} >
-        <h1 style={{ fontSize: "30px" }} >LogIn</h1>
+        <h1 style={{ fontSize: "30px" }} >Login</h1>
         {
           inputLabels.map(inputLabel => <InputLabel key={inputLabel.id} info={inputLabel} />)
         }
-        <Button className="submit" text="LogIn" />
+        <Button className="submit" text="Login" />
       </form>
     </div>
   )

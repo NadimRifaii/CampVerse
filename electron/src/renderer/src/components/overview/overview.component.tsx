@@ -53,7 +53,7 @@ const Overview = () => {
           curriculums.map((curriculum, index) => <CurriculumCard key={index} curriculum={curriculum} />)
         }
         <div className="add-curriculum-btn">
-          <Button text='Add Module' handleClick={() => {
+          <Button text='Add module' handleClick={() => {
             setActiveAddModal(true)
           }} />
         </div>

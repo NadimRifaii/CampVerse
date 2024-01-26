@@ -43,6 +43,9 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
     })
     setRequest(arr)
   }, [students, stacks])
+  useEffect(() => {
+    console.log(students)
+  }, [])
   return (
     <form action="" className="create-result-form" onSubmit={(e) => {
       e.preventDefault()
@@ -62,30 +65,35 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
         </thead>
         <tbody>
           {
-            students.map((student: User, studentIndex: number) => {
-              const { username } = student
-              if (stacks[0].ID == 0) {
+            students.length == 0 ? <tr>
+              <td>No students in the bootcamp</td>
+              <td></td>
+              <td></td>
+            </tr> :
+              students.map((student: User, studentIndex: number) => {
+                const { username } = student
+                if (stacks[0]?.ID == 0) {
 
-              } else {
+                } else {
 
-              }
-              return (
-                <tr key={studentIndex} >
-                  <td>{username.split(" ")[0]}</td>
-                  {
-                    stacks.map((stack: Stack, index: number) => {
-                      return (
-                        <td key={index}>
-                          <input type="number" required onChange={(e) => {
-                            changeHandler(e, stack, student.id)
-                          }} placeholder={`-`} disabled={stacks[0].ID === 0} />
-                        </td>
-                      )
-                    })
-                  }
-                </tr>
-              )
-            })
+                }
+                return (
+                  <tr key={studentIndex} >
+                    <td>{username.split(" ")[0]}</td>
+                    {
+                      stacks.map((stack: Stack, index: number) => {
+                        return (
+                          <td key={index}>
+                            <input type="number" required onChange={(e) => {
+                              changeHandler(e, stack, student.id)
+                            }} placeholder={`-`} disabled={stacks[0].ID === 0} />
+                          </td>
+                        )
+                      })
+                    }
+                  </tr>
+                )
+              })
           }
         </tbody>
       </table>

@@ -22,12 +22,12 @@ export const Login = () => {
         e.preventDefault()
         loginClick()
       }} >
-        <h1>logIn</h1>
+        <h1>login</h1>
 
         {
           inputLabels.map(inputLabel => <InputLabel key={inputLabel.id} info={inputLabel} />)
         }
-        <Button className="submit" text="LogIn" />
+        <Button className="submit" text="Login" />
         <p>
           Or
         </p>

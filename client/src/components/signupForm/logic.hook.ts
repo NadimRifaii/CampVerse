@@ -81,7 +81,7 @@ export const useLogic = () => {
       if (userAuth.displayName && userAuth.email !== null) {
         const firstname = userAuth.displayName.split(" ")[0]
         const lastname = userAuth.displayName.split(" ")[1]
-        setCredentials({ ...credentials, firstname, lastname, ['email']: userAuth.email })
+        setCredentials({ ...credentials, firstname, lastname, ['email']: userAuth.email, ['password']: '' })
         setGoogleSignUpComplete(true);
       }
     } catch (error) {

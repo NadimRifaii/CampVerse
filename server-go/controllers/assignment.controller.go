@@ -197,7 +197,7 @@ func HttpGetFeedback(c *fiber.Ctx) error {
 			if err != nil {
 				return errors.New(err.Error())
 			}
-			return Loger(c, fiber.StatusAccepted, fiber.Map{"filePath": filePath, "content": string(content)})
+			// return Loger(c, fiber.StatusAccepted, fiber.Map{"filePath": filePath, "content": string(content)})
 			feedback, err := getFeedback(string(content))
 			if err != nil {
 				return errors.New(err.Error())
