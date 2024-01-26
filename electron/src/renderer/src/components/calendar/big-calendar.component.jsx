@@ -28,6 +28,11 @@ const Calendar = () => {
           initialView='timeGridWeek'
           slotMinTime='10:00:00'
           slotMaxTime='21:00:00'
+          initialDate={'2024-01-01'}
+          validRange={{
+            start: '2024-01-01',
+            end: '2024-01-28'
+          }}
         />
       </div>
       {

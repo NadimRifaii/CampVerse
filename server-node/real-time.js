@@ -36,7 +36,7 @@ const realTime = (httpServer) => {
           io.to(user.email).emit("notification", {
             type: "new_message",
             message: "You have a new message!",
-            chatId: chat._id, // You can include more details if needed
+            chatId: chat._id,
           });
         }
       })
