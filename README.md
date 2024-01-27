@@ -79,8 +79,9 @@
 | Auth screen | Google authentication |
 | ---| ---|
 | <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif" /> |
-| Home screen  | Menu Screen | 
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| Live chat + notification | 
+| <img src="./readme/gifs/LiveChatNotifications-ezgif.com-video-to-gif-converter.gif" /> | 
+
 
 ### Admin Screens 
 | Login screen  | Register screen |  Landing screen |
