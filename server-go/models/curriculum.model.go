@@ -7,7 +7,7 @@ import (
 type Curriculum struct { //
 	ID         uint `gorm:"primarykey"`
 	BootcampID uint
-	Title      string `json:"title" gorm:"not null;size:255;unique"`
+	Title      string `json:"title" gorm:"not null;size:255;"`
 	Bootcamp   Bootcamp
 	Stack      []*Stack `json:"stacks"  gorm:"many2many:curriculum_stacks;"`
 	WeekId     uint     `gorm:"foreignkey:weekId;unique" json:"weekId"`

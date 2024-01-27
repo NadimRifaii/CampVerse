@@ -11,7 +11,16 @@ const useLogic = () => {
   const [events, setEvents] = useState([])
   const { schedules } = useSelector(extractSchedulesSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
+  const [bootcampStartDate, setBootcampStartDate] = useState('')
   const dispatch = useDispatch()
+
+  // const formattingDatesTest=()=>{
+  //   // Get the year, month, and day
+  //   let year = currentDate.getFullYear();
+  //   let month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based, so add 1
+  //   let day = currentDate.getDate().toString().padStart(2, '0');
+  // }
+
   const fetchBootcampSchedules = async () => {
     try {
       const id = currentBootcamp.id
@@ -21,6 +30,7 @@ const useLogic = () => {
       console.log(error)
     }
   }
+
   const displayEvents = () => {
     let calendarApi = calendarRef.current.getApi();
     calendarApi.removeAllEventSources();
@@ -41,6 +51,7 @@ const useLogic = () => {
       calendarApi.addEventSource(newEvents);
     }
   };
+
   const saveEvents = async () => {
     const loadingToastId = toast.loading('Saving...');
     try {
@@ -59,16 +70,7 @@ const useLogic = () => {
       console.log(error)
     }
   }
-  useEffect(() => {
-    fetchBootcampSchedules()
-  }, [])
-  useEffect(() => {
-    console.log(sessions)
-  }, [sessions])
-  useEffect(() => {
-    if (schedules)
-      displayEvents()
-  }, [schedules])
+
   const onEventAdded = event => {
     let calendarApi = calendarRef.current.getApi();
     calendarApi.removeAllEventSources();
@@ -78,6 +80,15 @@ const useLogic = () => {
     setEvents(updatedEvents);
     calendarApi.addEventSource(updatedEvents);
   }
-  return { modalOpen, setModalOpen, onEventAdded, saveEvents, events, sessions, calendarRef }
+
+  useEffect(() => {
+    fetchBootcampSchedules()
+  }, [])
+  useEffect(() => {
+    if (schedules)
+      displayEvents()
+  }, [schedules])
+
+  return { modalOpen, events, sessions, calendarRef, setModalOpen, onEventAdded, saveEvents }
 }
 export default useLogic

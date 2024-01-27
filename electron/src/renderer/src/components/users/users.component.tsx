@@ -5,6 +5,9 @@ import UserRow from '../userRow/user-row.component'
 import { Button } from '../common/button/button.component'
 import { CurrentUserContext } from '@renderer/utils/contexts/current-user.context'
 import { useNavigate } from 'react-router-dom'
+import { User } from '@renderer/core/types/user'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 type UsersProps = {
   userType?: "student" | "mentor",
   showBtn: string,
@@ -58,7 +61,7 @@ const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeade
                     'email': currentUser?.email,
                     'bootcampName': activeBootcamp
                   })
-                  setCurrentUser(null)
+                  setCurrentUser({} as User)
                 }
                 setActiveBootcamp(false)
               }} className={activeBootcamp ? 'active' : ""} />
@@ -76,11 +79,14 @@ const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeade
                 return <UserRow key={user.email} setActiveBootcamp={setActiveBootcamp} showBtn={showBtn} info={user} />
               return null
             })
-              : <h1>No such user</h1>
+              : <>
+                <h1>User not found</h1>
+                <FontAwesomeIcon icon={faUserSlash} />
+              </>
           }
         </div>
       </div >
-    </div>
+    </div >
   )
 }
 export default Users

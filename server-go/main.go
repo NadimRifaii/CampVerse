@@ -46,6 +46,7 @@ func main() {
 	app := setupApp()
 
 	protectedPaths := []string{"/auth", "/schedule", "/bootcamp", "/stacks", "/mentor", "/assignment", "/user", "/curriculum", "/result"}
+
 	groups := setupProtectedGroups(app, protectedPaths)
 
 	registerRoutes(groups,

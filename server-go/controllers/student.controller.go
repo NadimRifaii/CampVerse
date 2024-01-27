@@ -60,9 +60,9 @@ func GetStudent(c *fiber.Ctx, db *gorm.DB) (*models.Student, error) {
 	if err := student.GetStudentByID(db, user.ID); err != nil {
 		return nil, errors.New("Unauthorized")
 	}
-
 	return student, nil
 }
+
 func populateSubmission(studentSubmission *models.StudentSubmission, body *SubmissionBody, db *gorm.DB) error {
 	stack := new(models.Stack)
 	if stackErr := stack.GetStackByName(db, body.StackName); stackErr != nil {

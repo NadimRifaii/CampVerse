@@ -35,12 +35,7 @@ func handleMentorAction(c *fiber.Ctx, action string) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Mentor action successfull"})
 }
-func verifyStackRequest(c *fiber.Ctx, stack *models.Stack) error {
-	if err := c.BodyParser(stack); err != nil {
-		return errors.New("invalid request body")
-	}
-	return nil
-}
+
 func GetMentor(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, error) {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil || user.UserRole.RoleName != "mentor" {
@@ -58,7 +53,7 @@ func GetMentor(c *fiber.Ctx, db *gorm.DB) (*models.Mentor, error) {
 
 func getStack(c *fiber.Ctx, db *gorm.DB) (*models.Stack, error) {
 	stack := new(models.Stack)
-	if err := verifyStackRequest(c, stack); err != nil {
+	if err := ValidateRequest(c, stack); err != nil {
 		return nil, errors.New("invalid request body")
 	}
 

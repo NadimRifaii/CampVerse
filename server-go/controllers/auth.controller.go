@@ -148,20 +148,11 @@ func populateMentor(mentor *models.Mentor, user *models.User, body *UserInfoRequ
 	mentor.Position = body.Position
 	mentor.User = *user
 }
-func Loger(c *fiber.Ctx, status int, m fiber.Map) error {
-	return c.Status(status).JSON(m)
-}
-func CreateRecordInDb(record interface{}) error {
-	db := database.Db
-	result := db.Create(record)
-	return checkExistingEmail(result)
-}
+
 func checkExistingEmail(result *gorm.DB) error {
 	if result.Error != nil {
-		// Check if the error is a MySQL error with code 1062 (duplicate entry)
 		mysqlErr, isMySQLError := result.Error.(*mysql.MySQLError)
 		if isMySQLError && mysqlErr.Number == 1062 {
-			// Parse the error message to get the conflicting email
 			if strings.Contains(mysqlErr.Message, "for key 'email'") {
 				return errors.New("email is already in use")
 			}

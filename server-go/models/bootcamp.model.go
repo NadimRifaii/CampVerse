@@ -11,6 +11,8 @@ type Bootcamp struct {
 	Name             string   `json:"name" gorm:"not null;default:'first';size:255;unique"`
 	LearningOutcomes string   `json:"outcomes" gorm:"not null;"`
 	TargetAudiance   string   `json:"audience" gorm:"not null;;size:255"`
+	StartDate        string   `json:"startDate" gorm:"size:255"`
+	EndDate          string   `json:"endDate" gorm:"size:255"`
 	NumberOfWeeks    int      `json:"numberOfWeeks" gorm:"not null;"`
 	Users            []*User  `gorm:"many2many:bootcamp_users;"`
 	Stacks           []*Stack `gorm:"many2many:bootcamp_stack"`

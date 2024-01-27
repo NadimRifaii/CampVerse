@@ -21,6 +21,19 @@
   margin-bottom: 15px;
 }
 
+.create-bootcamp .MuiFormControl-root {
+  background-color: var(--main-white-color);
+}
+
+.create-bootcamp .MuiInputBase-root {
+  width: 100%;
+  position: relative;
+}
+
+.create-bootcamp .MuiInputBase-root input::placeholder {
+  color: red;
+}
+
 .create-bootcamp .holder {
   margin-bottom: 15px;
 }
@@ -71,5 +84,9 @@
 }
 
 .create-bootcamp .buttons-container .save-btn {
+  color: var(--main-white-color);
+}
+
+.create-bootcamp .holder label {
   color: var(--main-white-color);
 }

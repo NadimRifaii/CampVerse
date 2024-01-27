@@ -10,24 +10,27 @@ import Users from './components/users/users.component'
 import BootcampDetails from './components/bootcampDetails/bootcamp-details.component'
 import Chat from './components/chat/chat.component'
 import Schedule from './components/schedule/schedule.component'
-
-function App(): JSX.Element {
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+function App() {
 
   return (
     <>
-      <Toaster />
-      <Routes>
-        <Route path="/" element={<AuthPage />} />
-        <Route path='/dashboard' element={<DashBoard />}>
-          <Route index element={<Bootcamps />} />
-          <Route path="/dashboard/bootcamps" element={<Bootcamps />} />
-          <Route path='/dashboard/Create' element={<CreateBootcamp />} />
-          <Route path='/dashboard/Users' element={<Users showHeader={true} userType='student' showBtn='Add' />} />
-          <Route path='/dashboard/details' element={<BootcampDetails />} />
-          <Route path="/dashboard/chat" element={<Chat />} />
-          <Route path="/dashboard/schedule" element={<Schedule />} />
-        </Route>
-      </Routes>
+      <LocalizationProvider dateAdapter={AdapterDayjs} >
+        <Toaster />
+        <Routes>
+          <Route path="/" element={<AuthPage />} />
+          <Route path='/dashboard' element={<DashBoard />}>
+            <Route index element={<Bootcamps />} />
+            <Route path="/dashboard/bootcamps" element={<Bootcamps />} />
+            <Route path='/dashboard/Create' element={<CreateBootcamp />} />
+            <Route path='/dashboard/Users' element={<Users showHeader={true} userType='student' showBtn='Add' />} />
+            <Route path='/dashboard/details' element={<BootcampDetails />} />
+            <Route path="/dashboard/chat" element={<Chat />} />
+            <Route path="/dashboard/schedule" element={<Schedule />} />
+          </Route>
+        </Routes>
+      </LocalizationProvider>
     </>
   )
 }

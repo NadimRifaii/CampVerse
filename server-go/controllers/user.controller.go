@@ -1,8 +1,6 @@
 package controllers
 
 import (
-	"errors"
-
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/NadimRifaii/campverse/models"
 	"github.com/gofiber/fiber/v2"
@@ -52,6 +50,7 @@ func HttpUploadImage(c *fiber.Ctx) error {
 	c.SaveFile(file, "public/images/"+file.Filename)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
 }
+
 func HttpUploadFile(c *fiber.Ctx) error {
 	user := new(models.User)
 	if user = GetAuthUser(c); user == nil {
@@ -68,6 +67,7 @@ func HttpUploadFile(c *fiber.Ctx) error {
 	c.SaveFile(file, "public/files/"+substring+file.Filename)
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"file": file})
 }
+
 func HttpGetAllUsers(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
@@ -80,6 +80,7 @@ func HttpGetAllUsers(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": users})
 }
+
 func HttpGetAllMentorUsers(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
@@ -92,6 +93,7 @@ func HttpGetAllMentorUsers(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": mentors})
 }
+
 func HttpGetAllStudentUsers(c *fiber.Ctx) error {
 	db := database.Db
 	user := new(models.User)
@@ -104,6 +106,7 @@ func HttpGetAllStudentUsers(c *fiber.Ctx) error {
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"users": students})
 }
+
 func HttpUpdateUserProfile(c *fiber.Ctx) error {
 	user := new(models.User)
 	db := database.Db
@@ -141,7 +144,6 @@ func HttpUpdateUserProfile(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully", "body": body})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"info": "updated successfully"})
-
 }
 
 func HttpUpdateUserRole(c *fiber.Ctx) error {
@@ -165,10 +167,4 @@ func HttpUpdateUserRole(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusAccepted, fiber.Map{"error": err.Error()})
 	}
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "User updated"})
-}
-func ValidateRequest(c *fiber.Ctx, body interface{}) error {
-	if err := c.BodyParser(body); err != nil {
-		return errors.New("invalid request body")
-	}
-	return nil
 }

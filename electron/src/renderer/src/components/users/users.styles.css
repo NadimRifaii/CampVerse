@@ -198,6 +198,12 @@ ul::-webkit-scrollbar-track {
   border-radius: 5px;
 }
 
+.users-container svg {
+  font-size: 100px;
+  margin-top: 10px;
+  color: var(--main-blue-color);
+}
+
 .users-container .bootcamps-list button.active {
   background-color: var(--main-blue-color)
 }

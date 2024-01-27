@@ -1,6 +1,8 @@
 import { Button } from "../common/button/button.component";
 import './create-bootcamp.styles.css'
+import 'react-datepicker/dist/react-datepicker.css';
 import useLogic from "./logic.hook";
+import { useState } from "react";
 const CreateBootcamp = () => {
   const { changeHandler, credentials, resetFields, createBootcamp } = useLogic()
   return (
@@ -14,6 +16,11 @@ const CreateBootcamp = () => {
           <div className="inputs-container">
             <div className="holder">
               <input type="text" required value={credentials.name} name="name" placeholder="Bootcamp name" onChange={changeHandler} />
+            </div>
+            <div className="holder">
+              <input type="date" onChange={(e) => {
+                console.log(e.target.value)
+              }} id="start-date" />
             </div>
             <div className="holder">
               <input type="number" required value={credentials.numberOfWeeks} name="numberOfWeeks" placeholder="Number of weeks" onChange={changeHandler} />
