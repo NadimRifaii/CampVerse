@@ -38,12 +38,11 @@ func HttpGetSchedule(c *fiber.Ctx) error {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
 
-	// return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": schedule})
-	cleaned, err := schedule.GetCleanedScheduleWithSessionsAndUsers()
+	cleanedSchedule, err := schedule.GetCleanedScheduleWithSessionsAndUsers()
 	if err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": cleaned})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"schedule": cleanedSchedule})
 }
 func HttpGetBootcampSchedules(c *fiber.Ctx) error {
 	db := database.Db
@@ -101,7 +100,7 @@ func HttpCreateSchedule(c *fiber.Ctx) error {
 			StartDate:  sessionData.StartDate,
 			EndDate:    sessionData.EndDate,
 			Title:      sessionData.Title,
-			ScheduleID: schedule.ID, // Set ScheduleID for the session
+			ScheduleID: schedule.ID,
 			User:       []*models.User{},
 		}
 

@@ -197,13 +197,11 @@ func HttpGetFeedback(c *fiber.Ctx) error {
 			if err != nil {
 				return errors.New(err.Error())
 			}
-			// return Loger(c, fiber.StatusAccepted, fiber.Map{"filePath": filePath, "content": string(content)})
 			feedback, err := getFeedback(string(content))
 			if err != nil {
 				return errors.New(err.Error())
 			}
 
-			// JSON string into map, like Json.Parse and stringify in js
 			var feedbackMap map[string]interface{}
 			if err := json.Unmarshal([]byte(feedback), &feedbackMap); err != nil {
 				return errors.New(err.Error())

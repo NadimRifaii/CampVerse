@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/NadimRifaii/campverse/database"
@@ -72,7 +71,6 @@ func HttpGetUserWeeklyResults(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"results": results})
 }
 func HttpTestingWeeklyResults(c *fiber.Ctx) error {
-	fmt.Println(";ajdflk;jasdf")
 	var request struct {
 		WeekId uint `json:"weekId"`
 	}

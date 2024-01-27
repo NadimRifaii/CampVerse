@@ -5,42 +5,55 @@
 <!-- project philosophy -->
 <img src="./readme/title2.svg"/>
 
-> A website where mentors and students meet up for a smooth bootcamp journey 
+> A mobile app for ordering coffee on-the-go, making it easier for coffee lovers to get their favorite beverages without waiting in line.
 >
-> CampVerse simplifies the mentorship journey with a user-friendly platform. We're committed to saving time, maximizing learning, and ensuring satisfaction. Join us in elevating the educational experience, where mentors and students meet seamlessly for a transformative journey.
+> Coffee Express aims to streamline the coffee-ordering process by providing a user-friendly platform for customers to place orders and pick up their coffee at their convenience. We believe in enhancing the coffee experience by saving time and ensuring customer satisfaction.
 
 ### Admin Stories
-- As an admin, I should be able to create new bootcamps with a name, description, number of weeks and target audience.
-- As an admin, I should be able to add mentors and students to bootcamps.
-- As an admin, I want to access user profiles containing their details and edit their profile.
-- As an admin, I want to invite a certain user to a bootcamp , specifying their role.
-- As an admin, I want to the ability to live chat with all users and get notification when a user sends me a message.
+- As an admin, I should be able to create new bootcamps and add students and mentors to it
 - As an admin, I want the ability to create the bootcamp curriculum containig all the modules and stack that will be given during the bootcamp
 - As an admin, I want the ability to create the bootcamp's schedule , assigning sessions to mentors with specific time and specific dates
 
+### Mentor Stories
+- As a mentor, I want to create new assignments 
+- As a mentor, I want the ability to get ai feedback on any of my students assignments
+- As a mentor, I want to publish weekly results to the students in the bootcamp
+
 ### Student Stories
 - As a student, I have the ability to submit an assignment and upload my files
-- As a student, I have the ability to download assignment files 
+- As a student, I want to see my private weekly results 
 - As a student, I have the ability to see the bootcamp's weekly schedule 
-- As a student, I expect the ability to have a private chat with any of my mentors and friends in the bootcamp and get notification when a user sends me a message.
 
-### Mentor Stories
-- As a mentor, I want to create new assignments for my bootcamp 
-- As a mentor, I want the ability to get ai feedback on any of my students assignments
-- As a mentor, I want to post assignments to students and view all previous and upcoming assignments.
-- As a mentor, I have the ability to live chat with other users and get notification when a user sends me a message.
+
 
 <br><br>
-
-<!-- Prototyping -->
+<!-- Tech stack -->
 <img src="./readme/title3.svg"/>
+
+###  CampVerse is built using the following technologies:
+
+- This project uses the [React Library](https://react.dev/). React is a JavaScript library for building user interfaces. It makes it easy to create reusable components and manage complex UIs.
+
+- This project uses [Go](https://go.dev/) For the backend side of the application with [Fiber](https://gofiber.io). Fiber is a Go web framework built on top of Fasthttp, the fastest HTTP engine for Go. It's designed to ease things up for fast development with zero memory allocation and performance in mind.
+
+- In addition to [Go](https://go.dev/) with [Fiber](https://gofiber.io) for the main backend functionality, this project uses also [Node.js](https://nodejs.org/en) paired with the [Express.js](https://nodejs.org/en) to handle the real-time features of this project.
+- This project uses [MySQL](https://www.mysql.com/) as the primary database which is ideal for applications with structured data, requiring complex queries and a fixed schema.
+
+- This project also uses [MongoDB](https://www.mongodb.com/) for the real time features of the project.
+
+- To send real time messages and notifications, the project uses [Socket.IO](https://socket.io/). Which is a JavaScript library for real time web applications. It enables bidirectional communication between clients and servers in real time .
+
+- This project uses [Electron](https://www.electronjs.org/) For the admin side, electron enable building desktop applications with web libraries and frameworks
+
+<br><br>
+<!-- UI UX -->
+<img src="./readme/title4.svg"/>
+
 
 > We designed Coffee Express using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
-### Wireframes
-| Auth Page  | Google authentication |  Landing screen |
-| ---| ---| ---|
-| <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif"/> | <img src="./readme/gifs/LandingPage-ezgif.com-optimize.gif" /> |
+- Project Figma design [figma](https://www.figma.com/file/LsuOx5Wnh5YTGSEtrgvz4l/Purrfect-Pals?type=design&node-id=257%3A79&mode=design&t=adzbABt5hbb91ucZ-1)
+
 
 ### Mockups
 | Home screen  | Menu Screen | Order Screen |
@@ -49,10 +62,20 @@
 
 <br><br>
 
-<!-- Implementation -->
-<img src="./readme/title4.svg"/>
+<!-- Database Design -->
+<img src="./readme/title5.svg"/>
 
-> Using the wireframes and mockups as a guide, we implemented the Coffee Express app with the following features:
+###  Architecting Data Excellence: Innovative Database Design Strategies:
+
+- Insert ER Diagram here
+
+
+<br><br>
+
+
+<!-- Implementation -->
+<img src="./readme/title6.svg"/>
+
 
 ### User Screens (Mobile)
 | Login screen  | Register screen | Landing screen | Loading screen |
@@ -70,21 +93,37 @@
 
 <br><br>
 
-<!-- Tech stack -->
-<img src="./readme/title5.svg"/>
 
-###  Coffee Express is built using the following technologies:
+<!-- Prompt Engineering -->
+<img src="./readme/title7.svg"/>
 
-- This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
-- For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
+###  Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
+
+- This project uses advanced prompt engineering techniques to optimize the interaction with natural language processing models. By skillfully crafting input instructions, we tailor the behavior of the models to achieve precise and efficient language understanding and generation for various tasks and preferences.
 
 <br><br>
 
+<!-- AWS Deployment -->
+<img src="./readme/title8.svg"/>
+
+###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
+
+- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
+
+<br><br>
+
+<!-- Unit Testing -->
+<img src="./readme/title9.svg"/>
+
+###  Precision in Development: Harnessing the Power of Unit Testing:
+
+- This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
+
+<br><br>
+
+
 <!-- How to run -->
-<img src="./readme/title6.svg"/>
+<img src="./readme/title10.svg"/>
 
 > To set up Coffee Express locally, follow these steps:
 
@@ -100,11 +139,9 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key at [example](https://example.com)
 2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
+   git clone [github](https://github.com/your_username_/Project-Name.git)
 3. Install NPM packages
    ```sh
    npm install

@@ -45,7 +45,9 @@ func HttpSignup(c *fiber.Ctx) error {
 		body.RoleName = "student"
 	}
 	getRoleId(&user.UserRole, body.RoleName)
-	populateUser(user, body, user.UserRole.ID)
+	if err := populateUser(user, body, user.UserRole.ID); err != nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
+	}
 	tokenString := createJwtToken(user, user.UserRole.RoleName)
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), 10)
 	if err != nil {
@@ -135,13 +137,18 @@ func HttpRefresh(c *fiber.Ctx) error {
 	return Loger(c, fiber.StatusAccepted, fiber.Map{"token": tokenEncoded, "user": userInfoResponse})
 }
 
-func populateUser(user *models.User, body *UserInfoRequest, id uint) {
-	user.Email = body.Email
-	user.Password = body.Password
-	user.RoleID = id
-	user.UserName = body.Username
-	user.FirstName = body.FirstName
-	user.LastName = body.Lastname
+func populateUser(user *models.User, body *UserInfoRequest, id uint) error {
+	if body.Email == "" || body.Password == "" {
+		return errors.New("Invalid request")
+	} else {
+		user.Email = body.Email
+		user.Password = body.Password
+		user.RoleID = id
+		user.UserName = body.Username
+		user.FirstName = body.FirstName
+		user.LastName = body.Lastname
+		return nil
+	}
 }
 func populateMentor(mentor *models.Mentor, user *models.User, body *UserInfoRequest) {
 	mentor.Speciality = body.Speciality
