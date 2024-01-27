@@ -76,9 +76,6 @@
 
 
 ### User Screens
-| Landing page |
-| ---|
-<img src="./readme/gifs/LandingPage-ezgif.com-optimize.gif" /> 
 | Auth screen | Google authentication |
 | ---| ---|
 | <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif" /> |
