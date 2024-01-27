@@ -12,15 +12,12 @@ const useLogic = () => {
   const { schedules } = useSelector(extractSchedulesSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
   const [bootcampStartDate, setBootcampStartDate] = useState('')
+  const [bootcampEndDate, setBootcampEndDate] = useState('')
   const dispatch = useDispatch()
-
-  // const formattingDatesTest=()=>{
-  //   // Get the year, month, and day
-  //   let year = currentDate.getFullYear();
-  //   let month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based, so add 1
-  //   let day = currentDate.getDate().toString().padStart(2, '0');
-  // }
-
+  useEffect(() => {
+    setBootcampEndDate(currentBootcamp.endDate)
+    setBootcampStartDate(currentBootcamp.startDate)
+  }, [currentBootcamp])
   const fetchBootcampSchedules = async () => {
     try {
       const id = currentBootcamp.id
@@ -89,6 +86,6 @@ const useLogic = () => {
       displayEvents()
   }, [schedules])
 
-  return { modalOpen, events, sessions, calendarRef, setModalOpen, onEventAdded, saveEvents }
+  return { modalOpen, events, sessions, calendarRef, bootcampStartDate,bootcampEndDate, setModalOpen, onEventAdded, saveEvents }
 }
 export default useLogic

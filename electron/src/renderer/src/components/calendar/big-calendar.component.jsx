@@ -5,9 +5,12 @@ import AddEventModal from '../addEventModal/add-event.component'
 import { Button } from '../common/button/button.component'
 import './calendar.styles.css'
 import useLogic from './logic.hook'
+import { useEffect } from 'react'
 
 const Calendar = () => {
-  const { modalOpen, calendarRef, events, sessions, onEventAdded, setModalOpen, saveEvents } = useLogic()
+  const { modalOpen, calendarRef, events, sessions, bootcampStartDate, bootcampEndDate, onEventAdded, setModalOpen, saveEvents } = useLogic()
+
+
   return (
     <section>
       <div className="buttons-container">
@@ -28,9 +31,10 @@ const Calendar = () => {
           initialView='timeGridWeek'
           slotMinTime='10:00:00'
           slotMaxTime='21:00:00'
+          initialDate={bootcampStartDate}
           validRange={{
-            start: '2024-01-01',
-            end: '2024-01-15'
+            start: bootcampStartDate,
+            end: bootcampEndDate
           }}
         />
       </div>
