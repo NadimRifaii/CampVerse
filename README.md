@@ -79,8 +79,9 @@
 | Auth screen | Google authentication |
 | ---| ---|
 | <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif" /> |
-| Live chat + notification | 
-| <img src="./readme/gifs/LiveChatNotifications-ezgif.com-video-to-gif-converter.gif" /> | 
+
+| Live chat + notification |
+ <img src="./readme/gifs/LiveChatNotifications-ezgif.com-video-to-gif-converter.gif" /> 
 
 
 ### Admin Screens 
