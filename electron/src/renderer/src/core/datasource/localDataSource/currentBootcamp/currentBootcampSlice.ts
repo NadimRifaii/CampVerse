@@ -14,7 +14,9 @@ const initialState: CurrentBootcampType = {
     stacks: [],
     students: [],
     mentors: [],
-    weeks: []
+    weeks: [],
+    startDate: '',
+    endDate: ''
   }
 }
 export const currentBootcampSlice = createSlice({

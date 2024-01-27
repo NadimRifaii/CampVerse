@@ -30,7 +30,7 @@ const Calendar = () => {
           slotMaxTime='21:00:00'
           validRange={{
             start: '2024-01-01',
-            end: '2024-01-28'
+            end: '2024-01-15'
           }}
         />
       </div>

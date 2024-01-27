@@ -27,6 +27,8 @@ type BootcampDetails struct {
 	Weeks            []*Week    `json:"weeks"`
 	Mentors          []Response `json:"mentors"`
 	Students         []Response `json:"students"`
+	StartDate        string     `json:"startDate"`
+	EndDate          string     `json:"endDate"`
 }
 
 func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]BootcampDetails, error) {
@@ -70,6 +72,8 @@ func (bootcamp *Bootcamp) GetAllBootcampsWithCleanedData(db *gorm.DB) ([]Bootcam
 			Mentors:          mentors,
 			Students:         students,
 			Weeks:            bootcamp.Weeks,
+			StartDate:        bootcamp.StartDate,
+			EndDate:          bootcamp.EndDate,
 		}
 
 		bootcampDetailsList = append(bootcampDetailsList, bootcampDetails)
