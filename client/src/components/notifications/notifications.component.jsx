@@ -8,7 +8,9 @@ import { useNavigate } from "react-router-dom";
 const Notifications = ({ className = "", setActiveNotification }) => {
   const { notifications, removeNotification, setCurrentUser } = notificationsLogic();
   const navigate = useNavigate();
-
+  useEffect(() => {
+    console.log(notifications)
+  }, [notifications])
   return (
     <div className={`notifications-container ${className}`}>
       {
@@ -23,7 +25,7 @@ const Notifications = ({ className = "", setActiveNotification }) => {
               <div className="profile">
                 <img src={`http://localhost:8000/images/${notification.sender.profilePicture || 'default_profile_picture.jpg'}`} alt="" />
               </div>
-              <div className="sender">{notification.sender.email.split("@")[0]} sent a message</div>
+              <div className="sender">{notification.sender.username} sent a message</div>
             </div>
           ))
       }

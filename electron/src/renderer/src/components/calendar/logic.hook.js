@@ -11,13 +11,9 @@ const useLogic = () => {
   const [events, setEvents] = useState([])
   const { schedules } = useSelector(extractSchedulesSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
-  const [bootcampStartDate, setBootcampStartDate] = useState('')
-  const [bootcampEndDate, setBootcampEndDate] = useState('')
+  const [bootcampStartDate, setBootcampStartDate] = useState(currentBootcamp.startDate)
+  const [bootcampEndDate, setBootcampEndDate] = useState(currentBootcamp.endDate)
   const dispatch = useDispatch()
-  useEffect(() => {
-    setBootcampEndDate(currentBootcamp.endDate)
-    setBootcampStartDate(currentBootcamp.startDate)
-  }, [currentBootcamp])
   const fetchBootcampSchedules = async () => {
     try {
       const id = currentBootcamp.id
@@ -86,6 +82,6 @@ const useLogic = () => {
       displayEvents()
   }, [schedules])
 
-  return { modalOpen, events, sessions, calendarRef, bootcampStartDate,bootcampEndDate, setModalOpen, onEventAdded, saveEvents }
+  return { modalOpen, events, sessions, calendarRef, bootcampStartDate, bootcampEndDate, currentBootcamp, setModalOpen, onEventAdded, saveEvents }
 }
 export default useLogic
