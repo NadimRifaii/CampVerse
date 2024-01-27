@@ -38,9 +38,9 @@
 > We designed Coffee Express using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
 ### Wireframes
-| Login screen  | Register screen |  Landing screen |
+| Auth Page  | Google authentication |  Landing screen |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf]<img src="./readme/gifs/LandingPage-ezgif.com-optimize.gif" /> |
+| <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif"/> | <img src="./readme/gifs/LandingPage-ezgif.com-optimize.gif" /> |
 
 ### Mockups
 | Home screen  | Menu Screen | Order Screen |
