@@ -80,10 +80,11 @@
 | ---| ---|
 | <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif" /> |
 
-| Live chat + notification |
- <img src="./readme/gifs/LiveChatNotifications-ezgif.com-video-to-gif-converter.gif" /> 
 
-
+<details>
+  <summary>Live chat + notification</summary>
+  <img src="./readme/gifs/LiveChatNotifications-ezgif.com-video-to-gif-converter.gif" style="width: 100%;" />
+</details>
 ### Admin Screens 
 | Login screen  | Register screen |  Landing screen |
 | ---| ---| ---|
