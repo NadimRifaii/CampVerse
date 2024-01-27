@@ -76,11 +76,14 @@
 
 
 ### User Screens
+| Landing page |
+| ---|
+<img src="./readme/gifs/LandingPage-ezgif.com-optimize.gif" /> 
 | Auth screen | Google authentication |
 | ---| ---|
 | <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif" /> |
-| Home screen  | Menu Screen | Order Screen | Checkout Screen |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| Home screen  | Menu Screen | 
+| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
 
 ### Admin Screens 
 | Login screen  | Register screen |  Landing screen |
