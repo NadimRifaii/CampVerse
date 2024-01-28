@@ -87,18 +87,17 @@
 | ---|
 | ![Live Chat + Notifications](./readme/gifs/RealTime.gif) |
 
-# Admin Screens
 
 # Admin Screens
 
-| Login screen  | Register screen |
-| ---| ---|
-| ![Login](./readme/demo/1440x1024.png) | ![Register](./readme/demo/1440x1024.png) |
 
 | Home screen  | Menu Screen |
 | ---| ---|
 | ![Home](./readme/gifs/Admin_home_page-ezgif.com-video-to-gif-converter.gif) | ![update profile](./readme/gifs/Update_profile-ezgif.com-video-to-gif-converter.gif) |
 
+| Search users  | add user to bootcamp |
+| ---| ---|
+| ![Search users](./readme/gifs/Search_users.gif) | ![add user to bootcamp](./readme/gifs/Admin_add_user_to_bootcamp-ezgif.com-video-to-gif-converter.gif) |
 
 <br><br>
 
