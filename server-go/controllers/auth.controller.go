@@ -3,6 +3,7 @@ package controllers
 import (
 	"errors"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
@@ -41,6 +42,11 @@ func HttpSignup(c *fiber.Ctx) error {
 	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@gmail\.com$`)
+	if !emailRegex.MatchString(body.Email) {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid email format. Must be at least 4 characters followed by @gmail.com"})
+	}
+
 	if body.RoleName == "" {
 		body.RoleName = "student"
 	}
@@ -89,6 +95,11 @@ func HttpLogin(c *fiber.Ctx) error {
 	if err := ValidateRequest(c, body); err != nil {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": err.Error()})
 	}
+	emailRegex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@gmail\.com`)
+	if !emailRegex.MatchString(body.Email) {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid email format. Must be at least 4 characters followed by @gmail.com"})
+	}
+
 	if err := user.GetUserByEmail(body.Email, db); err != nil {
 		return Loger(c, fiber.StatusNotFound, fiber.Map{"error": err.Error()})
 	}

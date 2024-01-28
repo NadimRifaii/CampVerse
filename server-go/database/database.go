@@ -43,6 +43,7 @@ func ConnectToDb() {
 			new(models.Week),
 			new(models.Grade),
 			new(models.Result),
+			new(models.CommonPasswords),
 		)
 	}
 	Db = db

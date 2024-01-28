@@ -15,6 +15,7 @@ func init() {
 	initializers.LoadEnv()
 	database.ConnectToDb()
 	initializers.MigrateUserRoles()
+	initializers.MigratMostCommonPasswords()
 }
 
 func setupApp() *fiber.App {
