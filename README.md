@@ -144,7 +144,7 @@
 
 | Features testing |
 | ---|
-| ![Features testing](./readme/gifs/Features_testing.png.png) |
+| ![Features testing](./readme/gifs/Features_testing.png) |
 <br><br>
 
 <!-- Unit Testing -->
