@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/NadimRifaii/campverse/database"
 	"github.com/gofiber/fiber/v2"
@@ -17,6 +18,8 @@ func CreateRecordInDb(record interface{}) error {
 }
 func ValidateRequest(c *fiber.Ctx, body interface{}) error {
 	if err := c.BodyParser(body); err != nil {
+		fmt.Println("Error parsing request body:", err)
+		fmt.Println("Parsed body:", body)
 		return errors.New("invalid request body")
 	}
 	return nil

@@ -31,7 +31,7 @@ func HttpCreateBootcamp(c *fiber.Ctx) error {
 		}
 	}
 
-	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was ceated successfully", "bootcamp": bootcamp})
+	return Loger(c, fiber.StatusAccepted, fiber.Map{"message": "Bootcamp was created successfully"})
 }
 
 func HttpGetBootcamps(c *fiber.Ctx) error {
