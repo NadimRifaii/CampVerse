@@ -159,9 +159,9 @@ This is an example of how to list things you need to use the software and how to
   ```sh
    npm install npm@latest -g
   ```
-* Go
+* Go <br>
    Make sure you have Go installed on your machine. You can download and install it from the official website: [Go](https://golang.org/dl)
-* Database
+* Database <br>
    You need to ensure that [XAMPP](https://www.apachefriends.org/), [MySQL](https://dev.mysql.com/downloads/installer/) are installed on your device.
 ### Installation
 
@@ -186,10 +186,10 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
    - Go to the Firebase Console: [https://console.firebase.google.com/](https://console.firebase.google.com/)
    - Create a new project or select an existing one.
-   - In the project dashboard, click on the gear icon (Settings) and go to "Project settings."
-   - Under the "General" tab, you'll find your Firebase SDK snippet. Choose the "Config" option, and you'll see the values for the variables above.
+   - In the project dashboard, click on add an app icon "choose add web app"
+   - Register the app 
    - Copy and paste the values into the .env file.
-3. Setup the go backend
+3. Setup the go backend <br>
    Open [phpMyAdmin](http://localhost/phpmyadmin/) and create a database called `campverse_db`
    ```sh
    cd server-go
