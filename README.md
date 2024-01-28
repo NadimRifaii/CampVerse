@@ -81,9 +81,8 @@
 
 # Live chat + notification
 
-| Live chat + notification |
 | ---|
-| ![Live Chat + Notifications](./readme/gifs/RealTime-ezgif.com-optimize.gif) |
+| ![Live Chat + Notifications](./readme/gifs/RealTime.gif) |
 
 # Admin Screens
 
