@@ -142,9 +142,22 @@
 
 - This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
 
-| Features testing |
-| ---|
-| ![Features testing](./readme/gifs/Features_testing.png) |
+Commands used to deploy this project on aws
+
+1. Install nodejs
+   ```sh
+   sudo yum install -y nodejs npm
+   ```
+2. Install go
+   ```sh
+   wget https://golang.org/dl/go1.21.4.linux-amd64.tar.gz
+   sudo tar -C /usr/local -xzf go1.21.4.linux-amd64.tar.gz
+   ```
+3. Install git , to clone the repo from github
+   ```sh
+   sudo yum install -y git
+   ```
+
 <br><br>
 
 <!-- Unit Testing -->
@@ -154,6 +167,9 @@
 
 - This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
 
+| Features testing |
+| ---|
+| ![Features testing](./readme/gifs/Features_testing.png) |
 <br><br>
 
 
