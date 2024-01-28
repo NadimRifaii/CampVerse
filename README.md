@@ -200,4 +200,27 @@ _Below is an example of how you can instruct your audience on installing and set
    secret="This can be whatever you want"
    OPENAI_API_KEY=
    ```
+4. Setup the node backend <br>
+   ```sh
+   cd server-node
+   npm install
+   ```
+   - Create a MongoDB Atlas account:
+   1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+   2. Sign up for an account or log in if you already have one.
+   3. Create a new cluster for your project.
+   - Get the Connection URL:
+   1. In you Atlas dashboard, go to the cluster you just created
+   2. Click on the "connect" button
+   3. Choose Drivers option
+   4. Copy the connection string. It will look something like this:
+     ```sh
+     mongodb+srv://<username>:<password>@cluster0.mongodb.net/<database>
+     ```
+     Replace `<username>`, `<password>`, and `<database>` with your actual MongoDB Atlas credentials.
+   - Now rename the .env.example file to .env and put the connection string in the MONG_URL variable
+   ```sh
+   MONG_URL=
+   secret="This can be whatever you want"
+   ```
 Now, you should be able to run CampVerse locally and explore its features.
