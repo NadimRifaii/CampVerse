@@ -50,14 +50,21 @@
 
 > We designed CampVerse using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
-- Project Figma design [figma](https://www.figma.com/file/LsuOx5Wnh5YTGSEtrgvz4l/Purrfect-Pals?type=design&node-id=257%3A79&mode=design&t=adzbABt5hbb91ucZ-1)
+- Project Figma design [figma](https://www.figma.com/file/s1JMz99qMQnpwjyfpfi8DR/Final_Project_1?type=design&node-id=0%3A1&mode=design&t=27EwAsazmeALwqCH-1)
 
 
 ### Mockups
-| Home screen  | Menu Screen | Order Screen |
-| ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| Login | Signup |
+| ---| ---|
+| ![Login](./readme/mockups/login.png) | ![Signup](./readme/mockups/signup.png) |
 
+| Live chat + notification |
+| ---|
+| ![Live Chat + Notifications](./readme/mockups/chatting.png) |
+
+| Users list |
+| ---|
+| ![Live Chat + Notifications](./readme/mockups/users_list.png) |
 <br><br>
 
 <!-- Database Design -->
@@ -222,7 +229,7 @@ This is an example of how to list things you need to use the software and how to
    MONG_URL=
    secret="This can be whatever you want"
    ```
-   5. Setup electron
+5. Setup electron
    ```sh
    cd electron
    npm install
