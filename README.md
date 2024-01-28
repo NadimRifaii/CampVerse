@@ -74,25 +74,31 @@
 <!-- Implementation -->
 <img src="./readme/title6.svg"/>
 
+| Landing page |
+| ---|
+| ![Landing](./readme/gifs/LandingPage-ezgif.com-optimize.gif) |
 
 | Auth screen | Google authentication |
 | ---| ---|
 | ![Auth Page](./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif) | ![Google OAuth](./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif) |
 
-# Live chat + notification
 
+| Live chat + notification |
 | ---|
 | ![Live Chat + Notifications](./readme/gifs/RealTime.gif) |
 
 # Admin Screens
 
-| Login screen  | Register screen |  Landing screen |
-| ---| ---| ---|
-| ![Login](./readme/demo/1440x1024.png) | ![Register](./readme/demo/1440x1024.png) | ![Landing](./readme/demo/1440x1024.png) |
+# Admin Screens
 
-| Home screen  | Menu Screen | Order Screen |
-| ---| ---| ---|
-| ![Home](./readme/demo/1440x1024.png) | ![Menu](./readme/demo/1440x1024.png) | ![Order](./readme/demo/1440x1024.png) |
+| Login screen  | Register screen |
+| ---| ---|
+| ![Login](./readme/demo/1440x1024.png) | ![Register](./readme/demo/1440x1024.png) |
+
+| Home screen  | Menu Screen |
+| ---| ---|
+| ![Home](./readme/gifs/Admin_home_page-ezgif.com-video-to-gif-converter.gif) | ![update profile](./readme/gifs/Update_profile-ezgif.com-video-to-gif-converter.gif) |
+
 
 <br><br>
 
