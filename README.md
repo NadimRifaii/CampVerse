@@ -157,23 +157,47 @@
 This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
-  npm install npm@latest -g
+   npm install npm@latest -g
   ```
-
+* Go
+   Make sure you have Go installed on your machine. You can download and install it from the official website: [Go](https://golang.org/dl)
+* Database
+   You need to ensure that [XAMPP](https://www.apachefriends.org/), [MySQL](https://dev.mysql.com/downloads/installer/) are installed on your device.
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [example](https://example.com)
+1. Get an openAI API Key from [openai](https://openai.com/)
 2. Clone the repo
-   git clone [github](https://github.com/your_username_/Project-Name.git)
-3. Install NPM packages
+   git clone [github](https://github.com/NadimRifaii/CampVerse.git)
+3. Setup the frontend
    ```sh
+   cd client
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+   Then go to .env.example file, rename it to .env and populate the values
+   ```sh
+   REACT_APP_FIREBASE_API_KEY=
+   REACT_APP_FIREBASE_AUTH_DOMAIN=
+   REACT_APP_FIREBASE_PROJECT_ID=
+   REACT_APP_FIREBASE_STORAGE_BUCKET=
+   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+   REACT_APP_FIREBASE_APP_ID=
    ```
-
-Now, you should be able to run Coffee Express locally and explore its features.
+   - Go to the Firebase Console: [https://console.firebase.google.com/](https://console.firebase.google.com/)
+   - Create a new project or select an existing one.
+   - In the project dashboard, click on the gear icon (Settings) and go to "Project settings."
+   - Under the "General" tab, you'll find your Firebase SDK snippet. Choose the "Config" option, and you'll see the values for the variables above.
+   - Copy and paste the values into the .env file.
+3. Setup the go backend
+   Open [phpMyAdmin](http://localhost/phpmyadmin/) and create a database called `campverse_db`
+   ```sh
+   cd server-go
+   go mod download
+   ```
+   Then go to .env.example file, rename it to .env and populate the values
+   ```sh
+   secret="This can be whatever you want"
+   OPENAI_API_KEY=
+   ```
+Now, you should be able to run CampVerse locally and explore its features.
