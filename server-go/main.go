@@ -60,5 +60,5 @@ func main() {
 		routes.CurriculumRoutes,
 		routes.ResultRoutes,
 	)
-	app.Listen(os.Getenv("PORT"))
+	app.Listen(":" + os.Getenv("PORT"))
 }
