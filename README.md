@@ -87,18 +87,35 @@
 | ---|
 | ![Live Chat + Notifications](./readme/gifs/RealTime.gif) |
 
+| AI feedback on student assignment |
+| ---|
+| ![ai feedback](./readme/gifs/ai_feedback_on_assignment.gif) |
+
 
 # Admin Screens
 
 
-| Home screen  | Menu Screen |
+| Home screen  | Edit profile |
 | ---| ---|
 | ![Home](./readme/gifs/Admin_home_page-ezgif.com-video-to-gif-converter.gif) | ![update profile](./readme/gifs/Update_profile-ezgif.com-video-to-gif-converter.gif) |
 
-| Search users  | add user to bootcamp |
+| Search users  | Add user to bootcamp |
 | ---| ---|
 | ![Search users](./readme/gifs/Search_users.gif) | ![add user to bootcamp](./readme/gifs/Admin_add_user_to_bootcamp-ezgif.com-video-to-gif-converter.gif) |
 
+| Add weekly modules  | Create bootcamp schedule |
+| ---| ---|
+| ![Weekly modules](./readme/gifs/Admin_add_curriculum-ezgif.com-video-to-gif-converter.gif) | ![create bootcamp schedule](./readme/gifs/Admin_create_schedule-ezgif.com-video-to-gif-converter.gif) |
+
+# Mentor Screens
+
+| Assignment statistics  | Create assignment |
+| ---| ---|
+| ![Assignment statistics](./readme/gifs/assignments_statistics.png) | ![create bootcamp schedule](./readme/gifs/create_assignment.png) |
+
+| Weekly results |
+| ---|
+| ![Weekly results](./readme/gifs/Weekly_results.gif) |
 <br><br>
 
 
