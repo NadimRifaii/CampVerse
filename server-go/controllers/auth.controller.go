@@ -37,6 +37,7 @@ type UserInfoResponse struct {
 }
 
 func HttpSignup(c *fiber.Ctx) error {
+	db := database.Db
 	body := new(UserInfoRequest)
 	user := new(models.User)
 	if err := ValidateRequest(c, body); err != nil {
@@ -46,7 +47,10 @@ func HttpSignup(c *fiber.Ctx) error {
 	if !emailRegex.MatchString(body.Email) {
 		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Invalid email format. Must be at least 4 characters followed by @gmail.com"})
 	}
-
+	commonPassword := new(models.CommonPasswords)
+	if err := db.Where("password = ?", body.Password).First(commonPassword).Error; err == nil {
+		return Loger(c, fiber.StatusBadRequest, fiber.Map{"error": "Password is too common. Choose a stronger password."})
+	}
 	if body.RoleName == "" {
 		body.RoleName = "student"
 	}
