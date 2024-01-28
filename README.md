@@ -163,9 +163,8 @@ This is an example of how to list things you need to use the software and how to
    Make sure you have Go installed on your machine. You can download and install it from the official website: [Go](https://golang.org/dl)
 * Database <br>
    You need to ensure that [XAMPP](https://www.apachefriends.org/), [MySQL](https://dev.mysql.com/downloads/installer/) are installed on your device.
+   
 ### Installation
-
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Get an openAI API Key from [openai](https://openai.com/)
 2. Clone the repo
@@ -222,5 +221,10 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    MONG_URL=
    secret="This can be whatever you want"
+   ```
+   5. Setup electron
+   ```sh
+   cd electron
+   npm install
    ```
 Now, you should be able to run CampVerse locally and explore its features.
