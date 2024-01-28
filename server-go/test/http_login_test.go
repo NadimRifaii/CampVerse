@@ -27,8 +27,8 @@ type RequestBody struct {
 
 func (s *EndToEndSuite) TestLoginSuccessful() {
 	requestBody := RequestBody{
-		Email:    "student1@gmail.com",
-		Password: "password",
+		Email:    "login1@gmail.com",
+		Password: "333#GoldRoger",
 	}
 
 	requestBodyJSON, err := json.Marshal(requestBody)
@@ -45,12 +45,12 @@ func (s *EndToEndSuite) TestLoginSuccessful() {
 	s.NoError(err)
 
 	expectedUser := map[string]interface{}{
-		"email":          "student1@gmail.com",
-		"username":       "Prince",
-		"role":           "student",
-		"profilePicture": "OIP.jpg",
-		"firstname":      "Prince",
-		"lastname":       "Vegeta",
+		"email":          "login1@gmail.com",
+		"username":       "L",
+		"role":           "mentor",
+		"profilePicture": "default_profile_picture.jpg",
+		"firstname":      "L",
+		"lastname":       "L",
 	}
 
 	actualResponse := map[string]interface{}{} //similiar to js objects , key:value , key of type string , vaalue of type interface{}
@@ -61,7 +61,7 @@ func (s *EndToEndSuite) TestLoginSuccessful() {
 }
 func (s *EndToEndSuite) TestLoginWrongPassword() {
 	requestBody := RequestBody{
-		Email: "student1@gmail.com",
+		Email: "login1@gmail.com",
 	}
 
 	requestBodyJSON, err := json.Marshal(requestBody)
@@ -88,8 +88,8 @@ func (s *EndToEndSuite) TestLoginWrongPassword() {
 }
 func (s *EndToEndSuite) TestInvalidEmail() {
 	requestBody := RequestBody{
-		Email:    "student1gmail.com",
-		Password: "password",
+		Email:    "mentor1gmail.com",
+		Password: "333#GoldRoger",
 	}
 
 	requestBodyJSON, err := json.Marshal(requestBody)

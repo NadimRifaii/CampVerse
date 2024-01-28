@@ -99,7 +99,7 @@
 | ![ai feedback](./readme/gifs/ai_feedback_on_assignment.gif) |
 
 
-# Admin Screens
+### Admin Screens
 
 
 | Home screen  | Edit profile |
@@ -114,7 +114,7 @@
 | ---| ---|
 | ![Weekly modules](./readme/gifs/Admin_add_curriculum-ezgif.com-video-to-gif-converter.gif) | ![create bootcamp schedule](./readme/gifs/Admin_create_schedule-ezgif.com-video-to-gif-converter.gif) |
 
-# Mentor Screens
+### Mentor Screens
 
 | Assignment statistics  | Create assignment |
 | ---| ---|
@@ -141,7 +141,9 @@
 ###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
 
 - This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
-
+| Features testing |
+| ---|
+| ![Features testing](./readme/gifs/Features_testing.png.png) |
 <br><br>
 
 <!-- Unit Testing -->

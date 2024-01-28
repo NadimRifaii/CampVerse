@@ -14,16 +14,16 @@ type addUserRequest struct {
 
 func (s *EndToEndSuite) TestAddUserToBootcamp() {
 	requestBody := addUserRequest{
-		Email:        "mentor1@gmail.com",
-		BootcampName: "Test9",
+		Email:        "student3@gmail.com",
+		BootcampName: "FSD",
 	}
 
 	requestBodyJSON, err := json.Marshal(requestBody)
 	s.NoError(err)
 
 	c := http.Client{}
-	//needs to be valid token
-	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImV4cCI6MTcwNjQ3NDM2OCwiZmlyc3RuYW1lIjoiYWRtaW4iLCJsYXN0bmFtZSI6ImFkbWluIiwicHJvZmlsZVBpY3R1cmUiOiIyMDIyMDUxNF8xNTUzMzYuanBnIiwicm9sZSI6ImFkbWluIiwidXNlcm5hbWUiOiJhZG1pbl91c2VyIn0.SneXCGaRo4fmnOFZ1m6vqsiMeS4Tksnc5mTbR4Xr8C0"
+	//needs to be valid token of an admin
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImV4cCI6MTcwNjQ4MDQxNiwiZmlyc3RuYW1lIjoiYWRtaW4iLCJsYXN0bmFtZSI6ImFkbWluIiwicHJvZmlsZVBpY3R1cmUiOiJkZWZhdWx0X3Byb2ZpbGVfcGljdHVyZS5qcGciLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.qeepOLvHCLM1tz1qzupmOuPOks_EqqCmkiZOn6s17Ak"
 
 	req, err := http.NewRequest("POST", "http://localhost:8000/bootcamp/add-user", bytes.NewBuffer(requestBodyJSON))
 	s.NoError(err)

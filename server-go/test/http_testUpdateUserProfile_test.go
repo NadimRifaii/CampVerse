@@ -17,6 +17,9 @@ type updateUserRequest struct {
 	Role           string `json:"role"`
 	ProfilePicture string `json:"profilePicture"`
 }
+type UpdateResponse struct {
+	Info string `json:"info"`
+}
 
 func (s *EndToEndSuite) TestUpdateUserProfile() {
 	requestBody := updateUserRequest{
@@ -24,7 +27,7 @@ func (s *EndToEndSuite) TestUpdateUserProfile() {
 		FirstName:      "Nadim",
 		LastName:       "Rifaii",
 		ProfilePicture: "20220514_155336.jpg",
-		Email:          "student1@gmail.com",
+		Email:          "update2@gmail.com",
 		Speciality:     "Updated speciality",
 		Position:       "Updated position",
 		Role:           "mentor",
@@ -34,9 +37,7 @@ func (s *EndToEndSuite) TestUpdateUserProfile() {
 	s.NoError(err)
 
 	c := http.Client{}
-	//needs to be valid token, and the token of the current authenticated user
-	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0dWRlbnQxQGdtYWlsLmNvbSIsImV4cCI6MTcwNjQ3MzY2MSwiZmlyc3RuYW1lIjoiUHJpbmNlIiwibGFzdG5hbWUiOiJWZWdldGEiLCJwcm9maWxlUGljdHVyZSI6Ik9JUC5qcGciLCJyb2xlIjoic3R1ZGVudCIsInVzZXJuYW1lIjoiUHJpbmNlIn0.dBxEkioDBg4dVvrcXMChto4ohRnV1UX5vGmGYixPOkk"
-
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0dWRlbnQxQGdtYWlsLmNvbSIsImV4cCI6MTcwNjQ3ODg2NiwiZmlyc3RuYW1lIjoiTCIsImxhc3RuYW1lIjoiTCIsInByb2ZpbGVQaWN0dXJlIjoiZGVmYXVsdF9wcm9maWxlX3BpY3R1cmUuanBnIiwicm9sZSI6InN0dWRlbnQiLCJ1c2VybmFtZSI6IkwifQ.e9RrlVSNZDeKAfdWqbiOS4jVex-Y_PHDX3t-KtH0e5Y"
 	req, err := http.NewRequest("PUT", "http://localhost:8000/user", bytes.NewBuffer(requestBodyJSON))
 	s.NoError(err)
 
@@ -52,24 +53,26 @@ func (s *EndToEndSuite) TestUpdateUserProfile() {
 	responseJSON, err := ioutil.ReadAll(r.Body)
 	s.NoError(err)
 
-	expectedResponse := map[string]interface{}{
-		"info": "updated successfully",
+	// Define expected and actual responses
+	expectedResponse := UpdateResponse{
+		Info: "updated successfully",
 	}
 
-	actualResponse := map[string]interface{}{}
+	var actualResponse UpdateResponse
 	err = json.Unmarshal(responseJSON, &actualResponse)
 	s.NoError(err)
 
-	s.Equal(expectedResponse, actualResponse)
-	//This test is to check if the user is already in the bootcamp , it shouldn't add it again instead it returns an error
+	s.Equal(expectedResponse.Info, actualResponse.Info)
+
 }
+
 func (s *EndToEndSuite) TestUpdateUserProfileUnauthorized() {
 	requestBody := updateUserRequest{
 		UserName:       "Roger",
 		FirstName:      "Nadim",
 		LastName:       "Rifaii",
 		ProfilePicture: "20220514_155336.jpg",
-		Email:          "student1@gmail.com",
+		Email:          "update1@gmail.com",
 		Speciality:     "Updated speciality",
 		Position:       "Updated position",
 		Role:           "mentor",

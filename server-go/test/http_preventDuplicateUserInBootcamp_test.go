@@ -14,7 +14,7 @@ type preventDuplicateRequest struct {
 
 func (s *EndToEndSuite) TestPreventDuplicateUserInBootcamp() {
 	requestBody := preventDuplicateRequest{
-		Email:        "mentor1@gmail.com",
+		Email:        "student1@gmail.com",
 		BootcampName: "FSW",
 	}
 
@@ -22,8 +22,8 @@ func (s *EndToEndSuite) TestPreventDuplicateUserInBootcamp() {
 	s.NoError(err)
 
 	c := http.Client{}
-
-	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImV4cCI6MTcwNjQ3NDM2OCwiZmlyc3RuYW1lIjoiYWRtaW4iLCJsYXN0bmFtZSI6ImFkbWluIiwicHJvZmlsZVBpY3R1cmUiOiIyMDIyMDUxNF8xNTUzMzYuanBnIiwicm9sZSI6ImFkbWluIiwidXNlcm5hbWUiOiJhZG1pbl91c2VyIn0.SneXCGaRo4fmnOFZ1m6vqsiMeS4Tksnc5mTbR4Xr8C0"
+	//needs to be a valid token of an admin
+	token := "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImV4cCI6MTcwNjQ4MDQxNiwiZmlyc3RuYW1lIjoiYWRtaW4iLCJsYXN0bmFtZSI6ImFkbWluIiwicHJvZmlsZVBpY3R1cmUiOiJkZWZhdWx0X3Byb2ZpbGVfcGljdHVyZS5qcGciLCJyb2xlIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIn0.qeepOLvHCLM1tz1qzupmOuPOks_EqqCmkiZOn6s17Ak"
 
 	req, err := http.NewRequest("POST", "http://localhost:8000/bootcamp/add-user", bytes.NewBuffer(requestBodyJSON))
 	s.NoError(err)
