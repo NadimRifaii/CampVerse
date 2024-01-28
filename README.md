@@ -75,22 +75,25 @@
 <img src="./readme/title6.svg"/>
 
 
-### User Screens
 | Auth screen | Google authentication |
 | ---| ---|
-| <img src="./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif" /> | <img src="./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif" /> |
+| ![Auth Page](./readme/gifs/authPage-ezgif.com-video-to-gif-converter.gif) | ![Google OAuth](./readme/gifs/Google_Oauth-ezgif.com-video-to-gif-converter.gif) |
 
+# Live chat + notification
 
-<details>
-  <summary>Live chat + notification</summary>
-  <img src="./readme/gifs/LiveChatNotifications-ezgif.com-video-to-gif-converter.gif" style="width: 100%;" />
-</details>
-### Admin Screens 
+| Live chat + notification |
+| ---|
+| ![Live Chat + Notifications](./readme/gifs/RealTime-ezgif.com-optimize.gif) |
+
+# Admin Screens
+
 | Login screen  | Register screen |  Landing screen |
 | ---| ---| ---|
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Login](./readme/demo/1440x1024.png) | ![Register](./readme/demo/1440x1024.png) | ![Landing](./readme/demo/1440x1024.png) |
+
 | Home screen  | Menu Screen | Order Screen |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ---| ---| ---|
+| ![Home](./readme/demo/1440x1024.png) | ![Menu](./readme/demo/1440x1024.png) | ![Order](./readme/demo/1440x1024.png) |
 
 <br><br>
 
