@@ -48,29 +48,24 @@
 <img src="./readme/title4.svg"/>
 
 
-> We designed CampVerse using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+> CampVerse is designed using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
-- Project Figma design [figma](https://www.figma.com/file/s1JMz99qMQnpwjyfpfi8DR/Final_Project_1?type=design&node-id=0%3A1&mode=design&t=27EwAsazmeALwqCH-1)
-
-
-### Mockups
+### Mockups Examples
 | Login | Signup |
 | ---| ---|
 | ![Login](./readme/mockups/login.png) | ![Signup](./readme/mockups/signup.png) |
 
-| Live chat + notification |
-| ---|
-| ![Live Chat + Notifications](./readme/mockups/chatting.png) |
+| Live Chat + Notification | Users List |
+| --- | --- |
+| ![Live Chat + Notifications](./readme/mockups/chatting.png) | ![Users List](./readme/mockups/users_list.png) |
 
-| Users list |
-| ---|
-| ![Live Chat + Notifications](./readme/mockups/users_list.png) |
+
+- Check more Mockups on [figma](https://www.figma.com/file/s1JMz99qMQnpwjyfpfi8DR/Final_Project_1?type=design&node-id=0%3A1&mode=design&t=27EwAsazmeALwqCH-1)
 <br><br>
 
 <!-- Database Design -->
 <img src="./readme/title5.svg"/>
 
-###  Architecting Data Excellence: Innovative Database Design Strategies:
 
 <img src="./readme/gifs/Final_Schema_V0_MySql (1)_page-0002.jpg" />
 
@@ -101,7 +96,6 @@
 
 ### Admin Screens
 
-
 | Home screen  | Edit profile |
 | ---| ---|
 | ![Home](./readme/gifs/Admin_home_page-ezgif.com-video-to-gif-converter.gif) | ![update profile](./readme/gifs/Update_profile-ezgif.com-video-to-gif-converter.gif) |
@@ -128,8 +122,6 @@
 
 <!-- Prompt Engineering -->
 <img src="./readme/title7.svg"/>
-
-###  Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
 
 - In this prompt I first describe the identity of the AI , then describes what it should do and how it would return it's response
 
@@ -169,7 +161,6 @@
 <!-- Unit Testing -->
 <img src="./readme/title9.svg"/>
 
-###  Precision in Development: Harnessing the Power of Unit Testing:
 
 - Ensuring the reliability of APIs and features is crucial in development for catching issues early. Although I didn't strictly follow the test-driven development approach, I did implement tests for specific APIs to enhance the efficiency and effectiveness of the testing process.
 
