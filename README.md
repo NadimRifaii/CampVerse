@@ -166,7 +166,7 @@
 
 | Features testing |
 | ---|
-| ![Features testing](./readme/gifs/Features_testing.png) |
+| ![Features testing](./readme/gifs/Features_testing2.png) |
 <br><br>
 
 
