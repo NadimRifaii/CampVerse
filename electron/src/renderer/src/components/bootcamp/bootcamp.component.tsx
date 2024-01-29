@@ -26,7 +26,7 @@ const BootcampC = ({ bootcamp }: BootcampProps) => {
           </p>
         </SkeletonTheme>}
         <img
-          src={`http://localhost:8000/images/Subtract.png`}
+          src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/Subtract.png`}
           alt=""
           onLoad={handleImageLoad}
           style={{ display: imageLoaded ? 'block' : 'none' }}

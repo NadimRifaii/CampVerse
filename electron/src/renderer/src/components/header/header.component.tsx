@@ -30,7 +30,7 @@ const Header = () => {
         <Notifications setActiveNotification={setActiveNotification} className={activeNotification ? 'active' : ''} />
         <div className={`profile ${dropdownActive ? 'active' : ""} `}>
           <div className="image">
-            <img src={`http://localhost:8000/images/${user.profilePicture}`} alt="" />
+            <img src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/${user.profilePicture}`} alt="" />
           </div>
           <div className="name-role">
             <div className="name">

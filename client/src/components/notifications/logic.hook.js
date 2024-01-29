@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { extractChatSlice } from "../../core/datasource/localDataSource/chat/chatSlice";
 import { CurrentUserContext } from "../../utils/contexts/current-user.context";
 
-const ENDPOINT = `http://localhost:5000`;//
+const ENDPOINT = process.env.REACT_APP_SERVER_NODE;//
 let socket;
 const useLogic = () => {
   const user = useSelector(extractUserSlice)

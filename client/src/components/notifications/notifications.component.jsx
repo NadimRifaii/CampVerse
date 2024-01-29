@@ -23,7 +23,7 @@ const Notifications = ({ className = "", setActiveNotification }) => {
               navigate("/dashboard/chat");
             }}>
               <div className="profile">
-                <img src={`http://localhost:8000/images/${notification.sender.profilePicture || 'default_profile_picture.jpg'}`} alt="" />
+                <img src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/${notification.sender.profilePicture || 'default_profile_picture.jpg'}`} alt="" />
               </div>
               <div className="sender">{notification.sender.username} sent a message</div>
             </div>

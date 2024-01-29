@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { CurrentUserContext } from "@renderer/utils/contexts/current-user.context";
 import io from 'socket.io-client';
-const ENDPOINT = `http://localhost:5000`;//
+const ENDPOINT = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443/`;//
 let socket;
 let selectedChatCompare;
 
@@ -133,7 +133,6 @@ const useLogic = () => {
         // notification logic
       } else {
         setMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
-        scrollToBottom()
       }
     };
     socket.on("message received", handleNewMessage);

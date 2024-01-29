@@ -5,7 +5,7 @@ import { extractUserSlice } from "../../core/datasource/localDataSource/user/use
 import io from 'socket.io-client';
 import { extractChatSlice, setChatX } from "../../core/datasource/localDataSource/chat/chatSlice";
 import { CurrentUserContext } from "../../utils/contexts/current-user.context";
-const ENDPOINT = `http://localhost:5000`;//
+const ENDPOINT = process.env.REACT_APP_SERVER_NODE;//
 let socket;
 let selectedChatCompare;
 
@@ -22,11 +22,7 @@ const useLogic = () => {
   const messagesContainerRef = useRef(null);
   const [typing, setTyping] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
-  const scrollToBottom = () => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
-    }
-  };
+
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.on('connect', () => {
@@ -127,7 +123,6 @@ const useLogic = () => {
       if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
       } else {
         setMessages((prevMessages) => [...prevMessages, newMessageRecieved]);
-        scrollToBottom()
       }
     };
     socket.on("message received", handleNewMessage);

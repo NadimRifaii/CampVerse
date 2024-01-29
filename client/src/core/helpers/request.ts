@@ -45,6 +45,7 @@ export const sendFileRequest = async ({
 }: SendRequestRequirements) => {
   const token = local("token");
   const baseURL = process.env.REACT_APP_SERVER_GO
+  console.log(baseURL)
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({

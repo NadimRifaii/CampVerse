@@ -10,7 +10,7 @@ const Chat = () => {
     <div className="chat-page">
       <div className="header">
         <div className="user-profile">
-          <img src={`http://localhost:8000/images/${currentUser.profilePicture}`} alt="" />
+          <img src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/${currentUser.profilePicture}`} alt="" />
         </div>
         <div className="user-name">
           {currentUser.username}

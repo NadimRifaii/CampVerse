@@ -38,7 +38,7 @@ const MentorsList = ({ setDescription, description, setMentorsListOpen }) => {
         {currentBootcamp.mentors.map((mentor, index) => (
           <div key={index} onClick={() => handleMentorClick(mentor)} className={mentorRowClassName(mentor)}>
             <div className="profile">
-              <img src={`http://localhost:8000/images/${mentor.profilePicture}`} alt="" />
+              <img src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/${mentor.profilePicture}`} alt="" />
             </div>
             <div className="username">
               <p>{mentor.username}</p>

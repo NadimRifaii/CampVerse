@@ -254,6 +254,7 @@ This is an example of how to list things you need to use the software and how to
    MONG_URL=
    secret="This can be whatever you want"
    ```
+   
 5. Setup electron
    ```sh
    cd electron

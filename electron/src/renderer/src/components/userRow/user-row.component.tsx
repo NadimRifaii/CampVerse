@@ -21,7 +21,7 @@ const UserRow = ({ info, showBtn, setActiveBootcamp, activeBootcamp }: UserRowPr
     <div className="user-row">
       <div className="left">
         <div className="profile-picture">
-          <img src={`http://localhost:8000/images/${info.profilePicture}`} alt="" />
+          <img src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/${info.profilePicture}`} alt="" />
         </div>
         <div className="role-name">
           <div className="name">

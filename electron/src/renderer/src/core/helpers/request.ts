@@ -6,7 +6,6 @@ type SendRequestRequirements = {
   method?: "GET" | "POST" | "PUT" | "DELETE";
   body?: {};
 };
-//REACT_APP_SERVER_GO
 
 export const sendRequest = async ({
   route,
@@ -14,7 +13,7 @@ export const sendRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://localhost:8000/`
+  const baseURL = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/`
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({
@@ -44,7 +43,8 @@ export const sendFileRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://localhost:8000/`
+  const baseURL = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/`
+  console.log(baseURL)
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({
@@ -74,7 +74,8 @@ export const messagesRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://localhost:5000/`
+  const baseURL = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443/`
+  console.log(baseURL)
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({
