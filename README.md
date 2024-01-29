@@ -171,7 +171,7 @@
 
 ###  Precision in Development: Harnessing the Power of Unit Testing:
 
-- This project employs rigorous unit testing methodologies to ensure the reliability and accuracy of code components. By systematically evaluating individual units of the software, we guarantee a robust foundation, identifying and addressing potential issues early in the development process.
+- Ensuring the reliability of APIs and features is crucial in development for catching issues early. Although I didn't strictly follow the test-driven development approach, I did implement tests for specific APIs to enhance the efficiency and effectiveness of the testing process.
 
 | Features testing |
 | ---|
