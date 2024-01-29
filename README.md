@@ -78,7 +78,7 @@
 
 | Landing page |
 | ---|
-| ![Landing](./readme/gifs/LandingPage-ezgif.com-optimize.gif) |
+| ![Landing](./readme/gifs/LandingPage.gif) |
 
 | Auth screen | Google authentication |
 | ---| ---|
@@ -218,7 +218,7 @@ This is an example of how to list things you need to use the software and how to
    Open [phpMyAdmin](http://localhost/phpmyadmin/) and create a database called `campverse_db`
    ```sh
    cd server-go
-   go mod download
+   go get
    ```
    Then go to .env.example file, rename it to .env and populate the values
    ```sh
