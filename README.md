@@ -131,18 +131,18 @@
 
 ###  Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
 
-- This project uses advanced prompt engineering techniques to optimize the interaction with natural language processing models. By skillfully crafting input instructions, we tailor the behavior of the models to achieve precise and efficient language understanding and generation for various tasks and preferences.
+- In this prompt I first describe the identity of the AI , then describes what it should do and how it would return it's response
+
+| openAI prompt |
+| ---|
+| ![Weekly results](./readme/gifs/openai_prompt.png) |
 
 <br><br>
 
 <!-- AWS Deployment -->
 <img src="./readme/title8.svg"/>
 
-###  Efficient AI Deployment: Unleashing the Potential with AWS Integration:
-
-- This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
-
-Commands used to deploy this project on aws
+### Commands used to deploy this project on aws
 
 1. Install nodejs
    ```sh
@@ -152,6 +152,12 @@ Commands used to deploy this project on aws
    ```sh
    wget https://golang.org/dl/go1.21.4.linux-amd64.tar.gz
    sudo tar -C /usr/local -xzf go1.21.4.linux-amd64.tar.gz
+   ```
+3. Install MySQL
+   ```sh
+   sudo yum localinstall mysql57-community-release-el7-11.noarch.rpm
+   sudo yum install mysql-community-server
+   sudo systemctl start mysqld
    ```
 3. Install git , to clone the repo from github
    ```sh

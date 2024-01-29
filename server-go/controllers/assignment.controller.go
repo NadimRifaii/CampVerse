@@ -224,8 +224,10 @@ func getFeedback(fileContent string) (string, error) {
 			Model: openai.GPT3Dot5Turbo,
 			Messages: []openai.ChatCompletionMessage{
 				{
-					Role:    openai.ChatMessageRoleSystem,
-					Content: "You are a helpful assistant helping the mentor of a student providing feedback on a student document, give your opinion on the student's work, and give his work a grade out of 10,make your response format in a valid json object, with two keys the feedback and the grade.",
+					Role: openai.ChatMessageRoleSystem,
+					Content: "You are a helpful assistant helping the mentor of a student providing feedback on a student document, " +
+						"give your opinion on the student's work, and give his work a grade out of 10, " +
+						"make your response format in a valid json object, with two keys the feedback and the grade.",
 				},
 				{
 					Role:    openai.ChatMessageRoleUser,
