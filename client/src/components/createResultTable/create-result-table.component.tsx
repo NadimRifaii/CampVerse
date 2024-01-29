@@ -50,7 +50,6 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
     <form action="" className="create-result-form" onSubmit={(e) => {
       e.preventDefault()
       createWeeklyResults()
-
     }}>
       <table className="results-table" >
         <thead>
@@ -81,6 +80,7 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
                   <tr key={studentIndex} >
                     <td>{username.split(" ")[0]}</td>
                     {
+                      students.length > 0 &&
                       stacks.map((stack: Stack, index: number) => {
                         return (
                           <td key={index}>

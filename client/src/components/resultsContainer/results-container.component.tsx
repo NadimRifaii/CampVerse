@@ -28,11 +28,10 @@ const ResultsContainer = () => {
         />
       </div>
       {
-
-        user.role == "student" ? <ResultsTable user={user} students={students} results={results} stacks={stacks} /> :
-          results.length > 0 ?
+        results.length > 0 && stacks.length > 0 ?
+          user.role == "student" ? <ResultsTable user={user} students={students} results={results} stacks={stacks} /> :
             <ResultsTable user={user} students={students} results={results} stacks={stacks} /> :
-            <CreateResultTable students={students} stacks={stacks} currentWeek={currentWeek} getBootcampWeeklyResults={getBootcampWeeklyResults} />
+          <CreateResultTable students={students} stacks={stacks} currentWeek={currentWeek} getBootcampWeeklyResults={getBootcampWeeklyResults} />
       }
     </div>
   );

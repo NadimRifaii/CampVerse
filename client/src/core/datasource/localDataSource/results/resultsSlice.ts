@@ -25,10 +25,15 @@ export const resultsSlice = createSlice({
       return {
         results: payload
       }
+    },
+    removeResults(state, { type, payload }: { type: string, payload: any }) {
+      return {
+        ...initialState
+      }
     }
   }
 })
-export const { setResults } = resultsSlice.actions
+export const { setResults, removeResults } = resultsSlice.actions
 export const results = resultsSlice.name
 export default resultsSlice.reducer
 export const extractResultsSlice = (global: RootState) => {

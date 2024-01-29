@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { extractResultsSlice, setResults } from "../../core/datasource/localDataSource/results/resultsSlice"
+import { extractResultsSlice, setResults, removeResults } from "../../core/datasource/localDataSource/results/resultsSlice"
 import { extractCurriculumsSlice } from "../../core/datasource/localDataSource/curriculums/curriculumsSlice"
 import { extractcurrentBootcampSlice } from "../../core/datasource/localDataSource/currentBootcamp/currentBootcampSlice"
 import { useEffect, useState } from "react"
@@ -12,6 +12,9 @@ const useLogic = () => {
   const { results } = useSelector(extractResultsSlice)
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
+  useEffect(() => {
+    console.log(currentBootcamp)
+  }, [])
   const { students } = useSelector(extractUsersSlice)
   const user = useSelector(extractUserSlice)
   const dispatch = useDispatch()
@@ -43,6 +46,8 @@ const useLogic = () => {
     }
   }
   useEffect(() => {
+    dispatch(removeResults({}))
+    setWeekStacks([])
     getWeekStacks()
   }, [currentWeek])
   useEffect(() => {

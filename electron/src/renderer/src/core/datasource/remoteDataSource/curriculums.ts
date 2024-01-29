@@ -14,6 +14,7 @@ export const curriculumsDataSource = {
     }
   },
   addCurriculumToBootcamp: async (data: {}) => {
+    console.log(data)
     try {
       const response = await sendRequest({
         body: data,

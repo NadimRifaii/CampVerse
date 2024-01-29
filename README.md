@@ -114,9 +114,11 @@
 | ---| ---|
 | ![Assignment statistics](./readme/gifs/assignments_statistics.png) | ![create bootcamp schedule](./readme/gifs/create_assignment.png) |
 
-| Weekly results |
+
+| mentor flow |
 | ---|
-| ![Weekly results](./readme/gifs/Weekly_results.gif) |
+| [![Watch the video](./readme/gifs/video.mp4)] |
+
 <br><br>
 
 
