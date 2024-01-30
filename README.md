@@ -135,7 +135,7 @@
 <!-- AWS Deployment -->
 <img src="./readme/title8.svg"/>
 
-### Commands used to deploy this project on aws
+### Commands used to deploy this project on AWS
 
 1. Install nodejs
    ```sh
@@ -241,7 +241,7 @@ This is an example of how to list things you need to use the software and how to
    2. Sign up for an account or log in if you already have one.
    3. Create a new cluster for your project.
    - Get the Connection URL:
-   1. In you Atlas dashboard, go to the cluster you just created
+   1. In your Atlas dashboard, go to the cluster you just created
    2. Click on the "connect" button
    3. Choose Drivers option
    4. Copy the connection string. It will look something like this:
