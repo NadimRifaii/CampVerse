@@ -119,7 +119,10 @@
 <br><br>
 ## Video Demo
 
-[![Watch the video](./readme/gifs/thumbnail.png)](./readme/gifs/video.mp4)
+
+https://github.com/NadimRifaii/CampVerse/assets/149371719/e3de89e3-b3f4-4501-8cd3-97e92d21de23
+
+
 
 
 <!-- Prompt Engineering -->
