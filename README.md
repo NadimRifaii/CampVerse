@@ -120,7 +120,11 @@
 ## Video Demo
 
 
-https://github.com/NadimRifaii/CampVerse/assets/149371719/e3de89e3-b3f4-4501-8cd3-97e92d21de23
+
+https://github.com/NadimRifaii/CampVerse/assets/149371719/2d8c96ba-7d04-4770-b241-8524e16dab4f
+
+
+
 
 
 
