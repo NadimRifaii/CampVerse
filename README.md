@@ -154,6 +154,12 @@
    sudo yum install mysql-community-server
    sudo systemctl start mysqld
    ```
+   - Now to create the campverse_db
+   ```sh
+   mysql -u root -p
+   CREATE DATABASE campverse_db;
+   exit;
+   ```
 3. Install git , to clone the repo from github
    ```sh
    sudo yum install -y git
