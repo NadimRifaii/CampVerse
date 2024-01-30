@@ -8,7 +8,6 @@ const useLogic = () => {
   const notificaitonsContext = useContext(NotificationsContext)
   const { notifications, setNotifications } = notificaitonsContext || {}
   useEffect(() => {
-    // console.log(notifications)
   }, [notifications])
   return { user, dropdownActive, setDropdownActive, notifications }
 }

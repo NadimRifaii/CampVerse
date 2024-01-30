@@ -22,7 +22,6 @@ const useLogic = () => {
       const data = await userDataSource.getUser({})
       dispatch(updateUser(data.info))
     } catch (error: any) {
-      console.log(error)
     }
   }
   return { getUserInfo, refresh }

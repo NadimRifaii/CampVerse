@@ -10,7 +10,6 @@ const useLogic = () => {
   const { users }: UsersSliceType = useSelector(extractUsersSlice)
   const { bootcamps }: BootcampsSliceType = useSelector(extractBootcampsSlice)
   useEffect(() => {
-    console.log(bootcamps)
   }, [])
   let [filteredArray, setFilteredArray] = useState(users)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<"student" | "mentor">('student')
@@ -22,7 +21,6 @@ const useLogic = () => {
       const response = await userDataSource.getAllUsers({}, userType)
       dispatch(setUsers(response.users))
     } catch (error) {
-      console.log(error)
     }
   }
   const setBootcampUsers = (bootcampUsers: []) => {
@@ -33,7 +31,6 @@ const useLogic = () => {
       const response = await bootcampsDataSource.getBootcamps({})
       dispatch(setBootcamps(response))
     } catch (error) {
-      console.log(error)
     }
 
   }
@@ -42,10 +39,8 @@ const useLogic = () => {
     try {
       const response = await bootcampsDataSource.addUserToBootcamp(data)
       toast.success(response.message, { id: loadingToastId });
-      console.log(response.message)
     } catch (error) {
       toast.error(`User already exist in this bootcamp`, { id: loadingToastId });
-      console.log(error)
     }
   }
   const searchUsers = (query: string) => {

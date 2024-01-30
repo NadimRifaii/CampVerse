@@ -8,9 +8,6 @@ import { useNavigate } from "react-router-dom";
 const Notifications = ({ className = "", setActiveNotification }) => {
   const { notifications, removeNotification, setCurrentUser } = notificationsLogic();
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log(notifications)
-  }, [notifications])
   return (
     <div className={`notifications-container ${className}`}>
       {

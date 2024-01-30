@@ -33,7 +33,6 @@ const CreateAssignment = ({ fetchBootcampAssignments }: CreateAssignmentProps) =
         </div>
         <div className="stack-name">
           <input type="text" value={stackName} placeholder='Stack name' onChange={(e) => {
-            console.log(e.target.value)
           }} onFocus={() => setStacksListOpen(true)} />
         </div>
       </div>

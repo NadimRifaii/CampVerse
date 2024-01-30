@@ -69,7 +69,7 @@ const Users = ({ userType = "student", showBtn = "Add", bootcampUsers, showHeade
           </div>
           <div className="search-bar">
             <input type="search" placeholder="Search..." onChange={(e) => searchUsers(e.target.value)} />
-            <img src={`http://localhost:8000/images/black-search.png`} alt="" />
+            <img src={`http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:80/images/black-search.png`} alt="" />
           </div>
         </div>
         <div className="holder">

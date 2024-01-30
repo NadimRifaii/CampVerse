@@ -63,7 +63,6 @@ const useLogic = () => {
         throw new Error("No file selected")
       }
     } catch (error) {
-      console.log(error);
     }
   };
   const updateProfile = async () => {
@@ -80,7 +79,6 @@ const useLogic = () => {
         dispatch(setUsers(updatedUsers));
       }
     } catch (error) {
-      console.log(error)
     }
   }
 

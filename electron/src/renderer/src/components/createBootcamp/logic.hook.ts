@@ -11,9 +11,6 @@ const defaultCredentials = {
 }
 const useLogic = () => {
   const [credentials, setCredentials] = useState(defaultCredentials)
-  useEffect(() => {
-    console.log(credentials)
-  }, [credentials])
   const changeHandler = (event) => {
     if (event.target.name == "numberOfWeeks") {
       if (credentials.startDate != '') {
@@ -33,7 +30,6 @@ const useLogic = () => {
     const loadingToastId = toast.loading('Loading...');
     try {
       const response = await bootcampsDataSource.createBootcamp(credentials)
-      console.log(credentials)
       toast.success(response.message, { id: loadingToastId });
       resetFields()
     } catch (error) {

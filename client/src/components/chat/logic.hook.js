@@ -26,16 +26,13 @@ const useLogic = () => {
   useEffect(() => {
     socket = io(ENDPOINT);
     socket.on('connect', () => {
-      console.log("in electron, socket connected");
       setSocketConnected(true);
     });
     socket.emit("setup", user);
     socket.on("user-typing", () => {
-      console.log("typing event received")
       setIsTyping(true)
     })
     socket.on("user-stoped-typing", () => {
-      console.log("stop typing event received")
       setIsTyping(false)
     })
     return () => {
@@ -47,7 +44,6 @@ const useLogic = () => {
     if (currentUser) {
       try {
         setLoadingChat(true);
-        console.log(currentUser)
         const data = await messagesDataSource.accessChat({
           currentUser
         });
@@ -70,7 +66,6 @@ const useLogic = () => {
         socket.emit("join chat", chat._id);
       }
     } catch (error) {
-      console.log("error", error);
     }
   };
 
@@ -101,7 +96,6 @@ const useLogic = () => {
         socket.emit("new message", response.message);
         setMessages((prevMessages) => [...prevMessages, response.message]);
       } catch (error) {
-        console.log(error);
       }
     }
   };
@@ -110,9 +104,6 @@ const useLogic = () => {
     fetchUsers();
   }, [currentUser]);
 
-  useEffect(() => {
-    console.log(chat)
-  }, [chat])
 
   useEffect(() => {
     getChatMessages();

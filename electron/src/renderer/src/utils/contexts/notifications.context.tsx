@@ -10,7 +10,6 @@ export const NotificationsContext = createContext<NotificationsContextType>({} a
 
 export const NotificationsContextProvider = ({ children }: NotificationsContextProviderProps) => {
   const [notifications, setNotifications] = useState<[]>([])
-  console.log(notifications)
   return (
     <NotificationsContext.Provider value={{ notifications, setNotifications }}>{children}</NotificationsContext.Provider>
   )

@@ -12,9 +12,6 @@ const useLogic = () => {
   const { results } = useSelector(extractResultsSlice)
   const { curriculums } = useSelector(extractCurriculumsSlice)
   const { currentBootcamp } = useSelector(extractcurrentBootcampSlice)
-  useEffect(() => {
-    console.log(currentBootcamp)
-  }, [])
   const { students } = useSelector(extractUsersSlice)
   const user = useSelector(extractUserSlice)
   const dispatch = useDispatch()
@@ -25,7 +22,6 @@ const useLogic = () => {
       const response = await resultsDataSource.getBootcampWeeklyResults({ weekId: currentWeek })
       dispatch(setResults(response.results))
     } catch (error) {
-      console.log(error)
     }
   }
   const getUserWeeklyResults = async () => {
@@ -33,7 +29,6 @@ const useLogic = () => {
       const response = await resultsDataSource.getUserWeeklyResults({ weekId: currentWeek, userId: user.UserId })
       dispatch(setResults(response.results))
     } catch (error) {
-      console.log(error)
     }
   }
   const getWeekStacks = async () => {
@@ -42,7 +37,6 @@ const useLogic = () => {
       const stacks = await curriculumsDataSource.getWeekCurriculum({ id })
       setWeekStacks(stacks)
     } catch (error) {
-      console.log(error)
     }
   }
   useEffect(() => {

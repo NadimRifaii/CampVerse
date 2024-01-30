@@ -28,16 +28,13 @@ const useLogic = () => {
 
     // Wait for the "connect" event before emitting other events
     socket.on('connect', () => {
-      console.log("in electron, socket connected");
       setSocketConnected(true);
     });
     socket.emit("setup", user);
     socket.on("user-typing", () => {
-      console.log("typing event received")
       setIsTyping(true)
     })
     socket.on("user-stoped-typing", () => {
-      console.log("stop typing event received")
       setIsTyping(false)
     })
     return () => {
@@ -79,7 +76,6 @@ const useLogic = () => {
         socket.emit("join chat", chat._id);
       }
     } catch (error) {
-      console.log("error", error);
     }
   };
 
@@ -110,7 +106,6 @@ const useLogic = () => {
         socket.emit("new message", response.message);
         setMessages((prevMessages) => [...prevMessages, response.message]);
       } catch (error) {
-        console.log(error);
       }
     }
   };
@@ -119,9 +114,6 @@ const useLogic = () => {
     fetchUsers();
   }, [currentUser]);
 
-  useEffect(() => {
-    console.log(chat)
-  }, [chat])
 
   useEffect(() => {
     getChatMessages();

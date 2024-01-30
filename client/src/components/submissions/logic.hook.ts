@@ -17,7 +17,6 @@ const useLogic = () => {
       const response = await submissionsDataSource.getStudentSubmissions({})
       dispatch(setSubmissions(response.submissions))
     } catch (error) {
-      console.log(error)
     }
   }
   return { user, submissions, getStudentSubmissions }

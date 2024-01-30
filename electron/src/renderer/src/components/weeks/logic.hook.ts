@@ -15,7 +15,6 @@ const useLogic = () => {
       })
       dispatch(setSchedule(response))
     } catch (error) {
-      console.log(error)
     }
   }
   useEffect(() => {

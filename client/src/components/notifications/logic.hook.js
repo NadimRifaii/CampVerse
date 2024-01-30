@@ -23,10 +23,7 @@ const useLogic = () => {
       socket.emit("setup", user);
       socket.on("message received", (newMessageReceived) => {
         if (Object.keys(chat).length == 0 || chat._id != newMessageReceived.chat._id) {
-          console.log("message received in client")
           const newMessage = newMessageReceived.content
-          console.log(notifications, newMessage)
-          console.log("message received in client")
           setNotifications([...notifications, newMessageReceived]);
         }
       });
@@ -38,7 +35,6 @@ const useLogic = () => {
   useEffect(() => {
     return () => {
       socket.off("message received", () => {
-        console.log("Component unmounted in client")
       });
     };
   }, []);

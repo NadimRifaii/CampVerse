@@ -85,7 +85,6 @@ export const useLogic = () => {
         setGoogleSignUpComplete(true);
       }
     } catch (error) {
-      console.log(error)
     }
   }
 

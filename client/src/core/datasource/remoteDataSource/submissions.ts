@@ -14,7 +14,6 @@ export const submissionsDataSource = {
     }
   },
   getAssignmentFiles: async (data: { assignmentName: string }) => {
-    console.log(data)
     try {
       const response = await sendRequest({
         body: data,
@@ -37,7 +36,7 @@ export const submissionsDataSource = {
       throw new Error(error.message)
     }
   },
-  getAiFeedback: async (data: {fileUrl:string}) => {
+  getAiFeedback: async (data: { fileUrl: string }) => {
     try {
       const response = await sendRequest({
         body: data,

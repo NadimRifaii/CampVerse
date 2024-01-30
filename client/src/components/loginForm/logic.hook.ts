@@ -70,7 +70,6 @@ export const useLogic = () => {
         setCredentials({ ...credentials, ['email']: userAuth.email, ['password']: '' })
       setGoogleSignInComplete(true);
     } catch (error) {
-      console.log(error)
     }
   }
   return { inputLabels, signInWithGoogle, loginClick, googleSignInComplete }

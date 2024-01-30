@@ -62,7 +62,6 @@ const useLogic = () => {
         throw new Error("No file selected")
       }
     } catch (error) {
-      console.log(error);
     }
   };
   const updateProfile = async () => {
@@ -70,7 +69,6 @@ const useLogic = () => {
       const response = await userDataSource.updateProfile(credentials)
       dispatch(updateUser(credentials))
     } catch (error) {
-      console.log(error)
     }
   }
   const fields = [

@@ -9,11 +9,6 @@ import { useEffect } from 'react'
 
 const Calendar = () => {
   const { modalOpen, calendarRef, events, sessions, currentBootcamp, bootcampStartDate, bootcampEndDate, onEventAdded, setModalOpen, saveEvents } = useLogic()
-  useEffect(() => {
-    console.log(currentBootcamp)
-    console.log(bootcampStartDate)
-    console.log(bootcampEndDate)
-  }, [])
 
   return (
     <section>

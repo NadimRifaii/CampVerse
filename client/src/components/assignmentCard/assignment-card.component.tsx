@@ -28,7 +28,6 @@ const AssignmentCard = ({ assignment, status = "" }: AssignmentCardProps) => {
       setNumberOfSubmissions(response.numberOfSubmissions);
       dispatch(setSubmissions(response.submisssions))
     } catch (error) {
-      console.log(error);
     }
   };
   useEffect(() => {

@@ -10,9 +10,6 @@ const BootcampDetails = () => {
   const { currentBootcamp }: CurrentBootcampType = useSelector(extractcurrentBootcampSlice)
   const [currentActiveComponent, setCurrentActiveComponent] = useState<string>('student')
   const navigate = useNavigate()
-  useEffect(() => {
-    console.log(currentActiveComponent)
-  }, [currentActiveComponent])
   return (
     <div className="bootcamp-details-container">
       <div className="toggler-header">

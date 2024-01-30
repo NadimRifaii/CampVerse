@@ -5,9 +5,6 @@ import useLogic from "./logic.hook"
 import './weeks.styles.css'
 const Weeks = () => {
   const { currentBootcamp, schedule } = useLogic()
-  useEffect(() => {
-    console.log(schedule)
-  }, [schedule])
   return (
     <div className="weeks">
       {Array.from({ length: currentBootcamp?.numberOfWeeks || 0 }, (_, index) => (

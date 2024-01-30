@@ -16,7 +16,6 @@ const useLogic = () => {
       const data = await schedulesDataSource.getBootcampSchedules({ id })
       dispatch(setSchedules(data.schedules))
     } catch (error) {
-      console.log(error)
     }
   }
   const displayEvents = () => {

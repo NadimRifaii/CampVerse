@@ -20,7 +20,6 @@ const useLogic = () => {
       const data = await schedulesDataSource.getBootcampSchedules({ id })
       dispatch(setSchedules(data.schedules))
     } catch (error) {
-      console.log(error)
     }
   }
 
@@ -60,7 +59,6 @@ const useLogic = () => {
       }
     } catch (error) {
       toast.error(`${error}`, { id: loadingToastId });
-      console.log(error)
     }
   }
 

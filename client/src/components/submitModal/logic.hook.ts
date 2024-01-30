@@ -28,9 +28,6 @@ const useLogic = () => {
   const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
   const { assignment } = useSelector(extractCurrentAssignmentSlice)
 
-  useEffect(() => {
-    console.log(assignment)
-  }, [])
   const submitAssignment = async () => {
     const loadingToastId = toast.loading('Submitting...');
     if (uploadedFiles.length == 0) {

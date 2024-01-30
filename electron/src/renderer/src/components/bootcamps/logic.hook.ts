@@ -18,7 +18,6 @@ const useLogic = () => {
         }
         dispatch(setBootcamps(response))
       } catch (error) {
-        console.log(error)
       }
     }
     getBootcamps()

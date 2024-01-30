@@ -43,9 +43,6 @@ const CreateResultTable = ({ stacks, students, currentWeek, getBootcampWeeklyRes
     })
     setRequest(arr)
   }, [students, stacks])
-  useEffect(() => {
-    console.log(students)
-  }, [])
   return (
     <form action="" className="create-result-form" onSubmit={(e) => {
       e.preventDefault()

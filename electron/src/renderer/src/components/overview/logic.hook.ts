@@ -18,7 +18,6 @@ const useLogic = () => {
       const response = await curriculumsDataSource.getCurriculums({ ["id"]: currentBootcamp.id })
       dispatch(setCurriculums(response))
     } catch (error) {
-      console.log(error)
     }
   }
   const [currentCurriculum, setCurrentCurriculum] = useState('')
@@ -59,9 +58,6 @@ const useLogic = () => {
       await fetchCurriculums()
     }
   }
-  useEffect(() => {
-    console.log(currentBootcamp)
-  }, [])
   return { stacksArray, currentCurriculum, curriculums, activeAddModal, currentBootcamp, currentWeek, setCurrentWeek, setActiveAddModal, updateStack, addNewStack, currentCurriculumChangeHandler, saveCurriculum };
 };
 

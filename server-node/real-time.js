@@ -6,22 +6,18 @@ const realTime = (httpServer) => {
     }
   })
   io.on("connection", (socket) => {
-    console.log(`connected to socket.io`)
-    //this take user data from the frontend
+
     socket.on('setup', (userData) => {
       socket.join(userData.email)//creates a room for the user
       socket.emit('connected')
     })
     socket.on("join chat", (room) => {
       socket.join(room._id)
-      console.log("User joined room: " + room)
     })
     socket.on("typing", (user) => {
-      console.log(`${user} started typing`)
       socket.broadcast.emit("user-typing", user)
     })
     socket.on("stop typing", (user) => {
-      console.log(`${user} stoped typing`)
       socket.broadcast.emit("user-stoped-typing")
     })
     socket.on("new message", (newMessageReceived) => {
