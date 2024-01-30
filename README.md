@@ -117,6 +117,9 @@
 | ![Weekly results](./readme/gifs/Weekly_results.gif) |
 
 <br><br>
+## Video Demo
+
+[![Watch the video](./readme/gifs/thumbnail.png)](./readme/gifs/video.mp4)
 
 
 <!-- Prompt Engineering -->
