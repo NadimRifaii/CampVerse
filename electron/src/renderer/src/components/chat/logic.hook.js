@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useContext } from "react";
 import { CurrentUserContext } from "@renderer/utils/contexts/current-user.context";
 import io from 'socket.io-client';
-const ENDPOINT = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443/`;//
+const ENDPOINT = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443`;//
+// const ENDPOINT = `http://localhost:5000`
 let socket;
 let selectedChatCompare;
 
@@ -22,11 +23,9 @@ const useLogic = () => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
-  // Establish socket connection and handle cleanup
   useEffect(() => {
     socket = io(ENDPOINT);
 
-    // Wait for the "connect" event before emitting other events
     socket.on('connect', () => {
       setSocketConnected(true);
     });
@@ -43,7 +42,6 @@ const useLogic = () => {
     };
   }, [user]);
 
-  // Fetch users function with error handling and logging
   const fetchUsers = async () => {
     if (currentUser) {
       try {
@@ -57,7 +55,7 @@ const useLogic = () => {
           role: currentUser?.role
         });
         dispatch(setChatX(data))
-        selectedChatCompare = data; // Move this line here
+        selectedChatCompare = data;
       } catch (error) {
         console.error("Error fetching users:", error);
         setLoadingChat('');
@@ -65,7 +63,6 @@ const useLogic = () => {
     }
   };
 
-  // Get chat messages function
   const getChatMessages = async () => {
     try {
       if (chat._id) {

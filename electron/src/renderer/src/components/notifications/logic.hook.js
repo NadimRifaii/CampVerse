@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import { NotificationsContext } from "../../utils/contexts/notifications.context";
 import { CurrentUserContext } from '../../utils/contexts/current-user.context'
 import { useContext } from "react";
-const ENDPOINT = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443/`;//
+const ENDPOINT = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443`;
 let socket;
 const useLogic = () => {
   const user = useSelector(extractUserSlice)

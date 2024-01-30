@@ -73,7 +73,8 @@ export const messagesRequest = async ({
   body,
 }: SendRequestRequirements) => {
   const token = local("token");
-  const baseURL = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443/`
+  const baseURL = `http://ec2-35-180-140-53.eu-west-3.compute.amazonaws.com:443`
+  // const baseURL = `http://localhost:5000`
   const authorizationHeader = `Bearer ${token}`;
   try {
     const response = await axios.request({
