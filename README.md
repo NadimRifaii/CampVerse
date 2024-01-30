@@ -51,9 +51,9 @@
 > CampVerse is designed using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
 ### Mockups Examples
-| Login | Signup | Live Chat + Notification | Users List |
-| --- | --- | --- | --- |
-| ![Login](./readme/mockups/login.png) | ![Signup](./readme/mockups/signup.png) | ![Live Chat + Notifications](./readme/mockups/chatting.png) | ![Users List](./readme/mockups/users_list.png) |
+| Login | Signup | Live Chat + Notification | 
+| --- | --- | --- | 
+| ![Login](./readme/mockups/login.png) | ![Signup](./readme/mockups/signup.png) | ![Live Chat + Notifications](./readme/mockups/chatting.png) | 
 
 
 - Check more Mockups on [figma](https://www.figma.com/file/s1JMz99qMQnpwjyfpfi8DR/Final_Project_1?type=design&node-id=0%3A1&mode=design&t=27EwAsazmeALwqCH-1)
