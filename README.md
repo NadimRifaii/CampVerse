@@ -125,9 +125,6 @@ https://github.com/NadimRifaii/CampVerse/assets/149371719/e3de89e3-b3f4-4501-8cd
 
 
 
-[![Watch the video](./readme/gifs/thumbnail.png)](./readme/gifs/video.mp4)
-
-
 <!-- Prompt Engineering -->
 <img src="./readme/title7.svg"/>
 
